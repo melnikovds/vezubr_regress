@@ -75,6 +75,7 @@ class Base:
         chrome_driver_path = WINDOWS_DRIVER_PATH if platform.system() == 'Windows' else LINUX_DRIVER_PATH
         # options.add_argument('--headless')
         options.add_argument('--window-size=1920x1080')
+        options.add_argument('--force-device-scale-factor=0.8')
 
         if platform.system() != 'Windows':
             # Дополнительные параметры для Linux

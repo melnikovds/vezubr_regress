@@ -150,6 +150,7 @@ def test_sorting_orders_lkz(base_fixture, domain):
     # Переход к списку отложенных рейсов
     sidebar.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.deferred_list_button,
                            do_assert=True, wait="lst")
+
     # Последовательный клик по всем кнопкам сортировки всех столбцов
     base.click_multiple_buttons(base.sorting_button, num_buttons=7, num_clicks=3, wait="lst")
     

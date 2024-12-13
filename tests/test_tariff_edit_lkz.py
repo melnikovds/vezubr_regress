@@ -234,3 +234,4 @@ def test_tariff_ltl_copy_lkz(base_fixture, domain):
     tariff.click_button(tariff.confirm_button)
     tariff.click_button(tariff.confirm_button, do_assert=True)
     # Конец теста
+

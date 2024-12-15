@@ -50,12 +50,10 @@ class CustomFieldsParam(Base):
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
         "name": "save_custom"
     }
-
     done_pop_up = {
         "xpath": "(//button[@class='ant-btn ant-btn-primary'])[2]",
         "name": "done_pop_up"
     }
-
 
 
 class EditFieldsParam(Base):
@@ -66,4 +64,15 @@ class EditFieldsParam(Base):
         "xpath": "(// img[@ alt='editBlack'])[2]",
         "name": "e_p"
     }
-
+    del_custom = {
+        "xpath": "(//img[@alt='trashBinBlack'])[2]",
+        "name": "del_custom"
+    }
+    rej_del = {
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[1]",
+        "name": "rej_del"
+    }
+    acc_del = {
+        "xpath": "//button[@class='ant-btn ant-btn-primary']",
+        "name": "rej_del"
+    }

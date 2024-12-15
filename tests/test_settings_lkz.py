@@ -41,6 +41,7 @@ def test_custom_settings_lkz(base_fixture, domain):
     add_param.click_button(add_param.save_custom)
     time.sleep(2)
     add_param.click_button(add_param.done_pop_up)
+    time.sleep(2)
 
     edit_param = EditFieldsParam(base.driver)
 
@@ -55,6 +56,17 @@ def test_custom_settings_lkz(base_fixture, domain):
 
     add_param.dropdown_without_input(add_param.add_type, option_text="Числовое значение")
 
+    # сохраняем поле
+    add_param.click_button(add_param.save_custom)
+    time.sleep(2)
+    add_param.click_button(add_param.done_pop_up)
+    time.sleep(2)
+
+    # удаляем кастомное поле
+    edit_param.click_button(edit_param.del_custom)
+    edit_param.click_button(edit_param.rej_del)
+    edit_param.click_button(edit_param.del_custom)
+    edit_param.click_button(edit_param.acc_del)
     # конец теста
 
 

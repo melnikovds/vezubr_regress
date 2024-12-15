@@ -1,6 +1,5 @@
 import time
 from typing import NoReturn
-
 import allure
 from base.base_class import Base
 

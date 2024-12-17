@@ -47,12 +47,16 @@ class CustomFieldsParam(Base):
         "name": "add_role"
     }
     save_custom = {
-        "xpath": "//button[@class='ant-btn ant-btn-primary']",
+        "xpath": "//button[@class='ant-btn margin-right-16']/following-sibling::button[1]",
         "name": "save_custom"
     }
     done_pop_up = {
         "xpath": "(//button[@class='ant-btn ant-btn-primary'])[2]",
         "name": "done_pop_up"
+    }
+    done_pop_up_second = {
+        "xpath": "(//button[@class='ant-btn ant-btn-primary'])[3]",
+        "name": "done_pop_up_second"
     }
 
 
@@ -68,11 +72,49 @@ class EditFieldsParam(Base):
         "xpath": "(//img[@alt='trashBinBlack'])[2]",
         "name": "del_custom"
     }
+    # acc_del = {
+    #     "xpath": "//button[@class='ant-btn ant-btn-primary']",
+    #     "name": "acc_del",
+    #     "reference": "Да"
+    # }
+    # rej_del = {
+    #     "xpath": "//button[@class='ant-btn']",
+    #     "name": "rej_del",
+    #     "reference": "Нет"
+    # }
+    acc_del = {
+        "xpath": "//button[@class='ant-btn']/following-sibling::button[1]",
+        "name": "acc_del"
+    }
     rej_del = {
         "xpath": "//div[@class='ant-modal-confirm-btns']//button[1]",
         "name": "rej_del"
     }
-    acc_del = {
-        "xpath": "//button[@class='ant-btn ant-btn-primary']",
-        "name": "rej_del"
+    add_val = {
+        "xpath": "(//div[contains(@class,'flexbox justify-right')]//button)[2]",
+        "name": "add_val"
     }
+    unique_number_value = {
+        "xpath": "(//input[@class='ant-input'])[3]",
+        "name": "unique_number_value"
+    }
+    name_value = {
+        "xpath": "//input[@placeholder='Наименование значения']",
+        "name": "name_value"
+    }
+    save_unique_value = {
+        "xpath": "(//button[@class='ant-btn ant-btn-primary'])[3]",
+        "name": "name_value"
+    }
+    edit_value = {
+        "xpath": "(//button[contains(@class,'ant-btn margin-right-8')])[2]",
+        "name": "edit_value"
+    }
+    delete_value = {
+        "xpath": "(//button[@class='ant-btn ant-btn-sm'])[2]",
+        "name": "delete_value"
+    }
+
+
+
+

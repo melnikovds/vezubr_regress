@@ -53,11 +53,15 @@ class CustomFieldParam(Base):
         "name": "add_type"
     }
     click_save = {
-        "xpath": "//button[@class='ant-btn margin-right-16']/following-sibling::button[1]",
+        "xpath": "(//button[@class='ant-btn ant-btn-primary'])[2]",
         "name": "click_save"
     }
+    click_save_two = {
+        "xpath": "//button[@class='ant-btn ant-btn-primary']",
+        "name": "click_save_two"
+    }
     click_ok = {
-        "xpath": "(//button[@class='ant-btn ant-btn-primary'])[2]",
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[1]",
         "name": "click_ok"
     }
     click_meaning = {
@@ -77,3 +81,8 @@ class CustomFieldParam(Base):
         "name": "confirm_add",
         "reference_xpath": "//button[span[text()='Сохранить']]"
     }
+    click_require_field = {
+        "xpath": "//button[@class='ant-switch ant-switch-checked']",
+        "name": "require_field"
+    }
+

@@ -1,11 +1,12 @@
 import allure
 import pytest
+import time
 from pages.custom_page import Settings, CustomFieldParam
 
 
 @allure.story("Extended path test")
 @allure.feature('Кастомные поля')
-@allure.description('ЛКП. ')
+@allure.description('ЛКП. Создание поля Заявка')
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_create_custom_field_lkp(base_fixture, domain):
     base, sidebar = base_fixture
@@ -26,14 +27,18 @@ def test_create_custom_field_lkp(base_fixture, domain):
     add_param.click_button(add_param.click_meaning)
     add_param.input_in_field(add_param.unic_n, value="25-002")
     add_param.input_in_field(add_param.named_n, value="1324")
+    time.sleep(1)
     add_param.click_button(add_param.confirm_add)
+    time.sleep(1)
     add_param.click_button(add_param.click_save)
+    time.sleep(1)
     add_param.click_button(add_param.click_ok)
+    time.sleep(1)
 
 
 @allure.story("Extended path test")
 @allure.feature('Кастомные поля')
-@allure.description('ЛКП. ')
+@allure.description('ЛКП. Редактирование поля Заявка на Договор')
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_edit_custom_field_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -44,17 +49,20 @@ def test_edit_custom_field_lkp(base_fixture, domain):
     settings.click_button(settings.custom_field)
     settings.click_button(settings.edit_field)
     add_param = CustomFieldParam(base.driver)
-    add_param.input_in_field(add_param.add_ru, value="договор")
-    add_param.input_in_field(add_param.add_en, value="contract")
+    add_param.backspace_and_input(add_param.add_ru, value="договор")
+    add_param.backspace_and_input(add_param.add_en, value="contract")
     add_param.dropdown_without_input(add_param.add_role, option_text="Договор")
     add_param.dropdown_without_input(add_param.add_type, option_text="Текстовое значение")
-    add_param.click_button(add_param.click_save)
+    time.sleep(1)
+    add_param.click_button(add_param.click_save_two)
+    time.sleep(1)
     add_param.click_button(add_param.click_ok)
+    time.sleep(1)
 
 
 @allure.story("Extended path test")
 @allure.feature('Кастомные поля')
-@allure.description('ЛКП. ')
+@allure.description('ЛКП. Удаления поля Договор')
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_delete_custom_field_lkp(base_fixture, domain):
     base, sidebar = base_fixture
@@ -63,12 +71,14 @@ def test_delete_custom_field_lkp(base_fixture, domain):
     settings = Settings(base.driver)
     settings.click_button(settings.custom_field)
     settings.click_button(settings.delete_field)
+    time.sleep(1)
     settings.click_button(settings.delete_ok)
+    time.sleep(1)
 
 
 @allure.story("Extended path test")
 @allure.feature('Кастомные поля')
-@allure.description('ЛКП. ')
+@allure.description('ЛКП. Создание поля Договор')
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_edit_custom_field2_lkp(base_fixture, domain):
     base, sidebar = base_fixture
@@ -76,19 +86,19 @@ def test_edit_custom_field2_lkp(base_fixture, domain):
     sidebar.click_button(sidebar.settings_button, do_assert=True)
     settings = Settings(base.driver)
     settings.click_button(settings.custom_field)
-    settings.click_button(settings.edit_field)
+    settings.click_button(settings.add_field)
     add_param = CustomFieldParam(base.driver)
-    add_param.backspace_and_input(add_param.add_ru, value="Новое поле2")
-    add_param.backspace_and_input(add_param.add_en, value="new field2")
-    add_param.dropdown_without_input(add_param.add_role, option_text="Заявка")
-    add_param.dropdown_without_input(add_param.add_type, option_text="Ввод нескольких значений")
-    add_param.click_button(add_param.click_save)
+    add_param.input_in_field(add_param.add_ru, value="Новое поле2")
+    add_param.input_in_field(add_param.add_en, value="new field2")
+    add_param.dropdown_without_input(add_param.add_role, option_text="Договор")
+    add_param.dropdown_without_input(add_param.add_type, option_text="Текстовое значение")
+    add_param.click_button(add_param.click_save_two)
     add_param.click_button(add_param.click_ok)
 
 
 @allure.story("Extended path test")
 @allure.feature('Кастомные поля')
-@allure.description('ЛКП. ')
+@allure.description('ЛКП. Редактирование поля Договор на Контрагент')
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_create_custom_field2_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -97,19 +107,23 @@ def test_create_custom_field2_lkp(base_fixture, domain):
     sidebar.click_button(sidebar.settings_button, do_assert=True)
     settings = Settings(base.driver)
     settings.click_button(settings.custom_field)
-    settings.click_button(settings.add_field)
+    settings.click_button(settings.edit_field)
     add_param = CustomFieldParam(base.driver)
-    add_param.input_in_field(add_param.add_ru, value="Новое поле")
-    add_param.input_in_field(add_param.add_en, value="new field")
+    add_param.backspace_and_input(add_param.add_ru, value="127")
+    add_param.backspace_and_input(add_param.add_en, value="0000127")
     add_param.dropdown_without_input(add_param.add_role, option_text="Контрагент")
-    add_param.dropdown_without_input(add_param.add_type, option_text="Текстовое значение")
-    add_param.click_button(add_param.click_save)
+    add_param.dropdown_without_input(add_param.add_type, option_text="Числовое значение")
+    add_param.click_button(add_param.click_require_field)
+    time.sleep(1)
+    add_param.click_button(add_param.click_save_two)
+    time.sleep(1)
     add_param.click_button(add_param.click_ok)
+    time.sleep(1)
 
 
 @allure.story("Extended path test")
 @allure.feature('Кастомные поля')
-@allure.description('ЛКП. ')
+@allure.description('ЛКП. Удаление поля Контрагент')
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_delete_custom_field2_lkp(base_fixture, domain):
     base, sidebar = base_fixture
@@ -118,5 +132,8 @@ def test_delete_custom_field2_lkp(base_fixture, domain):
     settings = Settings(base.driver)
     settings.click_button(settings.custom_field)
     settings.click_button(settings.delete_field)
+    time.sleep(1)
     settings.click_button(settings.delete_ok)
+    time.sleep(1)
+
 

@@ -1,9 +1,9 @@
 import allure
 import pytest
 import time
-from pages.settings_custom_page import Settings
-from pages.settings_custom_page import CustomFieldsParam
-from pages.settings_custom_page import EditFieldsParam
+from pages.settings_page import Settings
+from pages.settings_page import CustomFieldsParam
+from pages.settings_page import EditFieldsParam
 
 
 @allure.story("Extended test")

@@ -7,6 +7,11 @@ class Settings(Base):
         self.driver = driver
 
     # Locators
+    notifications_field_tab = {
+        "xpath": "//a[@href='/settings/notification']",
+        "name": "notifications_field",
+        "reference_xpath": "Настройки уведомлений"
+    }
     custom_fields_tab = {
         "xpath": "//a[text()='Пользовательские поля']",
         "name": "custom_field",

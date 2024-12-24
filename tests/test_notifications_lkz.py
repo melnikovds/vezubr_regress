@@ -40,6 +40,7 @@ def test_notification_field_lkz(base_fixture, domain):
     add.dropdown_without_input(add.min_cost_sms, option_text="уведомлять", index=3)
     add.dropdown_without_input(add.executor_add_sms, option_text="уведомлять", index=6)
 
-    add.dropdown_without_input(add.ts_not_assigned_sms, option_text="Каждые 4 часа", index=4)
+
+    add.dropdown_without_input(add.ts_not_assigned_sms, option_text="Каждые 4 часа", index=24)
     # add.dropdown_without_input(add.driver_ts_replacement_sms, option_text="уведомлять", index=1)
 

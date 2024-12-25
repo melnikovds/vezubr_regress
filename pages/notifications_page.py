@@ -75,15 +75,71 @@ class Notification(Base):
         "xpath": "//table[@class='ant-table-fixed']/tbody/tr[3]/td[4]",
         "name": "executor_add_sms"
     }
-    # ts_not_assigned_sms = {
-    #     "xpath": "//table[@class='ant-table-fixed']/tbody/tr[4]/td[4]",
-    #     "name": "ts_not_assigned_sms"
-    # }
     ts_not_assigned_sms = {
         "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[4]/td[4]/div[1]/div[1]/div[1]/div[2]",
         "name": "ts_not_assigned_sms"
     }
-    # driver_ts_replacement_sms = {
-    #     "xpath": '//*[@id="main"]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[3]/div[1]/div[1]',
-    #     "name": "driver_ts_replacement_sms",
-    # }
+    driver_ts_replacement_sms = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[5]/td[4]/div[1]/div[1]/div[1]",
+        "name": "driver_ts_replacement_sms"
+    }
+    not_started_mail = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[6]/td[2]/div[1]/div[1]/div[1]",
+        "name": "not_started_mail"
+    }
+    not_started_monitor = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[6]/td[3]/div[1]/div[1]/div[1]",
+        "name": "not_started_monitor"
+    }
+    not_started_sms = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[6]/td[4]/div[1]/div[1]/div[1]",
+        "name": "not_started_sms"
+    }
+    cancelled_contractor_mail = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[7]/td[2]/div[1]/div[1]/div[1]",
+        "name": "cancelled_contractor_mail"
+    }
+    cancelled_contractor_monitor = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[7]/td[3]/div[1]/div[1]/div[1]",
+        "name": "cancelled_contractor_monitor"
+    }
+    cancelled_contractor_sms = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[7]/td[4]/div[1]/div[1]/div[1]",
+        "name": "cancelled_contractor_sms"
+    }
+
+    cancelled_owner_mail = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[8]/td[2]/div[1]/div[1]/div[1]",
+        "name": "cancelled_owner_mail"
+    }
+    cancelled_owner_monitor = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[8]/td[3]/div[1]/div[1]/div[1]",
+        "name": "cancelled_owner_monitor"
+    }
+    cancelled_owner_sms = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[8]/td[4]/div[1]/div[1]/div[1]",
+        "name": "cancelled_owner_sms"
+    }
+
+    late_arrival_mail = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[1]",
+        "name": "late_arrival_mail"
+    }
+    late_arrival_monitor = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[3]/div[1]/div[1]/div[1]",
+        "name": "late_arrival_monitor"
+    }
+    late_arrival_sms = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[4]/div[1]/div[1]/div[1]",
+        "name": "late_arrival_sms"
+    }
+
+
+
+
+
+    safe_notifications = {
+        "xpath": "//div[contains(@class,'vz-form-actions vz-form-actions--right')]//button[1]",
+        "name": "safe_notifications"
+    }
+

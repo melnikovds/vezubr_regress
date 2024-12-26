@@ -61,15 +61,63 @@ def test_notification_field_lkz(base_fixture, domain):
     # add.click_and_select_with_arrows(add.cancelled_owner_sms, arrow_presses=1)
 
 
-    element = base.find_element(By.XPATH_SELECTOR, "late_arrival_mail")
-    base.execute_script("arguments[0].scrollIntoView(true);", element)
+    # add.scroll_to_element(add.late_arrival_mail)
+    # add.click_and_select_with_arrows(add.late_arrival_mail, arrow_presses=12)
+    # add.click_and_select_with_arrows(add.late_arrival_monitor, arrow_presses=13)
+    # add.click_and_select_with_arrows(add.late_arrival_sms, arrow_presses=7)
+    #
+    # add.click_and_select_with_arrows(add.arrived_mail, arrow_presses=9)
+    # add.click_and_select_with_arrows(add.arrived_monitor, arrow_presses=10)
+    # add.click_and_select_with_arrows(add.arrived_sms, arrow_presses=4)
+    #
+    # add.click_and_select_with_arrows(add.loading_begun_mail, arrow_presses=5)
+    # add.click_and_select_with_arrows(add.loading_begun_monitor, arrow_presses=6)
+    # add.click_and_select_with_arrows(add.loading_begun_sms, arrow_presses=8)
+
+    # add.scroll_to_element(add.loading_completed_mail)
+    # add.click_and_select_with_arrows(add.loading_completed_mail, arrow_presses=1)
+    # add.click_and_select_with_arrows(add.loading_completed_monitor, arrow_presses=2)
+    # add.click_and_select_with_arrows(add.loading_completed_sms, arrow_presses=3)
+
+    # add.click_and_select_with_arrows(add.documents_received_mail, arrow_presses=16)
+    # add.click_and_select_with_arrows(add.documents_received_monitor, arrow_presses=17)
+    # add.click_and_select_with_arrows(add.documents_received_sms, arrow_presses=18)
+    #
+    # add.scroll_to_element(add.flight_over_mail)
+    # add.click_and_select_with_arrows(add.flight_over_mail, arrow_presses=5)
+    # add.click_and_select_with_arrows(add.flight_over_monitor, arrow_presses=10)
+    # add.click_and_select_with_arrows(add.flight_over_sms, arrow_presses=15)
+
+    # add.scroll_to_element(add.flight_confirmation_mail)
+    # add.click_and_select_with_arrows(add.flight_confirmation_mail, arrow_presses=2)
+    # add.click_and_select_with_arrows(add.flight_confirmation_monitor, arrow_presses=3)
+    # add.click_and_select_with_arrows(add.flight_confirmation_sms, arrow_presses=8)
+    #
+    # add.click_and_select_with_arrows(add.register_confirmation_mail, arrow_presses=1)
+    # add.click_and_select_with_arrows(add.register_confirmation_monitor, arrow_presses=4)
+    # add.click_and_select_with_arrows(add.register_confirmation_sms, arrow_presses=14)
+    #
+    # add.click_and_select_with_arrows(add.registry_not_confirmed_mail, arrow_presses=1)
+    # add.click_and_select_with_arrows(add.registry_not_confirmed_monitor, arrow_presses=4)
+    # add.click_and_select_with_arrows(add.registry_not_confirmed_sms, arrow_presses=14)
 
 
-    add.click_and_select_with_arrows(add.late_arrival_mail, arrow_presses=12)
-    add.click_and_select_with_arrows(add.late_arrival_monitor, arrow_presses=13)
-    add.click_and_select_with_arrows(add.late_arrival_sms, arrow_presses=7)
+    add.scroll_to_element(add.critical_charge_mail)
+    add.click_and_select_with_arrows(add.critical_charge_mail, arrow_presses=1)
+    add.click_and_select_with_arrows(add.critical_charge_monitor, arrow_presses=1)
+    add.click_and_select_with_arrows(add.critical_charge_sms, arrow_presses=1)
 
+    add.click_and_select_with_arrows(add.no_connection_mail, arrow_presses=1)
+    add.click_and_select_with_arrows(add.no_connection_monitor, arrow_presses=1)
+    add.click_and_select_with_arrows(add.no_connection_sms, arrow_presses=1)
+
+
+    add.scroll_to_element(add.loading_completed_mail)
+    add.click_and_select_with_arrows(add.cargo_not_accepted_mail, arrow_presses=1)
+    add.click_and_select_with_arrows(add.cargo_not_accepted_monitor, arrow_presses=1)
+    add.click_and_select_with_arrows(add.cargo_not_accepted_sms, arrow_presses=1)
 
 
 
     add.click_button(add.safe_notifications, wait='form')
+

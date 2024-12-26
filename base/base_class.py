@@ -477,6 +477,32 @@ class Base:
 
 
 
+    def scroll_to_element(self, element_info: Dict[str, str]) -> None:
+        """
+        Прокручивает страницу до указанного элемента.
+
+        Parameters
+        ----------
+        element_info : dict
+            Информация о локаторе элемента (name и xpath).
+        """
+        try:
+            element = self.get_element(element_info, wait_type='visible')['element']
+
+            # JS прокрутка до элемента
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+
+            # Формируем сообщение для шага Allure и консоли
+            with allure.step(f"Scrolled to element {element_info['name']}"):
+                print(f"Scrolled to element {element_info['name']}")
+        except Exception as e:
+            message = f"Error scrolling to element {element_info['name']}: {str(e)}"
+            with allure.step(message):
+                print(message)
+            raise
+
+
+
     """ In dropdown click, wait, input and enter"""
     def dropdown_with_input(self, element_dict: Dict[str, str], option_text: str, press_enter: bool = True,
                             wait_presence: bool = False, wait_type: str = 'clickable',

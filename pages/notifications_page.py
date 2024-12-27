@@ -300,8 +300,6 @@ class Notification(Base):
 
 
 
-
-
     safe_notifications = {
         "xpath": "//div[contains(@class,'vz-form-actions vz-form-actions--right')]//button[1]",
         "name": "safe_notifications"

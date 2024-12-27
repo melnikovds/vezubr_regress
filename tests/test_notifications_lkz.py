@@ -111,10 +111,6 @@ def test_notification_field_lkz(base_fixture, domain):
     add.click_and_select_with_arrows(add.cargo_not_accepted_monitor, arrow_presses=1)
     add.click_and_select_with_arrows(add.cargo_not_accepted_sms, arrow_presses=1)
 
-    add.click_and_select_with_arrows(add.cargo_not_accepted_mail, arrow_presses=1)
-    add.click_and_select_with_arrows(add.cargo_not_accepted_monitor, arrow_presses=1)
-    add.click_and_select_with_arrows(add.cargo_not_accepted_sms, arrow_presses=1)
-
     add.click_and_select_with_arrows(add.address_missing_mail, arrow_presses=1)
     add.click_and_select_with_arrows(add.address_missing_monitor, arrow_presses=1)
     add.click_and_select_with_arrows(add.address_missing_sms, arrow_presses=1)

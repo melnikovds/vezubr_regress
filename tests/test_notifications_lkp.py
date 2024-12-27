@@ -7,9 +7,9 @@ from pages.settings_page import Settings
 
 @allure.story("Extended path test")
 @allure.feature('Уведомления')
-@allure.description('ЛКЗ. Установка уведомлений')
-@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
-def test_notification_field_lkz(base_fixture, domain):
+@allure.description('ЛКП. Установка уведомлений')
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
+def test_notification_field_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
 
@@ -47,6 +47,7 @@ def test_notification_field_lkz(base_fixture, domain):
     add.click_and_select_with_arrows(add.not_started_monitor, arrow_presses=7)
     add.click_and_select_with_arrows(add.not_started_sms, arrow_presses=8)
 
+
     add.click_and_select_with_arrows(add.cancelled_contractor_mail, arrow_presses=1)
     add.click_and_select_with_arrows(add.cancelled_contractor_monitor, arrow_presses=1)
     add.click_and_select_with_arrows(add.cancelled_contractor_sms, arrow_presses=1)
@@ -83,7 +84,6 @@ def test_notification_field_lkz(base_fixture, domain):
     add.click_and_select_with_arrows(add.flight_over_monitor, arrow_presses=10)
     add.click_and_select_with_arrows(add.flight_over_sms, arrow_presses=15)
 
-
     add.scroll_to_element(add.flight_confirmation_mail)
     add.click_and_select_with_arrows(add.flight_confirmation_mail, arrow_presses=2)
     add.click_and_select_with_arrows(add.flight_confirmation_monitor, arrow_presses=3)
@@ -111,14 +111,9 @@ def test_notification_field_lkz(base_fixture, domain):
     add.click_and_select_with_arrows(add.cargo_not_accepted_monitor, arrow_presses=1)
     add.click_and_select_with_arrows(add.cargo_not_accepted_sms, arrow_presses=1)
 
-    add.click_and_select_with_arrows(add.cargo_not_accepted_mail, arrow_presses=1)
-    add.click_and_select_with_arrows(add.cargo_not_accepted_monitor, arrow_presses=1)
-    add.click_and_select_with_arrows(add.cargo_not_accepted_sms, arrow_presses=1)
-
     add.click_and_select_with_arrows(add.address_missing_mail, arrow_presses=1)
     add.click_and_select_with_arrows(add.address_missing_monitor, arrow_presses=1)
     add.click_and_select_with_arrows(add.address_missing_sms, arrow_presses=1)
 
 
     add.click_button(add.safe_notifications, wait='form')
-

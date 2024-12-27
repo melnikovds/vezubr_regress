@@ -117,3 +117,4 @@ def test_notification_field_lkp(base_fixture, domain):
 
 
     add.click_button(add.safe_notifications, wait='form')
+

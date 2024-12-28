@@ -1,11 +1,12 @@
 import allure
 import pytest
+import time
 from pages.manual_page import Manual
 
 @allure.story("Extended test")
 @allure.feature('Фильтры')
 @allure.description('ЛКЗ Тест фильтра Адреса в разделе справочники')
-@pytest.mark.paramtrize('base_fixture', ['lkz'], indirect=True) # Параметризация роли
+@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True) # Параметризация роли
 def test_address_directory_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
@@ -14,8 +15,107 @@ def test_address_directory_lkz(base_fixture, domain):
     base.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.addresses_list_button,
                         do_assert=True, wait='lst')
 
-    manual = Manual(base.driver)
+    add = Manual(base.driver)
 
-    manual.click_button(manual.filter_date_create, do_assert=True)
+    add.dropdown_without_input(add.filter_date_create, option_text='За год')
+    time.sleep(2)
+    add.input_in_field(add.verified_address, value='Ленина', click_first=True)
+    time.sleep(2)
+    add.verify_text_on_page(text='г Екатеринбург, пр-кт Ленина, д 68')
+    time.sleep(1)
+
+    add.backspace_and_input(add.verified_address, value='Великие Луки', click_first=True)
+    time.sleep(1)
+    add.verify_text_on_page(text='Винатовского')
+    time.sleep(1)
+    add.backspace_and_input(add.verified_address, value='')
+
+    add.backspace_and_input(add.verified_address, value='Винатовского', click_first=True)
+    time.sleep(2)
+    add.verify_text_on_page(text='Великие Луки')
+    time.sleep(1)
+    add.backspace_and_input(add.verified_address, value='')
+
+    add.backspace_and_input(add.verified_address, value='Мурманск', click_first=True)
+    time.sleep(2)
+    add.verify_text_on_page(text='Плато')
+    time.sleep(1)
+    add.backspace_and_input(add.verified_address, value='')
+
+    add.backspace_and_input(add.verified_address, value='Плато', click_first=True)
+    time.sleep(2)
+    add.verify_text_on_page(text='Мурманск')
+    time.sleep(1)
+    add.backspace_and_input(add.verified_address, value='')
+
+    add.input_in_field(add.name_address, value='мрмск', wait='lst')
+    add.verify_text_on_page(text='Мурманск')
+    add.backspace_and_input(add.name_address, value='')
+    time.sleep(1)
+
+    add.input_in_field(add.name_address, value='тгл', wait='lst')
+    add.verify_text_on_page(text='Нижний Тагил')
+    add.backspace_and_input(add.name_address, value='')
+    time.sleep(1)
+
+
+    add.input_in_field(add.sender_recipient, value='Авангард', wait='lst')
+    add.verify_text_on_page('Лиговский')
+    add.backspace_and_input(add.sender_recipient, value='')
+
+    add.dropdown_without_input(add.status, option_text='Активный')
+    time.sleep(3)
+    add.verify_text_on_page('Россия, Псковская обл, г Великие Луки, ул Винатовского, д 28')
+    time.sleep(1)
+
+    add.dropdown_without_input(add.status, option_text='Неактивный')
+    time.sleep(3)
+    add.verify_text_on_page('86')
+    time.sleep(1)
+
+    add.click_button(element_dict=add.reset)
+
+    add.dropdown_without_input(add.region, option_text='Псковская область')
+    add.verify_text_on_page('Россия, Псковская обл, г Великие Луки, ул Винатовского, д 28')
+    time.sleep(3)
+
+    add.click_button(element_dict=add.reset)
+
+
+    add.input_in_field(add.approved, value='auto@LKZ.com', wait='lst')
+    add.verify_text_on_page('Винатовского')
+    add.backspace_and_input(add.sender_recipient, value='')
+
+    add.input_in_field(add.created, value='auto@LKZ.com', wait='lst')
+    add.verify_text_on_page('Плато')
+    add.backspace_and_input(add.sender_recipient, value='')
+    time.sleep(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

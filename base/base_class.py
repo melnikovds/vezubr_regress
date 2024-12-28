@@ -381,50 +381,6 @@ class Base:
                 self.assert_element_text(element_dict)
 
 
-    # def click_and_select_with_arrows(self, element_info: Dict[str, str], arrow_presses: int) -> None:
-    #     """
-    #     Кликает по элементу, использует клавишу "стрелка вниз" указанное количество раз и нажимает "Enter".
-    #
-    #     Parameters
-    #     ----------
-    #     element_info : dict
-    #         Информация о локаторе элемента (name и xpath).
-    #     arrow_presses : int
-    #         Количество нажатий клавиши "стрелка вниз".
-    #     """
-    #     try:
-    #         # Ожидание, пока элемент станет кликабельным
-    #         element = self.get_element(element_info, wait_type='clickable')['element']
-    #
-    #         # клик по элементу
-    #         element.click()
-    #         time.sleep(3)
-    #
-    #         # # ожидание фокуса на элементе
-    #         # self.driver.execute_script("arguments[0].focus();", element)
-    #         # # принудительное нажатие клавиши через JS
-    #         # for _ in range(arrow_presses):
-    #         #     self.driver.execute_script("arguments[0].dispatchEvent(new KeyboardEvent('keydown', {'key': 'ArrowDown'}));", element)
-    #
-    #         # нажатие стрелки вниз указанное количество раз
-    #         for _ in range(arrow_presses):
-    #             time.sleep(2)
-    #             element.send_keys(Keys.ARROW_DOWN)
-    #             time.sleep(2)
-    #
-    #         # нажатие Enter для подтверждения выбора
-    #         element.send_keys(Keys.ENTER)
-    #
-    #         # Формируем сообщение для шага Allure и консоли
-    #         with allure.step(f"Clicked and selected with {arrow_presses} arrow presses on {element_info['name']}"):
-    #             print(f"Clicked and selected with {arrow_presses} arrow presses on {element_info['name']}")
-    #
-    #     except Exception as e:
-    #         message = f"Error interacting with element {element_info['name']}: {str(e)}"
-    #         with allure.step(message):
-    #             print(message)
-    #         raise
-
 
     def click_and_select_with_arrows(self, element_info: Dict[str, str], arrow_presses: int) -> None:
         """

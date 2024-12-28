@@ -13,3 +13,9 @@ def test_address_directory_lkz(base_fixture, domain):
 
     base.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.addresses_list_button,
                         do_assert=True, wait='lst')
+
+    manual = Manual(base.driver)
+
+    manual.click_button(manual.filter_date_create, do_assert=True)
+
+

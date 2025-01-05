@@ -459,6 +459,39 @@ class Base:
 
 
 
+    def refresh_page(self) -> None:
+        """
+        Обновляет текущую страницу.
+        """
+        try:
+            self.driver.refresh()
+            with allure.step("Page refreshed successfully"):
+                print("Page refreshed successfully.")
+
+        except Exception as e:
+            message = f"Error while refreshing the page: {str(e)}"
+            with allure.step(message):
+                print(message)
+            raise
+
+
+    def reload_page(self) -> None:
+        """
+        Перезагружает текущую страницу.
+        """
+        try:
+            self.driver.execute_script("location.reload(true);")
+            with allure.step("Page reload successfully"):
+                print("Page reload successfully.")
+
+        except Exception as e:
+            message = f"Error while performing a reload: {str(e)}"
+            with allure.step(message):
+                print(message)
+            raise
+
+
+
     """ In dropdown click, wait, input and enter"""
     def dropdown_with_input(self, element_dict: Dict[str, str], option_text: str, press_enter: bool = True,
                             wait_presence: bool = False, wait_type: str = 'clickable',

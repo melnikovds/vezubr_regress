@@ -99,3 +99,22 @@ class Manual(Base):
         "name": "cross"
     }
 
+
+
+
+    tariff_name = {
+        "xpath": "//label[text()='Название тарифа']/following::input",
+        "name": "tariff_name"
+    }
+    tariff_status = {
+        "xpath": "//div[@data-__field='[object Object]']//div",
+        "name": "tariff_status"
+    }
+
+
+
+
+
+
+
+

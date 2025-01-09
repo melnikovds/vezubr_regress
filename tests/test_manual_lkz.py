@@ -172,6 +172,66 @@ def test_address_directory_lkz(base_fixture, domain):
 
 
 
+@allure.story("Extended test")
+@allure.feature('Фильтры')
+@allure.description('ЛКЗ Тест фильтра Тарифы в разделе справочники')
+@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True) # Параметризация роли
+def test_tariff_directory_lkz(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    base.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.tariffs_list_button,
+                        do_assert=True, wait='lst')
+
+    add = Manual(base.driver)
+
+    add.input_in_field(add.tariff_name, value='202412092122', click_first=True)
+    time.sleep(2)
+    add.verify_text_on_page(text='LTL-20241209212214', should_exist=True)
+    time.sleep(2)
+    add.verify_text_on_page(text='20241210031127', should_exist=False)
+
+    add.backspace_and_input(add.tariff_name, value='')
+    time.sleep(2)
+
+    add.dropdown_without_input(add.tariff_status, option_text='Не активный')
+    time.sleep(2)
+    add.verify_text_on_page(text='ПРР-20241209180612', should_exist=True)
+    time.sleep(2)
+    add.verify_text_on_page(text='ТТ-20240910124407', should_exist=False)
+    time.sleep(2)
+
+    add.dropdown_without_input(add.tariff_status, option_text='Активный')
+    time.sleep(2)
+    add.verify_text_on_page(text='ПРР-20240818230735', should_exist=True)
+    time.sleep(2)
+    add.verify_text_on_page(text='ПРР-20241206111102', should_exist=False)
+    time.sleep(2)
+
+
+    add.input_in_field(add.tariff_name, value='ПРР-20241209212319', click_first=True)
+    add.dropdown_without_input(add.tariff_status, option_text='Не активный')
+    add.verify_text_on_page(text='10.12.2024 05:58', should_exist=True)
+    time.sleep(2)
+    add.verify_text_on_page(text='ПРР-20241206111102', should_exist=False)
+    time.sleep(2)
+
+    add.backspace_and_input(add.tariff_name, value='')
+
+    add.input_in_field(add.tariff_name, value='ГГ-20241006200435', click_first=True)
+    add.dropdown_without_input(add.tariff_status, option_text='Активный')
+    add.verify_text_on_page(text='10.12.2024 05:58', should_exist=True)
+    time.sleep(2)
+    add.verify_text_on_page(text='ПРР-20241206111102', should_exist=False)
+    time.sleep(2)
+
+
+
+
+
+
+
+
 
 
 

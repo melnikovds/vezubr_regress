@@ -267,7 +267,47 @@ class Base:
                 assert not text_found, f"Expected text '{text}' to be absent on the page, but it was found."
             
             print(message)
-    
+
+
+
+    def find_text_on_page(self, text: str, occurrences: int = 1) -> bool:
+        """
+        Проверяет наличие указанного текста на странице и количество его вхождений.
+
+        Parameters
+        ----------
+        text : str
+            Текст, который необходимо найти на странице.
+        occurrences : int, optional
+            Количество раз, которое текст должен присутствовать на странице (по умолчанию 1).
+
+        Returns
+        -------
+        bool
+            True, если текст найден указанное количество раз, иначе False.
+        """
+
+        try:
+            page_source = self.driver.page_source
+            count = page_source.count(text)
+
+            if count == occurrences:
+                with allure.step(f"Text '{text}' found {count} times as expected"):
+                    print(f"Text '{text}' found {count} times as expected.")
+                return True
+            else:
+                with allure.step(f"Expected '{text}' {occurrences} times, but found {count} times."):
+                    print(f"Expected '{text}' {occurrences} times, but found {count} times.")
+                return False
+        except Exception as e:
+            message = f"Error finding text on the page: {str(e)}"
+            with allure.step(message):
+                print(message)
+            raise
+
+
+
+
     """ Get random value float to str"""
     @staticmethod
     def random_value_float_str(of: float, to: float, precision: int = 0) -> str:

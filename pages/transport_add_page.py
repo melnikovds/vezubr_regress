@@ -1,5 +1,4 @@
 from typing import NoReturn
-
 from base.base_class import Base
 
 

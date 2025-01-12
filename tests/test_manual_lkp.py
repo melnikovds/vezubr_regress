@@ -43,7 +43,7 @@ def test_tariff_directory_lkp(base_fixture, domain):
     add.input_in_field(add.tariff_name, value='ПРР-20241209183834', click_first=True)
     add.dropdown_without_input(add.tariff_status, option_text='Не активный')
     time.sleep(2)
-    add.find_text_on_page(text='834', occurrences=3)
+    add.find_text_on_page(text='83834', occurrences=3)
     add.verify_text_on_page(text='10.12.2024 00:11', should_exist=True)
     add.verify_text_on_page(text='ПРР-20241209145054', should_exist=False)
     add.verify_text_on_page(text='212151', should_exist=False)

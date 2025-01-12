@@ -6,6 +6,7 @@ class Notification(Base):
         super().__init__(driver)
         self.driver = driver
 
+    # Locators
     click_sms = {
         "xpath": "//button[contains(@class,'ant-btn form-field-range-time__action')]",
         "name": "click_sms"
@@ -172,7 +173,6 @@ class Notification(Base):
         "name": "loading_completed_sms"
     }
 
-
     documents_received_mail = {
         "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[5]/td[2]/div[1]/div[1]/div[1]",
         "name": "documents_received_mail"
@@ -186,7 +186,6 @@ class Notification(Base):
         "name": "documents_received_sms"
     }
 
-
     flight_over_mail = {
         "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[6]/td[2]/div[1]/div[1]/div[1]",
         "name": "flight_over_mail"
@@ -199,8 +198,6 @@ class Notification(Base):
         "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[6]/td[4]/div[1]/div[1]/div[1]",
         "name": "flight_over_sms"
     }
-
-
 
     flight_confirmation_mail = {
         "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[1]",
@@ -241,7 +238,6 @@ class Notification(Base):
         "name": "registry_not_confirmed_sms"
     }
 
-
     critical_charge_mail = {
         "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[6]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[1]",
         "name": "critical_charge_mail"
@@ -254,7 +250,6 @@ class Notification(Base):
         "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[6]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[4]/div[1]/div[1]/div[1]",
         "name": "critical_charge_sms"
     }
-
 
     no_connection_mail = {
         "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[6]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[2]/td[2]/div[1]/div[1]/div[1]",
@@ -269,8 +264,6 @@ class Notification(Base):
         "name": "no_connection_sms"
     }
 
-
-
     cargo_not_accepted_mail = {
         "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[7]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[1]",
         "name": "cargo_not_accepted_mail"
@@ -284,7 +277,6 @@ class Notification(Base):
         "name": "cargo_not_accepted_sms"
     }
 
-
     address_missing_mail = {
         "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[7]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[2]/td[2]/div[1]/div[1]/div[1]",
         "name": "address_missing_mail"
@@ -297,8 +289,6 @@ class Notification(Base):
         "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[7]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[2]/td[4]/div[1]/div[1]/div[1]",
         "name": "address_missing_sms"
     }
-
-
 
     safe_notifications = {
         "xpath": "//div[contains(@class,'vz-form-actions vz-form-actions--right')]//button[1]",

@@ -13,17 +13,23 @@ def test_notification_field_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
 
+    # переход в раздел 'Настройки'
     sidebar.click_button(sidebar.settings_button, do_assert=True)
 
     notification = Settings(base.driver)
+    # переход в таб 'Настройки уведомлений'
     notification.click_button(notification.notifications_field_tab)
-
     add = Notification(base.driver)
+
+    # настройка уведомлений по смс
     add.click_button(add.click_sms)
     add.dropdown_without_input(add.day_to_allowed, option_text="Только по рабочим дням")
+
+    # настройка уведомлений по рейсам
     add.dropdown_without_input(add.send_notification, option_text="По всем Рейсам")
     time.sleep(1)
 
+    # установка уведомлений в блоке 'Подбор'
     add.dropdown_without_input(add.driver_search_mail, option_text="15 мин")
     add.dropdown_without_input(add.min_cost_mail, option_text="уведомлять")
     add.dropdown_without_input(add.executor_add_mail, option_text="уведомлять", index=2)
@@ -55,8 +61,10 @@ def test_notification_field_lkz(base_fixture, domain):
     add.click_and_select_with_arrows(add.cancelled_owner_monitor, arrow_presses=1)
     add.click_and_select_with_arrows(add.cancelled_owner_sms, arrow_presses=1)
 
-
+    # прокрутка страницы вниз
     add.scroll_to_element(add.late_arrival_mail)
+
+    # установка уведомлений в блоке 'Исполнение'
     add.click_and_select_with_arrows(add.late_arrival_mail, arrow_presses=12)
     add.click_and_select_with_arrows(add.late_arrival_monitor, arrow_presses=13)
     add.click_and_select_with_arrows(add.late_arrival_sms, arrow_presses=7)
@@ -69,7 +77,9 @@ def test_notification_field_lkz(base_fixture, domain):
     add.click_and_select_with_arrows(add.loading_begun_monitor, arrow_presses=6)
     add.click_and_select_with_arrows(add.loading_begun_sms, arrow_presses=8)
 
+    # прокрутка страницы вниз
     add.scroll_to_element(add.loading_completed_mail)
+
     add.click_and_select_with_arrows(add.loading_completed_mail, arrow_presses=1)
     add.click_and_select_with_arrows(add.loading_completed_monitor, arrow_presses=2)
     add.click_and_select_with_arrows(add.loading_completed_sms, arrow_presses=3)
@@ -78,13 +88,18 @@ def test_notification_field_lkz(base_fixture, domain):
     add.click_and_select_with_arrows(add.documents_received_monitor, arrow_presses=17)
     add.click_and_select_with_arrows(add.documents_received_sms, arrow_presses=18)
 
+    # прокрутка страницы вниз
     add.scroll_to_element(add.flight_over_mail)
+
+
     add.click_and_select_with_arrows(add.flight_over_mail, arrow_presses=5)
     add.click_and_select_with_arrows(add.flight_over_monitor, arrow_presses=10)
     add.click_and_select_with_arrows(add.flight_over_sms, arrow_presses=15)
 
-
+    # прокрутка страницы вниз
     add.scroll_to_element(add.flight_confirmation_mail)
+
+    # установка уведомлений в блоке 'Проверка'
     add.click_and_select_with_arrows(add.flight_confirmation_mail, arrow_presses=2)
     add.click_and_select_with_arrows(add.flight_confirmation_monitor, arrow_presses=3)
     add.click_and_select_with_arrows(add.flight_confirmation_sms, arrow_presses=8)
@@ -97,8 +112,10 @@ def test_notification_field_lkz(base_fixture, domain):
     add.click_and_select_with_arrows(add.registry_not_confirmed_monitor, arrow_presses=4)
     add.click_and_select_with_arrows(add.registry_not_confirmed_sms, arrow_presses=14)
 
-
+    # прокрутка страницы вниз
     add.scroll_to_element(add.critical_charge_mail)
+
+    # установка уведомлений в блоке 'Мобильное приложение'
     add.click_and_select_with_arrows(add.critical_charge_mail, arrow_presses=1)
     add.click_and_select_with_arrows(add.critical_charge_monitor, arrow_presses=1)
     add.click_and_select_with_arrows(add.critical_charge_sms, arrow_presses=1)
@@ -107,6 +124,7 @@ def test_notification_field_lkz(base_fixture, domain):
     add.click_and_select_with_arrows(add.no_connection_monitor, arrow_presses=1)
     add.click_and_select_with_arrows(add.no_connection_sms, arrow_presses=1)
 
+    # установка уведомлений в блоке 'Грузоместа'
     add.click_and_select_with_arrows(add.cargo_not_accepted_mail, arrow_presses=1)
     add.click_and_select_with_arrows(add.cargo_not_accepted_monitor, arrow_presses=1)
     add.click_and_select_with_arrows(add.cargo_not_accepted_sms, arrow_presses=1)
@@ -115,6 +133,7 @@ def test_notification_field_lkz(base_fixture, domain):
     add.click_and_select_with_arrows(add.address_missing_monitor, arrow_presses=1)
     add.click_and_select_with_arrows(add.address_missing_sms, arrow_presses=1)
 
-
+    # сохранение настроек
     add.click_button(add.safe_notifications, wait='form')
 
+    # Конец теста

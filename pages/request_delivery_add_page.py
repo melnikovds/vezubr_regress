@@ -230,8 +230,7 @@ class DeliveryAdd(Base):
         # Выбор первого адреса из списка
         self.click_button(self.first_address_select)
         # Фильтрация адресов и выбор первого адреса
-        self.input_in_field(self.address_filter,
-                            "Свердловская обл, г Верхняя Пышма, Успенский пр-кт, д 103а")
+        self.input_in_field(self.address_filter,"Свердловская обл, г Верхняя Пышма, Успенский пр-кт, д 103а")
         time.sleep(1)
         self.click_button(self.address_radio_button)
         # Подтверждение выбора адреса

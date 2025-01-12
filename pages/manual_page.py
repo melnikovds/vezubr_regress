@@ -6,6 +6,7 @@ class Manual(Base):
         super().__init__(driver)
         self.driver = driver
 
+    # Locators
     filter_date_create = {
         "xpath": "//div[@class='ant-select-selection__rendered']",
         "name": "filter_date_create"
@@ -42,9 +43,6 @@ class Manual(Base):
         "xpath": "//input[@placeholder='ID Адреса Партнёра']",
         "name": "id_address"
     }
-
-
-
 
     reset = {
         "xpath": "//button[contains(@class,'ant-btn semi-wide')]",
@@ -98,9 +96,6 @@ class Manual(Base):
         "xpath": "//button[@class='ant-modal-close']//span[1]",
         "name": "cross"
     }
-
-
-
 
     tariff_name = {
         "xpath": "//label[text()='Название тарифа']/following::input",

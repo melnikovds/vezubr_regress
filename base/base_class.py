@@ -268,9 +268,7 @@ class Base:
             
             print(message)
 
-
-
-    def find_text_on_page(self, text: str, occurrences: int = 1) -> bool:
+    def find_text_on_page(self, text: str, occurrences: int = 1) -> None:
         """
         Проверяет наличие указанного текста на странице и количество его вхождений.
 
@@ -281,10 +279,10 @@ class Base:
         occurrences : int, optional
             Количество раз, которое текст должен присутствовать на странице (по умолчанию 1).
 
-        Returns
+        Raises
         -------
-        bool
-            True, если текст найден указанное количество раз, иначе False.
+        AssertionError
+            Если количество вхождений текста на странице не совпадает с ожидаемым.
         """
 
         try:
@@ -292,21 +290,17 @@ class Base:
             count = page_source.count(text)
 
             if count == occurrences:
-                with allure.step(f"Text '{text}' found {count} times as expected"):
+                with allure.step(f"Text '{text}' found {count} times as expected."):
                     print(f"Text '{text}' found {count} times as expected.")
-                return True
             else:
-                with allure.step(f"Expected '{text}' {occurrences} times, but found {count} times."):
-                    print(f"Expected '{text}' {occurrences} times, but found {count} times.")
-                return False
+                raise AssertionError (
+                    f"Expected '{text}' to appear {occurrences} times, but found {count} times."
+                )
         except Exception as e:
             message = f"Error finding text on the page: {str(e)}"
             with allure.step(message):
                 print(message)
             raise
-
-
-
 
     """ Get random value float to str"""
     @staticmethod
@@ -420,8 +414,6 @@ class Base:
             if do_assert:
                 self.assert_element_text(element_dict)
 
-
-
     def click_and_select_with_arrows(self, element_info: Dict[str, str], arrow_presses: int) -> None:
         """
         Кликает по указанному элементу, затем нажимает клавишу "стрелка вниз" указанное количество раз
@@ -471,8 +463,6 @@ class Base:
                 print(message)
             raise
 
-
-
     def scroll_to_element(self, element_info: Dict[str, str]) -> None:
         """
         Прокручивает страницу до указанного элемента.
@@ -497,8 +487,6 @@ class Base:
                 print(message)
             raise
 
-
-
     def refresh_page(self) -> None:
         """
         Обновляет текущую страницу.
@@ -514,7 +502,6 @@ class Base:
                 print(message)
             raise
 
-
     def reload_page(self) -> None:
         """
         Перезагружает текущую страницу.
@@ -529,8 +516,6 @@ class Base:
             with allure.step(message):
                 print(message)
             raise
-
-
 
     """ In dropdown click, wait, input and enter"""
     def dropdown_with_input(self, element_dict: Dict[str, str], option_text: str, press_enter: bool = True,

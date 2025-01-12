@@ -69,6 +69,7 @@ class EditFieldsParam(Base):
     def __init__(self, driver):
         super().__init__(driver)
 
+    # Locators
     e_p = {
         "xpath": "(// img[@ alt='editBlack'])[2]",
         "name": "e_p"
@@ -77,16 +78,6 @@ class EditFieldsParam(Base):
         "xpath": "(//img[@alt='trashBinBlack'])[2]",
         "name": "del_custom"
     }
-    # acc_del = {
-    #     "xpath": "//button[@class='ant-btn ant-btn-primary']",
-    #     "name": "acc_del",
-    #     "reference": "Да"
-    # }
-    # rej_del = {
-    #     "xpath": "//button[@class='ant-btn']",
-    #     "name": "rej_del",
-    #     "reference": "Нет"
-    # }
     acc_del = {
         "xpath": "//button[@class='ant-btn']/following-sibling::button[1]",
         "name": "acc_del"

@@ -7,7 +7,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class SmsCenter(Base):
-
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver

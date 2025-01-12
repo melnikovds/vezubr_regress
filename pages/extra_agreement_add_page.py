@@ -56,8 +56,8 @@ class ExtraAgreementAdd(Base):
         "xpath": "//input[@type='radio' and @class='ant-radio-input']",
         "name": "radio_button"
     }
-    # Methods
 
+    # Methods
     def add_base_extra_agreements(self):
         extra_agr_number = f"№-{self.get_timestamp()}"
         self.input_in_field(self.extra_agr_number_input, extra_agr_number)

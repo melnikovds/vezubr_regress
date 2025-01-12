@@ -6,6 +6,7 @@ class Settings(Base):
         super().__init__(driver)
         self.driver = driver
 
+    # Locators
     custom_field = {
         "xpath": "//a[text()='Пользовательские поля']",
         "name": "custom_field",
@@ -35,6 +36,7 @@ class CustomFieldParam(Base):
         super().__init__(driver)
         self.driver = driver
 
+    # Locators
     add_ru = {
         "xpath": "//input[@class='ant-input']",
         "name": "add_ru",

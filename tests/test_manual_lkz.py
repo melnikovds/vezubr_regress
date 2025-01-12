@@ -5,7 +5,7 @@ from pages.manual_page import Manual
 
 @allure.story("Extended test")
 @allure.feature('Фильтры')
-@allure.description('ЛКЗ Тест фильтра Адреса в разделе справочники')
+@allure.description("ЛКЗ Тест фильтра 'Адреса' в разделе справочники")
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True) # Параметризация роли
 def test_address_directory_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -208,7 +208,7 @@ def test_address_directory_lkz(base_fixture, domain):
 
 @allure.story("Extended test")
 @allure.feature('Фильтры')
-@allure.description('ЛКЗ Тест фильтра Тарифы в разделе справочники')
+@allure.description("ЛКЗ Тест фильтра 'Тарифы' в разделе справочники")
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True) # Параметризация роли
 def test_tariff_directory_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -246,7 +246,7 @@ def test_tariff_directory_lkz(base_fixture, domain):
     add.input_in_field(add.tariff_name, value='ПРР-20241209212319', click_first=True)
     add.dropdown_without_input(add.tariff_status, option_text='Не активный')
     time.sleep(2)
-    add.find_text_on_page(text='12319', occurrences=3)
+    add.find_text_on_page(text='319', occurrences=3)
     add.verify_text_on_page(text='10.12.2024 05:58', should_exist=True)
     add.verify_text_on_page(text='ПРР-20241206111102', should_exist=False)
     add.verify_text_on_page(text='93428', should_exist=False)

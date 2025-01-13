@@ -97,6 +97,7 @@ class Manual(Base):
         "name": "cross"
     }
 
+
     tariff_name = {
         "xpath": "//label[text()='Название тарифа']/following::input",
         "name": "tariff_name"
@@ -105,6 +106,35 @@ class Manual(Base):
         "xpath": "//div[@data-__field='[object Object]']//div",
         "name": "tariff_status"
     }
+
+
+    surname_driver = {
+    "xpath": "//input[@class='ant-input']",
+    "name": "surname_driver"
+    }
+    status_in_system = {
+    "xpath": "//div[@class='ant-select-selection__rendered']",
+    "name": "status_in_system"
+    }
+    status_on_flight = {
+    "xpath": "(//div[contains(@class,'ant-select-selection ')])[2]",
+    "name": "status_on_flight"
+    }
+    name_driver = {
+    "xpath": "(//input[@class='ant-input'])[3]",
+    "name": "name_driver"
+    }
+    patronymic_driver = {
+    "xpath": "//input[@placeholder='Отчество']",
+    "name": "patronymic_driver"
+    }
+    telephone_driver = {
+    "xpath": "//label[text()='Телефон']/following::input",
+    "name": "telephone_driver"
+    }
+
+
+
 
 
 

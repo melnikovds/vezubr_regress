@@ -66,3 +66,144 @@ def test_tariff_directory_lkp(base_fixture, domain):
     add.backspace_and_input(add.tariff_name, value='')
 
     # Конец теста
+
+@allure.story("Extended test")
+@allure.feature('Фильтры')
+@allure.description("ЛКЗ Тест фильтра 'Водители' в разделе справочники")
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
+def test_driver_directory_lkp(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # переход к списку водителей
+    base.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.tariffs_list_button,
+                        do_assert=True, wait='lst')
+
+    add = Manual(base.driver)
+    # проверка фильтра "Фамилия"
+    add.input_in_field(add.surname_driver, value='2205347', click_first=True)
+    time.sleep(1)
+    add.verify_text_on_page(text='Ф-20241212205347', should_exist=True)
+    add.verify_text_on_page(text='Ф-20241211051656', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.surname_driver, value='')
+    time.sleep(1)
+    add.input_in_field(add.surname_driver, value='Ф-20240531043410', click_first=True)
+    time.sleep(2)
+    add.find_text_on_page(text='3410', occurrences=3)
+    time.sleep(1)
+    add.backspace_and_input(add.surname_driver, value='')
+    time.sleep(1)
+
+    # проверка №1 фильтра "Статус в системе"
+    add.dropdown_without_input(add.status_in_system, option_text='Не активный')
+    time.sleep(2)
+    add.verify_text_on_page(text='Ф-20241210204128', should_exist=True)
+    add.verify_text_on_page(text='Ф-20241209193525', should_exist=False)
+    time.sleep(2)
+
+    # проверка №2 фильтра "Статус в системе"
+    add.dropdown_without_input(add.status_in_system, option_text='Активный')
+    time.sleep(2)
+    add.verify_text_on_page(text='Ф-20241019111829', should_exist=True)
+    add.verify_text_on_page(text='Ф-20240524143334', should_exist=False)
+    time.sleep(2)
+
+    # проверка №1 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight, option_text='Нет заказов')
+    time.sleep(2)
+    add.verify_text_on_page(text='И-20241211051657', should_exist=True)
+    add.verify_text_on_page(text='И-20240515185027', should_exist=False)
+    time.sleep(2)
+
+    # проверка №2 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight, option_text='Назначен на заказ')
+    time.sleep(2)
+    add.verify_text_on_page(text='Ф-20240515185027', should_exist=True)
+    add.verify_text_on_page(text='Ф-20241211051656', should_exist=False)
+    time.sleep(2)
+
+    # проверка №3 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight, option_text='На заказе')
+    time.sleep(2)
+    add.verify_text_on_page(text='Ф-20241204160029', should_exist=True)
+    add.verify_text_on_page(text='Ф-20241209193448', should_exist=False)
+    time.sleep(2)
+
+    # проверка №4 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight, option_text='Работа приостановлена')
+    time.sleep(2)
+    add.verify_text_on_page(text='Ф-20240806185159', should_exist=True)
+    add.verify_text_on_page(text='Ф-20241210010831', should_exist=False)
+    time.sleep(2)
+
+    add.dropdown_without_input(add.status_in_system, option_text='Активный')
+    add.dropdown_without_input(add.status_on_flight, option_text='Нет заказов')
+
+    # проверка фильтра "Имя"
+    add.input_in_field(add.name_driver, value='93449', click_first=True)
+    time.sleep(1)
+    add.verify_text_on_page(text='И-20241209193449', should_exist=True)
+    add.verify_text_on_page(text='И-20241210010831', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.name_driver, value='')
+    time.sleep(1)
+    add.input_in_field(add.name_driver, value='И-20241205221738', click_first=True)
+    time.sleep(2)
+    add.find_text_on_page(text='738', occurrences=3)
+    time.sleep(1)
+    add.backspace_and_input(add.name_driver, value='')
+    time.sleep(1)
+
+    # проверка фильтра "Отчество"
+    add.input_in_field(add.patronymic_driver, value='5235', click_first=True)
+    time.sleep(1)
+    add.verify_text_on_page(text='О-20241210205235', should_exist=True)
+    add.verify_text_on_page(text='О-20241210010752', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.patronymic_driver, value='')
+    time.sleep(1)
+    add.input_in_field(add.patronymic_driver, value='О-20241209193526', click_first=True)
+    time.sleep(2)
+    add.find_text_on_page(text='3526', occurrences=3)
+    time.sleep(1)
+    add.backspace_and_input(add.patronymic_driver, value='')
+    time.sleep(1)
+
+    # проверка фильтра "Телефон"
+    add.input_in_field(add.telephone_driver, value='18834', click_first=True)
+    time.sleep(1)
+    add.verify_text_on_page(text='79659218834', should_exist=True)
+    add.verify_text_on_page(text='79653420389', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.telephone_driver, value='')
+    time.sleep(1)
+    add.input_in_field(add.telephone_driver, value='79654648108', click_first=True)
+    time.sleep(2)
+    add.find_text_on_page(text='8108', occurrences=3)
+    time.sleep(1)
+    add.backspace_and_input(add.telephone_driver, value='')
+    time.sleep(1)
+
+    # проверка №1 фильтра с несколькими значениями
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

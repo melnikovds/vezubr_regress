@@ -117,7 +117,7 @@ class Manual(Base):
     "name": "status_in_system"
     }
     status_on_flight = {
-    "xpath": "(//div[contains(@class,'ant-select-selection ')])[2]",
+    "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
     "name": "status_on_flight"
     }
     name_driver = {
@@ -132,6 +132,29 @@ class Manual(Base):
     "xpath": "//label[text()='Телефон']/following::input",
     "name": "telephone_driver"
     }
+    cross_two = {
+    "xpath": "(//i[contains(@class,'anticon anticon-down')])[2]",
+    "name": "cross_two"
+    }
+
+
+
+
+    tractor_number = {
+    "xpath": "//input[@class='ant-input']",
+    "name": "tractor_number"
+    }
+    status_in_system_two = {
+    "xpath": "//div[@class='ant-select-selection__rendered']",
+    "name": "status_in_system_two"
+    }
+    status_on_flight_two = {
+    "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
+    "name": "status_on_flight_two"
+    }
+
+
+
 
 
 

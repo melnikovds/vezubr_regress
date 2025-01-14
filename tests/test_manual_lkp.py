@@ -76,13 +76,17 @@ def test_driver_directory_lkp(base_fixture, domain):
     base, sidebar = base_fixture
 
     # переход к списку водителей
-    base.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.tariffs_list_button,
+    base.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.drivers_list_button,
                         do_assert=True, wait='lst')
 
     add = Manual(base.driver)
+    # add.move_and_click(move_to=add.status_on_flight, click_to=add.cross_two, click_wait_type='', wait='lst')
+    # add.click_button(add.cross_two, wait='lst')
+    add.backspace_and_input(add.status_on_flight, value='')
+
     # проверка фильтра "Фамилия"
     add.input_in_field(add.surname_driver, value='2205347', click_first=True)
-    time.sleep(1)
+    time.sleep(3)
     add.verify_text_on_page(text='Ф-20241212205347', should_exist=True)
     add.verify_text_on_page(text='Ф-20241211051656', should_exist=False)
     time.sleep(1)
@@ -96,8 +100,8 @@ def test_driver_directory_lkp(base_fixture, domain):
     time.sleep(1)
 
     # проверка №1 фильтра "Статус в системе"
-    add.dropdown_without_input(add.status_in_system, option_text='Не активный')
-    time.sleep(2)
+    add.click_and_select_with_arrows(add.status_in_system, arrow_presses=1)
+    time.sleep(3)
     add.verify_text_on_page(text='Ф-20241210204128', should_exist=True)
     add.verify_text_on_page(text='Ф-20241209193525', should_exist=False)
     time.sleep(2)
@@ -186,6 +190,109 @@ def test_driver_directory_lkp(base_fixture, domain):
     time.sleep(1)
 
     # проверка №1 фильтра с несколькими значениями
+
+
+
+
+
+
+
+@allure.story("Extended test")
+@allure.feature('Фильтры')
+@allure.description("ЛКЗ Тест фильтра 'Тягачи' в разделе справочники")
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
+def test_tractor_directory_lkp(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # переход к списку тягачей
+    base.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.tractors_list_button,
+                        do_assert=True, wait='lst')
+
+    add = Manual(base.driver)
+    # проверка фильтра "Госномер тягача"
+    add.input_in_field(add.tractor_number, value='832', click_first=True)
+    time.sleep(3)
+    add.verify_text_on_page(text='ТЯГ-20240708081832', should_exist=True)
+    add.verify_text_on_page(text='ТЯГ-20240517055115', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.tractor_number, value='')
+    time.sleep(1)
+    add.input_in_field(add.surname_driver, value='ТЯГ-20240531061917', click_first=True)
+    time.sleep(2)
+    add.find_text_on_page(text='1917', occurrences=3)
+    time.sleep(1)
+    add.backspace_and_input(add.surname_driver, value='')
+    time.sleep(1)
+
+    # проверка №1 фильтра "Статус в системе"
+    add.dropdown_without_input(add.status_in_system_two, option_text='Неактивный')
+    time.sleep(3)
+    add.verify_text_on_page(text='ТЯГ-20240126103308', should_exist=False)
+    time.sleep(2)
+
+    # проверка №2 фильтра "Статус в системе"
+    add.dropdown_without_input(add.status_in_system_two, option_text='Активный')
+    time.sleep(3)
+    add.verify_text_on_page(text='ТЯГ-20240320203430', should_exist=True)
+    time.sleep(2)
+
+    # проверка №1 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight_two, option_text='Нет заказов')
+    time.sleep(2)
+    add.verify_text_on_page(text='ТЯГ-20240116131200', should_exist=True)
+    add.verify_text_on_page(text='ТЯГ-20241212233054', should_exist=False)
+    time.sleep(2)
+
+    # проверка №2 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight_two, option_text='Назначен на заказ')
+    time.sleep(2)
+    add.verify_text_on_page(text='ТЯГ-20240910131320', should_exist=True)
+    add.verify_text_on_page(text='ТЯГ-20240223190811', should_exist=False)
+    time.sleep(2)
+
+    # проверка №3 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight_two, option_text='На заказе')
+    time.sleep(2)
+    add.verify_text_on_page(text='ТЯГ-20241212233054', should_exist=True)
+    add.verify_text_on_page(text='ТЯГ-20240224125553', should_exist=False)
+    time.sleep(2)
+
+    # проверка №4 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight_two, option_text='Эксплуатация приостановлена')
+    time.sleep(2)
+    add.verify_text_on_page(text='ТЯГ-20240714214407', should_exist=True)
+    add.verify_text_on_page(text='ТЯГ-20240710212039', should_exist=False)
+    time.sleep(2)
+
+    # проверка №1 фильтра с несколькими значениями
+    add.input_in_field(add.tractor_number, value='ТЯГ-20240222223726', click_first=True)
+    add.dropdown_without_input(add.status_on_flight_two, option_text='Нет заказов')
+    time.sleep(2)
+    add.find_text_on_page(text='3726', occurrences=3)
+    add.verify_text_on_page(text='ТЯГ-20240220122853', should_exist=False)
+    time.sleep(2)
+
+    # очистка поля "Госномер тягача"
+    add.backspace_and_input(add.tractor_number, value='')
+
+    # проверка №2 фильтра с несколькими значениями
+    add.input_in_field(add.tractor_number, value='ТЯГ-20240316202442', click_first=True)
+    add.dropdown_without_input(add.status_on_flight_two, option_text='Эксплуатация приостановлена')
+    time.sleep(2)
+    add.find_text_on_page(text='2442', occurrences=3)
+    add.verify_text_on_page(text='ТЯГ-20240112133258', should_exist=False)
+    time.sleep(2)
+
+    # очистка поля "Госномер тягача"
+    add.backspace_and_input(add.tractor_number, value='')
+
+    # Конец теста
+
+
+
+
+
 
 
 

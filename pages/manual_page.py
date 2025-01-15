@@ -132,13 +132,22 @@ class Manual(Base):
     "xpath": "//label[text()='Телефон']/following::input",
     "name": "telephone_driver"
     }
+    # cross_two = {
+    # "xpath": "(//i[contains(@class,'anticon anticon-down')])[2]",
+    # "name": "cross_two"
+    # }
     cross_two = {
-    "xpath": "(//i[contains(@class,'anticon anticon-down')])[2]",
+    "xpath": "(//span[@class='ant-select-arrow']//i)[2]",
     "name": "cross_two"
     }
-
-
-
+    # cross_two = {
+    # "xpath": "(//span[@unselectable='on']//i)[3]",
+    # "name": "cross_two"
+    # }
+    cross_three = {
+    "xpath": "(//span[@unselectable='on']//i)[2]",
+    "name": "cross_three"
+    }
 
     tractor_number = {
     "xpath": "//input[@class='ant-input']",
@@ -151,6 +160,55 @@ class Manual(Base):
     status_on_flight_two = {
     "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
     "name": "status_on_flight_two"
+    }
+
+
+    trailer_number = {
+    "xpath": "//input[@class='ant-input']",
+    "name": "trailer_number"
+    }
+    type_road_transport = {
+    "xpath": "//span[@class='ant-select-selection__rendered']",
+    "name": "type_road_transport"
+    }
+    status_in_system_three = {
+    "xpath": "//div[@class='ant-select-selection__rendered']",
+    "name": "status_in_system_three"
+    }
+    status_on_flight_three = {
+    "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
+    "name": "status_on_flight_three"
+    }
+    special_road_transport = {
+    "xpath": "//span[@class='ant-select-tree-switcher ant-select-tree-switcher_open']",
+    "name": "special_road_transport"
+    }
+
+
+    specialist_type = {
+    "xpath": "//span[@class='ant-select-selection ant-select-selection--multiple']//ul[1]",
+    "name": "specialist_type"
+    }
+    specialist_surname = {
+    "xpath": "//input[@placeholder='Фамилия']",
+    "name": "specialist_surname"
+    }
+    specialist_name = {
+    "xpath": "//input[@placeholder='Имя']",
+    "name": "specialist_name"
+    }
+    specialist_patronymic = {
+    "xpath": "//input[@placeholder='Отчество']",
+    "name": "specialist_patronymic"
+    }
+    specialist_telephone = {
+    "xpath": "//label[text()='Телефон']/following::input",
+    "name": "specialist_telephone"
+    }
+
+    loader = {
+    "xpath": "//span[@class='ant-select-tree-checkbox-inner']",
+    "name": "loader"
     }
 
 

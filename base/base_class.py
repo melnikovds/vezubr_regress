@@ -517,6 +517,40 @@ class Base:
                 print(message)
             raise
 
+    def click_on_the_cross(self, cross_info: Dict[str, str]) -> None:
+        """
+        Проверяет наличие крестика в поле, и кликает по нему если он существует.
+
+        Parameters
+        ----------
+        cross_info : Dict[str, str]
+            Словарь с информацией о локаторе элемента (name и xpath).
+        """
+        try:
+            # проверяем наличие крестика
+            try:
+                cross_element = WebDriverWait(self.driver, timeout=3).until(
+                    EC.presence_of_element_located((By.XPATH, cross_info['xpath']))
+                )
+            except TimeoutException:
+                # Формируем сообщение для шага Allure и консоли
+                with allure.step(f"Clear button not present, skipping action: {cross_info['name']}"):
+                    print(f"Clear button not present, skipping action: {cross_info['name']}")
+                return
+
+            # клик по крестику
+            ActionChains(self.driver).move_to_element(cross_element).click().perform()
+
+            # Формируем сообщение для шага Allure и консоли
+            with allure.step(f"Clicked on clear button: {cross_info['name']}"):
+                print(f"Clicked on clear button: {cross_info['name']}")
+
+        except Exception as e:
+            message = f"Error clicking clear button: {cross_info['name']}. Error: {str(e)}"
+            with allure.step(message):
+                print(message)
+            raise
+
     """ In dropdown click, wait, input and enter"""
     def dropdown_with_input(self, element_dict: Dict[str, str], option_text: str, press_enter: bool = True,
                             wait_presence: bool = False, wait_type: str = 'clickable',

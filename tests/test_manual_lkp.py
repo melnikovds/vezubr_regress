@@ -5,7 +5,7 @@ from pages.manual_page import Manual
 
 @allure.story("Extended test")
 @allure.feature('Фильтры')
-@allure.description("ЛКЗ Тест фильтра 'Тарифы' в разделе справочники")
+@allure.description("ЛКП Тест фильтра 'Тарифы' в разделе справочники")
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True) # Параметризация роли
 def test_tariff_directory_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -69,7 +69,7 @@ def test_tariff_directory_lkp(base_fixture, domain):
 
 @allure.story("Extended test")
 @allure.feature('Фильтры')
-@allure.description("ЛКЗ Тест фильтра 'Водители' в разделе справочники")
+@allure.description("ЛКП Тест фильтра 'Водители' в разделе справочники")
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_driver_directory_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -80,9 +80,15 @@ def test_driver_directory_lkp(base_fixture, domain):
                         do_assert=True, wait='lst')
 
     add = Manual(base.driver)
-    # add.move_and_click(move_to=add.status_on_flight, click_to=add.cross_two, click_wait_type='', wait='lst')
-    # add.click_button(add.cross_two, wait='lst')
-    add.backspace_and_input(add.status_on_flight, value='')
+    add.move_to_element(add.status_on_flight)
+    time.sleep(5)
+    add.click_on_the_cross(add.cross_two)
+    time.sleep(5)
+
+    # add.move_to_element(add.status_in_system)
+    # time.sleep(5)
+    # add.click_on_the_cross(add.cross_three)
+    # time.sleep(5)
 
     # проверка фильтра "Фамилия"
     add.input_in_field(add.surname_driver, value='2205347', click_first=True)
@@ -154,7 +160,7 @@ def test_driver_directory_lkp(base_fixture, domain):
     time.sleep(1)
     add.input_in_field(add.name_driver, value='И-20241205221738', click_first=True)
     time.sleep(2)
-    add.find_text_on_page(text='738', occurrences=3)
+    add.find_text_on_page(text='1738', occurrences=3)
     time.sleep(1)
     add.backspace_and_input(add.name_driver, value='')
     time.sleep(1)
@@ -199,7 +205,7 @@ def test_driver_directory_lkp(base_fixture, domain):
 
 @allure.story("Extended test")
 @allure.feature('Фильтры')
-@allure.description("ЛКЗ Тест фильтра 'Тягачи' в разделе справочники")
+@allure.description("ЛКП Тест фильтра 'Тягачи' в разделе справочники")
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_tractor_directory_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -218,11 +224,11 @@ def test_tractor_directory_lkp(base_fixture, domain):
     time.sleep(1)
     add.backspace_and_input(add.tractor_number, value='')
     time.sleep(1)
-    add.input_in_field(add.surname_driver, value='ТЯГ-20240531061917', click_first=True)
+    add.input_in_field(add.tractor_number, value='ТЯГ-20240531061917', click_first=True)
     time.sleep(2)
     add.find_text_on_page(text='1917', occurrences=3)
     time.sleep(1)
-    add.backspace_and_input(add.surname_driver, value='')
+    add.backspace_and_input(add.tractor_number, value='')
     time.sleep(1)
 
     # проверка №1 фильтра "Статус в системе"
@@ -289,6 +295,196 @@ def test_tractor_directory_lkp(base_fixture, domain):
 
     # Конец теста
 
+
+@allure.story("Extended test")
+@allure.feature('Фильтры')
+@allure.description("ЛКП Тест фильтра 'Полуприцепы' в разделе справочники")
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
+def test_trailer_directory_lkp(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # переход к списку тягачей
+    base.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.trailers_list_button,
+                        do_assert=True, wait='lst')
+
+    add = Manual(base.driver)
+    # проверка фильтра "Госномер полуприцепа"
+    add.backspace_and_input(add.trailer_number, value='')
+    time.sleep(1)
+    add.input_in_field(add.trailer_number, value='3058', click_first=True)
+    time.sleep(3)
+    add.verify_text_on_page(text='ПП20240220123058', should_exist=True)
+    add.verify_text_on_page(text='ПП-20241019130545', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.trailer_number, value='')
+    time.sleep(1)
+    add.input_in_field(add.trailer_number, value='ПП20240126103514', click_first=True)
+    time.sleep(2)
+    add.find_text_on_page(text='3514', occurrences=3)
+    time.sleep(1)
+    add.backspace_and_input(add.trailer_number, value='')
+    time.sleep(1)
+
+    # проверка фильтра "Тип автоперевозки"
+    add.dropdown_without_input(add.type_road_transport, option_text='Грузовая', index=1)
+    time.sleep(3)
+    add.verify_text_on_page(text='ПП20240120144445', should_exist=True)
+    add.verify_text_on_page(text='ПП-20240910132625', should_exist=False)
+    add.verify_text_on_page(text='ПП-20240515211247', should_exist=False)
+    add.verify_text_on_page(text='ПП-20240826225850', should_exist=False)
+    time.sleep(2)
+    # add.dropdown_without_input(add.type_road_transport, option_text='Грузовая')
+
+    # проверка №1 фильтра "Статус в системе"
+    add.dropdown_without_input(add.status_in_system_three, option_text='Неактивный')
+    time.sleep(3)
+    add.verify_text_on_page(text='ПП20240321042342', should_exist=False)
+    time.sleep(2)
+
+    # проверка №2 фильтра "Статус в системе"
+    add.dropdown_without_input(add.status_in_system_three, option_text='Активный')
+    time.sleep(3)
+    add.verify_text_on_page(text='ПП-20240615163933', should_exist=True)
+    time.sleep(2)
+
+    # проверка №1 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight_three, option_text='Нет заказов')
+    time.sleep(2)
+    add.verify_text_on_page(text='ПП20240202124010', should_exist=True)
+    add.verify_text_on_page(text='ПП20240126103514', should_exist=False)
+    time.sleep(2)
+
+    # проверка №2 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight_three, option_text='Назначен на заказ')
+    time.sleep(2)
+    add.verify_text_on_page(text='ПП-20240828215650', should_exist=True)
+    add.verify_text_on_page(text='ПП-20240524194437', should_exist=False)
+    time.sleep(2)
+
+    # проверка №3 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight_three, option_text='На заказе')
+    time.sleep(2)
+    add.verify_text_on_page(text='ПП-20241210035413', should_exist=True)
+    add.verify_text_on_page(text='ПП-20240421211400', should_exist=False)
+    time.sleep(2)
+
+    # проверка №4 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight_three, option_text='Эксплуатация приостановлена')
+    time.sleep(2)
+    add.verify_text_on_page(text='ПП20240126103514', should_exist=True)
+    add.verify_text_on_page(text='ПП-20240517102825', should_exist=False)
+    time.sleep(2)
+
+    # проверка №1 фильтра с несколькими значениями
+    add.input_in_field(add.trailer_number, value='ПП-20240524193241', click_first=True)
+    add.dropdown_without_input(add.status_on_flight_three, option_text='Нет заказов')
+    time.sleep(2)
+    add.find_text_on_page(text='3241', occurrences=3)
+    add.verify_text_on_page(text='ПП-20240615162454', should_exist=False)
+    time.sleep(2)
+
+    # очистка поля "Госномер полуприцепа"
+    add.backspace_and_input(add.trailer_number, value='')
+
+    # проверка №2 фильтра с несколькими значениями
+    add.input_in_field(add.trailer_number, value='ПП-20240704075915', click_first=True)
+    add.dropdown_without_input(add.status_on_flight_two, option_text='Эксплуатация приостановлена')
+    time.sleep(2)
+    add.find_text_on_page(text='5915', occurrences=3)
+    add.verify_text_on_page(text='ПП-20240709213607', should_exist=False)
+    time.sleep(2)
+
+    # очистка поля "Госномер полуприцепа"
+    add.backspace_and_input(add.trailer_number, value='')
+
+    # Конец теста
+
+
+@allure.story("Extended test")
+@allure.feature('Фильтры')
+@allure.description("ЛКП Тест фильтра 'Специалисты' в разделе справочники")
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
+def test_specialist_directory_lkp(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # переход к списку специалистов
+    base.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.loaders_list_button,
+                        do_assert=True, wait='lst')
+
+    add = Manual(base.driver)
+
+    # # проверка №1 фильтра "Тип специалиста"
+    # add.click_button(add.specialist_type, )
+    # time.sleep(3)
+    # add.click_button(add.loader)
+    # add.verify_text_on_page(text='Ф-20241210210607', should_exist=True)
+    # add.verify_text_on_page(text='Евтушенко', should_exist=False)
+    # time.sleep(2)
+    # add.dropdown_without_input(add.specialist_type, option_text='Грузчик', index=1)
+    # time.sleep(2)
+    # add.dropdown_without_input(add.specialist_type, option_text='Такелажник', index=2)
+
+    # проверка фильтра "Фамилия"
+    add.input_in_field(add.specialist_surname, value='11039', click_first=True)
+    time.sleep(3)
+    add.verify_text_on_page(text='Ф-20241210211039', should_exist=True)
+    add.verify_text_on_page(text='Ф-20241205183937', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.specialist_surname, value='')
+    time.sleep(1)
+    add.input_in_field(add.specialist_surname, value='Ф-20241107182635', click_first=True)
+    time.sleep(2)
+    add.find_text_on_page(text='2635', occurrences=3)
+    time.sleep(1)
+    add.backspace_and_input(add.specialist_surname, value='')
+    time.sleep(1)
+
+    # проверка фильтра "Имя"
+    add.input_in_field(add.specialist_name, value='210832', click_first=True)
+    time.sleep(1)
+    add.verify_text_on_page(text='И-20241212210832', should_exist=True)
+    add.verify_text_on_page(text='И-20241211053807', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.specialist_name, value='')
+    time.sleep(1)
+    add.input_in_field(add.specialist_name, value='И-20241209165826', click_first=True)
+    time.sleep(2)
+    add.find_text_on_page(text='5826', occurrences=3)
+    time.sleep(1)
+    add.backspace_and_input(add.specialist_name, value='')
+    time.sleep(1)
+
+    # проверка фильтра "Отчество"
+    add.input_in_field(add.specialist_patronymic, value='12804', click_first=True)
+    time.sleep(1)
+    add.verify_text_on_page(text='О-20241019112804', should_exist=True)
+    add.verify_text_on_page(text='О-20240828184523', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.specialist_patronymic, value='')
+    time.sleep(1)
+    add.input_in_field(add.specialist_patronymic, value='О-20240818203746', click_first=True)
+    time.sleep(2)
+    add.find_text_on_page(text='3746', occurrences=3)
+    time.sleep(1)
+    add.backspace_and_input(add.specialist_patronymic, value='')
+    time.sleep(1)
+
+    # проверка фильтра "Телефон"
+    add.input_in_field(add.telephone_driver, value='0793', click_first=True)
+    time.sleep(1)
+    add.verify_text_on_page(text='78655240793', should_exist=True)
+    add.verify_text_on_page(text='78659504025', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.telephone_driver, value='')
+    time.sleep(1)
+    add.input_in_field(add.telephone_driver, value='78654403548', click_first=True)
+    time.sleep(2)
+    add.find_text_on_page(text='3548', occurrences=3)
+    time.sleep(1)
+    add.backspace_and_input(add.telephone_driver, value='')
+    time.sleep(1)
 
 
 

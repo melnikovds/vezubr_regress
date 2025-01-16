@@ -132,18 +132,10 @@ class Manual(Base):
     "xpath": "//label[text()='Телефон']/following::input",
     "name": "telephone_driver"
     }
-    # cross_two = {
-    # "xpath": "(//i[contains(@class,'anticon anticon-down')])[2]",
-    # "name": "cross_two"
-    # }
     cross_two = {
     "xpath": "(//span[@class='ant-select-arrow']//i)[2]",
     "name": "cross_two"
     }
-    # cross_two = {
-    # "xpath": "(//span[@unselectable='on']//i)[3]",
-    # "name": "cross_two"
-    # }
     cross_three = {
     "xpath": "(//span[@unselectable='on']//i)[2]",
     "name": "cross_three"

@@ -3,6 +3,7 @@ import pytest
 import time
 from pages.manual_page import Manual
 
+
 @allure.story("Extended test")
 @allure.feature('Фильтры')
 @allure.description("ЛКП Тест фильтра 'Тарифы' в разделе справочники")
@@ -67,6 +68,7 @@ def test_tariff_directory_lkp(base_fixture, domain):
 
     # Конец теста
 
+
 @allure.story("Extended test")
 @allure.feature('Фильтры')
 @allure.description("ЛКП Тест фильтра 'Водители' в разделе справочники")
@@ -79,16 +81,16 @@ def test_driver_directory_lkp(base_fixture, domain):
     base.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.drivers_list_button,
                         do_assert=True, wait='lst')
 
+    # очистка полей с выпадающими списками
     add = Manual(base.driver)
+    add.move_to_element(add.status_in_system)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_three)
+    time.sleep(2)
     add.move_to_element(add.status_on_flight)
-    time.sleep(5)
+    time.sleep(2)
     add.click_on_the_cross(add.cross_two)
-    time.sleep(5)
-
-    # add.move_to_element(add.status_in_system)
-    # time.sleep(5)
-    # add.click_on_the_cross(add.cross_three)
-    # time.sleep(5)
+    time.sleep(2)
 
     # проверка фильтра "Фамилия"
     add.input_in_field(add.surname_driver, value='2205347', click_first=True)
@@ -100,7 +102,7 @@ def test_driver_directory_lkp(base_fixture, domain):
     time.sleep(1)
     add.input_in_field(add.surname_driver, value='Ф-20240531043410', click_first=True)
     time.sleep(2)
-    add.find_text_on_page(text='3410', occurrences=3)
+    add.find_text_on_page(text='43410', occurrences=3)
     time.sleep(1)
     add.backspace_and_input(add.surname_driver, value='')
     time.sleep(1)
@@ -114,35 +116,35 @@ def test_driver_directory_lkp(base_fixture, domain):
 
     # проверка №2 фильтра "Статус в системе"
     add.dropdown_without_input(add.status_in_system, option_text='Активный')
-    time.sleep(2)
+    time.sleep(3)
     add.verify_text_on_page(text='Ф-20241019111829', should_exist=True)
     add.verify_text_on_page(text='Ф-20240524143334', should_exist=False)
     time.sleep(2)
 
     # проверка №1 фильтра "Статус в рейсе"
     add.dropdown_without_input(add.status_on_flight, option_text='Нет заказов')
-    time.sleep(2)
+    time.sleep(3)
     add.verify_text_on_page(text='И-20241211051657', should_exist=True)
     add.verify_text_on_page(text='И-20240515185027', should_exist=False)
     time.sleep(2)
 
     # проверка №2 фильтра "Статус в рейсе"
     add.dropdown_without_input(add.status_on_flight, option_text='Назначен на заказ')
-    time.sleep(2)
+    time.sleep(3)
     add.verify_text_on_page(text='Ф-20240515185027', should_exist=True)
     add.verify_text_on_page(text='Ф-20241211051656', should_exist=False)
     time.sleep(2)
 
     # проверка №3 фильтра "Статус в рейсе"
     add.dropdown_without_input(add.status_on_flight, option_text='На заказе')
-    time.sleep(2)
+    time.sleep(3)
     add.verify_text_on_page(text='Ф-20241204160029', should_exist=True)
     add.verify_text_on_page(text='Ф-20241209193448', should_exist=False)
     time.sleep(2)
 
     # проверка №4 фильтра "Статус в рейсе"
     add.dropdown_without_input(add.status_on_flight, option_text='Работа приостановлена')
-    time.sleep(2)
+    time.sleep(3)
     add.verify_text_on_page(text='Ф-20240806185159', should_exist=True)
     add.verify_text_on_page(text='Ф-20241210010831', should_exist=False)
     time.sleep(2)
@@ -160,7 +162,7 @@ def test_driver_directory_lkp(base_fixture, domain):
     time.sleep(1)
     add.input_in_field(add.name_driver, value='И-20241205221738', click_first=True)
     time.sleep(2)
-    add.find_text_on_page(text='1738', occurrences=3)
+    add.find_text_on_page(text='79651895827', occurrences=2)
     time.sleep(1)
     add.backspace_and_input(add.name_driver, value='')
     time.sleep(1)
@@ -175,10 +177,20 @@ def test_driver_directory_lkp(base_fixture, domain):
     time.sleep(1)
     add.input_in_field(add.patronymic_driver, value='О-20241209193526', click_first=True)
     time.sleep(2)
-    add.find_text_on_page(text='3526', occurrences=3)
+    add.find_text_on_page(text='79659326139', occurrences=2)
     time.sleep(1)
     add.backspace_and_input(add.patronymic_driver, value='')
     time.sleep(1)
+
+    # очистка полей с выпадающими списками
+    add.move_to_element(add.status_in_system)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_three)
+    time.sleep(2)
+    add.move_to_element(add.status_on_flight)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_two)
+    time.sleep(2)
 
     # проверка фильтра "Телефон"
     add.input_in_field(add.telephone_driver, value='18834', click_first=True)
@@ -190,17 +202,43 @@ def test_driver_directory_lkp(base_fixture, domain):
     time.sleep(1)
     add.input_in_field(add.telephone_driver, value='79654648108', click_first=True)
     time.sleep(2)
-    add.find_text_on_page(text='8108', occurrences=3)
+    add.find_text_on_page(text='79658472612', occurrences=2)
     time.sleep(1)
     add.backspace_and_input(add.telephone_driver, value='')
     time.sleep(1)
 
+    # очистка полей с выпадающими списками
+    add.move_to_element(add.status_in_system)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_three)
+    time.sleep(2)
+    add.move_to_element(add.status_on_flight)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_two)
+    time.sleep(2)
+
     # проверка №1 фильтра с несколькими значениями
+    add.input_in_field(add.surname_driver, value='80111', click_first=True)
+    add.input_in_field(add.name_driver, value='180112', click_first=True)
+    add.input_in_field(add.patronymic_driver, value='О-20241002180112', click_first=True)
+    time.sleep(2)
+    add.verify_text_on_page(text='Ф-20241002180111', should_exist=True)
+    add.verify_text_on_page(text='Ф-20241002180015', should_exist=False)
 
+    add.backspace_and_input(add.surname_driver, value='')
+    add.backspace_and_input(add.name_driver, value='')
+    add.backspace_and_input(add.patronymic_driver, value='')
 
+    # проверка №2 фильтра с несколькими значениями
+    add.dropdown_without_input(add.status_in_system, option_text='Неактивный')
+    add.input_in_field(add.telephone_driver, value='79657063014', click_first=True)
+    time.sleep(2)
+    add.verify_text_on_page(text='И-20240806184630', should_exist=True)
+    add.verify_text_on_page(text='И-20241207114547', should_exist=False)
 
+    add.backspace_and_input(add.telephone_driver, value='')
 
-
+    # Конец теста
 
 
 @allure.story("Extended test")
@@ -334,7 +372,10 @@ def test_trailer_directory_lkp(base_fixture, domain):
     add.verify_text_on_page(text='ПП-20240515211247', should_exist=False)
     add.verify_text_on_page(text='ПП-20240826225850', should_exist=False)
     time.sleep(2)
+
+
     # add.dropdown_without_input(add.type_road_transport, option_text='Грузовая')
+
 
     # проверка №1 фильтра "Статус в системе"
     add.dropdown_without_input(add.status_in_system_three, option_text='Неактивный')

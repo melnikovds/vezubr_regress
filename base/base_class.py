@@ -645,7 +645,9 @@ class Base:
             dropdown_dict = self.get_element({"name": element_dict['name'], "xpath": xpath_dropdown})
             
             # Клик по выпадающему списку
+            time.sleep(1)
             dropdown_dict['element'].click()
+            time.sleep(2)
             
             # XPath для выбора нужной опции
             xpath_expression = f"(.//li[@role='option' and normalize-space(.)='{option_text}'])[{index}]"
@@ -653,7 +655,9 @@ class Base:
                 'element']
             
             # Клик по найденной опции
+            time.sleep(1)
             option_to_select.click()
+            time.sleep(1)
             
             # Вывод сообщения в консоль
             print(message)

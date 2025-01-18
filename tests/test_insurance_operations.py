@@ -1,5 +1,6 @@
 import allure
 import pytest
+import time
 from pages.clients_list_page import ClientsList
 from pages.contractor_page import Contractor
 
@@ -66,12 +67,14 @@ def test_insurance_contract_attach_lkp(base_fixture, domain):
     # Выбор страховой компании "Энергогарант"
     contractor.dropdown_without_input(contractor.insurance_company_select, "Энергогарант")
     # Выбор конкретного договора страхования
-    contractor.dropdown_without_input(contractor.insurance_contract_select,
-                                          "Договор №№-20240721102631 «Н-20240721102631» от 21.07.2024")
+    contractor.click_and_select_with_arrows(contractor.insurance_contract_select, arrow_presses=4)
     # Подтверждение привязки договора
     contractor.click_button(contractor.confirm_button, do_assert=True)
     # Подтверждение успешного выполнения действия
     contractor.click_button(contractor.ok_button)
+    time.sleep(2)
+    # Проверка наличия одного из договоров на странице
+    contractor.find_text_on_page(text='20241205222735', occurrences=1)
     # Очистка выбора договора страхования для дальнейшего открепления
     contractor.move_and_click(move_to=contractor.insurance_contract_select, click_to=contractor.clear_button)
     # Клик по кнопке открепления договора

@@ -32,7 +32,9 @@ def test_first_user_edit_lke(base_fixture, domain):
     # Выбор роли пользователя
     user.dropdown_without_input(user.user_role_select, "Администратор")
     # Выбор часового пояса пользователя
+    time.sleep(2)
     user.dropdown_without_input(user.user_timezone_select, "Asia/Yekaterinburg")
+    time.sleep(2)
     # Ввод фамилии пользователя
     user.input_in_field(user.surname_input, surname)
     # Ввод имени пользователя
@@ -64,7 +66,9 @@ def test_first_user_edit_lke(base_fixture, domain):
     # Изменение роли пользователя на "Логист"
     user.dropdown_without_input(user.user_role_select, "Логист")
     # Изменение часового пояса на "Africa/Abidjan"
+    time.sleep(3)
     user.dropdown_without_input(user.user_timezone_select, "Africa/Abidjan")
+    time.sleep(3)
     # Изменение фамилии пользователя
     user.backspace_and_input(user.surname_input, f"Ф-{base.get_timestamp()}")
     # Изменение имени пользователя
@@ -109,7 +113,9 @@ def test_user_responsible_fo_client_lke(base_fixture, domain):
     # Выбор роли пользователя
     user.dropdown_without_input(user.user_role_select, "Администратор")
     # Выбор часового пояса пользователя
+    time.sleep(2)
     user.dropdown_without_input(user.user_timezone_select, "Asia/Yekaterinburg")
+    time.sleep(2)
     # Ввод фамилии пользователя
     user.input_in_field(user.surname_input, surname)
     # Ввод имени пользователя
@@ -181,7 +187,9 @@ def test_user_responsible_fo_producer_lke(base_fixture, domain):
     # Выбор роли пользователя
     user.dropdown_without_input(user.user_role_select, "Администратор")
     # Выбор часового пояса пользователя
+    time.sleep(2)
     user.dropdown_without_input(user.user_timezone_select, "Asia/Yekaterinburg")
+    time.sleep(2)
     # Ввод фамилии пользователя
     user.input_in_field(user.surname_input, surname)
     # Ввод имени пользователя

@@ -28,7 +28,7 @@ def test_one_custom_settings_lkz(base_fixture, domain):
     add_param = CustomFieldsParam(base.driver)
 
     # добавляем кастомное поле
-    add_param.input_in_field(add_param.add_ru, value="контрагент")
+    add_param.input_in_field(add_param.add_ru, value="контрагентик")
     add_param.input_in_field(add_param.add_en, value="contractor")
     add_param.dropdown_without_input(add_param.add_role, option_text="Контрагент")
     add_param.dropdown_without_input(add_param.add_type, option_text="Текстовое значение")
@@ -39,6 +39,11 @@ def test_one_custom_settings_lkz(base_fixture, domain):
     time.sleep(2)
     add_param.click_button(add_param.done_pop_up)
     time.sleep(2)
+
+    # проверяем наличие кастомного поля
+    add_param.reload_page()
+    time.sleep(3)
+    add_param.verify_text_on_page(text='контрагентик')
 
     edit_param = EditFieldsParam(base.driver)
 
@@ -77,6 +82,11 @@ def test_one_custom_settings_lkz(base_fixture, domain):
     add_param.click_button(add_param.done_pop_up)
     time.sleep(2)
 
+    # проверяем изменение кастомного поля
+    add_param.reload_page()
+    time.sleep(3)
+    add_param.verify_text_on_page(text='00075')
+
     # удаляем кастомное поле
     edit_param.click_button(edit_param.del_custom)
     time.sleep(3)
@@ -85,7 +95,11 @@ def test_one_custom_settings_lkz(base_fixture, domain):
     edit_param.click_button(edit_param.del_custom)
     time.sleep(3)
     edit_param.click_button(edit_param.acc_del, wait="form")
-    time.sleep(2)
+
+    # проверяем отсутствие кастомного поля на странице
+    add_param.reload_page()
+    time.sleep(3)
+    edit_param.verify_text_on_page(text="00075", should_exist=False)
 
     # конец теста
 
@@ -142,11 +156,16 @@ def test_two_custom_settings_lkz(base_fixture, domain):
     add_param.click_button(add_param.done_pop_up_second)
     time.sleep(2)
 
+    # проверяем наличие кастомного поля
+    add_param.reload_page()
+    time.sleep(3)
+    add_param.verify_text_on_page(text='05485')
+
     # редактируем кастомное поле
     edit_param.click_button(edit_param.e_p)
 
-    add_param.backspace_and_input(add_param.add_ru, value="683")
-    add_param.backspace_and_input(add_param.add_en, value="683")
+    add_param.backspace_and_input(add_param.add_ru, value="537683")
+    add_param.backspace_and_input(add_param.add_en, value="537683")
     add_param.dropdown_without_input(add_param.add_role, option_text="Договор")
     add_param.dropdown_without_input(add_param.add_type, option_text="Числовое значение")
 
@@ -156,10 +175,20 @@ def test_two_custom_settings_lkz(base_fixture, domain):
     add_param.click_button(add_param.done_pop_up_second)
     time.sleep(2)
 
+    # проверяем изменение кастомного поля
+    add_param.reload_page()
+    time.sleep(3)
+    add_param.verify_text_on_page(text='537683')
+
     # удаляем кастомное поле
     edit_param.click_button(edit_param.del_custom)
     time.sleep(3)
     edit_param.click_button(edit_param.acc_del, wait='form')
+
+    # проверяем отсутствие кастомного поля на странице
+    add_param.reload_page()
+    time.sleep(3)
+    edit_param.verify_text_on_page(text="537683", should_exist=False)
 
     # конец теста
 

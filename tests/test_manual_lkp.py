@@ -85,11 +85,11 @@ def test_driver_directory_lkp(base_fixture, domain):
     add = Manual(base.driver)
     add.move_to_element(add.status_in_system)
     time.sleep(2)
-    add.click_on_the_cross(add.cross_three)
+    add.click_on_the_cross(add.cross_two)
     time.sleep(2)
     add.move_to_element(add.status_on_flight)
     time.sleep(2)
-    add.click_on_the_cross(add.cross_two)
+    add.click_on_the_cross(add.cross_three)
     time.sleep(2)
 
     # проверка фильтра "Фамилия"
@@ -185,11 +185,11 @@ def test_driver_directory_lkp(base_fixture, domain):
     # очистка полей с выпадающими списками
     add.move_to_element(add.status_in_system)
     time.sleep(2)
-    add.click_on_the_cross(add.cross_three)
+    add.click_on_the_cross(add.cross_two)
     time.sleep(2)
     add.move_to_element(add.status_on_flight)
     time.sleep(2)
-    add.click_on_the_cross(add.cross_two)
+    add.click_on_the_cross(add.cross_three)
     time.sleep(2)
 
     # проверка фильтра "Телефон"
@@ -210,11 +210,11 @@ def test_driver_directory_lkp(base_fixture, domain):
     # очистка полей с выпадающими списками
     add.move_to_element(add.status_in_system)
     time.sleep(2)
-    add.click_on_the_cross(add.cross_three)
+    add.click_on_the_cross(add.cross_two)
     time.sleep(2)
     add.move_to_element(add.status_on_flight)
     time.sleep(2)
-    add.click_on_the_cross(add.cross_two)
+    add.click_on_the_cross(add.cross_three)
     time.sleep(2)
 
     # проверка №1 фильтра с несколькими значениями

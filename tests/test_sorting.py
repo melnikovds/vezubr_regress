@@ -144,6 +144,7 @@ def test_sorting_orders_lkz(base_fixture, domain):
                            do_assert=True, wait="lst")
     # Клик по кнопке сброса фильтров
     base.click_button(base.reset_button, wait="lst")
+
     # Последовательный клик по всем кнопкам сортировки всех столбцов
     base.click_multiple_buttons(base.sorting_button, num_buttons=20, num_clicks=3, wait="lst")
     

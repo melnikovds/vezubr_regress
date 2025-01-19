@@ -31,7 +31,7 @@ def test_cargo_place_routing_lke(base_fixture, domain):
     cp_list = CargoPlaceList(base.driver)
     # Сброс фильтров
     cp_list.click_button(cp_list.reset_button, wait="lst")
-    # Ввод штрихкода грузоместа в поле фильтрации
+    # Ввод штрихкода грузоместа в поле фильтрации                                                       зачем?
     cp_list.input_in_field(cp_list.barcode_filter, value=cp_stamp, wait="lst")
     # Клик по кнопке экшен меню
     cp_list.click_button(cp_list.action_menu_button)

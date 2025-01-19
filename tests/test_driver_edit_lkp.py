@@ -1,7 +1,9 @@
 import allure
 import pytest
+import time
 from pages.driver_add_page import DriverAdd
 from pages.driver_list_page import DriverList
+from pages.manual_page import Manual
 
 
 @allure.story("Critical path test")
@@ -24,8 +26,16 @@ def test_driver_edit_1_own_lkp(base_fixture, domain):
     add_driver = DriverAdd(base.driver)
     # Добавление нового водителя и получение его фамилии
     surname = add_driver.add_base_driver()
-    
+
+    reset_filter = Manual(base.driver)
+
     # Фильтрация по фамилии водителя и переход к его профилю
+    reset_filter.move_to_element(reset_filter.status_in_system)
+    reset_filter.click_on_the_cross(reset_filter.cross_two)
+    time.sleep(1)
+    reset_filter.move_to_element(reset_filter.status_on_flight)
+    reset_filter.click_on_the_cross(reset_filter.cross_three)
+    time.sleep(1)
     driver_list.input_in_field(driver_list.surname_filter, value=surname, wait="lst")
     driver_list.click_button(driver_list.first_driver_link, wait="form")
     
@@ -108,8 +118,16 @@ def test_driver_edit_2_own_lkp(base_fixture, domain):
     add_driver.input_in_field(add_driver.driver_city_input, "Тирана")
     # Добавление нового водителя и получение его фамилии
     surname = add_driver.add_base_driver()
-    
+
+    reset_filter = Manual(base.driver)
+
     # Фильтрация по фамилии водителя и переход к его профилю
+    reset_filter.move_to_element(reset_filter.status_in_system)
+    reset_filter.click_on_the_cross(reset_filter.cross_two)
+    time.sleep(1)
+    reset_filter.move_to_element(reset_filter.status_on_flight)
+    reset_filter.click_on_the_cross(reset_filter.cross_three)
+    time.sleep(1)
     driver_list.input_in_field(driver_list.surname_filter, value=surname, wait="lst")
     driver_list.click_button(driver_list.first_driver_link, wait="form")
     

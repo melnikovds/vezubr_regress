@@ -146,14 +146,22 @@ class Base:
                 raise ValueError(f"Unsupported wait type: {wait_type}")
             
             condition = wait_conditions[wait_type]
-            
+
+            # Определение типа локаторов и его значения
+            if 'xpath' in element_info:
+                locator = (By.XPATH, element_info['xpath'])
+            elif 'css' in element_info:
+                locator = (By.CSS_SELECTOR, element_info['css'])
+            else:
+                raise ValueError("Не указан ни XPath, ни CSS-селектор для элемента")
+
             if wait_type == 'invisibility':
                 # Ожидание невидимости элемента с заданным таймаутом
-                WebDriverWait(self.driver, 15).until(condition((By.XPATH, element_info['xpath'])))
+                WebDriverWait(self.driver, 15).until(condition(locator))
                 element = None  # Возвращаем None, так как элемент невидим
             else:
                 # Ожидание для остальных типов
-                element = WebDriverWait(self.driver, 60).until(condition((By.XPATH, element_info['xpath'])))
+                element = WebDriverWait(self.driver, 60).until(condition(locator))
             
             return {'name': element_info['name'], 'element': element}
         
@@ -382,8 +390,21 @@ class Base:
         """
         # Формирование локатора и имени элемента с учётом индекса
         element_name = f"{element_dict['name']} index {index}" if index > 1 else element_dict['name']
-        locator = f"({element_dict['xpath']})[{index}]" if index > 1 else element_dict['xpath']
-        updated_element_dict = {"name": element_name, "xpath": locator}
+
+        if 'xpath' in element_dict:
+            locator = f"({element_dict['xpath']})[{index}]" if index > 1 else element_dict['xpath']
+            locator_type = 'xpath'
+        elif 'css' in element_dict:
+            locator = f"{element_dict['css']}:nth-of-type({index})" if index > 1 else element_dict['css']
+            locator_type = 'css'
+        else:
+            raise ValueError("Не указан ни XPath, ни CSS-селектор для элемента")
+
+
+        updated_element_dict = {
+            "name": element_name,
+            locator_type: locator
+        }
         
         # Создаем единое сообщение для Allure шага и консоли
         message = f"Click on {element_name}"

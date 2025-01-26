@@ -179,9 +179,50 @@ class Manual(Base):
 
 
     specialist_type = {
-    "xpath": "//span[@class='ant-select-selection ant-select-selection--multiple']//ul[1]",
-    "name": "specialist_type"
+        "xpath": "//ul[@class='ant-select-selection__rendered']/following-sibling::span[1]",
+        "name": "specialist_type"
     }
+    specialist_type_field = {
+        "xpath": "//span[@class='ant-select-selection ant-select-selection--multiple']",
+        "name": "specialist_type_field"
+    }
+    specialist_checkbox_one = {
+        "xpath": "(//span[@class='ant-select-tree-checkbox-inner'])[1]",
+        "name": "specialist_checkbox_one"
+    }
+    specialist_checkbox_two = {
+        "xpath": "(//span[@class='ant-select-tree-checkbox-inner'])[2]",
+        "name": "specialist_checkbox_two"
+    }
+    specialist_checkbox_three = {
+        "xpath": "(//span[@class='ant-select-tree-checkbox-inner'])[3]",
+        "name": "specialist_checkbox_three"
+    }
+    specialist_checkbox_four = {
+        "css": "div#rc-tree-select-list_1>ul>li:nth-of-type(4)>span:nth-of-type(2)>span",
+        "name": "specialist_checkbox_four"
+    }
+    specialist_checkbox_five = {
+        "css": "div#rc-tree-select-list_1>ul>li:nth-of-type(5)>span:nth-of-type(2)>span",
+        "name": "specialist_checkbox_five"
+    }
+    specialist_checkbox_six = {
+        "css": "div#rc-tree-select-list_1>ul>li:nth-of-type(6)>span:nth-of-type(2)>span",
+        "name": "specialist_checkbox_six"
+    }
+    specialist_checkbox_seven = {
+        "css": "div#rc-tree-select-list_1>ul>li:nth-of-type(7)>span:nth-of-type(2)>span",
+        "name": "specialist_checkbox_seven"
+    }
+    specialist_checkbox_eight = {
+        "css": "div#rc-tree-select-list_1>ul>li:nth-of-type(8)>span:nth-of-type(2)>span",
+        "name": "specialist_checkbox_eight"
+    }
+    specialist_type_cross = {
+        "xpath": "//span[@class='ant-select-selection ant-select-selection--multiple']",
+        "name": "specialist_type_cross"
+    }
+
     specialist_surname = {
     "xpath": "//input[@placeholder='Фамилия']",
     "name": "specialist_surname"

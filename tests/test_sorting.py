@@ -122,7 +122,7 @@ def test_sorting_orders_lkp(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку FTL рейсов
-    sidebar.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.ftl_list_button,
+    sidebar.move_and_click(move_to=sidebar.order_hover_lkp, click_to=sidebar.ftl_list_button_lkp,
                            do_assert=True, wait="lst")
     # Клик по кнопке сброса фильтров
     base.click_button(base.reset_button, wait="lst")
@@ -495,7 +495,7 @@ def test_sorting_employee_lke(base_fixture, domain):
     sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.drivers_list_button,
                            do_assert=True, wait="lst")
     # Последовательный клик по всем кнопкам сортировки всех столбцов
-    base.click_multiple_buttons(base.sorting_button, num_buttons=16, num_clicks=3, wait="lst")
+    base.click_multiple_buttons(base.sorting_button, num_buttons=12, num_clicks=3, wait="lst")
     
     # Переход к списку специалистов
     sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.loaders_list_button,
@@ -525,7 +525,7 @@ def test_sorting_employee_lkp(base_fixture, domain):
     sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.drivers_list_button,
                            do_assert=True, wait="lst")
     # Последовательный клик по всем кнопкам сортировки всех столбцов
-    base.click_multiple_buttons(base.sorting_button, num_buttons=15, num_clicks=3, wait="lst")
+    base.click_multiple_buttons(base.sorting_button, num_buttons=11, num_clicks=3, wait="lst")
     
     # Переход к списку специалистов
     sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.loaders_list_button,

@@ -105,9 +105,9 @@ def test_sidebar_lkp(base_fixture, domain):
                            do_assert=True, wait="lst")
     sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ftl_archive_list_button,
                            do_assert=True, wait="lst")
-    sidebar.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.ftl_list_button,
+    sidebar.move_and_click(move_to=sidebar.order_hover_lkp, click_to=sidebar.ftl_list_button_lkp,
                            do_assert=True, wait="lst")
-    sidebar.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.auction_list_button,
+    sidebar.move_and_click(move_to=sidebar.order_hover_lkp, click_to=sidebar.auction_list_button,
                            do_assert=True, wait="lst")
     sidebar.click_button(sidebar.dispatch_list_button, do_assert=True, wait="lst")
     sidebar.click_button(sidebar.clients_list_button, do_assert=True, wait="lst")

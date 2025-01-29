@@ -20,11 +20,13 @@ class CargoPlaceAdd(Base):
         "xpath": "//ul[@role='listbox']/li[text()='Auto LKZ']",
         "name": "select_cargo_place_lkz"
     }
+
     """Cargo place owner drop-down list"""
     child_cp_select = {
         "xpath": "//div[@class='vz-form-item__label' and contains(text(), 'Вложенные Задания')]",
         "name": "child_cp_select"
     }
+
     """Cargo place type drop-down list"""
     lke_cp_type_select = {
         "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
@@ -50,6 +52,7 @@ class CargoPlaceAdd(Base):
         "xpath": "(//input[@role='spinbutton'])[4]",
         "name": "cp_cost_input"
     }
+
     """Cargo place status drop-down list"""
     lke_cp_status_select = {
         "xpath": "(//div[@class='ant-select-selection__rendered'])[4]",
@@ -60,19 +63,19 @@ class CargoPlaceAdd(Base):
         "name": "lkz_cp_status_select"
     }
     lkz_cp_title_input = {
-        "xpath": "(//input[@type='text'])[2]",
+        "xpath": "//span[text()='Наименование']/following::input",
         "name": "lkz_cp_title_input"
     }
     lkz_invoice_number_input = {
-        "xpath": "(//input[@type='text'])[3]",
+        "xpath": "//span[text()='Номер Тов. Накладной']/following::input",
         "name": "lkz_invoice_number_input"
     }
     lke_cp_title_input = {
-        "xpath": "(//input[@type='text'])[3]",
+        "xpath": "//span[text()='Наименование']/following::input",
         "name": "lke_cp_title_input"
     }
     lke_invoice_number_input = {
-        "xpath": "(//input[@type='text'])[4]",
+        "xpath": "//span[text()='Номер Тов. Накладной']/following::input",
         "name": "lke_invoice_number_input"
     }
     invoice_date_input = {
@@ -84,15 +87,15 @@ class CargoPlaceAdd(Base):
         "name": "date_input"
     }
     lkz_bar_code_input = {
-        "xpath": "(//input[@type='text'])[4]",
+        "xpath": "//span[text()='Bar Code']/following::input",
         "name": "lkz_bar_code_input"
     }
     lkz_seal_number_input = {
-        "xpath": "(//input[@type='text'])[5]",
+        "xpath": "//span[text()='Номер пломбы']/following::input",
         "name": "lkz_seal_number_input"
     }
     lkz_external_id_input = {
-        "xpath": "(//input[@type='text'])[6]",
+        "xpath": "//span[text()='ID грузоместа партнера']/following::input",
         "name": "lkz_external_id_input"
     }
     lkz_wms_number_input = {
@@ -100,15 +103,15 @@ class CargoPlaceAdd(Base):
         "name": "lkz_wms_number_input"
     }
     lke_bar_code_input = {
-        "xpath": "(//input[@type='text'])[5]",
+        "xpath": "//span[text()='Bar Code']/following::input",
         "name": "lke_bar_code_input"
     }
     lke_seal_number_input = {
-        "xpath": "(//input[@type='text'])[6]",
+        "xpath": "//span[text()='Номер пломбы']/following::input",
         "name": "lke_seal_number_input"
     }
     lke_external_id_input = {
-        "xpath": "(//input[@type='text'])[7]",
+        "xpath": "//span[text()='ID грузоместа партнера']/following::input",
         "name": "lke_external_id_input"
     }
     lke_wms_number_input = {
@@ -124,13 +127,14 @@ class CargoPlaceAdd(Base):
         "name": "temp_until_input"
     }
     lkz_comment_input = {
-        "xpath": "(//input[@type='text'])[10]",
+        "xpath": "//span[text()='Комментарий']/following::input",
         "name": "lkz_comment_input"
     }
     lke_comment_input = {
-        "xpath": "(//input[@type='text'])[11]",
+        "xpath": "//span[text()='Комментарий']/following::input",
         "name": "lke_comment_input"
     }
+
     """Departure address drop-down list"""
     departure_address_select = {
         "xpath": "//span[@class='vz-form-item__label ' and contains(text(),'Адрес отправления')]",
@@ -140,6 +144,7 @@ class CargoPlaceAdd(Base):
         "xpath": "(//li[@class='ant-select-dropdown-menu-item ant-select-dropdown-menu-item-active'])[1]",
         "name": "select_dp_address_first"
     }
+
     """Delivery address drop-down list"""
     delivery_address_select = {
         "xpath": "//span[@class='vz-form-item__label ' and contains(text(),'Адрес доставки')]",
@@ -261,9 +266,9 @@ class CargoPlaceAdd(Base):
         "xpath": "//button[contains(., 'Сохранить')]",
         "name": "save_button"
     }
+
     # Methods
     """ Create base cargo place"""
-    
     def add_base_cargo_place_lkz(self) -> str:
         """
         Автоматизирует добавление грузоместа в систему, заполняя основные поля и выбирая опции из выпадающих списков.

@@ -30,9 +30,9 @@ def test_ftl_request_add_lke(base_fixture, domain):
     # Установка даты подачи заявки на сегодня
     ftl.click_button(ftl.start_date_field)
     ftl.click_button(ftl.today_button)
-    # Установка времени подачи заявки через 30 минут от текущего времени
+    # Установка времени подачи заявки через 3 часа от текущего времени
     ftl.click_button(ftl.start_time_field)
-    new_time = ftl.naw_time_change(30)
+    new_time = ftl.naw_time_change(180)
     ftl.input_in_field(ftl.start_time_input, new_time)
     time.sleep(1)
     # Выбор категории заявки - Груз
@@ -91,9 +91,9 @@ def test_ftl_request_add_lkz(base_fixture, domain):
     # Установка даты подачи заявки на сегодня
     ftl.click_button(ftl.start_date_field)
     ftl.click_button(ftl.today_button)
-    # Установка времени подачи заявки через 30 минут от текущего времени
+    # Установка времени подачи заявки через 3 часа от текущего времени
     ftl.click_button(ftl.start_time_field)
-    new_time = ftl.naw_time_change(30)
+    new_time = ftl.naw_time_change(180)
     ftl.input_in_field(ftl.start_time_input, new_time)
     time.sleep(1)
     # Выбор категории заявки - Груз

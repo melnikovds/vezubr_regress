@@ -25,10 +25,6 @@ class SideBar(Base):
         "reference": "ТОРГИ"
     }
     """New order"""
-    # new_order_hover = {
-    #     "xpath": "//span[@class='route-name no-events' and text()='Новый Заказ']",
-    #     "name": "new_order_hover"
-    # }
     new_order_hover = {
         "xpath": "//li[contains(@class,'ant-menu-submenu ant-menu-submenu-vertical')]",
         "name": "new_order_hover"
@@ -87,23 +83,23 @@ class SideBar(Base):
         "reference": "Архив заявок"
     }
     """Orders"""
-    # order_hover = {
-    #     "xpath": "//span[@class='route-name no-events' and text()='Рейсы']",
-    #     "name": "order_hover"
-    # }
     order_hover = {
-        "xpath": "(//li[@class='ant-menu-submenu ant-menu-submenu-vertical']/following-sibling::li)[2]",
+        "xpath": "(//li[@role='menuitem']/following-sibling::li)[3]",
         "name": "order_hover"
     }
-    # ftl_list_button = {
-    #     "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Все FTL рейсы')]",
-    #     "name": "ftl_list_button",
-    #     "reference_xpath": base_reference_xpath,
-    #     "reference": "Рейсы"
-    # }
+    order_hover_lkp = {
+        "xpath": "(//li[contains(@class,'ant-menu-submenu ant-menu-submenu-vertical')])[2]",
+        "name": "order_hover"
+    }
     ftl_list_button = {
-        "xpath": "allOrder-side",
+        "xpath": "//li[@id='allOrder-side']",
         "name": "ftl_list_button",
+        "reference_xpath": base_reference_xpath,
+        "reference": "Рейсы"
+    }
+    ftl_list_button_lkp = {
+        "xpath": "//ul[@id='2$Menu']/li[1]",
+        "name": "ftl_list_button_lkp",
         "reference_xpath": base_reference_xpath,
         "reference": "Рейсы"
     }

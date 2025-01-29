@@ -38,8 +38,10 @@ def test_extra_agreements_client_add_lke(base_fixture, domain):
     add_extra = ExtraAgreementAdd(base.driver)
     # Заполнение формы дополнительного соглашения
     extra_agr_number = add_extra.add_base_extra_agreements()
+    time.sleep(1)
     # Клик по кнопке "Назначить позже"
     add_extra.click_button(add_extra.appoint_later_button, do_assert=True)
+    time.sleep(1)
     # Клик по кнопке подтверждения добавления дополнительного соглашения
     add_extra.click_button(add_extra.confirm_add_button, wait="form")
     
@@ -49,9 +51,10 @@ def test_extra_agreements_client_add_lke(base_fixture, domain):
     agreement.click_button(agreement.delete_extra_agr_button)
     # Клик по кнопке подтверждения удаления ДУ
     agreement.click_button(agreement.yes_button, wait="form")
-    time.sleep(1.5)
+    time.sleep(2)
     # Проверка отсутствия удаленного ДУ
     agreement.verify_text_on_page(extra_agr_number, should_exist=False)
+    time.sleep(1)
     # Конец теста
 
 

@@ -217,15 +217,6 @@ class Manual(Base):
 
 
 
-
-
-
-
-
-
-
-
-
     specialist_type = {
         "xpath": "//ul[@class='ant-select-selection__rendered']/following-sibling::span[1]",
         "name": "specialist_type"

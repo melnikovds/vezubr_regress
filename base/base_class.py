@@ -451,15 +451,6 @@ class Base:
             # ожидание видимости элемента
             element = self.get_element(element_info, wait_type='visible')['element']
 
-            # # JS прокрутка к элементу, если он находится вне видимой области
-            # self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
-
-            # # JS ожидание фокуса на элементе
-            # self.driver.execute_script("arguments[0].focus();", element)
-            # # JS принудительное нажатие клавиши
-            # for _ in range(arrow_presses):
-            #     self.driver.execute_script("arguments[0].dispatchEvent(new KeyboardEvent('keydown', {'key': 'ArrowDown'}));", element)
-
             # клик по элементу
             element.click()
             time.sleep(1)

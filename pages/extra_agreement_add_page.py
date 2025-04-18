@@ -20,6 +20,10 @@ class ExtraAgreementAdd(Base):
         "xpath": "//*[@id='agreement_form_expiresAt']/div/input",
         "name": "extra_agr_end_date_button"
     }
+    # extra_agr_end_date_button = {
+    #     "xpath": "//table[@class='ant-calendar-table']/tbody[1]/tr[4]/td[5]/div[1]",
+    #     "name": "extra_agr_end_date_button"
+    # }
     today_button = {
         "xpath": "//a[@class='ant-calendar-today-btn ']",
         "name": "today_button"
@@ -68,8 +72,8 @@ class ExtraAgreementAdd(Base):
         ]
         for button in buttons_to_click:
             self.click_button(button)
-        time.sleep(0.5)
-        self.input_in_field(self.extra_agr_date_input, "01012040", press_enter=True)
+        time.sleep(1)
+        self.input_in_field(self.extra_agr_date_input, "01012035", press_enter=True)
         self.input_in_field(self.extra_agr_comment_input, "ДУ создано автотестом", click_first=True)
         self.click_button(self.add_extra_agr_button)
         

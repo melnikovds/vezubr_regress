@@ -636,8 +636,8 @@ def test_filter_insured_order_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
 
-    # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.insurers_list_button,
+    # Переход в раздел "Страховые компании"
+    base.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -717,8 +717,8 @@ def test_filter_insured_order_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
 
-    # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.insurers_list_button,
+    # Переход в раздел "Страховые компании"
+    base.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)

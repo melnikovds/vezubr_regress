@@ -16,7 +16,8 @@ def test_tariff_attach_producer_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход к списку перевозчиков
-    sidebar.click_button(sidebar.producers_list_button, do_assert=True, wait="lst")
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.producers_list_button,
+                           do_assert=True, wait="lst")
 
     producer_list = ProducersList(base.driver)
     # Выбор перевозчика по ИНН

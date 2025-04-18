@@ -117,7 +117,7 @@ def test_driver_directory_lkp(base_fixture, domain):
     # проверка №2 фильтра "Статус в системе"
     add.dropdown_without_input(add.status_in_system, option_text='Активный')
     time.sleep(3)
-    add.verify_text_on_page(text='Ф-20241019111829', should_exist=True)
+    add.verify_text_on_page(text='Ф-20250307122233', should_exist=True)
     add.verify_text_on_page(text='Ф-20240524143334', should_exist=False)
     time.sleep(2)
 

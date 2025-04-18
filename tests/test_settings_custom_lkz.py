@@ -16,7 +16,7 @@ def test_one_custom_settings_lkz(base_fixture, domain):
 
     # Переход в раздел 'Настройки'
     sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.settings_button,
-                           do_assert=True, wait="lst")
+                           do_assert=True)
 
     time.sleep(2)
     settings = Settings(base.driver)
@@ -94,7 +94,8 @@ def test_one_custom_settings_lkz(base_fixture, domain):
     time.sleep(3)
     edit_param.click_button(edit_param.del_custom)
     time.sleep(3)
-    edit_param.click_button(edit_param.acc_del, wait="form")
+    edit_param.click_button(edit_param.acc_del)
+    time.sleep(2)
 
     # проверяем отсутствие кастомного поля на странице
     add_param.reload_page()
@@ -114,7 +115,7 @@ def test_two_custom_settings_lkz(base_fixture, domain):
 
     # Переход в раздел настройки
     sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.settings_button,
-                           do_assert=True, wait="lst")
+                           do_assert=True)
 
     time.sleep(2)
     settings = Settings(base.driver)
@@ -183,7 +184,8 @@ def test_two_custom_settings_lkz(base_fixture, domain):
     # удаляем кастомное поле
     edit_param.click_button(edit_param.del_custom)
     time.sleep(3)
-    edit_param.click_button(edit_param.acc_del, wait='form')
+    edit_param.click_button(edit_param.acc_del)
+    time.sleep(2)
 
     # проверяем отсутствие кастомного поля на странице
     add_param.reload_page()

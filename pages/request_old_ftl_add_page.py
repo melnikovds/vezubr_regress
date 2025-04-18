@@ -222,6 +222,14 @@ class FTLAdd(Base):
         "xpath": "//div[@id='1-Z25-0039']/div[1]/div[1]",
         "name": "custom_fields"
     }
+    # custom_fields = {
+    #     "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
+    #     "name": "custom_fields"
+    # }
+    # custom_fields = {
+    #     "xpath": "(//div[@role='combobox'])[2]",
+    #     "name": "custom_fields"
+    # }
     order_insurance = {
         "xpath": "//button[@id='order-insurance']",
         "name": "order_insurance"

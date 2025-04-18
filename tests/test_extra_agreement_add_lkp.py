@@ -17,7 +17,8 @@ def test_extra_agreements_client_add_lkp(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку клиентов
-    sidebar.click_button(sidebar.clients_list_button, do_assert=True, wait="lst")
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.clients_list_button,
+                           do_assert=True, wait="lst")
     
     client_list = ClientsList(base.driver)
     # Клик по клиенту с ИНН "client_lkz_inn"

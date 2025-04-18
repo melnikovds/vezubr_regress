@@ -145,16 +145,6 @@ class OldFTL(Base):
 
 
 
-
-
-
-
-
-
-
-
-
-
     # start_at_from_button = {
     #
     #
@@ -220,7 +210,7 @@ def create_entity():
         "clientRate": 540000,
         "selectingStrategy": 1,
         "disabledLoadingTypesByVehicleAndBody": [3, 2, 3, 2, 3, 2, 3],
-        "toStartAtTime": "11:30",
+        "toStartAtTime": "14:30",
         "cargoPlacesParams": [],
         "cargoPlaces": [
             {
@@ -399,7 +389,7 @@ def create_entity():
             }
         ],
         "newCargoPlaces": [],
-        "toStartAtDate": "2025-03-04",
+        "toStartAtDate": "2025-03-14",
         "vehicleType": 1,
         "requiredPassesDetectionMode": 1,
         "bodyTypes": [3, 4, 7, 8],
@@ -517,7 +507,6 @@ def create_entity():
     except requests.exceptions.RequestException as e:
         print(f"Ошибка при создании сущности: {e}")
         return None
-
 
 # Вызов функции
 if __name__ == "__main__":

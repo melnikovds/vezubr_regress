@@ -17,6 +17,7 @@ class SideBar(Base):
                   "button-icon-menuHamburgerOrange element-button-icon element-button theme-simple']"),
         "name": "sidebar_button"
     }
+
     """Monitor"""
     monitor_button = {
         "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Монитор')]",
@@ -24,6 +25,7 @@ class SideBar(Base):
         "reference_xpath": "//*[@id='monitor-bargains']",
         "reference": "ТОРГИ"
     }
+
     """New order"""
     new_order_hover = {
         "xpath": "//li[contains(@class,'ant-menu-submenu ant-menu-submenu-vertical')]",
@@ -59,6 +61,7 @@ class SideBar(Base):
         "reference_xpath": new_order_reference_xpath,
         "reference": "Новый заказ ПРР"
     }
+
     """Requests"""
     requests_hover = {
         "xpath": "//span[@class='route-name no-events' and text()='Заявки']",
@@ -82,6 +85,7 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Архив заявок"
     }
+
     """Orders"""
     order_hover = {
         "xpath": "(//li[@role='menuitem']/following-sibling::li)[3]",
@@ -121,6 +125,7 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Регулярные рейсы"
     }
+
     """Assignments"""
     assignments_hover = {
         "xpath": "//span[@class='route-name no-events' and text()='Задания']",
@@ -138,6 +143,7 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Отправления"
     }
+
     """Contractor"""
     contractor_hover = {
         "xpath": "//span[@class='route-name no-events' and text()='Контрагенты']",
@@ -155,6 +161,19 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Список контрагентов"
     }
+    insurers_list_button = {
+        "xpath": "//li[@id='producers-side']/following-sibling::li[1]",
+        "name": "insurers_list_button",
+        "reference_xpath": base_reference_xpath,
+        "reference": "Страховщики"
+    }
+    insurers_list_button_lke = {
+        "xpath": "//li[@id='producer-list-side']/following-sibling::li[1]",
+        "name": "insurers_list_button_lke",
+        "reference_xpath": base_reference_xpath,
+        "reference": "Страховщики"
+    }
+
     """Registries"""
     registries_hover = {
         "xpath": "//span[@class='route-name no-events' and text()='Реестры']",
@@ -260,12 +279,7 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Специалисты"
     }
-    insurers_list_button = {
-        "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Страховые компании')]",
-        "name": "insurers_list_button",
-        "reference_xpath": base_reference_xpath,
-        "reference": "Страховщики"
-    }
+
     """Profile"""
     profile_button = {
         "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Профиль')]",
@@ -273,6 +287,7 @@ class SideBar(Base):
         "reference_xpath": "//*[@id='main']/div/div[3]/div[2]/div/div[1]/div[1]/h2",
         "reference": "Общая информация о профиле"
     }
+
     """Settings"""
     settings_button = {
         "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Настройки')]",
@@ -280,6 +295,7 @@ class SideBar(Base):
         "reference_xpath": "//*[@id='main']/div/div[3]/div[2]/div/div[1]/div/div/h1",
         "reference": "Настройки"
     }
+
     """References"""
     instructions_hover = {
         "xpath": "//span[@class='route-name no-events' and text()='Справка']",
@@ -315,6 +331,7 @@ class SideBar(Base):
         "reference_xpath": instructions_reference,
         "reference": "FAQ"
     }
+
     """Exit"""
     exit_button = {
         "xpath": "//a[contains(@class, 'sidebar__list-item') and contains(., 'Выход')]",

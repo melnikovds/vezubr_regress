@@ -1,4 +1,6 @@
 from base.base_class import Base
+import random
+from datetime import datetime, timedelta
 
 
 class FTLAdd(Base):
@@ -132,3 +134,231 @@ class FTLAdd(Base):
         "xpath": "//span[contains(@class, 'ant-select-tree-title') and contains(text(), 'Контур')]",
         "name": "producer_check_box"
     }
+
+    # Methods
+    @staticmethod
+    def generate_ide_code() -> str:
+        """
+        Генерирует идентификатор заявки
+        """
+        ide_code = f"ide-{random.randint(100000, 999999)}"
+
+        return ide_code
+
+    @staticmethod
+    def get_time_intervals():
+        # Получаем текущее время
+        now = datetime.now()
+
+        # Вычисляем временные промежутки
+        time_one = now - timedelta(hours=4)  # Четыре часа назад
+        time_two = now - timedelta(hours=3)  # Три часа назад
+        time_three = now - timedelta(hours=2)  # Два часа назад
+        time_four = now - timedelta(hours=1)  # Один час назад
+
+        # Форматируем время в нужном формате (дд.мм.гггг чч:мм)
+        time_one_formatted = time_one.strftime('%d.%m.%Y %H:%M')
+        time_two_formatted = time_two.strftime('%d.%m.%Y %H:%M')
+        time_three_formatted = time_three.strftime('%d.%m.%Y %H:%M')
+        time_four_formatted = time_four.strftime('%d.%m.%Y %H:%M')
+
+        return time_one_formatted, time_two_formatted, time_three_formatted, time_four_formatted
+
+
+    # Locators
+    attach_cargoplaces = {
+        "xpath": "//button[contains(@class,'ant-btn order-cargo-places__add')]",
+        "name": "attach_cargoplaces"
+    }
+    new_cargoplace = {
+        "xpath": "//button[contains(@class,'ant-btn margin-left-5')]",
+        "name": "new_cargoplace"
+    }
+    number_of_pieces = {
+        "xpath": "//input[@class='ant-input-number-input']",
+        "name": "number_of_pieces"
+    }
+    type_of_packaging = {
+        "xpath": "//table[@class='ant-table-fixed']/tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[1]",
+        "name": "type_of_packaging"
+    }
+    weight = {
+        "xpath": "(//input[@class='ant-input-number-input'])[2]",
+        "name": "weight"
+    }
+    volume = {
+        "xpath": "(//input[@class='ant-input-number-input'])[3]",
+        "name": "volume"
+    }
+    name_of_cargo = {
+        "xpath": "//input[@class='ant-input']",
+        "name": "name_of_cargo"
+    }
+    cost = {
+        "xpath": "//table[@class='ant-table-fixed']/tbody[1]/tr[1]/td[6]/div[1]/div[1]/div[2]/input[1]",
+        "name": "cost"
+    }
+    loading = {
+        "xpath": "//table[@class='ant-table-fixed']/tbody[1]/tr[1]/td[7]/div[1]/div[1]/div[1]",
+        "name": "loading"
+    }
+    unloading = {
+        "xpath": "//table[@class='ant-table-fixed']/tbody[1]/tr[1]/td[8]/div[1]/div[1]/div[1]",
+        "name": "unloading"
+    }
+    attach = {
+        "xpath": "//button[contains(@class,'ant-btn margin-left-15')]",
+        "name": "attach"
+    }
+    additional_requirements = {
+        "xpath": "//div[@class='ant-collapse-header']",
+        "name": "additional_requirements"
+    }
+    order_identifier = {
+        "xpath": "//span[text()='Идентификатор рейса']/following::input",
+        "name": "order_identifier"
+    }
+    custom_fields = {
+        "xpath": "//div[@id='1-Z25-0039']/div[1]/div[1]",
+        "name": "custom_fields"
+    }
+    # custom_fields = {
+    #     "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
+    #     "name": "custom_fields"
+    # }
+    # custom_fields = {
+    #     "xpath": "(//div[@role='combobox'])[2]",
+    #     "name": "custom_fields"
+    # }
+    order_insurance = {
+        "xpath": "//button[@id='order-insurance']",
+        "name": "order_insurance"
+    }
+    cargo_category = {
+        "xpath": "//div[@id='order-cargocategoryids']//div",
+        "name": "cargo_category"
+    }
+    estimated_value = {
+        "xpath": "//div[@class='ant-input-number-input-wrap']//input[1]",
+        "name": "estimated_value"
+    }
+    responsible_employee = {
+        "xpath": "(//div[@class='ant-collapse-header'])[2]",
+        "name": "responsible_employee"
+    }
+    select_employee = {
+        "xpath": "//label[@class='vz-form-item responsible-employees__select']",
+        "name": "select_employee"
+    }
+    publish_order = {
+        "xpath": "(//button[@class='ant-btn ant-btn-primary'])[2]",
+        "name": "publish_order"
+    }
+    radio_button_rate = {
+        "xpath": "(//div[@class='ant-radio-group ant-radio-group-outline']//div)[2]",
+        "name": "radio_button_rate"
+    }
+    rate_for_publication = {
+        "xpath": "//input[@id='order-clientrate']",
+        "name": "rate_for_publication"
+    }
+    selection_of_contractors = {
+        "xpath": "//span[text()='Подрядчики (для публикации доступно: 3 из 3)']",
+        "name": "selection_of_contractors"
+    }
+    contractor_checkbox = {
+        "xpath": "(//span[@class='ant-select-tree-checkbox']//span)[2]",
+        "name": "contractor_checkbox"
+    }
+    publish = {
+        "xpath": "(//button[@class='ant-btn ant-btn-primary'])[3]",
+        "name": "publish"
+    }
+    ok = {
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[1]",
+        "name": "ok"
+    }
+
+
+    click_on_request = {
+        "xpath": "//td[@class='ant-table-row-cell-break-word']//a[1]",
+        "name": "click_on_request"
+    }
+    accept_obligations = {
+        "xpath": "//button[contains(@class,'ant-btn take-button')]",
+        "name": "accept_obligations"
+    }
+    order_accept = {
+        "xpath": "//button[contains(@class,'ant-btn rounded')]",
+        "name": "order_accept"
+    }
+    search_driver = {
+        "xpath": "//input[@placeholder='Поиск по номеру ТС / фамилии водителя']",
+        "name": "search_driver"
+    }
+    attach_driver = {
+        "xpath": "//button[contains(@class,'ant-btn square')]//img",
+        "name": "attach_driver"
+    }
+    order_accepted = {
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[1]",
+        "name": "order_accepted"
+    }
+    burger_menu = {
+        "xpath": "//img[@class='element-icon icon-small']",
+        "name": "burger_menu"
+    }
+    start_execution = {
+        "xpath": "//img[@alt='playOrange']",
+        "name": "start_execution"
+    }
+    tab_execution = {
+        "xpath": "//a[contains(@class,'vz-tabs-modern__item active')]/following-sibling::a[1]",
+        "name": "tab_execution"
+    }
+    point_loading_start = {
+        "xpath": "//input[@class='ant-calendar-picker-input ant-input']",
+        "name": "point_loading_start"
+    }
+    point_loading_finish = {
+        "xpath": "",
+        "name": "point_loading_finish"
+    }
+    point_unloading_start = {
+        "xpath": "",
+        "name": "point_unloading_start"
+    }
+    point_unloading_finish = {
+        "xpath": "",
+        "name": "point_unloading_finish"
+    }
+    save_changes = {
+        "xpath": "//button[@class='ant-btn ant-btn-primary']",
+        "name": "save_changes"
+    }
+    approve_changes = {
+        "xpath": "(//button[@class='ant-btn ant-btn-primary'])[2]",
+        "name": "approve_changes"
+    }
+    ok_time = {
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[1]",
+        "name": "ok_time"
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

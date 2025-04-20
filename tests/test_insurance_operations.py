@@ -53,7 +53,8 @@ def test_insurance_contract_attach_lkp(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку клиентов
-    sidebar.click_button(sidebar.clients_list_button, do_assert=True, wait="lst")
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.clients_list_button,
+                           do_assert=True, wait="lst")
     
     client_list = ClientsList(base.driver)
     # Клик по клиенту с ИНН "client_lkz_inn"
@@ -74,7 +75,7 @@ def test_insurance_contract_attach_lkp(base_fixture, domain):
     contractor.click_button(contractor.ok_button)
     time.sleep(2)
     # Проверка наличия одного из договоров на странице
-    contractor.find_text_on_page(text='20241205222735', occurrences=1)
+    contractor.verify_text_on_page(text='210305', should_exist=True)
     # Очистка выбора договора страхования для дальнейшего открепления
     contractor.move_and_click(move_to=contractor.insurance_contract_select, click_to=contractor.clear_button)
     # Клик по кнопке открепления договора

@@ -213,7 +213,9 @@ def test_sorting_contractor_lkp(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход к списку заказчиков
-    sidebar.click_button(sidebar.clients_list_button, do_assert=True, wait="lst")
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.clients_list_button,
+                           do_assert=True, wait="lst")
+
     # Последовательный клик по всем кнопкам сортировки всех столбцов
     base.click_multiple_buttons(base.sorting_button, num_buttons=7, num_clicks=3, wait="lst")
     # Конец теста
@@ -228,7 +230,9 @@ def test_sorting_contractor_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход к списку подрядчиков
-    sidebar.click_button(sidebar.producers_list_button, do_assert=True, wait="lst")
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.producers_list_button,
+                           do_assert=True, wait="lst")
+
     # Последовательный клик по всем кнопкам сортировки всех столбцов
     base.click_multiple_buttons(base.sorting_button, num_buttons=7, num_clicks=3, wait="lst")
     # Конец теста
@@ -326,7 +330,7 @@ def test_sorting_documents_lke(base_fixture, domain):
     base.click_multiple_buttons(base.sorting_button, num_buttons=19, num_clicks=3, wait="lst")
 
     # Переход к списку страховых компаний
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.insurers_list_button,
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button_lke,
                            do_assert=True, wait="lst")
 
     insurers_list = InsurersList(base.driver)
@@ -362,7 +366,7 @@ def test_sorting_documents_lkp(base_fixture, domain):
     base.click_multiple_buttons(base.sorting_button, num_buttons=19, num_clicks=3, wait="lst")
 
     # Переход к списку страховых компаний
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.insurers_list_button,
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
                            do_assert=True, wait="lst")
 
     insurers_list = InsurersList(base.driver)
@@ -391,7 +395,7 @@ def test_sorting_documents_lkz(base_fixture, domain):
     base.click_multiple_buttons(base.sorting_button, num_buttons=4, num_clicks=3, wait="lst")
 
     # Переход к списку страховых компаний
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.insurers_list_button,
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
                            do_assert=True, wait="lst")
 
     insurers_list = InsurersList(base.driver)
@@ -479,13 +483,13 @@ def test_sorting_employee_lke(base_fixture, domain):
                            do_assert=True, wait="lst")
     # Последовательный клик по всем кнопкам сортировки всех столбцов
     base.click_multiple_buttons(base.sorting_button, num_buttons=12, num_clicks=3, wait="lst")
-
+    
     # Переход к списку специалистов
     sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.loaders_list_button,
                            do_assert=True, wait="lst")
     # Последовательный клик по всем кнопкам сортировки всех столбцов
     base.click_multiple_buttons(base.sorting_button, num_buttons=9, num_clicks=3, wait="lst")
-
+    
     profile = Profile(base.driver)
     # Переход в профиль
     profile.click_button(sidebar.profile_button, do_assert=True)
@@ -509,13 +513,10 @@ def test_sorting_employee_lkp(base_fixture, domain):
                            do_assert=True, wait="lst")
     # Последовательный клик по всем кнопкам сортировки всех столбцов
     base.click_multiple_buttons(base.sorting_button, num_buttons=11, num_clicks=3, wait="lst")
+    
 
-    # Переход к списку специалистов
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.loaders_list_button,
-                           do_assert=True, wait="lst")
-    # Последовательный клик по всем кнопкам сортировки всех столбцов
-    base.click_multiple_buttons(base.sorting_button, num_buttons=9, num_clicks=3, wait="lst")
 
+    
     profile = Profile(base.driver)
     # Переход в профиль
     profile.click_button(sidebar.profile_button, do_assert=True)
@@ -533,7 +534,7 @@ def test_sorting_employee_lkp(base_fixture, domain):
 def test_sorting_employee_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
-
+    
     profile = Profile(base.driver)
     # Переход в профиль
     profile.click_button(sidebar.profile_button, do_assert=True)

@@ -15,7 +15,7 @@ def test_insurance_contract_add_lke(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку страховщиков
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.insurers_list_button,
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button_lke,
                            do_assert=True, wait="lst")
     
     insurers_list = InsurersList(base.driver)
@@ -51,7 +51,7 @@ def test_insurance_contract_add_lke(base_fixture, domain):
     
     # Переход к списку страховщиков
     sidebar.click_button(sidebar.profile_button, do_assert=True)
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.insurers_list_button,
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button_lke,
                            do_assert=True, wait="lst")
     
     # Клик по страховщику с ИНН "insurer_energy_inn"
@@ -81,7 +81,7 @@ def test_insurance_contract_add_lkp(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку страховщиков
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.insurers_list_button,
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
                            do_assert=True, wait="lst")
     
     insurers_list = InsurersList(base.driver)
@@ -116,7 +116,7 @@ def test_insurance_contract_add_lkp(base_fixture, domain):
     add_contract.click_button(add_contract.confirm_button)
     # Переход к списку страховщиков
     sidebar.click_button(sidebar.profile_button, do_assert=True)
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.insurers_list_button,
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
                            do_assert=True, wait="lst")
     
     # Клик по страховщику с ИНН "insurer_energy_inn"
@@ -146,7 +146,7 @@ def test_insurance_contract_add_lkz(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку страховщиков
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.insurers_list_button,
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
                            do_assert=True, wait="lst")
     
     insurers_list = InsurersList(base.driver)
@@ -182,7 +182,7 @@ def test_insurance_contract_add_lkz(base_fixture, domain):
     
     # Переход к списку страховщиков
     sidebar.click_button(sidebar.profile_button, do_assert=True)
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.insurers_list_button,
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
                            do_assert=True, wait="lst")
     
     # Клик по страховщику с ИНН "insurer_energy_inn"

@@ -56,14 +56,6 @@ class ExtraAgreementAdd(Base):
         "xpath": "//input[@type='radio' and @class='ant-radio-input']",
         "name": "radio_button"
     }
-    click_next_year_button = {
-        "xpath": "//a[@class='ant-calendar-next-month-btn']/following-sibling::a[1]",
-        "name": "click_next_year_button"
-    }
-    click_day_button = {
-        "xpath": "//div[text()='20']",
-        "name": "click_day_button"
-    }
 
     # Methods
     def add_base_extra_agreements(self):
@@ -77,9 +69,7 @@ class ExtraAgreementAdd(Base):
         for button in buttons_to_click:
             self.click_button(button)
         time.sleep(0.5)
-
-        self.click_button(self.click_next_year_button)
-        self.click_button(self.click_day_button)
+        self.input_in_field(self.extra_agr_date_input, "01012040", press_enter=True)
         self.input_in_field(self.extra_agr_comment_input, "ДУ создано автотестом", click_first=True)
         self.click_button(self.add_extra_agr_button)
         

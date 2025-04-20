@@ -68,9 +68,8 @@ def test_sidebar_lke(base_fixture, domain):
                            do_assert=True, wait="lst")
     sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.trailers_list_button,
                            do_assert=True, wait="lst")
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.loaders_list_button,
-                           do_assert=True, wait="lst")
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.insurers_list_button,
+
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button_lke,
                            do_assert=True, wait="lst")
     sidebar.click_button(sidebar.profile_button, do_assert=True)
     sidebar.click_button(sidebar.settings_button, do_assert=True)
@@ -108,8 +107,14 @@ def test_sidebar_lkp(base_fixture, domain):
                            do_assert=True, wait="lst")
     sidebar.move_and_click(move_to=sidebar.order_hover_lkp, click_to=sidebar.auction_list_button,
                            do_assert=True, wait="lst")
+
     sidebar.click_button(sidebar.dispatch_list_button, do_assert=True, wait="lst")
-    sidebar.click_button(sidebar.clients_list_button, do_assert=True, wait="lst")
+
+
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.clients_list_button,
+                           do_assert=True, wait="lst")
+
+
     sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.reg_client_create_list_button,
                            do_assert=True, wait="lst")
     sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.registries_list_button_lkp,
@@ -128,10 +133,10 @@ def test_sidebar_lkp(base_fixture, domain):
                            do_assert=True, wait="lst")
     sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.trailers_list_button,
                            do_assert=True, wait="lst")
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.loaders_list_button,
+
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
                            do_assert=True, wait="lst")
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.insurers_list_button,
-                           do_assert=True, wait="lst")
+
     sidebar.click_button(sidebar.profile_button, do_assert=True)
     sidebar.click_button(sidebar.settings_button, do_assert=True)
     sidebar.move_and_click(move_to=sidebar.instructions_hover, click_to=sidebar.instructions_client_button)
@@ -187,17 +192,23 @@ def test_sidebar_lkz(base_fixture, domain):
                            do_assert=True, wait="lst")
     sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.dispatch_list_button,
                            do_assert=True, wait="lst")
-    sidebar.click_button(sidebar.producers_list_button, do_assert=True, wait="lst")
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.producers_list_button,
+                           do_assert=True, wait="lst")
+
     sidebar.click_button(sidebar.registries_list_button_lkz, do_assert=True, wait="lst")
     sidebar.click_button(sidebar.transport_doc_list_button, do_assert=True, wait="lst")
+
     sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.addresses_list_button,
                            do_assert=True, wait="lst")
     sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.tariffs_list_button,
                            do_assert=True, wait="lst")
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.insurers_list_button,
+
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
                            do_assert=True, wait="lst")
+
     sidebar.click_button(sidebar.profile_button, do_assert=True)
     sidebar.click_button(sidebar.settings_button, do_assert=True)
+
     sidebar.move_and_click(move_to=sidebar.instructions_hover, click_to=sidebar.instructions_client_button)
     sidebar.switch_to_original_window()
     sidebar.move_and_click(move_to=sidebar.instructions_hover, click_to=sidebar.instructions_producer_button)

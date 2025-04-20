@@ -237,8 +237,8 @@ def test_tariff_directory_lkz(base_fixture, domain):
 
     # проверка №2 фильтра "Статус"
     add.dropdown_without_input(add.tariff_status, option_text='Активный')
-    time.sleep(2)
-    add.verify_text_on_page(text='ПРР-20240818230735', should_exist=True)
+    time.sleep(10)
+    add.verify_text_on_page(text='ГГ-20250307142655', should_exist=True)
     add.verify_text_on_page(text='ПРР-20241206111102', should_exist=False)
     time.sleep(2)
 

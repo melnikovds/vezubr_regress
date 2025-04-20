@@ -172,10 +172,49 @@ class Manual(Base):
     "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
     "name": "status_on_flight_three"
     }
-    special_road_transport = {
-    "xpath": "//span[@class='ant-select-tree-switcher ant-select-tree-switcher_open']",
-    "name": "special_road_transport"
+    cargo_transportation = {
+    "xpath": "//span[@title='Грузовая']",
+    "name": "cargo_transportation"
     }
+    special_transportation = {
+    "xpath": "//span[@class='ant-select-tree-switcher ant-select-tree-switcher_close']",
+    "name": "special_transportation"
+    }
+    cross_four = {
+    "xpath": "(//i[contains(@class,'anticon anticon-down')])[3]",
+    "name": "cross_four"
+    }
+    mainline_trawl = {
+    "xpath": "//span[@class='ant-select-tree-node-content-wrapper ant-select-tree-node-content-wrapper-normal']",
+    "name": "mainline_trawl"
+    }
+    cistern_car = {
+    "xpath": "//span[@title='Цистерна']",
+    "name": "cistern_car"
+    }
+    dump_truck = {
+    "xpath": "//span[@title='Самосвал']",
+    "name": "dump_truck"
+    }
+    car_transporter = {
+    "css": "div#rc-tree-select-list_1>ul>li:nth-of-type(2)>ul>li:nth-of-type(4)>span:nth-of-type(2)",
+    "name": "car_transporter"
+    }
+    container_truck = {
+    "xpath": "//span[@title='Контейнеровоз']",
+    "name": "container_truck"
+    }
+    cross_five = {
+    "xpath": "//i[contains(@class,'anticon anticon-down')]",
+    "name": "cross_five"
+    }
+
+
+
+
+
+
+
 
 
     specialist_type = {

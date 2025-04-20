@@ -1,3 +1,5 @@
+import time
+
 import allure
 import pytest
 from pages.agreement_page import Agreement
@@ -23,14 +25,15 @@ def test_tariff_attach_client_lke(base_fixture, domain):
     client_list = ClientsList(base.driver)
     # Выбор клиента по ИНН
     client_list.click_button(client_list.client_lkz_inn, wait="lst")
-
+    time.sleep(3)
     contractor = Contractor(base.driver)
     # Переход к договорам
     contractor.click_button(contractor.agreements_link, wait="form")
-
+    time.sleep(3)
     agreement = Agreement(base.driver)
     # Переход на вкладку дополнительных соглашений
     agreement.click_button(agreement.extra_agreement_tab)
+    time.sleep(3)
     # Клик по кнопке добавления дополнительного соглашения
     agreement.click_button(agreement.add_extra_agr_button)
 

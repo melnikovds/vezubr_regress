@@ -101,8 +101,7 @@ def test_sidebar_lkp(base_fixture, domain):
     # Переход по всем вкладкам бокового меню и ожидание их прогрузки
     sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ftl_active_list_button,
                            do_assert=True, wait="lst")
-    sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ltl_active_list_button,
-                           do_assert=True, wait="lst")
+
     sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ftl_archive_list_button,
                            do_assert=True, wait="lst")
     sidebar.move_and_click(move_to=sidebar.order_hover_lkp, click_to=sidebar.ftl_list_button_lkp,

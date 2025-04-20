@@ -2,7 +2,7 @@ import allure
 import pytest
 
 from pages.custom_field_param_page import CustomFieldParam
-from pages.settings_page import Settings
+from pages.setting_page import Settings
 
 
 @allure.story("Extended path test")

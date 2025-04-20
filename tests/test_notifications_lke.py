@@ -3,13 +3,13 @@ import time
 import allure
 import pytest
 
-from pages.notifications_page import Notification
-from pages.settings_page import Settings
+from pages.notifications_lke_i_page import Notification
+from pages.setting_page import Settings
 
 
 @allure.story("Extended path test")
-@allure.feature('Маршрутизация грузомест')
-@allure.description('ЛКЭ. Тест маршрутизации ГМ ГВ: создаем - ГМ ГВ, маршрутизируем - ТС 20т/90м3/ 33пал')
+@allure.feature('Уведомления')
+@allure.description('Установка уведомлений')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_notification_field_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру

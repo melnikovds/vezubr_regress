@@ -4,7 +4,7 @@ import allure
 import pytest
 
 from pages.settings_company_page import Company
-from pages.settings_page import Settings
+from pages.setting_page import Settings
 
 
 @allure.story("Extended path test")

@@ -1,6 +1,8 @@
+import time
+
 import allure
 import pytest
-import time
+
 from pages.agreement_page import Agreement
 from pages.clients_list_page import ClientsList
 from pages.contractor_page import Contractor
@@ -44,7 +46,7 @@ def test_extra_agreements_client_add_lke(base_fixture, domain):
     time.sleep(1)
     # Клик по кнопке подтверждения добавления дополнительного соглашения
     add_extra.click_button(add_extra.confirm_add_button, wait="form")
-    
+
     # Переход на вкладку дополнительных соглашений
     agreement.click_button(agreement.extra_agreement_tab)
     # Клик по кнопке удаления ДУ
@@ -54,7 +56,7 @@ def test_extra_agreements_client_add_lke(base_fixture, domain):
     time.sleep(2)
     # Проверка отсутствия удаленного ДУ
     agreement.verify_text_on_page(extra_agr_number, should_exist=False)
-    time.sleep(1)
+    time.sleep(4)
     # Конец теста
 
 
@@ -92,7 +94,7 @@ def test_extra_agreements_producer_add_lke(base_fixture, domain):
     add_extra.click_button(add_extra.appoint_later_button, do_assert=True)
     # Клик по кнопке подтверждения добавления дополнительного соглашения
     add_extra.click_button(add_extra.confirm_add_button, wait="form")
-    
+
     # Переход на вкладку дополнительных соглашений
     agreement.click_button(agreement.extra_agreement_tab)
     # Клик по кнопке удаления ДУ
@@ -139,7 +141,7 @@ def test_extra_agreements_inner_contractor_add_lke(base_fixture, domain):
     add_extra.click_button(add_extra.appoint_later_button, do_assert=True)
     # Клик по кнопке подтверждения добавления дополнительного соглашения
     add_extra.click_button(add_extra.confirm_add_button, wait="form")
-    
+
     # Переход на вкладку дополнительных соглашений
     agreement.click_button(agreement.extra_agreement_tab)
     # Клик по кнопке удаления ДУ

@@ -70,9 +70,9 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Активные заявки"
     }
-    ltl_active_list_button = {
-        "xpath": "//*[@id='requests-ltl-side']",
-        "name": "ltl_active_list_button",
+    ftl_active_requests_button = {
+        "xpath": "(//li[contains(@class,'ant-menu-item sidebar__dropdown-item')])[3]",
+        "name": "ftl_active_requests_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Заявки на доставку Груза"
     }
@@ -81,6 +81,12 @@ class SideBar(Base):
         "name": "ftl_archive_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Архив заявок"
+    }
+    new_cdr_button = {
+        "xpath": "//li[@id='loader-order-new-side']/following-sibling::li[1]",
+        "name": "new_cdr_button",
+        #"reference_xpath": base_reference_xpath,
+        "reference": "Заявка на доставку груза (NEW)"
     }
     """Orders"""
     order_hover = {
@@ -319,4 +325,8 @@ class SideBar(Base):
     exit_button = {
         "xpath": "//a[contains(@class, 'sidebar__list-item') and contains(., 'Выход')]",
         "name": "exit_button"
+    }
+    new_cdr_sidebar = {
+        "xpath": "(//li[contains(@class,'ant-menu-item sidebar__dropdown-item')])[3]",
+        "name": "new_cdr_sidebar"
     }

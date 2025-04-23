@@ -24,7 +24,7 @@ def test_sidebar_lke(base_fixture, domain):
                            do_assert=True)
     sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ftl_active_list_button,
                            do_assert=True, wait="lst")
-    sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ltl_active_list_button,
+    sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.cdr_active_list_button,
                            do_assert=True, wait="lst")
     sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ftl_archive_list_button,
                            do_assert=True, wait="lst")

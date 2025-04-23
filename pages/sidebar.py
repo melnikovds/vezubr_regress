@@ -71,9 +71,9 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Активные заявки"
     }
-    ftl_active_requests_button = {
-        "xpath": "(//li[contains(@class,'ant-menu-item sidebar__dropdown-item')])[3]",
-        "name": "ftl_active_requests_button",
+    cdr_active_list_button = {
+        "xpath": "//li[@id='requests-side']/following-sibling::li[1]",
+        "name": "cdr_active_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Заявки на доставку Груза"
     }
@@ -82,12 +82,6 @@ class SideBar(Base):
         "name": "ftl_archive_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Архив заявок"
-    }
-    new_cdr_button = {
-        "xpath": "//li[@id='loader-order-new-side']/following-sibling::li[1]",
-        "name": "new_cdr_button",
-        #"reference_xpath": base_reference_xpath,
-        "reference": "Заявка на доставку груза (NEW)"
     }
 
     """Orders"""

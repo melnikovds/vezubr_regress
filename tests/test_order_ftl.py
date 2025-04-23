@@ -260,8 +260,9 @@ def test_ftl_order_lkz(base_fixture, domain):
     # Назначение водителя
     ftl.input_in_field(ftl.search_driver, value='Фронтов')
     time.sleep(1)
-    ftl.click_button(ftl.attach_driver, wait='lst')
+    ftl.click_button(ftl.attach_driver, wait='form')
     ftl.click_button(ftl.order_accepted)
+    time.sleep(5)
 
     # Начало исполнения рейса
     ftl.click_button(ftl.burger_menu)

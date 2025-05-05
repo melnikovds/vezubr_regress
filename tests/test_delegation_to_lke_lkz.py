@@ -14,7 +14,8 @@ def test_delegation_to_lke_lkz(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку перевозчиков
-    sidebar.click_button(sidebar.producers_list_button, do_assert=True, wait="lst")
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.producers_list_button,
+                           do_assert=True, wait="lst")
     
     producers_list = ProducersList(base.driver)
     # Клик по перевозчику с ИНН "producer_lke_inn"

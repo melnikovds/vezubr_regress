@@ -102,9 +102,11 @@ def test_tariff_ftl_h_copy_lke(base_fixture, domain):
     tariff.backspace_and_input(tariff.hourly_params_input, base.random_value_float_str(3000, 5000))
     # Сохранение изменений тарифа
     tariff.click_button(tariff.add_hourly_tariff_button)
+    time.sleep(5)
     tariff.click_button(tariff.confirm_button)
+    time.sleep(5)
     tariff.click_button(tariff.confirm_button)
-    time.sleep(1)
+    time.sleep(5)
     tariff.click_button(tariff.confirm_button, do_assert=True)
     # Конец теста
 

@@ -36,7 +36,8 @@ def test_driver_edit_1_own_lkp(base_fixture, domain):
     reset_filter.move_to_element(reset_filter.status_on_flight)
     reset_filter.click_on_the_cross(reset_filter.cross_three)
     time.sleep(1)
-    driver_list.input_in_field(driver_list.surname_filter, value=surname, wait="lst")
+    driver_list.backspace_and_input(driver_list.surname_filter, value=surname, click_first=True)
+    time.sleep(3)
     driver_list.click_button(driver_list.first_driver_link, wait="form")
     
     # Клик по кнопке редактирования водителя
@@ -128,7 +129,8 @@ def test_driver_edit_2_own_lkp(base_fixture, domain):
     reset_filter.move_to_element(reset_filter.status_on_flight)
     reset_filter.click_on_the_cross(reset_filter.cross_three)
     time.sleep(1)
-    driver_list.input_in_field(driver_list.surname_filter, value=surname, wait="lst")
+    driver_list.backspace_and_input(driver_list.surname_filter, value=surname, click_first=True)
+    time.sleep(3)
     driver_list.click_button(driver_list.first_driver_link, wait="form")
     
     # Клик по кнопке редактирования водителя

@@ -1,9 +1,7 @@
 import os
 import time
-
 import allure
 import pytest
-
 from pages.add_new_cdr_page import AddCdr
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Игнорировать INFO и WARNING сообщения
@@ -18,7 +16,7 @@ def test_add_new_ftl_lkz_lkp(base_fixture, domain, request):
     time.sleep(2)
 
     with allure.step("Открытие формы создания новой заявки"):
-        sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_cdr_button)
+        sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_delivery_request_button)
         add = AddCdr(base.driver)
         time.sleep(2)
 
@@ -108,7 +106,7 @@ def test_add_new_ftl_lkz_lke(base_fixture, domain, request):
     time.sleep(2)
 
     with allure.step("Открытие формы создания новой заявки"):
-        sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_cdr_button)
+        sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_delivery_request_button)
         add = AddCdr(base.driver)
         time.sleep(2)
 
@@ -211,7 +209,7 @@ def test_add_new_ltl_lkz(base_fixture, domain):
     time.sleep(2)
 
     with allure.step("Открытие формы создания новой заявки"):
-        sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_cdr_button)
+        sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_delivery_request_button)
         add = AddCdr(base.driver)
         time.sleep(2)
 
@@ -242,7 +240,7 @@ def test_add_new_ftl_lkz_dop(base_fixture, domain):
     time.sleep(2)
 
     with allure.step("Открытие формы создания новой заявки"):
-        sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_cdr_button)
+        sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_delivery_request_button)
         add = AddCdr(base.driver)
         time.sleep(2)
 
@@ -295,7 +293,7 @@ def test_add_new_ftl_lkz_asr(base_fixture, domain):
     time.sleep(2)
 
     with allure.step("Открытие формы создания новой заявки"):
-        sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_cdr_button)
+        sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_delivery_request_button)
         add = AddCdr(base.driver)
         time.sleep(2)
 

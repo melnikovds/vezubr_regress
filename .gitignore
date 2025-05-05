@@ -1,5 +1,6 @@
 pages/login.py
 results/
+/screens/
 
 # Allure Report
 allure-report/

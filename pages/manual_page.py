@@ -176,6 +176,46 @@ class Manual(Base):
     "xpath": "//span[@title='Грузовая']",
     "name": "cargo_transportation"
     }
+    type_road_transport_two = {
+    "xpath": "//span[@class='ant-select-selection ant-select-selection--multiple']",
+    "name": "type_road_transport_two"
+    }
+    cross_six = {
+    "xpath": "/html/body/div[2]/div/div[3]/div[2]/div/form/div[2]/div[1]/div/div[2]/div/span/span/span/span[1]",
+    "name": "cross_six"
+    }
+    cargo_passenger_transportation = {
+    "xpath": "(//span[@class='ant-select-tree-checkbox-inner'])[2]",
+    "name": "cargo_passenger_transportation"
+    }
+    transport_number = {
+    "xpath": "//input[@class='ant-input']",
+    "name": "transport_number"
+    }
+    cross_seven = {
+    "xpath": "/html/body/div[2]/div/div[3]/div[2]/div/form/div[2]/div[2]/div/div[2]/div/span/span/span/span[1]/span/i[1]",
+    "name": "cross_seven"
+    }
+    cross_eight = {
+    "xpath": "/html/body/div[2]/div/div[3]/div[2]/div/form/div[2]/div[4]/div/div[2]/div/span/div/div/span",
+    "name": "cross_eight"
+    }
+    surname_driver_two = {
+    "xpath": "(//input[@class='ant-input'])[3]",
+    "name": "surname_driver_two"
+    }
+    name_driver_two = {
+    "xpath": "//label[text()='Имя водителя']/following::input",
+    "name": "name_driver_two"
+    }
+    patronymic_driver_two = {
+    "xpath": "//label[text()='Отчество водителя']/following::input",
+    "name": "patronymic_driver_two"
+    }
+
+
+
+
     special_transportation = {
     "xpath": "//span[@class='ant-select-tree-switcher ant-select-tree-switcher_close']",
     "name": "special_transportation"
@@ -183,6 +223,10 @@ class Manual(Base):
     cross_four = {
     "xpath": "(//i[contains(@class,'anticon anticon-down')])[3]",
     "name": "cross_four"
+    }
+    manipulator_truck = {
+    "xpath": "//span[@title='Манипулятор']",
+    "name": "manipulator_truck"
     }
     mainline_trawl = {
     "xpath": "//span[@class='ant-select-tree-node-content-wrapper ant-select-tree-node-content-wrapper-normal']",
@@ -208,12 +252,6 @@ class Manual(Base):
     "xpath": "//i[contains(@class,'anticon anticon-down')]",
     "name": "cross_five"
     }
-
-
-
-
-
-
 
 
 

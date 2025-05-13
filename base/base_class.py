@@ -445,6 +445,77 @@ class Base:
             if do_assert:
                 self.assert_element_text(element_dict)
 
+    def click_button_recaptchav3(self, element_dict: Dict[str, str], index: int = 1, do_assert: bool = False,
+                                 wait: Optional[str] = None, wait_type: str = 'clickable', safe: bool = False) -> None:
+        """
+        Клик с имитацией человеческого поведения
+        """
+        element_name = f"{element_dict['name']} index {index}" if index > 1 else element_dict['name']
+
+        # Формируем локатор с учетом типа селектора
+        if 'xpath' in element_dict:
+            locator = f"({element_dict['xpath']})[{index}]" if index > 1 else element_dict['xpath']
+            locator_type = 'xpath'
+        elif 'css' in element_dict:
+            locator = f"{element_dict['css']}:nth-of-type({index})" if index > 1 else element_dict['css']
+            locator_type = 'css'
+        else:
+            raise ValueError("Не указан селектор")
+
+        updated_element_dict = {
+            "name": element_name,
+            locator_type: locator
+        }
+
+        message = f"Human-like click on {element_name}"
+
+        with allure.step(title=message):
+            button_dict = self.get_element(updated_element_dict, wait_type)
+            element = button_dict['element']
+
+            if safe:
+                # Имитация реального поведения
+                actions = ActionChains(self.driver)
+
+                # 1. Движение мыши к элементу
+                actions.move_to_element(element).perform()
+                time.sleep(random.uniform(0.2, 0.5))  # Задержка перед кликом
+
+                # 2. Случайное смещение клика (человек не всегда кликает точно в центр)
+                offset_x = random.randint(-10, 10)
+                offset_y = random.randint(-10, 10)
+                self.driver.execute_script(f"""
+                    var elem = arguments[0];
+                    var rect = elem.getBoundingClientRect();
+                    var x = rect.left + rect.width/2 + {offset_x};
+                    var y = rect.top + rect.height/2 + {offset_y};
+                    elem.dispatchEvent(new MouseEvent('click', {{clientX: x, clientY: y}}));
+                """, element)
+            else:
+                element.click()
+
+            print(message)
+            time.sleep(random.uniform(0.3, 1.0))  # Задержка после клика
+
+            # Обработка спиннеров
+            if wait:
+                loading_spinner = self.loading_form if wait == 'form' else self.loading_list
+                try:
+                    self.get_element(loading_spinner, wait_type="visible")
+                except TimeoutException:
+                    with allure.step("Spinner did not appear"):
+                        print("Spinner did not appear")
+                        return
+
+                try:
+                    self.get_element(loading_spinner, wait_type="invisibility")
+                except TimeoutException:
+                    with allure.step("Spinner did not disappear"):
+                        print("Spinner did not disappear")
+
+            if do_assert:
+                self.assert_element_text(element_dict)
+
     def click_and_select_with_arrows(self, element_info: Dict[str, str], arrow_presses: int) -> None:
         """
         Кликает по указанному элементу, затем нажимает клавишу "стрелка вниз" указанное количество раз
@@ -802,6 +873,67 @@ class Base:
                         print("Spinner did not disappear")
 
     """ Backspace num times/all and input with optional click, enter, and wait type"""
+
+    def input_in_field_recaptchav3(self, element_dict: Dict[str, str], value: str, click_first: bool = False,
+                                   press_enter: bool = False, wait: Optional[str] = None, safe: bool = False,
+                                   wait_type: str = 'clickable', index: int = 1) -> None:
+        """
+        Универсальный метод для ввода текста с поддержкой имитации человека
+        """
+        log_value = "***" if safe else value
+        element_name = f"{element_dict['name']} index {index}" if index > 1 else element_dict['name']
+        locator = f"({element_dict['xpath']})[{index}]" if index > 1 else element_dict['xpath']
+        updated_element_dict = {"name": element_name, "xpath": locator}
+
+        message = f"{'Click and ' if click_first else ''}Input in {element_name}: {log_value}"
+
+        with allure.step(title=message):
+            field_dict = self.get_element(updated_element_dict, wait_type)
+            element = field_dict['element']
+
+            if safe:
+                # Имитация реального поведения
+                actions = ActionChains(self.driver)
+                actions.move_to_element(element).perform()
+                time.sleep(random.uniform(0.2, 0.5))  # Задержка перед вводом
+
+                if click_first:
+                    element.click()
+                    time.sleep(random.uniform(0.1, 0.3))
+
+                # Плавный ввод по символам
+                for char in value:
+                    element.send_keys(char)
+                    time.sleep(random.uniform(0.1, 0.3))
+
+                if press_enter:
+                    time.sleep(random.uniform(0.2, 0.5))
+                    element.send_keys(Keys.ENTER)
+            else:
+                # Стандартный ввод
+                if click_first:
+                    element.click()
+                element.send_keys(value)
+                if press_enter:
+                    element.send_keys(Keys.ENTER)
+
+            print(message)
+
+            # Обработка спиннеров
+            if wait:
+                loading_spinner = self.loading_form if wait == 'form' else self.loading_list
+                try:
+                    self.get_element(loading_spinner, wait_type="visible")
+                except TimeoutException:
+                    with allure.step("Spinner did not appear"):
+                        print("Spinner did not disappear")
+                        return
+
+                try:
+                    self.get_element(loading_spinner, wait_type="invisibility")
+                except TimeoutException:
+                    with allure.step("Spinner did not disappear"):
+                        print("Spinner did not disappear")
 
     def backspace_and_input(self, element_dict: Dict[str, str], value: str, click_first: bool = False,
                             press_enter: bool = False, wait_type: str = 'clickable', num: Optional[int] = None) -> None:

@@ -1,5 +1,6 @@
 import allure
 import pytest
+import time
 from selenium.webdriver.support.wait import WebDriverWait
 from pages.clients_list_page import ClientsList
 from pages.contractor_page import Contractor
@@ -112,13 +113,17 @@ def test_go_to_account_client_lke(base_fixture, domain):
                            do_assert=True, wait="lst")
     
     client_list = ClientsList(base.driver)
+    time.sleep(2)
     # Переход в ЛК клиента
     client_list.move_and_click(move_to=client_list.action_button, click_to=client_list.go_to_account_button)
+    time.sleep(2)
     
     # Ожидание открытия новой вкладки и переключение на нее
     WebDriverWait(base.driver, 60).until(lambda d: len(d.window_handles) > 1)
+    time.sleep(2)
     windows = base.driver.window_handles
     base.driver.switch_to.window(windows[1])
+    time.sleep(2)
     # Проверка корректности перехода в ЛК клиента
     client_list.assert_element_text(client_list.assert_auto_lkz)
     # Конец теста
@@ -137,13 +142,17 @@ def test_go_to_account_producer_lke(base_fixture, domain):
                            do_assert=True, wait="lst")
     
     producer_list = ProducersList(base.driver)
+    time.sleep(2)
     # Переход в ЛК перевозчика
     producer_list.move_and_click(move_to=producer_list.action_button_lkp, click_to=producer_list.go_to_account_button)
+    time.sleep(2)
     
     # Ожидание открытия новой вкладки и переключение на нее
     WebDriverWait(base.driver, 60).until(lambda d: len(d.window_handles) > 1)
+    time.sleep(2)
     windows = base.driver.window_handles
     base.driver.switch_to.window(windows[1])
+    time.sleep(2)
     # Проверка корректности перехода в ЛК перевозчика
     producer_list.assert_element_text(producer_list.assert_auto_lkp)
     # Конец теста

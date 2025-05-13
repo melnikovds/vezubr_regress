@@ -1,3 +1,5 @@
+import time
+
 import allure
 import pytest
 from selenium.webdriver.support.wait import WebDriverWait
@@ -41,10 +43,11 @@ def test_registration_new_lke(base_fixture, domain):
     base.driver.switch_to.window(windows[1])
     
     # Ввод логина и пароля для доступа к СМС центру
-    sms.input_in_field(sms.sms_login_input, sms_center["login"], safe=True)
-    sms.input_in_field(sms.sms_password_input, sms_center["password"], safe=True)
+    sms.input_in_field_recaptchav3(sms.sms_login_input, sms_center["login"], safe=True)
+    sms.input_in_field_recaptchav3(sms.sms_password_input, sms_center["password"], safe=True)
+    time.sleep(3)
     # Переход к деталям сообщений
-    sms.click_button(sms.sms_login_button)
+    sms.click_button_recaptchav3(sms.sms_login_button, safe=True)
     sms.click_button(sms.detailing_button)
     
     # Получение кода подтверждения
@@ -114,10 +117,11 @@ def test_registration_new_lkz(base_fixture, domain):
     base.driver.switch_to.window(windows[1])
     
     # Ввод логина и пароля для доступа к СМС центру
-    sms.input_in_field(sms.sms_login_input, sms_center["login"], safe=True)
-    sms.input_in_field(sms.sms_password_input, sms_center["password"], safe=True)
+    sms.input_in_field_recaptchav3(sms.sms_login_input, sms_center["login"], safe=True)
+    sms.input_in_field_recaptchav3(sms.sms_password_input, sms_center["password"], safe=True)
+    time.sleep(3)
     # Переход к деталям сообщений
-    sms.click_button(sms.sms_login_button)
+    sms.click_button_recaptchav3(sms.sms_login_button, safe=True)
     sms.click_button(sms.detailing_button)
     
     # Получение кода подтверждения
@@ -206,10 +210,11 @@ def test_registration_new_lkp(base_fixture, domain):
     base.driver.switch_to.window(windows[1])
     
     # Ввод логина и пароля для доступа к СМС центру
-    sms.input_in_field(sms.sms_login_input, sms_center["login"], safe=True)
-    sms.input_in_field(sms.sms_password_input, sms_center["password"], safe=True)
+    sms.input_in_field_recaptchav3(sms.sms_login_input, sms_center["login"], safe=True)
+    sms.input_in_field_recaptchav3(sms.sms_password_input, sms_center["password"], safe=True)
+    time.sleep(3)
     # Переход к деталям сообщений
-    sms.click_button(sms.sms_login_button)
+    sms.click_button_recaptchav3(sms.sms_login_button, safe=True)
     sms.click_button(sms.detailing_button)
     
     # Получение кода подтверждения

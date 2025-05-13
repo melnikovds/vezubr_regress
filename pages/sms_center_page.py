@@ -1,9 +1,11 @@
 import re
-from selenium.webdriver.support import expected_conditions as EC
-from base.base_class import Base
+
 from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+
+from base.base_class import Base
 
 
 class SmsCenter(Base):
@@ -30,11 +32,16 @@ class SmsCenter(Base):
         "name": "detailing_button"
     }
     refresh_button = {
-        "xpath": "//button[@class='TlYSdkvjy8CvSMMQ0Zfb RkndBZDErw_QNC9G8r72 HStWRKScOyQNFQYvXccg Vd5x6c7IiEaFl4pAvotC Sp_9XlfPRQdlk8xOYoyU']",
+        "xpath": "(//button[contains(@class,'_button_5ah3p_65 _button-variant-secondary_5ah3p_133')])[2]",
         "name": "refresh_button"
+    }
+    ok_button = {
+        "xpath": "//button[contains(@class,'_button_5ah3p_65 _button-variant-primary_5ah3p_116')]",
+        "name": "ok_button"
     }
 
     """ Get sms code with retries """
+
     def get_confirmation_code(self, phone_number, max_attempts=12):
         """
         Извлекает код подтверждения, связанный с заданным номером телефона, с повторными попытками.
@@ -58,7 +65,7 @@ class SmsCenter(Base):
         """
         formatted_phone = '+7' + phone_number
         xpath_locator = f"//tr[contains(.//div, '{formatted_phone}')]//div[contains(text(), 'Код подтверждения:')]"
-        
+
         for attempt in range(max_attempts):
             try:
                 element_text = WebDriverWait(self.driver, 5).until(
@@ -71,6 +78,6 @@ class SmsCenter(Base):
             except TimeoutException:
                 print(f"Попытка {attempt + 1} не удалась. Обновляем страницу...")
                 self.click_button(self.refresh_button)
-        
+
         # Если после всех попыток код не найден, выбрасываем ошибку
         raise ValueError(f"Код подтверждения для номера {formatted_phone} не найден после {max_attempts} попыток.")

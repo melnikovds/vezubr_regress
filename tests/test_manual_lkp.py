@@ -245,6 +245,192 @@ def test_driver_directory_lkp(base_fixture, domain):
 
 @allure.story("Extended test")
 @allure.feature('Фильтры')
+@allure.description("ЛКП Тест фильтра 'ТС' в разделе справочники")
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
+def test_transport_directory_lkp(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # переход к списку ТС
+    base.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.transports_list_button,
+                        do_assert=True, wait='lst')
+
+    add = Manual(base.driver)
+    add.move_to_element(add.type_road_transport_two)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_six)
+    time.sleep(2)
+
+    # проверка фильтра "Тип автоперевозки"
+    add.move_and_click(move_to=add.type_road_transport_two, click_to=add.cargo_transportation)
+    time.sleep(4)
+    add.verify_text_on_page(text='ТС20231229113421', should_exist=True)
+    add.verify_text_on_page(text='ТК567У', should_exist=False)
+    add.verify_text_on_page(text='ТС-20240417063916', should_exist=False)
+    add.verify_text_on_page(text='ТС-20240515211030', should_exist=False)
+    time.sleep(2)
+
+    add.move_to_element(add.type_road_transport_two)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_six)
+    time.sleep(2)
+
+    add.move_and_click(move_to=add.type_road_transport_two, click_to=add.cargo_passenger_transportation)
+    time.sleep(3)
+    add.verify_text_on_page(text='ТС-20240417065434', should_exist=True)
+    add.verify_text_on_page(text='А444АА', should_exist=True)
+    add.verify_text_on_page(text='ТС20231229113421', should_exist=False)
+    time.sleep(2)
+
+    add.move_to_element(add.type_road_transport_two)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_six)
+    time.sleep(2)
+
+    add.move_and_click(move_to=add.type_road_transport_two, click_to=add.special_transportation)
+    time.sleep(1)
+    add.click_button(add.manipulator_truck)
+    time.sleep(3)
+    add.verify_text_on_page(text='ТС-20240512232418', should_exist=True)
+    add.verify_text_on_page(text='ТС-20240417063916', should_exist=True)
+    add.verify_text_on_page(text='ТС20240110120731', should_exist=False)
+    time.sleep(2)
+
+    add.move_to_element(add.type_road_transport_two)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_six)
+    time.sleep(2)
+
+    # проверка фильтра "госномер ТС"
+    add.input_in_field(add.transport_number, value='442')
+    time.sleep(3)
+    add.verify_text_on_page(text='ТС20240116120442', should_exist=True)
+    add.verify_text_on_page(text='ТС-20241108044244', should_exist=True)
+    add.verify_text_on_page(text='ТС20240116131611', should_exist=False)
+    time.sleep(2)
+
+    add.move_to_element(add.transport_number)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_seven)
+    time.sleep(2)
+
+    # проверка фильтра "Статус в системе"
+    add.dropdown_without_input(add.status_in_system_two, option_text='Неактивный')
+    time.sleep(3)
+    add.verify_text_on_page(text='ТС-20240418133910', should_exist=True)
+    add.verify_text_on_page(text='ТС20231229113421', should_exist=False)
+    time.sleep(2)
+
+    add.dropdown_without_input(add.status_in_system_two, option_text='Активный')
+    time.sleep(3)
+    add.verify_text_on_page(text='ТС20240110120731', should_exist=True)
+    add.verify_text_on_page(text='ТС-20240419044633', should_exist=False)
+    time.sleep(2)
+
+    add.move_to_element(add.status_in_system_two)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_two)
+    time.sleep(2)
+
+    # проверка №1 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight, option_text='Нет заказов')
+    time.sleep(3)
+    add.verify_text_on_page(text='ТС20240112133709', should_exist=True)
+    add.verify_text_on_page(text='ПРО_СТО', should_exist=False)
+    time.sleep(2)
+
+    add.move_to_element(add.status_on_flight)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_eight)
+    time.sleep(2)
+
+    # проверка №2 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight, option_text='Назначен на заказ')
+    time.sleep(3)
+    add.verify_text_on_page(text='ТС-20240714234846', should_exist=True)
+    add.verify_text_on_page(text='ТС-20240526054013', should_exist=False)
+    time.sleep(2)
+
+    add.move_to_element(add.status_on_flight)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_eight)
+    time.sleep(2)
+
+    # проверка №3 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight, option_text='На заказе')
+    time.sleep(3)
+    add.verify_text_on_page(text='ТС20240110120731', should_exist=True)
+    add.verify_text_on_page(text='ТС20240116131611', should_exist=False)
+    time.sleep(2)
+
+    add.move_to_element(add.status_on_flight)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_eight)
+    time.sleep(2)
+
+    # проверка №4 фильтра "Статус в рейсе"
+    add.dropdown_without_input(add.status_on_flight, option_text='Эксплуатация приостановлена')
+    time.sleep(3)
+    add.verify_text_on_page(text='ТС-20240526052340', should_exist=True)
+    add.verify_text_on_page(text='ТС20240116131611', should_exist=False)
+    time.sleep(2)
+
+    add.move_to_element(add.status_on_flight)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_eight)
+    time.sleep(2)
+
+    # проверка фильтра "фамилия водителя"
+    add.input_in_field(add.surname_driver_two, value='фро', click_first=True)
+    time.sleep(3)
+    add.verify_text_on_page(text='ПРО_СТО', should_exist=True)
+    add.verify_text_on_page(text='ТС20240112133709', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.surname_driver_two, value='')
+    time.sleep(1)
+    add.input_in_field(add.surname_driver_two, value='17185241', click_first=True)
+    time.sleep(2)
+    add.find_text_on_page(text='ТС20240110120731', occurrences=1)
+    time.sleep(1)
+    add.backspace_and_input(add.surname_driver_two, value='')
+    time.sleep(1)
+
+    # проверка фильтра "имя водителя"
+    add.input_in_field(add.name_driver_two, value='09164032', click_first=True)
+    time.sleep(1)
+    add.verify_text_on_page(text='ТС20231229113421', should_exist=True)
+    add.verify_text_on_page(text='ТС20240120144803', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.name_driver_two, value='')
+    time.sleep(1)
+    add.input_in_field(add.name_driver_two, value='И-20241204160030', click_first=True)
+    time.sleep(2)
+    add.find_text_on_page(text='110120731', occurrences=1)
+    time.sleep(1)
+    add.backspace_and_input(add.name_driver_two, value='')
+    time.sleep(1)
+
+    # проверка фильтра "отчество водителя"
+    add.input_in_field(add.patronymic_driver_two, value='24200338', click_first=True)
+    time.sleep(1)
+    add.verify_text_on_page(text='ТС-20240526053124', should_exist=True)
+    add.verify_text_on_page(text='ТС20240110120731', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.patronymic_driver_two, value='')
+    time.sleep(1)
+    add.input_in_field(add.patronymic_driver_two, value='Пользователь', click_first=True)
+    time.sleep(2)
+    add.find_text_on_page(text='515211030', occurrences=1)
+    time.sleep(1)
+    add.backspace_and_input(add.patronymic_driver_two, value='')
+    time.sleep(1)
+
+    # Конец теста
+
+
+
+@allure.story("Extended test")
+@allure.feature('Фильтры')
 @allure.description("ЛКП Тест фильтра 'Тягачи' в разделе справочники")
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_tractor_directory_lkp(base_fixture, domain):

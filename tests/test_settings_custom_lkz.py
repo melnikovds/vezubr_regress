@@ -28,8 +28,8 @@ def test_one_custom_settings_lkz(base_fixture, domain):
     add_param = CustomFieldsParam(base.driver)
 
     # добавляем кастомное поле
-    add_param.input_in_field(add_param.add_ru, value="контрагентик")
-    add_param.input_in_field(add_param.add_en, value="contractor")
+    add_param.input_in_field(add_param.add_ru, value="амбрелла")
+    add_param.input_in_field(add_param.add_en, value="ambrella")
     add_param.dropdown_without_input(add_param.add_role, option_text="Контрагент")
     add_param.dropdown_without_input(add_param.add_type, option_text="Текстовое значение")
     time.sleep(2)
@@ -43,31 +43,31 @@ def test_one_custom_settings_lkz(base_fixture, domain):
     # проверяем наличие кастомного поля
     add_param.reload_page()
     time.sleep(3)
-    add_param.verify_text_on_page(text='контрагентик')
+    add_param.verify_text_on_page(text='амбрелла')
 
     edit_param = EditFieldsParam(base.driver)
 
     # редактируем кастомное поле
     edit_param.click_button(edit_param.e_p)
-    add_param.backspace_and_input(add_param.add_ru, value="З24-00075", click_first=True)
-    add_param.backspace_and_input(add_param.add_en, value="Z24-0003")
+    add_param.backspace_and_input(add_param.add_ru, value="З24-00275", click_first=True)
+    add_param.backspace_and_input(add_param.add_en, value="Z24-0013")
     add_param.dropdown_without_input(add_param.add_role, option_text="Рейс")
     add_param.dropdown_without_input(add_param.add_type, option_text="Выбор из нескольких значений")
 
     # добавляем несколько значений
     edit_param.click_button(edit_param.add_val)
-    edit_param.input_in_field(edit_param.unique_number_value, value="0001", click_first=True)
-    edit_param.input_in_field(edit_param.name_value, value="Z24-0479", click_first=True, press_enter=True)
+    edit_param.input_in_field(edit_param.unique_number_value, value="0041", click_first=True)
+    edit_param.input_in_field(edit_param.name_value, value="Z24-0679", click_first=True, press_enter=True)
     edit_param.click_button(edit_param.save_unique_value)
 
     edit_param.click_button(edit_param.add_val)
-    edit_param.input_in_field(edit_param.unique_number_value, value="0002", click_first=True)
-    edit_param.input_in_field(edit_param.name_value, value="Z24-0480", click_first=True, press_enter=True)
+    edit_param.input_in_field(edit_param.unique_number_value, value="0042", click_first=True)
+    edit_param.input_in_field(edit_param.name_value, value="Z24-0680", click_first=True, press_enter=True)
     edit_param.click_button(edit_param.save_unique_value)
 
     edit_param.click_button(edit_param.add_val)
-    edit_param.input_in_field(edit_param.unique_number_value, value="0003", click_first=True)
-    edit_param.input_in_field(edit_param.name_value, value="Z24-0485", click_first=True, press_enter=True)
+    edit_param.input_in_field(edit_param.unique_number_value, value="0043", click_first=True)
+    edit_param.input_in_field(edit_param.name_value, value="Z24-0685", click_first=True, press_enter=True)
     edit_param.click_button(edit_param.save_unique_value)
 
     # редактируем и удаляем одно из значений
@@ -85,7 +85,7 @@ def test_one_custom_settings_lkz(base_fixture, domain):
     # проверяем изменение кастомного поля
     add_param.reload_page()
     time.sleep(3)
-    add_param.verify_text_on_page(text='00075')
+    add_param.verify_text_on_page(text='00275')
 
     # удаляем кастомное поле
     edit_param.click_button(edit_param.del_custom)
@@ -100,7 +100,7 @@ def test_one_custom_settings_lkz(base_fixture, domain):
     # проверяем отсутствие кастомного поля на странице
     add_param.reload_page()
     time.sleep(3)
-    edit_param.verify_text_on_page(text="00075", should_exist=False)
+    edit_param.verify_text_on_page(text="00275", should_exist=False)
 
     # конец теста
 
@@ -127,8 +127,9 @@ def test_two_custom_settings_lkz(base_fixture, domain):
     add_param = CustomFieldsParam(base.driver)
 
     # ввод данных кастомного поля
-    add_param.backspace_and_input(add_param.add_ru, value="З24-05485")
-    add_param.backspace_and_input(add_param.add_en, value="Z25-0039")
+    # add_param.backspace_and_input(add_param.add_ru, value="З24-05485")
+    add_param.backspace_and_input(add_param.add_ru, value="фыва")
+    add_param.backspace_and_input(add_param.add_en, value="oldj")
     add_param.dropdown_without_input(add_param.add_role, option_text="Рейс")
     add_param.dropdown_without_input(add_param.add_type, option_text="Выбор из нескольких значений")
 
@@ -136,18 +137,18 @@ def test_two_custom_settings_lkz(base_fixture, domain):
 
     # добавляем несколько значений
     edit_param.click_button(edit_param.add_val)
-    edit_param.input_in_field(edit_param.unique_number_value, value="0017", click_first=True)
-    edit_param.input_in_field(edit_param.name_value, value="Z25-0009", click_first=True, press_enter=True)
+    edit_param.input_in_field(edit_param.unique_number_value, value="0037", click_first=True)
+    edit_param.input_in_field(edit_param.name_value, value="Z25-0128", click_first=True, press_enter=True)
     edit_param.click_button(edit_param.save_unique_value)
 
     edit_param.click_button(edit_param.add_val)
-    edit_param.input_in_field(edit_param.unique_number_value, value="0018", click_first=True)
-    edit_param.input_in_field(edit_param.name_value, value="Z25-0877", click_first=True, press_enter=True)
+    edit_param.input_in_field(edit_param.unique_number_value, value="0038", click_first=True)
+    edit_param.input_in_field(edit_param.name_value, value="Z25-0421", click_first=True, press_enter=True)
     edit_param.click_button(edit_param.save_unique_value)
 
     edit_param.click_button(edit_param.add_val)
-    edit_param.input_in_field(edit_param.unique_number_value, value="0019", click_first=True)
-    edit_param.input_in_field(edit_param.name_value, value="Z25-033", click_first=True, press_enter=True)
+    edit_param.input_in_field(edit_param.unique_number_value, value="0039", click_first=True)
+    edit_param.input_in_field(edit_param.name_value, value="Z25-056", click_first=True, press_enter=True)
     edit_param.click_button(edit_param.save_unique_value)
     time.sleep(2)
 
@@ -160,7 +161,7 @@ def test_two_custom_settings_lkz(base_fixture, domain):
     # проверяем наличие кастомного поля
     add_param.reload_page()
     time.sleep(3)
-    add_param.verify_text_on_page(text='05485')
+    add_param.verify_text_on_page(text='фыва')
 
     # редактируем кастомное поле
     edit_param.click_button(edit_param.e_p)

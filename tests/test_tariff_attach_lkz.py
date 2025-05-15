@@ -1,5 +1,6 @@
 import allure
 import pytest
+import time
 from pages.agreement_page import Agreement
 from pages.contractor_page import Contractor
 from pages.extra_agreement_add_page import ExtraAgreementAdd
@@ -26,16 +27,21 @@ def test_tariff_attach_producer_lkz(base_fixture, domain):
     contractor = Contractor(base.driver)
     # Переход к договорам
     contractor.click_button(contractor.agreements_link, wait="form")
+    time.sleep(1)
+
 
     agreement = Agreement(base.driver)
     # Переход на вкладку дополнительных соглашений
     agreement.click_button(agreement.extra_agreement_tab)
+    time.sleep(1)
     # Клик по кнопке добавления дополнительного соглашения
     agreement.click_button(agreement.add_extra_agr_button)
+    time.sleep(1)
 
     add_extra = ExtraAgreementAdd(base.driver)
     # Создание базового дополнительного соглашения
     add_extra.add_base_extra_agreements()
+    time.sleep(1)
     # Выбор тарифа
     add_extra.click_button(add_extra.radio_button, wait_type="located")
     # Подтверждение выбора тарифа

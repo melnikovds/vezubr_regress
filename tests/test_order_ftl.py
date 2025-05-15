@@ -56,6 +56,10 @@ def test_ftl_request_add_lke(base_fixture, domain):
     ftl.input_in_field(ftl.address_filter, "Свердловская обл, г Березовский, ул Театральная, д 13", wait="lst")
     ftl.click_button(ftl.select_first_radio)
     ftl.click_button(ftl.confirm_address_button)
+
+    time.sleep(1)
+    ftl.click_and_select_with_arrows(ftl.custom_fields, arrow_presses=1)
+
     # Ожидание завершения расчета стоимости
     base.get_element(ftl.calculate_finish)
     # Публикация заявки с использованием тарифа
@@ -118,6 +122,10 @@ def test_ftl_request_add_lkz(base_fixture, domain):
     ftl.input_in_field(ftl.address_filter, "Свердловская обл, г Березовский, ул Театральная, д 13", wait="lst")
     ftl.click_button(ftl.select_first_radio)
     ftl.click_button(ftl.confirm_address_button)
+
+    time.sleep(1)
+    ftl.click_and_select_with_arrows(ftl.custom_fields, arrow_presses=1)
+
     # Ожидание завершения расчета стоимости
     base.get_element(ftl.calculate_finish)
     # Публикация заявки с использованием тарифа

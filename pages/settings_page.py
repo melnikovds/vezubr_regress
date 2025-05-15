@@ -71,11 +71,11 @@ class EditFieldsParam(Base):
 
     # Locators
     e_p = {
-        "xpath": "(//img[@alt='editBlack'])[2]",
+        "xpath": "(//table[@class='ant-table-fixed']/following::table)[3]/tbody[1]/tr[3]/td[1]/div[1]/div[1]/img[1]",
         "name": "e_p"
     }
     del_custom = {
-        "xpath": "(//table[@class='ant-table-fixed']/following::table)[3]/tbody[1]/tr[1]/td[1]/div[1]/div[2]/img[1]",
+        "xpath": "(//table[@class='ant-table-fixed']/following::table)[3]/tbody[1]/tr[3]/td[1]/div[1]/div[2]/img[1]",
         "name": "del_custom"
     }
     acc_del = {

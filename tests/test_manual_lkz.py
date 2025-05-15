@@ -231,14 +231,14 @@ def test_tariff_directory_lkz(base_fixture, domain):
     # проверка №1 фильтра "Статус"
     add.dropdown_without_input(add.tariff_status, option_text='Не активный')
     time.sleep(2)
-    add.verify_text_on_page(text='ПРР-20241209180612', should_exist=True)
+    add.verify_text_on_page(text='ПРР-20250427180818', should_exist=True)
     add.verify_text_on_page(text='ТТ-20240910124407', should_exist=False)
     time.sleep(2)
 
     # проверка №2 фильтра "Статус"
     add.dropdown_without_input(add.tariff_status, option_text='Активный')
-    time.sleep(10)
-    add.verify_text_on_page(text='ГГ-20250307142655', should_exist=True)
+    time.sleep(5)
+    add.verify_text_on_page(text='ГГ-20250514110632', should_exist=True)
     add.verify_text_on_page(text='ПРР-20241206111102', should_exist=False)
     time.sleep(2)
 
@@ -269,12 +269,6 @@ def test_tariff_directory_lkz(base_fixture, domain):
     add.backspace_and_input(add.tariff_name, value='')
 
     # Конец теста
-
-
-
-
-
-
 
 
 

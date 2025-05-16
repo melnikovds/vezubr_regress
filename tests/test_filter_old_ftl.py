@@ -7,7 +7,7 @@ from pages.filter_old_ftl_page import OldFTL
 @allure.story("Extended test")
 @allure.feature('Фильтры')
 @allure.description('ЛКЗ. Тест фильтров в разделе Активные old FTL-заявки ')
-@pytest.mark.usefixtures("create_entities")
+# @pytest.mark.usefixtures("create_entities")
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
 def test_filter_old_ftl_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру

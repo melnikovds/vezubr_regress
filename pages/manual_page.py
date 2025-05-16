@@ -97,6 +97,7 @@ class Manual(Base):
         "name": "cross"
     }
 
+
     tariff_name = {
         "xpath": "//label[text()='Название тарифа']/following::input",
         "name": "tariff_name"
@@ -106,105 +107,153 @@ class Manual(Base):
         "name": "tariff_status"
     }
 
+
     surname_driver = {
-        "xpath": "//input[@class='ant-input']",
-        "name": "surname_driver"
+    "xpath": "//input[@class='ant-input']",
+    "name": "surname_driver"
     }
     status_in_system = {
-        "xpath": "//div[@class='ant-select-selection__rendered']",
-        "name": "status_in_system"
+    "xpath": "//div[@class='ant-select-selection__rendered']",
+    "name": "status_in_system"
     }
     status_on_flight = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
-        "name": "status_on_flight"
+    "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
+    "name": "status_on_flight"
     }
     name_driver = {
-        "xpath": "(//input[@class='ant-input'])[3]",
-        "name": "name_driver"
+    "xpath": "(//input[@class='ant-input'])[3]",
+    "name": "name_driver"
     }
     patronymic_driver = {
-        "xpath": "//input[@placeholder='Отчество']",
-        "name": "patronymic_driver"
+    "xpath": "//input[@placeholder='Отчество']",
+    "name": "patronymic_driver"
     }
     telephone_driver = {
-        "xpath": "//label[text()='Телефон']/following::input",
-        "name": "telephone_driver"
+    "xpath": "//label[text()='Телефон']/following::input",
+    "name": "telephone_driver"
     }
 
     cross_two = {
-        "xpath": "(//span[@unselectable='on']//i)[2]",
-        "name": "cross_two"
+    "xpath": "(//span[@unselectable='on']//i)[2]",
+    "name": "cross_two"
     }
     cross_three = {
-        "xpath": "(//span[@class='ant-select-arrow']//i)[2]",
-        "name": "cross_three"
+    "xpath": "(//span[@class='ant-select-arrow']//i)[2]",
+    "name": "cross_three"
     }
 
     tractor_number = {
-        "xpath": "//input[@class='ant-input']",
-        "name": "tractor_number"
+    "xpath": "//input[@class='ant-input']",
+    "name": "tractor_number"
     }
     status_in_system_two = {
-        "xpath": "//div[@class='ant-select-selection__rendered']",
-        "name": "status_in_system_two"
+    "xpath": "//div[@class='ant-select-selection__rendered']",
+    "name": "status_in_system_two"
     }
     status_on_flight_two = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
-        "name": "status_on_flight_two"
+    "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
+    "name": "status_on_flight_two"
     }
 
+
     trailer_number = {
-        "xpath": "//input[@class='ant-input']",
-        "name": "trailer_number"
+    "xpath": "//input[@class='ant-input']",
+    "name": "trailer_number"
     }
     type_road_transport = {
-        "xpath": "//span[@class='ant-select-selection__rendered']",
-        "name": "type_road_transport"
+    "xpath": "//span[@class='ant-select-selection__rendered']",
+    "name": "type_road_transport"
     }
     status_in_system_three = {
-        "xpath": "//div[@class='ant-select-selection__rendered']",
-        "name": "status_in_system_three"
+    "xpath": "//div[@class='ant-select-selection__rendered']",
+    "name": "status_in_system_three"
     }
     status_on_flight_three = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
-        "name": "status_on_flight_three"
+    "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
+    "name": "status_on_flight_three"
     }
     cargo_transportation = {
-        "xpath": "//span[@title='Грузовая']",
-        "name": "cargo_transportation"
+    "xpath": "//span[@title='Грузовая']",
+    "name": "cargo_transportation"
     }
+    type_road_transport_two = {
+    "xpath": "//span[@class='ant-select-selection ant-select-selection--multiple']",
+    "name": "type_road_transport_two"
+    }
+    cross_six = {
+    "xpath": "/html/body/div[2]/div/div[3]/div[2]/div/form/div[2]/div[1]/div/div[2]/div/span/span/span/span[1]",
+    "name": "cross_six"
+    }
+    cargo_passenger_transportation = {
+    "xpath": "(//span[@class='ant-select-tree-checkbox-inner'])[2]",
+    "name": "cargo_passenger_transportation"
+    }
+    transport_number = {
+    "xpath": "//input[@class='ant-input']",
+    "name": "transport_number"
+    }
+    cross_seven = {
+    "xpath": "/html/body/div[2]/div/div[3]/div[2]/div/form/div[2]/div[2]/div/div[2]/div/span/span/span/span[1]/span/i[1]",
+    "name": "cross_seven"
+    }
+    cross_eight = {
+    "xpath": "/html/body/div[2]/div/div[3]/div[2]/div/form/div[2]/div[4]/div/div[2]/div/span/div/div/span",
+    "name": "cross_eight"
+    }
+    surname_driver_two = {
+    "xpath": "(//input[@class='ant-input'])[3]",
+    "name": "surname_driver_two"
+    }
+    name_driver_two = {
+    "xpath": "//label[text()='Имя водителя']/following::input",
+    "name": "name_driver_two"
+    }
+    patronymic_driver_two = {
+    "xpath": "//label[text()='Отчество водителя']/following::input",
+    "name": "patronymic_driver_two"
+    }
+
+
+
+
     special_transportation = {
-        "xpath": "//span[@class='ant-select-tree-switcher ant-select-tree-switcher_close']",
-        "name": "special_transportation"
+    "xpath": "//span[@class='ant-select-tree-switcher ant-select-tree-switcher_close']",
+    "name": "special_transportation"
     }
     cross_four = {
-        "xpath": "(//i[contains(@class,'anticon anticon-down')])[3]",
-        "name": "cross_four"
+    "xpath": "(//i[contains(@class,'anticon anticon-down')])[3]",
+    "name": "cross_four"
+    }
+    manipulator_truck = {
+    "xpath": "//span[@title='Манипулятор']",
+    "name": "manipulator_truck"
     }
     mainline_trawl = {
-        "xpath": "//span[@class='ant-select-tree-node-content-wrapper ant-select-tree-node-content-wrapper-normal']",
-        "name": "mainline_trawl"
+    "xpath": "//span[@class='ant-select-tree-node-content-wrapper ant-select-tree-node-content-wrapper-normal']",
+    "name": "mainline_trawl"
     }
     cistern_car = {
-        "xpath": "//span[@title='Цистерна']",
-        "name": "cistern_car"
+    "xpath": "//span[@title='Цистерна']",
+    "name": "cistern_car"
     }
     dump_truck = {
-        "xpath": "//span[@title='Самосвал']",
-        "name": "dump_truck"
+    "xpath": "//span[@title='Самосвал']",
+    "name": "dump_truck"
     }
     car_transporter = {
-        "css": "div#rc-tree-select-list_1>ul>li:nth-of-type(2)>ul>li:nth-of-type(4)>span:nth-of-type(2)",
-        "name": "car_transporter"
+    "css": "div#rc-tree-select-list_1>ul>li:nth-of-type(2)>ul>li:nth-of-type(4)>span:nth-of-type(2)",
+    "name": "car_transporter"
     }
     container_truck = {
-        "xpath": "//span[@title='Контейнеровоз']",
-        "name": "container_truck"
+    "xpath": "//span[@title='Контейнеровоз']",
+    "name": "container_truck"
     }
     cross_five = {
-        "xpath": "//i[contains(@class,'anticon anticon-down')]",
-        "name": "cross_five"
+    "xpath": "//i[contains(@class,'anticon anticon-down')]",
+    "name": "cross_five"
     }
+
+
 
     specialist_type = {
         "xpath": "//ul[@class='ant-select-selection__rendered']/following-sibling::span[1]",
@@ -252,27 +301,37 @@ class Manual(Base):
     }
 
     specialist_surname = {
-        "xpath": "//input[@placeholder='Фамилия']",
-        "name": "specialist_surname"
+    "xpath": "//input[@placeholder='Фамилия']",
+    "name": "specialist_surname"
     }
     specialist_name = {
-        "xpath": "//input[@placeholder='Имя']",
-        "name": "specialist_name"
+    "xpath": "//input[@placeholder='Имя']",
+    "name": "specialist_name"
     }
     specialist_patronymic = {
-        "xpath": "//input[@placeholder='Отчество']",
-        "name": "specialist_patronymic"
+    "xpath": "//input[@placeholder='Отчество']",
+    "name": "specialist_patronymic"
     }
     specialist_telephone = {
-        "xpath": "//label[text()='Телефон']/following::input",
-        "name": "specialist_telephone"
+    "xpath": "//label[text()='Телефон']/following::input",
+    "name": "specialist_telephone"
     }
 
     loader = {
-        "xpath": "//span[@class='ant-select-tree-checkbox-inner']",
-        "name": "loader"
+    "xpath": "//span[@class='ant-select-tree-checkbox-inner']",
+    "name": "loader"
     }
-    click_sort = {
-        "xpath": "//span[text()='Марка']",
-        "name": "click_sort"
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

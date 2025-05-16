@@ -40,7 +40,7 @@ def test_sorting_requests_lkp(base_fixture, domain):
     base.click_multiple_buttons(base.sorting_button, num_buttons=12, num_clicks=3, wait="lst")
 
     # Переход к списку заявок на доставку груза
-    base.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ltl_active_list_button,
+    base.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.cdr_active_list_button,
                         do_assert=True, wait="lst")
     # Клик по кнопке сброса фильтров
     base.click_button(base.reset_button, wait="lst")

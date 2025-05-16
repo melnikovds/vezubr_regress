@@ -88,11 +88,11 @@ class AddCdr(Base):
         "name": "change_closed_body_type"
     }
     first_address_select = {
-        "xpath": "//*[@id='order-address-0']",
+        "xpath": "(//a[@class='address-component-item__icon'])[2]",
         "name": "first_address_select"
     }
     second_address_select = {
-        "xpath": "//*[@id='order-address-1']",
+        "xpath": "(//a[@class='address-component-item__icon'])[4]",
         "name": "second_address_select"
     }
     address_radio_button = {
@@ -100,7 +100,7 @@ class AddCdr(Base):
         "name": "address_radio_button"
     }
     address_filter = {
-        "xpath": "//input[@placeholder='Введите Адрес']",
+        "xpath": "(//input[@class='ant-input'])[3]",
         "name": "address_filter"
     }
     confirm_address_button = {

@@ -177,13 +177,13 @@ def test_ftl_ml_tariff_copy_lkz(base_fixture, domain):
     tariff.backspace_and_input(tariff.tariff_name_input, f"ПБ-{base.get_timestamp()}")
     # Изменение параметров тарифа
     tariff.click_button(tariff.extra_mileage_input)
-    tariff.backspace_and_input(tariff.mileage_params_input, base.random_value_float_str(10, 50))
+    tariff.backspace_and_input(tariff.mileage_params_input, base.random_value_float_str(10, 50, precision=0))
     tariff.click_button(tariff.address_cost_input)
-    tariff.backspace_and_input(tariff.mileage_params_input, base.random_value_float_str(1000, 3000))
+    tariff.backspace_and_input(tariff.mileage_params_input, base.random_value_float_str(1000, 3000, precision=0))
     tariff.click_button(tariff.free_downtime_input)
-    tariff.backspace_and_input(tariff.mileage_params_input, base.random_value_float_str(10, 60))
+    tariff.backspace_and_input(tariff.mileage_params_input, base.random_value_float_str(10, 60, precision=0))
     tariff.click_button(tariff.add_min_price_button)
-    tariff.backspace_and_input(tariff.mileage_params_input, base.random_value_float_str(2500, 10000))
+    tariff.backspace_and_input(tariff.mileage_params_input, base.random_value_float_str(2500, 10000, precision=0))
     # Подтверждение изменений тарифа
     tariff.click_button(tariff.add_confirm_button)
     tariff.backspace_and_input(tariff.mileage_params_input, base.random_value_float_str(10, 30))

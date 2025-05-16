@@ -7,6 +7,8 @@ import sys
 ALLURE_RESULTS_DIR = "C:\\Users\\l2new\\PycharmProjects\\Vezubr_Autotests\\result_new"
 ALLURE_REPORT_DIR = "C:\\Users\\l2new\\PycharmProjects\\Vezubr_Autotests\\allure-report"
 
+os.chdir("C:\\Users\\l2new\\PycharmProjects\\Vezubr_Autotests")
+
 
 def signal_handler(sig, frame):
     """

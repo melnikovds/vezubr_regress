@@ -1,13 +1,15 @@
+import time
+
 import allure
 import pytest
-import time
+
 from pages.manual_page import Manual
 
 
 @allure.story("Extended test")
 @allure.feature('Фильтры')
 @allure.description("ЛКП Тест фильтра 'Тарифы' в разделе справочники")
-@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True) # Параметризация роли
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_tariff_directory_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
@@ -426,7 +428,6 @@ def test_transport_directory_lkp(base_fixture, domain):
     time.sleep(1)
 
     # Конец теста
-
 
 
 @allure.story("Extended test")
@@ -936,29 +937,3 @@ def test_specialist_directory_lkp(base_fixture, domain):
     time.sleep(2)
 
     # Конец теста
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

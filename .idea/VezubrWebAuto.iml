@@ -6,6 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/venv312/Lib" />
       <excludeFolder url="file://$MODULE_DIR$/venv312/Scripts" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/screens" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.12 (Vezubr_Autotests)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -59,7 +59,7 @@ class AddCdr(Base):
         "name": "input_start_time"
     }
     change_cdr_id = {
-        "xpath": "//span[text()='Внутренний идентификатор заявки']/following::input",
+        "xpath": "//span[text()='Внешний идентификатор заявки']/following::input",
         "name": "change_cdr_id",
         "reference": "Внутренний идентификатор заявки"
     }
@@ -88,11 +88,11 @@ class AddCdr(Base):
         "name": "change_closed_body_type"
     }
     first_address_select = {
-        "xpath": "//*[@id='order-address-0']",
+        "xpath": "(//a[@class='address-component-item__icon'])[2]",
         "name": "first_address_select"
     }
     second_address_select = {
-        "xpath": "//*[@id='order-address-1']",
+        "xpath": "(//a[@class='address-component-item__icon'])[5]",
         "name": "second_address_select"
     }
     address_radio_button = {
@@ -100,11 +100,15 @@ class AddCdr(Base):
         "name": "address_radio_button"
     }
     address_filter = {
-        "xpath": "//input[@placeholder='Введите Адрес']",
+        "xpath": "(//input[@class='ant-input'])[3]",
         "name": "address_filter"
     }
+    address_filter_ltl = {
+        "xpath": "(//input[@class='ant-input'])[2]",
+        "name": "address_filter_ltl"
+    }
     confirm_address_button = {
-        "xpath": "//button[@class='ant-btn ant-btn-primary' and span[contains(text(), 'Применить выбранный')]]",
+        "xpath": "//button[contains(@class,'ant-btn margin-left-5')]",
         "name": "confirm_address_button"
     }
     point_change_type = {
@@ -124,7 +128,7 @@ class AddCdr(Base):
         "name": "cost_cargo_place"
     }
     packaging_type = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[7]",
+        "xpath": "(//div[@class='ant-select-selection__rendered'])[8]",
         "name": "packaging_type"
     }
     packaging_type_ltl = {
@@ -152,7 +156,7 @@ class AddCdr(Base):
         "name": "price_cargo_place"
     }
     first_address_cargo_place = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[8]",
+        "xpath": "(//div[@class='ant-select-selection__rendered'])[9]",
         "name": "first_address_cargo_place"
     }
     first_address_cargo_place_ltl = {
@@ -160,7 +164,7 @@ class AddCdr(Base):
         "name": "first_address_cargo_place_ltl"
     }
     second_address_cargo_place = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[9]",
+        "xpath": "(//div[@class='ant-select-selection__rendered'])[10]",
         "name": "second_address_cargo_place"
     }
     second_address_cargo_place_ltl = {
@@ -196,12 +200,16 @@ class AddCdr(Base):
         "name": "change_publication_rate_asr"
     }
     select_contractors = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[7]",
+        "xpath": "(//div[@class='ant-select-selection__placeholder'])[5]",
         "name": "select_contractors"
     }
-    select_contractors_asr = {
-        "xpath": "(//input[@class='ant-select-search__field'])[9]",
-        "name": "select_contractors_asr"
+    select_contractors_asr_lkz_lkp = {
+        "xpath": "(//div[@class='ant-select-selection__placeholder'])[4]",
+        "name": "select_contractors_asr_lkz_lke"
+    }
+    select_contractors_asr_lkz_lke = {
+        "xpath": "(//div[@class='ant-select-selection__rendered'])[7]",
+        "name": "select_contractors_asr_lkz_lke"
     }
     select_contractors_ltl = {
         "xpath": "(//div[@class='ant-select-selection__rendered'])[4]",
@@ -284,7 +292,7 @@ class AddCdr(Base):
         "name": "additional_service_button"
     }
     additional_service_time = {
-        "xpath": "(//input[@class='ant-calendar-picker-input ant-input'])[2]",
+        "xpath": "(//input[@class='ant-calendar-picker-input ant-input'])[4]",
         "name": "additional_service_time"
     }
     change_volume_prr = {
@@ -364,6 +372,10 @@ class AddCdr(Base):
         "xpath": "(//button[@type='button'])[4]",
         "name": "start_execution"
     }
+    start_execution_ok = {
+        "xpath": "//button[@class='ant-btn ant-btn-primary']",
+        "name": "start_execution"
+    }
     time_address_1 = {
         "xpath": "//input[@class='ant-calendar-picker-input ant-input']",
         "name": "time_address_1"
@@ -411,6 +423,10 @@ class AddCdr(Base):
     publish_button_lke = {
         "xpath": "(//button[@class='ant-btn ant-btn-primary'])[2]",
         "name": "publish_button"
+    }
+    change_body_type_close = {
+        "xpath": "//ul[@class='ant-select-selection__rendered']",
+        "name": "change_body_type_close"
     }
 
     def change_date_time(self) -> NoReturn:
@@ -564,9 +580,7 @@ class AddCdr(Base):
         self.dropdown_with_input(self.change_publication_rate_asr, str(random.randint(100000, 800000)))
         time.sleep(2)
         # Выбор подрядчиков через выпадающий список
-        self.dropdown_without_input(self.select_contractors_asr, "Auto LKP")
-        ActionChains(self.driver).send_keys(Keys.TAB).perform()
-        self.dropdown_without_input(self.select_contractors_asr, "Auto LKE")
+        self.dropdown_without_input(self.select_contractors_asr_lkz_lkp, "Auto LKP")
         ActionChains(self.driver).send_keys(Keys.TAB).perform()
         # Подтверждение публикации заказа
         self.click_button(self.publish_button)
@@ -586,9 +600,7 @@ class AddCdr(Base):
         self.dropdown_with_input(self.change_publication_rate_asr, str(random.randint(100000, 800000)))
         time.sleep(2)
         # Выбор подрядчиков через выпадающий список
-        self.dropdown_without_input(self.select_contractors_asr, "Auto LKP")
-        ActionChains(self.driver).send_keys(Keys.TAB).perform()
-        self.dropdown_without_input(self.select_contractors_asr, "Auto LKE")
+        self.dropdown_without_input(self.select_contractors_asr_lkz_lkp, "Auto LKP")
         ActionChains(self.driver).send_keys(Keys.TAB).perform()
         # Подтверждение публикации заказа
         self.click_button(self.publish_button)
@@ -727,8 +739,10 @@ class AddCdr(Base):
     def change_ts_and_driver(self) -> NoReturn:
         # Нажимаем на кнопку "Опции"
         self.click_button(self.click_options)
+        time.sleep(2)
         # Нажимаем на кнопку "Изменить транспортное средство"
         self.click_button(self.click_change_transport)
+        time.sleep(2)
         # Вводим название ТС и водителя ("Робаут") в поле
         self.input_in_field(self.input_ts_and_driver, "Робаут")
         time.sleep(2)
@@ -744,15 +758,14 @@ class AddCdr(Base):
         time.sleep(2)
         # Нажимаем на первый элемент в списке (или на элемент с уникальным ID)
         self.click_button(self.click_first_element)
-        time.sleep(2)
-        # Удаляем конкретный ключ из кэша
-        # request.config.cache.set("unique_id", None)
 
     def start_cdr(self) -> NoReturn:
         # Нажимаем на меню "Исполнение"
         self.click_button(self.click_execution_menu)
         # Нажимаем на кнопку "Начать исполнение"
         self.click_button(self.start_execution)
+        # Нажимаем "ОК" подтверждаем начало исполнения
+        self.click_button(self.start_execution_ok)
 
     def change_time_to_address(self) -> NoReturn:
         self.click_button(self.time_address_1)
@@ -799,3 +812,35 @@ class AddCdr(Base):
         self.click_button(self.publish_button_lke)
         time.sleep(1)
         self.click_button(self.publish_ok_button)
+
+    # def clear_cache(self, request) -> NoReturn:
+    #    """
+    #    Очищает все данные из кэша.
+    #    """
+    #    # Удаляем все ключи из кэша
+    #    request.config.cache.clear()
+    #    print("Кэш успешно очищен.")
+
+    def change_address_ltl(self) -> NoReturn:
+        """
+        Изменение адресов отправления и назначения.
+        """
+        # Выбор первого адреса из списка доступных адресов
+        self.click_button(self.first_address_select)
+        time.sleep(2)
+        # Фильтрация адресов по заданному значению и выбор первого подходящего адреса
+        self.input_in_field(self.address_filter_ltl, "Свердловская обл, г Верхняя Пышма, Успенский пр-кт, д 103а")
+        time.sleep(3)  # Ожидание завершения фильтрации
+        self.click_button(self.address_radio_button)
+        time.sleep(2)
+        # Подтверждение выбора первого адреса
+        self.click_button(self.confirm_address_button)
+        time.sleep(3)  # Ожидание перед продолжением выполнения
+        # Выбор второго адреса из списка доступных адресов
+        self.click_button(self.second_address_select)
+        # Фильтрация адресов по заданному значению и выбор второго подходящего адреса
+        self.input_in_field(self.address_filter_ltl, "Свердловская обл, г Березовский, ул Театральная, д 13")
+        time.sleep(3)  # Ожидание завершения фильтрации
+        self.click_button(self.address_radio_button)
+        # Подтверждение выбора второго адреса
+        self.click_button(self.confirm_address_button)

@@ -1,12 +1,15 @@
+import time
+
 import allure
 import pytest
-import time
+
 from pages.manual_page import Manual
+
 
 @allure.story("Extended test")
 @allure.feature('Фильтры')
 @allure.description("ЛКЗ Тест фильтра 'Адреса' в разделе справочники")
-@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True) # Параметризация роли
+@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
 def test_address_directory_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
@@ -209,7 +212,7 @@ def test_address_directory_lkz(base_fixture, domain):
 @allure.story("Extended test")
 @allure.feature('Фильтры')
 @allure.description("ЛКЗ Тест фильтра 'Тарифы' в разделе справочники")
-@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True) # Параметризация роли
+@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
 def test_tariff_directory_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
@@ -269,20 +272,3 @@ def test_tariff_directory_lkz(base_fixture, domain):
     add.backspace_and_input(add.tariff_name, value='')
 
     # Конец теста
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

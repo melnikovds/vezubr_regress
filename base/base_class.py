@@ -343,6 +343,26 @@ class Base:
         random_value = random.uniform(of, to)
         return f'{random_value:.{precision}f}'
 
+    @staticmethod
+    def random_value_int(of: int, to: int) -> int:
+        """
+        Возвращает случайное целое число в заданном диапазоне.
+
+        Parameters
+        ----------
+        of : int
+            Нижняя граница диапазона (включительно).
+        to : int
+            Верхняя граница диапазона (включительно).
+
+        Returns
+        -------
+        int
+            Случайное целое число в диапазоне [of, to].
+        """
+        # Генерируем случайное целое число в указанном диапазоне
+        return random.randint(of, to)
+
     """ Get screenshot """
 
     def get_screenshot(self, test_name: str = None) -> NoReturn:
@@ -982,6 +1002,71 @@ class Base:
 
             # Вводим новое значение
             field_dict['element'].send_keys(value)
+
+            # Если указано, выполняем нажатие Enter
+            if press_enter:
+                field_dict['element'].send_keys(Keys.ENTER)
+
+            # Вывод сообщения в консоль
+            print(message)
+
+    def backspace_and_input_int(self, element_dict: Dict[str, str], value: int, click_first: bool = False,
+                                press_enter: bool = False, wait_type: str = 'clickable',
+                                num: Optional[int] = None) -> None:
+        """
+        Выполняет нажатие клавиши Backspace для удаления символов и вводит целое число.
+        Если передается num, то удаляет указанное количество символов.
+        Если num не передан, удаляет все символы в поле.
+
+        Parameters
+        ----------
+        element_dict : dict
+            Словарь с информацией о поле ввода.
+        value : int
+            Целочисленное значение для ввода.
+        click_first : bool, optional
+            Если True, сначала кликает по полю перед вводом текста.
+        press_enter : bool, optional
+            Если True, нажимает Enter после ввода значения.
+        wait_type : str, optional
+            Тип ожидания элемента. По умолчанию 'clickable'.
+            Доступные варианты: 'clickable', 'visible', 'located', 'find', 'invisibility'.
+        num : int, optional
+            Количество раз для нажатия клавиши Backspace. Если None, удаляет все символы в поле. По умолчанию None.
+
+        Raises
+        ------
+        ValueError
+            Если value не является целым числом.
+        """
+        # Проверяем, что value является целым числом
+        if not isinstance(value, int):
+            raise ValueError(f"Expected 'value' to be an integer, got {type(value).__name__} instead.")
+
+        element_name = element_dict['name']
+
+        # Формируем сообщение для шага Allure и консоли
+        message = (f"{'Click and ' if click_first else ''}"
+                   f"Backspace {'all' if num is None else num} times and input in {element_name}: {value}")
+
+        with allure.step(title=message):
+            field_dict = self.get_element(element_dict, wait_type=wait_type)
+
+            if click_first:
+                field_dict['element'].click()
+
+            # Если num не указан, удаляем все символы, иначе удаляем num символов
+            if num is None:
+                current_value = field_dict['element'].get_attribute('value')
+                num_backspaces = len(current_value)
+            else:
+                num_backspaces = num
+
+            # Выполняем нажатие Backspace
+            field_dict['element'].send_keys(Keys.BACKSPACE * num_backspaces)
+
+            # Вводим новое значение
+            field_dict['element'].send_keys(str(value))
 
             # Если указано, выполняем нажатие Enter
             if press_enter:

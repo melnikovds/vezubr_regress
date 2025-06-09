@@ -2,7 +2,8 @@ pages/login.py
 results/
 /screens/
 /allure-report/
-
+/result_new/
+result_new
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

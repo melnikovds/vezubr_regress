@@ -272,16 +272,55 @@ def test_ftl_order_lkz(base_fixture, domain):
     ftl.click_button(ftl.order_accepted)
     time.sleep(5)
 
+    ftl.reload_page()
+
     # Начало исполнения рейса
     ftl.click_button(ftl.burger_menu)
     ftl.click_button(ftl.start_execution)
-    time.sleep(1)
-    ftl.click_button(ftl.tab_execution)
+    time.sleep(3)
+    # ftl.click_button(ftl.tab_execution)
 
     time_one, time_two, time_three, time_four = FTLAdd.get_time_intervals()
 
-    # Простановка времени работы на точках
+    # Простановка времени работы на 1 точке
     ftl.input_in_field(ftl.point_loading_start, value=time_one)
+    time.sleep(1)
+    ftl.input_in_field(ftl.point_loading_finish, value=time_two)
+    time.sleep(1)
+
+    ftl.click_button(ftl.save_changes)
+    time.sleep(1)
+    ftl.click_button(ftl.approve_changes, wait='form')
+    time.sleep(1)
+    ftl.click_button(ftl.ok_time)
+    time.sleep(3)
+
+    # Простановка времени работы на 2 точке
+    ftl.input_in_field(ftl.point_unloading_start, value=time_three)
+    time.sleep(1)
+    ftl.input_in_field(ftl.point_unloading_finish, value=time_four)
+    time.sleep(1)
+
+    ftl.click_button(ftl.complete_order, wait='list')
+    time.sleep(1)
+    ftl.click_button(ftl.approve_and_complete_order, wait='form')
+    time.sleep(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

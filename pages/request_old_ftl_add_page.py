@@ -304,9 +304,14 @@ class FTLAdd(Base):
         "xpath": "//img[@alt='playOrange']",
         "name": "start_execution"
     }
+    # tab_execution = {
+    #     "xpath": "//a[contains(@class,'vz-tabs-modern__item active')]/following-sibling::a[1]",
+    #     "name": "tab_execution"
+    # }
     tab_execution = {
-        "xpath": "//a[contains(@class,'vz-tabs-modern__item active')]/following-sibling::a[1]",
-        "name": "tab_execution"
+        "xpath": "order-calculation",
+        "name": "tab_execution",
+        "reference": "Расчет заказчика"
     }
     point_loading_start = {
         "xpath": "//input[@class='ant-calendar-picker-input ant-input']",
@@ -317,15 +322,15 @@ class FTLAdd(Base):
     #     "name": "point_loading_start"
     # }
     point_loading_finish = {
-        "xpath": "",
+        "xpath": "(//input[@class='ant-calendar-picker-input ant-input'])[2]",
         "name": "point_loading_finish"
     }
     point_unloading_start = {
-        "xpath": "",
+        "xpath": "//span[@class='  ant-calendar-picker']//input",
         "name": "point_unloading_start"
     }
     point_unloading_finish = {
-        "xpath": "",
+        "xpath": "//span[@id='order-worktime-last']//input[1]",
         "name": "point_unloading_finish"
     }
     save_changes = {
@@ -339,6 +344,14 @@ class FTLAdd(Base):
     ok_time = {
         "xpath": "//div[@class='ant-modal-confirm-btns']//button[1]",
         "name": "ok_time"
+    }
+    complete_order = {
+        "xpath": "//button[@ant-click-animating-without-extra-node='false']",
+        "name": "complete_order"
+    }
+    approve_and_complete_order = {
+        "xpath": "//button[@class='ant-btn']/following-sibling::button[1]",
+        "name": "approve_and_complete_order"
     }
 
 

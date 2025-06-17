@@ -1,12 +1,12 @@
 import allure
 import pytest
-
+import time
 from pages.custom_field_param_page import CustomFieldParam
 from pages.setting_page import Settings
 
 
 @allure.story("Extended path test")
-@allure.feature('Пользовательские поля')
+@allure.feature('Кастомные поля')
 @allure.description('ЛКЭ. Создание полей')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_create_custom_field_lke(base_fixture, domain):
@@ -23,7 +23,9 @@ def test_create_custom_field_lke(base_fixture, domain):
     add_param.dropdown_without_input(add_param.add_role, "Договор")
     add_param.dropdown_without_input(add_param.add_type, "Числовое значение")
     add_param.click_button(add_param.click_save)
+    time.sleep(3)
     add_param.click_button(add_param.click_ok)
+    time.sleep(5)
 
 
 @allure.story("Extended path test")

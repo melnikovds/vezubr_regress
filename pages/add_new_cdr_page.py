@@ -2,9 +2,7 @@ import random
 import time
 from datetime import datetime
 from typing import NoReturn
-
 from selenium.webdriver import ActionChains, Keys
-
 from base.base_class import Base
 from pages.generator.flight_generator import fake
 

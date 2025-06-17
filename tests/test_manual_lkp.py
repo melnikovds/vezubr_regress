@@ -1,8 +1,6 @@
 import time
-
 import allure
 import pytest
-
 from pages.manual_page import Manual
 
 

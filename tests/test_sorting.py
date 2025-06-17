@@ -1,6 +1,5 @@
 import allure
 import pytest
-
 from pages.insurer_page import Insurer
 from pages.insurers_list_page import InsurersList
 from pages.profile_page import Profile

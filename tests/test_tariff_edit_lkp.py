@@ -1,5 +1,4 @@
 import time
-
 import allure
 import pytest
 from pages.tariff_ftl_add_page import FTLTariffAdd

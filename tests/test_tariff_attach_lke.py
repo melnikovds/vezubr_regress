@@ -1,5 +1,4 @@
 import time
-
 import allure
 import pytest
 from pages.agreement_page import Agreement

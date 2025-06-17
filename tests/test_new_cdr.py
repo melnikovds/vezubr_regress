@@ -1,9 +1,7 @@
 import os
 import time
-
 import allure
 import pytest
-
 from pages.add_new_cdr_page import AddCdr
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Игнорировать INFO и WARNING сообщения

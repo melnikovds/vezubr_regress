@@ -75,63 +75,6 @@ def test_filter_old_ftl_lkz(base_fixture, domain):
     add.backspace_and_input(add.order_number, value='')
 
 
-@allure.story("Extended test")
-@allure.feature('Фильтры')
-@allure.description('ЛКП. Тест фильтров в разделе Активные old FTL-заявки ')
-@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
-def test_filter_old_ftl_lkp(base_fixture, domain):
-    # Инициализация базовых объектов через фикстуру
-    base, sidebar = base_fixture
-
-    # Переход в раздел Активные FTL-заявки
-    base.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ftl_active_list_button,
-                        do_assert=True, wait='lst')
-
-    add = OldFTL(base.driver)
-    # сброс фильтров
-    add.click_button(element_dict=add.reset_filters)
-
-    # проверка фильтра "номер заявки"
-    add.input_in_field(add.request_number, value='25-23-2449', click_first=True)
-    time.sleep(3)
-    add.find_text_on_page(text='25-23-2449', occurrences=3)
-    add.verify_text_on_page(text='25-24-2449', should_exist=False)
-    time.sleep(1)
-    add.backspace_and_input(add.request_number, value='')
-
-    # проверка фильтра "статус заявки"
-    add.dropdown_without_input(add.request_status, option_text='Заявка опубликована')
-    time.sleep(3)
-    add.verify_text_on_page(text='25-35-2449', should_exist=True)
-    add.verify_text_on_page(text='25-24-2449', should_exist=False)
-    time.sleep(1)
-    add.dropdown_without_input(add.request_status, option_text='Заявка принята')
-    time.sleep(3)
-    add.verify_text_on_page(text='25-33-2449', should_exist=False)
-    add.verify_text_on_page(text='25-24-2449', should_exist=True)
-    time.sleep(1)
-
-    add.click_button(element_dict=add.reset_filters)
-
-    # проверка фильтра "Идентификатор заявки"
-    add.input_in_field(add.request_identifier, value='78', click_first=True)
-    time.sleep(2)
-    add.verify_text_on_page(text='rog-17-78', should_exist=True)
-    add.verify_text_on_page(text='rog-17-77', should_exist=False)
-    time.sleep(1)
-    add.backspace_and_input(add.request_identifier, value='')
-
-
-    add.click_button(element_dict=add.reset_filters)
-
-    # проверка фильтра "номер рейса"
-    add.input_in_field(add.order_number, value='13-2449', click_first=True)
-    time.sleep(3)
-    add.verify_text_on_page(text='R-25-13-2449-1', should_exist=True)
-    add.verify_text_on_page(text='R-25-16-2449-1', should_exist=False)
-    time.sleep(1)
-    add.backspace_and_input(add.order_number, value='')
-
 
 @allure.story("Extended test")
 @allure.feature('Фильтры')
@@ -189,6 +132,63 @@ def test_filter_old_ftl_lke(base_fixture, domain):
     time.sleep(1)
     add.backspace_and_input(add.order_number, value='')
 
+
+@allure.story("Extended test")
+@allure.feature('Фильтры')
+@allure.description('ЛКП. Тест фильтров в разделе Активные old FTL-заявки ')
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
+def test_filter_old_ftl_lkp(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # Переход в раздел Активные FTL-заявки
+    base.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ftl_active_list_button,
+                        do_assert=True, wait='lst')
+
+    add = OldFTL(base.driver)
+    # сброс фильтров
+    add.click_button(element_dict=add.reset_filters)
+
+    # проверка фильтра "номер заявки"
+    add.input_in_field(add.request_number, value='25-23-2449', click_first=True)
+    time.sleep(3)
+    add.find_text_on_page(text='25-23-2449', occurrences=3)
+    add.verify_text_on_page(text='25-24-2449', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.request_number, value='')
+
+    # проверка фильтра "статус заявки"
+    add.dropdown_without_input(add.request_status, option_text='Заявка опубликована')
+    time.sleep(3)
+    add.verify_text_on_page(text='25-35-2449', should_exist=True)
+    add.verify_text_on_page(text='25-24-2449', should_exist=False)
+    time.sleep(1)
+    add.dropdown_without_input(add.request_status, option_text='Заявка принята')
+    time.sleep(3)
+    add.verify_text_on_page(text='25-33-2449', should_exist=False)
+    add.verify_text_on_page(text='25-24-2449', should_exist=True)
+    time.sleep(1)
+
+    add.click_button(element_dict=add.reset_filters)
+
+    # проверка фильтра "Идентификатор заявки"
+    add.input_in_field(add.request_identifier, value='78', click_first=True)
+    time.sleep(2)
+    add.verify_text_on_page(text='rog-17-78', should_exist=True)
+    add.verify_text_on_page(text='rog-17-77', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.request_identifier, value='')
+
+
+    add.click_button(element_dict=add.reset_filters)
+
+    # проверка фильтра "номер рейса"
+    add.input_in_field(add.order_number, value='13-2449', click_first=True)
+    time.sleep(3)
+    add.verify_text_on_page(text='R-25-13-2449-1', should_exist=True)
+    add.verify_text_on_page(text='R-25-16-2449-1', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.order_number, value='')
 
 
 @allure.story("Extended test")

@@ -68,7 +68,7 @@ def test_own_driver_add_lke(base_fixture, domain):
 
 @allure.story("Smoke test")
 @allure.feature('Создание и операции с водителями')
-@allure.description('ЛКЭ. Тест создания водителя внутр КА: ка - Первыйй в списке, ФИО - ВФИО-timestamp, '
+@allure.description('ЛКЭ. Тест создания водителя внутр КА: ка - Первый в списке, ФИО - ВФИО-timestamp, '
                     'паспорт/права - РФ, № паспорт/код/права/тлф. - Рандом, добавить/убрать - 2 и 1 ТС, '
                     'работа - останавливаем/востанавливаем/увольняем')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли

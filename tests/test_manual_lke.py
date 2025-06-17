@@ -1,10 +1,7 @@
 import time
-
 import allure
 import pytest
-
-from pages.manual_page import Manual
-from pages.reference_page import Filter
+from pages.manual_page import Manual, Filter
 
 
 @allure.story("Extended test")

@@ -68,7 +68,7 @@ def test_group_client_add_lke(base_fixture, domain):
 
 @allure.story("Extended test")
 @allure.feature('Создание групп')
-@allure.description('ЛКЭ. Тест удалания группы: группа - Шестая в списке')
+@allure.description('ЛКЭ. Тест удаления группы: группа - Шестая в списке')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_group_delete_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру

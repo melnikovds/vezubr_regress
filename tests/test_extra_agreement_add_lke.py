@@ -1,8 +1,6 @@
 import time
-
 import allure
 import pytest
-
 from pages.agreement_page import Agreement
 from pages.clients_list_page import ClientsList
 from pages.contractor_page import Contractor

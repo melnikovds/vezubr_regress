@@ -1,16 +1,14 @@
 import time
-
 import allure
 import pytest
-
 from pages.settings_company_page import Company
 from pages.setting_page import Settings
 
 
 @allure.story("Extended path test")
 @allure.feature('Тестирование подразделений')
-@allure.description('ЛКЗ, Создание подразделения')
-@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
+@allure.description('ЛКП, Создание подразделения')
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_create_subdivision_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
@@ -24,6 +22,7 @@ def test_create_subdivision_lkz(base_fixture, domain):
     add.move_to_element(add.muve)
     time.sleep(2)
     add.click_button(add.subdivision)
+    time.sleep(2)
     add.click_button(add.add_subdivision)
     add.input_in_field(add.name_subdivision, "подразделение ОРКИ")
     add.input_in_field(add.id_subdivision, "007")
@@ -34,15 +33,15 @@ def test_create_subdivision_lkz(base_fixture, domain):
 
 @allure.story("Extended path test")
 @allure.feature('Тестирование подразделений')
-@allure.description('ЛКЗ, Назначение пользователя в подразделение')
-@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
+@allure.description('ЛКП, Назначение пользователя в подразделение')
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_accept_user_to_division_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
     # Открываем настройки профиля
     sidebar.click_button(sidebar.profile_button, do_assert=True)
     time.sleep(2)
-    # Добавляем пользователя
+    # добавляем пользователя
     add = Company(base.driver)
     add.click_button(add.click_users_lkz_lkp)
     add.click_button(add.edit_user, wait="form")
@@ -54,8 +53,8 @@ def test_accept_user_to_division_lkz(base_fixture, domain):
 
 @allure.story("Extended path test")
 @allure.feature('Тестирование подразделений')
-@allure.description('ЛКЗ, Редактирование и удаление подразделения')
-@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
+@allure.description('ЛКП, Редактирование и удаление подразделения')
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_edit_subdivision_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
@@ -63,7 +62,7 @@ def test_edit_subdivision_lkz(base_fixture, domain):
     # Переход к настройкам
     settings = Settings(base.driver)
     settings.click_button(settings.settings_subdivision)
-
+    # Изменение и удаление подразделения
     add = Company(base.driver)
     add.move_to_element(add.muve)
     add.click_button(add.subdivision)

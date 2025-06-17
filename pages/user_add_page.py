@@ -19,11 +19,13 @@ class User(Base):
         "xpath": "//input[@id='patronymic']",
         "name": "patronymic_input"
     }
+
     """User type drop-down list"""
     user_type_select = {
         "xpath": "//span[text()='Тип пользователя']",
         "name": "user_type_select"
     }
+
     """User role drop-down list"""
     user_role_select = {
         "xpath": "//span[text()='Роль пользователя']",
@@ -41,16 +43,19 @@ class User(Base):
         "xpath": "//input[@id='email']",
         "name": "email_input"
     }
+
     """User timezone drop-down list"""
     user_timezone_select = {
         "xpath": "//span[text()='Часовой пояс']",
         "name": "user_timezone_select"
     }
+
     """User subdivision drop-down list"""
     user_subdivision_select = {
         "xpath": "//span[text()='Подразделение']",
         "name": "user_subdivision_select"
     }
+
     """User subdivision drop-down list"""
     user_group_select = {
         "xpath": "//span[text()='Группы']",
@@ -79,6 +84,14 @@ class User(Base):
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
         "name": "confirm_button"
     }
+
+
+    cross = {
+        "xpath": "(//span[@class='ant-select-selection__choice__remove'])[2]",
+        "name": "cross"
+    }
+
+
     add_responsible_button = {
         "xpath": "//button[@class='filter-button rounded box-shadow primary default']",
         "name": "add_responsible_button"
@@ -87,6 +100,8 @@ class User(Base):
         "xpath": "//a[contains(text(),'Подрядчики')]",
         "name": "producer_tab"
     }
+
+
     """Assign responsibility list"""
     all_client_on_checkbox = {
         "xpath": "(//span[@class='ant-checkbox'])[4]",
@@ -100,6 +115,12 @@ class User(Base):
         "xpath": "//span[@class='ant-checkbox']",
         "name": "all_contractor_off_checkbox"
     }
+    first_producer_on_checkbox = {
+        "xpath": "(//table[@class='ant-table-fixed']/following::table)[5]",
+        "name": "first_producer_on_checkbox"
+    }
+
+
     """Contractor role drop-down list"""
     contractor_role_select = {
         "xpath": "(//div[@class='ant-select-selection__rendered'])[6]",

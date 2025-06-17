@@ -40,7 +40,7 @@ def test_delegation_client_lke(base_fixture, domain):
 
 @allure.story("Smoke test")
 @allure.feature('Делегирование прав управления ЛК')
-@allure.description('ЛКЭ. Тест делегирования пользователю права управления ЛК ГВ: '
+@allure.description('ЛКЭ. Тест делегирования пользователю права управления ЛК ПВ: '
                     'делегируем - Второму, отменяем - Третьему')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_delegation_producer_lke(base_fixture, domain):
@@ -71,7 +71,7 @@ def test_delegation_producer_lke(base_fixture, domain):
 
 @allure.story("Smoke test")
 @allure.feature('Делегирование прав управления ЛК')
-@allure.description('ЛКЭ. Тест делегирования пользователю права управления ЛК ГВ: '
+@allure.description('ЛКЭ. Тест делегирования пользователю права управления ЛК внутр. ПВ: '
                     'делегируем - Второму, отменяем - Третьему')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_delegation_inner_producer_lke(base_fixture, domain):

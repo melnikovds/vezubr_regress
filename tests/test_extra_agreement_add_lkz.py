@@ -48,7 +48,7 @@ def test_extra_agreements_producer_add_lkz(base_fixture, domain):
     agreement.click_button(agreement.delete_extra_agr_button)
     # Клик по кнопке подтверждения удаления ДУ
     agreement.click_button(agreement.yes_button, wait="form")
-    time.sleep(1.5)
+    time.sleep(2)
     # Проверка отсутствия удаленного ДУ
     agreement.verify_text_on_page(extra_agr_number, should_exist=False)
     # Конец теста

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/VezubrWebAuto.iml" filepath="$PROJECT_DIR$/.idea/VezubrWebAuto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/vezubr_regress.iml" filepath="$PROJECT_DIR$/.idea/vezubr_regress.iml" />
     </modules>
   </component>
 </project>

@@ -116,8 +116,12 @@ class User(Base):
         "name": "all_contractor_off_checkbox"
     }
     first_producer_on_checkbox = {
-        "xpath": "(//table[@class='ant-table-fixed']/following::table)[5]",
+        "xpath": "(//table[@class='ant-table-fixed']/following::table)[5]/tbody[1]/tr[1]/td[1]/span[1]/label[1]/span[1]/input[1]",
         "name": "first_producer_on_checkbox"
+    }
+    filter_company = {
+        "xpath": "(//input[@class='ant-input'])[3]",
+        "name": "filter_company"
     }
 
 
@@ -125,6 +129,10 @@ class User(Base):
     contractor_role_select = {
         "xpath": "(//div[@class='ant-select-selection__rendered'])[6]",
         "name": "contractor_role_select"
+    }
+    choice_contractor = {
+        "xpath": "(//input[@class='ant-checkbox-input'])[2]",
+        "name": "choice_contractor"
     }
     select_producer = {
         "xpath": "//li[@title='Подрядчик']",

@@ -1,8 +1,12 @@
 import time
 import allure
 import pytest
+from setuptools.command.setopt import option_base
+from pages.filter_page import Contractors
 from pages.profile_page import Profile
 from pages.user_add_page import User
+from pages.producers_list_page import ProducersList
+from pages.contractor_page import Contractor
 
 
 @allure.story("Extended test")
@@ -66,7 +70,6 @@ def test_user_group_lke(base_fixture, domain):
     # Подтверждение изменений
     user.click_button(user.confirm_add_button)
     time.sleep(1)
-
 
     # Проверка наличия изменений
     profile.input_in_field(profile.surname_filter,value='Ф-20250526230920')
@@ -171,14 +174,153 @@ def test_user_contractor_lke(base_fixture, domain):
 
     user = User(base.driver)
     # Клик по кнопке добавления ответственности
-    user.click_button(user.add_responsible_button, wait="lst")
+    user.click_button(user.add_responsible_button)
     # Переход на вкладку "Перевозчики"
     user.click_button(user.producer_tab, wait="lst")
     time.sleep(2)
+    user.input_in_field(user.filter_company, value='яндекс')
+    time.sleep(2)
     # Назначение ответственности за первого в списке перевозчика
-    user.click_button(user.first_producer_on_checkbox)
+    user.click_button(user.first_producer_on_checkbox, wait_type='located')
+    time.sleep(2)
     # Подтверждение назначения ответственности
     user.click_button(user.confirm_responsible_button, wait="lst")
+    time.sleep(2)
+
+    # Делегирование внутреннему ПВ
+    user.dropdown_without_input(user.contractor_role_select, option_text='Подрядчик')
+    user.click_button(user.choice_contractor, wait_type='located')
+    user.click_button(user.delegate_responsibility_button)
+
+    profile.input_in_field(profile.surname_filter, value='Ф-20250526230920')
+    time.sleep(2)
+    user.click_button(user.user_checkbox)
+    time.sleep(1)
+    user.click_button(user.confirm_responsible_button)
+    time.sleep(1)
+
+    # Переход к списку перевозчиков
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.producers_list_button,
+                           do_assert=True, wait="lst")
+
+    ctr = Contractors(base.driver)
+    ctr.input_in_field(ctr.contractor_name, value='яндекс')
+    time.sleep(1)
+
+    producer_list = ProducersList(base.driver)
+    # Клик по первому в списке подрядчику
+    producer_list.click_button(producer_list.first_producer, wait="lst")
+
+    contractor = Contractor(base.driver)
+    # Переход на вкладку настроек
+    contractor.click_button(contractor.settings_tab)
+    time.sleep(2)
+    # Фильтрация пользователей по фамилии
+    ctr.input_in_field(ctr.users_for_delegation, value='Ф-20250526230920')
+    time.sleep(3)
+
+    # Делегирование пользователю права управления ЛК
+    contractor.click_button(contractor.user_checkbox_empty, 2)
+    contractor.click_button(contractor.save_delegation_button, do_assert=True)
+    contractor.click_button(contractor.ok_button)
+
+    ctr.reload_page()
+    time.sleep(3)
+    ctr.move_to_element(ctr.users_for_delegation)
+    time.sleep(1)
+    ctr.click_button(ctr.cross_users_for_delegation)
+    time.sleep(1)
+
+    # Фильтрация пользователей по фамилии
+    ctr.input_in_field(ctr.users_for_delegation, value='Ф-20250526230920')
+    time.sleep(3)
+
+    # Отмена делегирования пользователю
+    contractor.click_button(contractor.user_checkbox_filled, 2)
+    contractor.click_button(contractor.save_delegation_button, do_assert=True)
+    contractor.click_button(contractor.ok_button)
+
+    ctr.reload_page()
+    time.sleep(3)
+
+    # Переход к профилю
+    sidebar.click_button(sidebar.profile_button, do_assert=True)
+
+    profile = Profile(base.driver)
+    # Переход на вкладку пользователей
+    profile.click_button(profile.users_tab, do_assert=True)
+
+    # Фильтрация пользователей по фамилии
+    profile.input_in_field(profile.surname_filter,value='Ф-20250526230920')
+    time.sleep(1)
+
+    # Переход к профилю первого пользователя в списке
+    profile.click_button(profile.user_link, wait="form")
+    time.sleep(1)
+
+    # отвязываем пользователя от ПВ
+    user.dropdown_without_input(user.contractor_role_select, option_text='Подрядчик')
+    time.sleep(1)
+    user.click_button(user.choice_contractor, wait_type='located')
+    user.click_button(user.off_responsibility_button)
+    user.click_button(user.confirm_off_responsible_button)
+
+    user.reload_page()
+    time.sleep(3)
+
+    user.verify_text_on_page(text='Яндекс', should_exist=False)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

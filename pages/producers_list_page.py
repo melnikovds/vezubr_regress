@@ -7,6 +7,10 @@ class ProducersList(Base):
         self.driver = driver
 
     # Locators
+    first_producer = {
+        "xpath": "(//a[@class='link-back'])[3]",
+        "name": "first_producer"
+    }
     producer_lkp_inn = {
         "xpath": "//a[@class='link-back' and contains(text(), '6883106209')]",
         "name": "producer_lkp_inn"

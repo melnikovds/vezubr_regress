@@ -96,10 +96,10 @@ def test_registration_new_lkz(base_fixture, domain):
     sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.clients_list_button,
                            do_assert=True, wait="lst")
     client_list = ClientsList(base.driver)
-    client_list.click_button(client_list.accept_button, wait="lst")
+    client_list.click_on_the_cross(client_list.accept_button)
 
     # Проверка принятия пользователя по ИНН
-    reg.verify_text_by_inn(inn_value=inn, reference_value="Нет договора")
+    reg.verify_text_by_inn(inn_value=inn, reference_value="Зарегистрирован")
     # Конец теста
 
 
@@ -263,9 +263,9 @@ def test_registration_new_lkp(base_fixture, domain):
     sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.producers_list_button,
                            do_assert=True, wait="lst")
     producer_list = ProducersList(base.driver)
-    producer_list.click_button(producer_list.accept_button, wait="lst")
+    producer_list.click_on_the_cross(producer_list.accept_button)
     
     # Проверка принятия пользователя по ИНН
-    reg.verify_text_by_inn(inn_value=inn, reference_value="Нет договора")
+    reg.verify_text_by_inn(inn_value=inn, reference_value="Зарегистрирован")
     # Конец теста
   

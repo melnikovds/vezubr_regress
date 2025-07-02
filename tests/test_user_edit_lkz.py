@@ -68,16 +68,23 @@ def test_user_edit_lkz(base_fixture, domain):
     # Изменение фамилии пользователя
     user.backspace_and_input(user.surname_input, f"Ф-{base.get_timestamp()}")
     # Изменение имени пользователя
-    user.backspace_and_input(user.name_input, f"И-{base.get_timestamp()}")
+    # === Здесь генерируем и запоминаем новое имя ===
+    new_name = f"И-{base.get_timestamp()}"
+    user.backspace_and_input(user.name_input, new_name)  # Вводим запомненное имя
     # Изменение отчества пользователя
     user.backspace_and_input(user.patronymic_input, f"О-{base.get_timestamp()}")
     # Изменение номера телефона пользователя
     user.click_button(user.phone_input)
     user.backspace_and_input(user.phone_input, base.random_value_float_str(1000000000, 9999999999))
-    # Изменение email пользователя
-    user.backspace_and_input(user.email_input, f"E{base.get_timestamp()}@mail.ru")
+    # === Здесь генерируем и запоминаем новый email ===
+    new_email = f"E{base.get_timestamp()}@mail.ru"
+    user.backspace_and_input(user.email_input, new_email)  # Вводим запомненную почту
     # Сохранение изменений
     user.click_button(user.save_edit_user_button, do_assert=True)
     # Подтверждение изменений
     user.click_button(user.confirm_add_button)
+    time.sleep(3)
+    # === Проверяем, что изменённое имя отображается на странице ===
+    user.verify_text_on_page(text=new_name)
+    time.sleep(1)
     # Конец теста

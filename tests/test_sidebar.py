@@ -36,6 +36,8 @@ def test_sidebar_lkz(base_fixture, domain):
                            do_assert=True, wait="lst")
     sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button,
                            do_assert=True, wait="lst")
+    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.assignments_list_button,
+                           do_assert=True, wait="lst")
     sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.dispatch_list_button,
                            do_assert=True, wait="lst")
     sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.producers_list_button,

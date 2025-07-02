@@ -67,8 +67,9 @@ def test_user_edit_lkp(base_fixture, domain):
     user.dropdown_without_input(user.user_timezone_select, "Africa/Abidjan")
     # Изменение фамилии пользователя
     user.backspace_and_input(user.surname_input, f"Ф-{base.get_timestamp()}")
-    # Изменение имени пользователя
-    user.backspace_and_input(user.name_input, f"И-{base.get_timestamp()}")
+    # === Здесь генерируем и запоминаем новое имя ===
+    new_name = f"И-{base.get_timestamp()}"
+    user.backspace_and_input(user.name_input, new_name)  # Вводим запомненное имя
     # Изменение отчества пользователя
     user.backspace_and_input(user.patronymic_input, f"О-{base.get_timestamp()}")
     # Изменение номера телефона пользователя
@@ -80,4 +81,8 @@ def test_user_edit_lkp(base_fixture, domain):
     user.click_button(user.save_edit_user_button, do_assert=True)
     # Подтверждение изменений
     user.click_button(user.confirm_add_button)
+    time.sleep(3)
+    # === Проверяем, что отредактированный пользователь отображается на странице ===
+    user.verify_text_on_page(text=new_name)
+    time.sleep(1)
     # Конец теста

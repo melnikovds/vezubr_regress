@@ -465,6 +465,90 @@ class Base:
             if do_assert:
                 self.assert_element_text(element_dict)
 
+    def click_button_option(self, element_dict: Dict[str, str], index: int = 1, do_assert: bool = False,
+                            wait: Optional[str] = None, wait_type: str = 'clickable',
+                            skip_if_not_clickable: bool = False) -> None:
+        """
+        Кликает по кнопке с заданным типом ожидания и опционально по индексу элемента.
+        Опционально проверяет текст элемента после клика и ожидает исчезновения спиннеров.
+
+        Parameters
+        ----------
+        element_dict : dict
+            Словарь с информацией о кнопке для клика.
+        index : int, optional
+            Индекс элемента в списке однотипных элементов. По умолчанию 1 (первый элемент).
+        do_assert : bool, optional
+            Если True, выполнит проверку текста элемента после клика.
+        wait : str, optional
+            Тип спиннера ('lst' или 'form'), который нужно ожидать после клика.
+        wait_type : str, optional
+            Тип ожидания перед кликом ('clickable', 'visible', 'located', 'find'). По умолчанию 'clickable'.
+        skip_if_not_clickable : bool, optional
+            Если True, шаг будет пропущен, если элемент не кликабельный. По умолчанию False.
+        """
+
+        # Формирование имени и локатора
+        element_name = f"{element_dict['name']} index {index}" if index > 1 else element_dict['name']
+
+        if 'xpath' in element_dict:
+            locator = f"({element_dict['xpath']})[{index}]" if index > 1 else element_dict['xpath']
+            locator_type = 'xpath'
+        elif 'css' in element_dict:
+            locator = f"{element_dict['css']}:nth-of-type({index})" if index > 1 else element_dict['css']
+            locator_type = 'css'
+        else:
+            raise ValueError("Не указан ни XPath, ни CSS-селектор для элемента")
+
+        updated_element_dict = {
+            "name": element_name,
+            locator_type: locator
+        }
+
+        message = f"Click on {element_name}"
+
+        with allure.step(title=message if not skip_if_not_clickable else f"{message} (если доступно)"):
+            try:
+                button_dict = self.get_element(updated_element_dict, wait_type)
+                button_dict['element'].click()
+                print(message)
+
+                # Ожидание спиннера, если задано
+                if wait:
+                    loading_spinner = self.loading_form if wait == 'form' else self.loading_list
+                    try:
+                        self.get_element(loading_spinner, wait_type="visible")
+                    except TimeoutException:
+                        with allure.step("Spinner did not appear"):
+                            print("Spinner did not appear")
+                            return
+
+                    try:
+                        self.get_element(loading_spinner, wait_type="invisibility")
+                    except TimeoutException:
+                        with allure.step("Spinner did not disappear"):
+                            print("Spinner did not disappear")
+
+                # Ассерт текста, если нужен
+                if do_assert:
+                    self.assert_element_text(element_dict)
+
+            except TimeoutException as e:
+                if skip_if_not_clickable:
+                    allure.attach(
+                        f"Элемент '{element_name}' некликабельный, шаг пропущен",
+                        name="Пропущенный шаг"
+                    )
+                    print(f"[INFO] Пропущен клик на элемент '{element_name}', так как он не кликабельный.")
+                    return
+                else:
+                    allure.attach(
+                        f"Не удалось кликнуть на элемент '{element_name}' из-за таймаута",
+                        name="Ошибка"
+                    )
+                    print(f"[ERROR] Не удалось кликнуть на элемент '{element_name}'.")
+                    raise e
+
     def click_button_recaptchav3(self, element_dict: Dict[str, str], index: int = 1, do_assert: bool = False,
                                  wait: Optional[str] = None, wait_type: str = 'clickable', safe: bool = False) -> None:
         """
@@ -1248,3 +1332,52 @@ class Base:
                         self.click_button(button_element, index=i, wait_type=wait_type)
                 except ElementClickInterceptedException:
                     print(f"ElementClickInterceptedException: unable to click button at index {i}")
+
+    def verify_visible_text_on_page(self, text: str, should_exist: bool = True) -> None:
+        """
+        Проверяет наличие или отсутствие заданного текста в ВИДИМЫХ элементах на странице.
+
+        Parameters
+        ----------
+        text : str
+            Текст для поиска в видимых элементах.
+        should_exist : bool, optional
+            Если True, проверяет, что текст присутствует в видимом контенте.
+            Если False, проверяет, что текст отсутствует в видимом контенте.
+
+        Raises
+        ------
+        AssertionError
+            Если текст не найден при should_exist=True или найден при should_exist=False.
+        """
+        message = f"Verify that visible text '{text}' is {'present' if should_exist else 'absent'} on the page"
+
+        with allure.step(message):
+            # Выполняем JS для поиска текста только в видимых элементах
+            script = """
+                   const walker = document.createTreeWalker(
+                       document.body,
+                       NodeFilter.SHOW_TEXT,
+                       null,
+                       false
+                   );
+                   const visibleTexts = [];
+                   let node;
+                   while (node = walker.nextNode()) {
+                       const parent = node.parentElement;
+                       // Проверяем, отображается ли элемент
+                       if (parent && window.getComputedStyle(parent).display !== 'none' &&
+                           parent.offsetParent !== null) {
+                           visibleTexts.push(node.textContent.trim());
+                       }
+                   }
+                   return visibleTexts.some(t => t.includes(arguments[0]));
+               """
+            text_found = self.driver.execute_script(script, text)
+
+            if should_exist:
+                assert text_found, f"Expected visible text '{text}' to be present on the page, but it was not found."
+            else:
+                assert not text_found, f"Expected visible text '{text}' to be absent on the page, but it was found."
+
+            print(message)

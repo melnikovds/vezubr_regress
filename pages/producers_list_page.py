@@ -7,10 +7,6 @@ class ProducersList(Base):
         self.driver = driver
 
     # Locators
-    first_producer = {
-        "xpath": "(//a[@class='link-back'])[3]",
-        "name": "first_producer"
-    }
     producer_lkp_inn = {
         "xpath": "//a[@class='link-back' and contains(text(), '6883106209')]",
         "name": "producer_lkp_inn"
@@ -47,12 +43,8 @@ class ProducersList(Base):
         "reference_xpath": "//h4[@class='title' and text()='НАО АВТОВАЗ']",
         "reference": "НАО АВТОВАЗ"
     }
-    # accept_button = {
-    #     "xpath": "(//button[.//span[text()='Принять']])[2]",
-    #     "name": "accept_button"
-    # }
     accept_button = {
-        "css": "div#main>div>div:nth-of-type(3)>div:nth-of-type(2)>div>div>div>div>div>div>div:nth-of-type(3)>div:nth-of-type(2)>div>table>tbody>tr>td>div>div>button",
+        "xpath": "(//button[contains(@class,'ant-btn ant-btn-primary')])",
         "name": "accept_button"
     }
     add_internal_contractor = {

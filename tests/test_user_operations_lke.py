@@ -1,12 +1,13 @@
 import time
+
 import allure
 import pytest
-from setuptools.command.setopt import option_base
+
+from pages.contractor_page import Contractor
 from pages.filter_page import Contractors
+from pages.producers_list_page import ProducersList
 from pages.profile_page import Profile
 from pages.user_add_page import User
-from pages.producers_list_page import ProducersList
-from pages.contractor_page import Contractor
 
 
 @allure.story("Extended test")
@@ -25,7 +26,7 @@ def test_user_group_lke(base_fixture, domain):
     profile.click_button(profile.users_tab, do_assert=True)
 
     # Фильтрация пользователей по фамилии
-    profile.input_in_field(profile.surname_filter,value='Ф-20250526230920')
+    profile.input_in_field(profile.surname_filter, value='Ф-20250526230920')
     time.sleep(1)
 
     # Переход к профилю первого пользователя в списке
@@ -52,7 +53,7 @@ def test_user_group_lke(base_fixture, domain):
     time.sleep(5)
 
     # Проверка наличия изменений
-    profile.input_in_field(profile.surname_filter,value='Ф-20250526230920')
+    profile.input_in_field(profile.surname_filter, value='Ф-20250526230920')
     time.sleep(1)
     profile.click_button(profile.user_link, wait="form")
     time.sleep(3)
@@ -72,11 +73,11 @@ def test_user_group_lke(base_fixture, domain):
     time.sleep(1)
 
     # Проверка наличия изменений
-    profile.input_in_field(profile.surname_filter,value='Ф-20250526230920')
+    profile.input_in_field(profile.surname_filter, value='Ф-20250526230920')
     time.sleep(1)
     profile.click_button(profile.user_link, wait="form")
     time.sleep(3)
-    profile.find_text_on_page(text="группа Икс",occurrences=0)
+    profile.find_text_on_page(text="группа Икс", occurrences=0)
     time.sleep(1)
 
 
@@ -96,7 +97,7 @@ def test_user_subdivision_lke(base_fixture, domain):
     profile.click_button(profile.users_tab, do_assert=True)
 
     # Фильтрация пользователей по фамилии
-    profile.input_in_field(profile.surname_filter,value='Ф-20250526230920')
+    profile.input_in_field(profile.surname_filter, value='Ф-20250526230920')
     time.sleep(1)
 
     # Переход к профилю первого пользователя в списке
@@ -122,7 +123,7 @@ def test_user_subdivision_lke(base_fixture, domain):
     time.sleep(5)
 
     # Проверка наличия изменений
-    profile.input_in_field(profile.surname_filter,value='Ф-20250526230920')
+    profile.input_in_field(profile.surname_filter, value='Ф-20250526230920')
     time.sleep(1)
     profile.click_button(profile.user_link, wait="form")
     time.sleep(3)
@@ -141,7 +142,7 @@ def test_user_subdivision_lke(base_fixture, domain):
     time.sleep(1)
 
     # Проверка наличия изменений
-    profile.input_in_field(profile.surname_filter,value='Ф-20250526230920')
+    profile.input_in_field(profile.surname_filter, value='Ф-20250526230920')
     time.sleep(1)
     profile.click_button(profile.user_link, wait="form")
     time.sleep(3)
@@ -165,7 +166,7 @@ def test_user_contractor_lke(base_fixture, domain):
     profile.click_button(profile.users_tab, do_assert=True)
 
     # Фильтрация пользователей по фамилии
-    profile.input_in_field(profile.surname_filter,value='Ф-20250526230920')
+    profile.input_in_field(profile.surname_filter, value='Ф-20250526230920')
     time.sleep(1)
 
     # Переход к профилю первого пользователя в списке
@@ -251,7 +252,7 @@ def test_user_contractor_lke(base_fixture, domain):
     profile.click_button(profile.users_tab, do_assert=True)
 
     # Фильтрация пользователей по фамилии
-    profile.input_in_field(profile.surname_filter,value='Ф-20250526230920')
+    profile.input_in_field(profile.surname_filter, value='Ф-20250526230920')
     time.sleep(1)
 
     # Переход к профилю первого пользователя в списке
@@ -269,92 +270,3 @@ def test_user_contractor_lke(base_fixture, domain):
     time.sleep(3)
 
     user.verify_text_on_page(text='Яндекс', should_exist=False)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

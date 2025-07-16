@@ -109,7 +109,7 @@ class Registration(Base):
             "xpath": f"//tr[.//a[contains(text(), '{inn_value}')]]//div[contains(text(), '{reference_value}')]"
         }
         element = self.get_element(element_info, wait_type=wait_type)['element']
-        time.sleep(0.1)  # Фиксированная задержка
+        time.sleep(0.5)  # Фиксированная задержка
         value_word = element.text
         with allure.step(title=f"Assert \"{value_word}\" == \"{reference_value}\""):
             assert value_word == reference_value, f"Expected '{reference_value}', but found '{value_word}'."

@@ -59,3 +59,41 @@ class ProducersList(Base):
         "xpath": "//button[@class='ant-btn margin-left-15 ant-btn-primary']",
         "name": "confirm_choice_button"
     }
+
+    """Create inner producer"""
+    button_inner_producer = {
+        "xpath": "//p[contains(.,'Добавить внутреннего Контрагента')]",
+        "name": "button_inner_producer"
+    }
+    inn_inner_producer = {
+        "xpath": "//input[contains(@id,'inn')]",
+        "name": "inn_inner_producer"
+    }
+    kpp_inner_producer = {
+        "xpath": "//input[contains(@id,'kpp')]",
+        "name": "kpp_inner_producer"
+    }
+    add_employee = {
+        "xpath": "//button[contains(.,'Добавить сотрудника')]",
+        "name": "add_employee"
+    }
+    last_name_field = {
+        "xpath": "//*[@id='main']/div/div[3]/div[2]/div/div/div[2]/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td[1]/label/div/div[1]/input",
+        "name": "last_name_field"
+    }
+    first_name_field = {
+        "xpath": "//*[@id='main']/div/div[3]/div[2]/div/div/div[2]/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td[2]/label/div/div[1]/input",
+        "name": "first_name_field"
+    }
+    middle_name_field = {
+        "xpath": "",
+        "name": "middle_name_field"
+    }
+    phone_field = {
+        "xpath": "",
+        "name": "phone_field"
+    }
+    create_producer_button = {
+        "xpath": "//button[contains(.,'Создать')]",
+        "name": "create_producer_button"
+    }

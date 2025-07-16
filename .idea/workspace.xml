@@ -5,53 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="456948c0-3270-4b5d-a3cf-cc313c21f73e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/filters_gm_lkz_lke_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_filters_gm_lkz_lke.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vezubr_regress.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vezubr_regress.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/behaviors.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/behaviors.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/categories.csv" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/categories.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/categories.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/categories.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/packages.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/packages.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/suites.csv" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/suites.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/suites.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/suites.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/timeline.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/timeline.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/export/influxDbData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/export/influxDbData.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/export/prometheusData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/export/prometheusData.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/history/categories-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/history/categories-trend.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/history/duration-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/history/duration-trend.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/history/history-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/history/history-trend.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/history/history.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/history/history.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/history/retry-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/history/retry-trend.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/behaviors.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/behaviors.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/categories-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/categories-trend.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/categories.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/categories.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/duration-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/duration-trend.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/duration.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/duration.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/history-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/history-trend.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/retry-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/retry-trend.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/severity.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/severity.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/status-chart.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/status-chart.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/suites.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/suites.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/summary.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/summary.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base/base_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/base/base_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/add_new_cdr_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/new_cdr_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/clients_list_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/clients_list_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/producers_list_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/producers_list_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/sidebar.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/sidebar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pytest.ini" beforeDir="false" afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_new_cdr.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_new_cdr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_profile_edit.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_profile_edit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_registration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_sidebar.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_sidebar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_user_edit_lke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_user_edit_lke.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_user_edit_lkp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_user_edit_lkp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_user_edit_lkz.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_user_edit_lkz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_user_operations_lke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_user_operations_lke.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cargo_place_add_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cargo_place_add_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/filter_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/filter_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_cargo_place_edit.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_cargo_place_edit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_cargo_place_operations.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_cargo_place_operations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_filter_lkz.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_filter_lkz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_filters_gm_lkz_lke.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,9 +38,12 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/melnikovds/vezubr_regress.git&quot;,
-    &quot;accountId&quot;: &quot;4ca5be42-cb2a-483d-9111-d8268e477979&quot;
+    &quot;accountId&quot;: &quot;2331e2a2-458c-428e-9872-70448798df12&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
@@ -110,8 +74,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23339.19" />
-        <option value="bundled-python-sdk-0029f7779945-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23339.19" />
+        <option value="bundled-python-sdk-337b0a7a993a-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.19416.19" />
       </set>
     </attachedChunks>
   </component>

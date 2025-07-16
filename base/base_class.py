@@ -1194,6 +1194,42 @@ class Base:
         # Кликаем по указанному элементу с дополнительными проверками
         self.click_button(click_to, index=click_index, wait_type=click_wait_type, do_assert=do_assert, wait=wait)
 
+    def click_then_click(self, first_click: dict, second_click: dict,
+                                first_index: int = 1, second_index: int = 1,
+                                first_wait_type: str = 'clickable', second_wait_type: str = 'clickable',
+                                do_assert: bool = False, wait: str = None) -> None:
+        """
+        Совершает клик по первому элементу, ждёт 1 секунду, затем кликает по второму.
+
+        Parameters
+        ----------
+        first_click : dict
+            Словарь с информацией о первом элементе для клика.
+        second_click : dict
+            Словарь с информацией о втором элементе для клика.
+        first_index : int, optional
+            Индекс первого элемента, по умолчанию 1.
+        second_index : int, optional
+            Индекс второго элемента, по умолчанию 1.
+        first_wait_type : str, optional
+            Тип ожидания первого элемента ('clickable', 'visible', 'located', 'find').
+        second_wait_type : str, optional
+            Тип ожидания второго элемента.
+        do_assert : bool, optional
+            Если True, выполняет проверку текста после клика.
+        wait : str, optional
+            Если 'lst' или 'form', ожидает исчезновение указанных элементов загрузки.
+        """
+
+        # Кликаем по первому элементу
+        self.click_button(first_click, index=first_index, wait_type=first_wait_type, do_assert=do_assert, wait=wait)
+
+        # Задержка в 1 секунду между кликами
+        time.sleep(1)
+
+        # Кликаем по второму элементу
+        self.click_button(second_click, index=second_index, wait_type=second_wait_type, do_assert=do_assert, wait=wait)
+
     """ Naw time/datetime change"""
 
     @staticmethod
@@ -1333,51 +1369,3 @@ class Base:
                 except ElementClickInterceptedException:
                     print(f"ElementClickInterceptedException: unable to click button at index {i}")
 
-    def verify_visible_text_on_page(self, text: str, should_exist: bool = True) -> None:
-        """
-        Проверяет наличие или отсутствие заданного текста в ВИДИМЫХ элементах на странице.
-
-        Parameters
-        ----------
-        text : str
-            Текст для поиска в видимых элементах.
-        should_exist : bool, optional
-            Если True, проверяет, что текст присутствует в видимом контенте.
-            Если False, проверяет, что текст отсутствует в видимом контенте.
-
-        Raises
-        ------
-        AssertionError
-            Если текст не найден при should_exist=True или найден при should_exist=False.
-        """
-        message = f"Verify that visible text '{text}' is {'present' if should_exist else 'absent'} on the page"
-
-        with allure.step(message):
-            # Выполняем JS для поиска текста только в видимых элементах
-            script = """
-                   const walker = document.createTreeWalker(
-                       document.body,
-                       NodeFilter.SHOW_TEXT,
-                       null,
-                       false
-                   );
-                   const visibleTexts = [];
-                   let node;
-                   while (node = walker.nextNode()) {
-                       const parent = node.parentElement;
-                       // Проверяем, отображается ли элемент
-                       if (parent && window.getComputedStyle(parent).display !== 'none' &&
-                           parent.offsetParent !== null) {
-                           visibleTexts.push(node.textContent.trim());
-                       }
-                   }
-                   return visibleTexts.some(t => t.includes(arguments[0]));
-               """
-            text_found = self.driver.execute_script(script, text)
-
-            if should_exist:
-                assert text_found, f"Expected visible text '{text}' to be present on the page, but it was not found."
-            else:
-                assert not text_found, f"Expected visible text '{text}' to be absent on the page, but it was found."
-
-            print(message)

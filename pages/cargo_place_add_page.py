@@ -231,7 +231,7 @@ class CargoPlaceAdd(Base):
         "name": "lkz_wms_number_edit"
     }
     lkz_comment_edit = {
-        "xpath": "(//input[@type='text'])[12]",
+        "xpath": "//span[text()='Комментарий']/following::input",
         "name": "lkz_comment_edit"
     }
     lke_cp_title_edit = {
@@ -259,11 +259,11 @@ class CargoPlaceAdd(Base):
         "name": "lke_wms_number_edit"
     }
     lke_comment_edit = {
-        "xpath": "(//input[@type='text'])[13]",
+        "xpath": "//span[text()='Комментарий']/following::input",
         "name": "lke_comment_edit"
     }
     save_button = {
-        "xpath": "//button[contains(., 'Сохранить')]",
+        "xpath": "//button[contains(@class,'ant-btn margin-left-5')]",
         "name": "save_button"
     }
 

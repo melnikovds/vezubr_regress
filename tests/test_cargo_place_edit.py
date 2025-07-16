@@ -58,6 +58,8 @@ def test_cargo_place_edit_lkz(base_fixture, domain):
     add_cp.backspace_and_input(add_cp.lkz_comment_edit, cp_stamp)  # Комментарий
     # Клик по кнопке сохранения изменений
     add_cp.click_button(add_cp.save_button, wait="form")
+    add_cp.verify_text_on_page(text=cp_stamp)
+
     # Конец теста
 
 
@@ -137,5 +139,6 @@ def test_cargo_place_edit_own_lke(base_fixture, domain):
     add_cp.backspace_and_input(add_cp.lke_comment_edit, cp_stamp)  # Комментарий
     # Клик по кнопке сохранения изменений
     add_cp.click_button(add_cp.save_button, wait="form")
+    add_cp.verify_text_on_page(text=cp_stamp)
     # Конец теста
 

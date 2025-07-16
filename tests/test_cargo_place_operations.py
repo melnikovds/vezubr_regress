@@ -1,9 +1,11 @@
 import time
+
 import allure
 import pytest
-from pages.request_delivery_add_page import DeliveryAdd
+
 from pages.cargo_place_add_page import CargoPlaceAdd
 from pages.cargo_place_list_page import CargoPlaceList
+from pages.request_delivery_add_page import DeliveryAdd
 
 
 @allure.story("Critical path test")
@@ -114,7 +116,7 @@ def test_cargo_place_transfer_lkz(base_fixture, domain):
 def test_cargo_place_routing_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
-    
+
     # Переход к списку грузомест
     sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button,
                            do_assert=True, wait="lst")
@@ -122,7 +124,7 @@ def test_cargo_place_routing_lke(base_fixture, domain):
     cp_list = CargoPlaceList(base.driver)
     # Клик по кнопке добавления грузоместа
     cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
-    
+
     add_cp = CargoPlaceAdd(base.driver)
     # Выбор владельца грузоместа "Auto LKZ"
     add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Auto LKZ")
@@ -172,7 +174,7 @@ def test_cargo_place_routing_lke(base_fixture, domain):
 def test_cargo_place_transfer_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
-    
+
     # Переход к списку грузомест
     sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button,
                            do_assert=True, wait="lst")
@@ -180,13 +182,13 @@ def test_cargo_place_transfer_lke(base_fixture, domain):
     cp_list = CargoPlaceList(base.driver)
     # Клик по кнопке добавления грузоместа
     cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
-    
+
     add_cp = CargoPlaceAdd(base.driver)
     # Выбор владельца грузоместа "Auto LKZ"
     add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Auto LKZ")
     # Добавление полного базового грузоместа
     cp_stamp = add_cp.add_base_cargo_place_lke()
-    
+
     cp_list = CargoPlaceList(base.driver)
     # Сброс фильтров
     cp_list.click_button(cp_list.reset_button, wait="lst")
@@ -200,7 +202,7 @@ def test_cargo_place_transfer_lke(base_fixture, domain):
     cp_list.click_button(cp_list.cp_list_checkbox, index=3)
     # Клик по кнопке передать экспедитору
     cp_list.click_button(cp_list.multi_transfer_button)
-    
+
     ltl = DeliveryAdd(base.driver)
     # Заполнение базовой информации для LTL заявки
     ltl.add_base_ltl()
@@ -210,7 +212,3 @@ def test_cargo_place_transfer_lke(base_fixture, domain):
     # # Публикация заявки позже
     # ltl.click_button(ltl.publish_later_button, do_assert=True)
     # Конец теста
-
-
-
-    

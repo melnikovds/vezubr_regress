@@ -22,8 +22,8 @@ def test_profile_edit_lkz(base_fixture, domain):
     # Изменение номера телефона
     profile.backspace_and_input(profile.phone_input, base.random_value_float_str(9000000000, 9999999999))
     # Перебор всех вариантов налогообложения
-    profile.dropdown_without_input(profile.vat_type_select, "Не плательщик НДС")
-    profile.dropdown_without_input(profile.vat_type_select, "Плательщик НДС")
+    profile.dropdown_without_input(profile.vat_type_select, "0%")
+    profile.dropdown_without_input(profile.vat_type_select, "20%")
     profile.dropdown_without_input(profile.direct_request_select, "Только плательщикам НДС")
     profile.dropdown_without_input(profile.direct_request_select, "Только неплательщикам НДС")
     profile.dropdown_without_input(profile.direct_request_select, "Всем")
@@ -72,8 +72,8 @@ def test_profile_edit_lke(base_fixture, domain):
     # Изменение номера телефона
     profile.backspace_and_input(profile.phone_input, base.random_value_float_str(9000000000, 9999999999))
     # Перебор всех вариантов налогообложения
-    profile.dropdown_without_input(profile.vat_type_select, "Не плательщик НДС")
-    profile.dropdown_without_input(profile.vat_type_select, "Плательщик НДС")
+    profile.dropdown_without_input(profile.vat_type_select, "0%")
+    profile.dropdown_without_input(profile.vat_type_select, "20%")
     profile.dropdown_without_input(profile.direct_request_select, "Только плательщикам НДС")
     profile.dropdown_without_input(profile.direct_request_select, "Только неплательщикам НДС")
     profile.dropdown_without_input(profile.direct_request_select, "Всем")
@@ -122,8 +122,8 @@ def test_profile_edit_lkp(base_fixture, domain):
     # Изменение номера телефона
     profile.backspace_and_input(profile.phone_input, base.random_value_float_str(9000000000, 9999999999))
     # Перебор всех вариантов налогообложения
-    profile.dropdown_without_input(profile.vat_type_select, "Не плательщик НДС")
-    profile.dropdown_without_input(profile.vat_type_select, "Плательщик НДС")
+    profile.dropdown_without_input(profile.vat_type_select, "0%")
+    profile.dropdown_without_input(profile.vat_type_select, "20%")
     profile.dropdown_without_input(profile.direct_request_select, "Только плательщикам НДС")
     profile.dropdown_without_input(profile.direct_request_select, "Только неплательщикам НДС")
     profile.dropdown_without_input(profile.direct_request_select, "Всем")

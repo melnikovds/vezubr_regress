@@ -465,6 +465,90 @@ class Base:
             if do_assert:
                 self.assert_element_text(element_dict)
 
+    def click_button_option(self, element_dict: Dict[str, str], index: int = 1, do_assert: bool = False,
+                            wait: Optional[str] = None, wait_type: str = 'clickable',
+                            skip_if_not_clickable: bool = False) -> None:
+        """
+        Кликает по кнопке с заданным типом ожидания и опционально по индексу элемента.
+        Опционально проверяет текст элемента после клика и ожидает исчезновения спиннеров.
+
+        Parameters
+        ----------
+        element_dict : dict
+            Словарь с информацией о кнопке для клика.
+        index : int, optional
+            Индекс элемента в списке однотипных элементов. По умолчанию 1 (первый элемент).
+        do_assert : bool, optional
+            Если True, выполнит проверку текста элемента после клика.
+        wait : str, optional
+            Тип спиннера ('lst' или 'form'), который нужно ожидать после клика.
+        wait_type : str, optional
+            Тип ожидания перед кликом ('clickable', 'visible', 'located', 'find'). По умолчанию 'clickable'.
+        skip_if_not_clickable : bool, optional
+            Если True, шаг будет пропущен, если элемент не кликабельный. По умолчанию False.
+        """
+
+        # Формирование имени и локатора
+        element_name = f"{element_dict['name']} index {index}" if index > 1 else element_dict['name']
+
+        if 'xpath' in element_dict:
+            locator = f"({element_dict['xpath']})[{index}]" if index > 1 else element_dict['xpath']
+            locator_type = 'xpath'
+        elif 'css' in element_dict:
+            locator = f"{element_dict['css']}:nth-of-type({index})" if index > 1 else element_dict['css']
+            locator_type = 'css'
+        else:
+            raise ValueError("Не указан ни XPath, ни CSS-селектор для элемента")
+
+        updated_element_dict = {
+            "name": element_name,
+            locator_type: locator
+        }
+
+        message = f"Click on {element_name}"
+
+        with allure.step(title=message if not skip_if_not_clickable else f"{message} (если доступно)"):
+            try:
+                button_dict = self.get_element(updated_element_dict, wait_type)
+                button_dict['element'].click()
+                print(message)
+
+                # Ожидание спиннера, если задано
+                if wait:
+                    loading_spinner = self.loading_form if wait == 'form' else self.loading_list
+                    try:
+                        self.get_element(loading_spinner, wait_type="visible")
+                    except TimeoutException:
+                        with allure.step("Spinner did not appear"):
+                            print("Spinner did not appear")
+                            return
+
+                    try:
+                        self.get_element(loading_spinner, wait_type="invisibility")
+                    except TimeoutException:
+                        with allure.step("Spinner did not disappear"):
+                            print("Spinner did not disappear")
+
+                # Ассерт текста, если нужен
+                if do_assert:
+                    self.assert_element_text(element_dict)
+
+            except TimeoutException as e:
+                if skip_if_not_clickable:
+                    allure.attach(
+                        f"Элемент '{element_name}' некликабельный, шаг пропущен",
+                        name="Пропущенный шаг"
+                    )
+                    print(f"[INFO] Пропущен клик на элемент '{element_name}', так как он не кликабельный.")
+                    return
+                else:
+                    allure.attach(
+                        f"Не удалось кликнуть на элемент '{element_name}' из-за таймаута",
+                        name="Ошибка"
+                    )
+                    print(f"[ERROR] Не удалось кликнуть на элемент '{element_name}'.")
+                    raise e
+
     def click_button_recaptchav3(self, element_dict: Dict[str, str], index: int = 1, do_assert: bool = False,
                                  wait: Optional[str] = None, wait_type: str = 'clickable', safe: bool = False) -> None:
         """
@@ -1110,6 +1194,42 @@ class Base:
         # Кликаем по указанному элементу с дополнительными проверками
         self.click_button(click_to, index=click_index, wait_type=click_wait_type, do_assert=do_assert, wait=wait)
 
+    def click_then_click(self, first_click: dict, second_click: dict,
+                                first_index: int = 1, second_index: int = 1,
+                                first_wait_type: str = 'clickable', second_wait_type: str = 'clickable',
+                                do_assert: bool = False, wait: str = None) -> None:
+        """
+        Совершает клик по первому элементу, ждёт 1 секунду, затем кликает по второму.
+
+        Parameters
+        ----------
+        first_click : dict
+            Словарь с информацией о первом элементе для клика.
+        second_click : dict
+            Словарь с информацией о втором элементе для клика.
+        first_index : int, optional
+            Индекс первого элемента, по умолчанию 1.
+        second_index : int, optional
+            Индекс второго элемента, по умолчанию 1.
+        first_wait_type : str, optional
+            Тип ожидания первого элемента ('clickable', 'visible', 'located', 'find').
+        second_wait_type : str, optional
+            Тип ожидания второго элемента.
+        do_assert : bool, optional
+            Если True, выполняет проверку текста после клика.
+        wait : str, optional
+            Если 'lst' или 'form', ожидает исчезновение указанных элементов загрузки.
+        """
+
+        # Кликаем по первому элементу
+        self.click_button(first_click, index=first_index, wait_type=first_wait_type, do_assert=do_assert, wait=wait)
+
+        # Задержка в 1 секунду между кликами
+        time.sleep(1)
+
+        # Кликаем по второму элементу
+        self.click_button(second_click, index=second_index, wait_type=second_wait_type, do_assert=do_assert, wait=wait)
+
     """ Naw time/datetime change"""
 
     @staticmethod
@@ -1248,3 +1368,4 @@ class Base:
                         self.click_button(button_element, index=i, wait_type=wait_type)
                 except ElementClickInterceptedException:
                     print(f"ElementClickInterceptedException: unable to click button at index {i}")
+

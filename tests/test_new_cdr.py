@@ -2,7 +2,7 @@ import os
 import time
 import allure
 import pytest
-from pages.add_new_cdr_page import AddCdr
+from pages.new_cdr_page import AddCdr
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Игнорировать INFO и WARNING сообщения
 
@@ -15,7 +15,6 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Игнорировать INFO и WAR
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
 def test_add_new_ftl_lkz_lkp(base_fixture, domain, request):
     base, sidebar = base_fixture
-    time.sleep(2)
 
     with allure.step("Открытие формы создания новой заявки"):
         sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_delivery_request_button)
@@ -65,7 +64,7 @@ def test_add_new_ftl_lkz_lkp(base_fixture, domain, request):
 @pytest.mark.test_lkz_lkp
 @pytest.mark.order(2)
 @allure.story("smoke")
-@allure.feature("Подтвержение и завершение рейса от ЛКЗ за ЛКП")
+@allure.feature("Подтверждение и завершение рейса от ЛКЗ за ЛКП")
 @allure.description("ЛКП, Тестирование: Подтверждаем заявку")
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_lkp_confirm_delivery(base_fixture, domain, request):
@@ -163,7 +162,7 @@ def test_add_new_ftl_lkz_lke(base_fixture, domain, request):
 @pytest.mark.test_lkz_lke_lkp
 @pytest.mark.order(2)
 @allure.story("smoke")
-@allure.feature('Подтвержение и перепубликация рейса от ЛКЭ к ЛКП')
+@allure.feature('Подтверждение и перепубликация рейса от ЛКЭ к ЛКП')
 @allure.description('ЛКЗ, Тестирование: Принятие ФТЛ заявки за ЛКЭ и перепубликация на ЛКП')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_republishing_new_ftl_lke_lkp(base_fixture, domain, request):
@@ -194,8 +193,8 @@ def test_republishing_new_ftl_lke_lkp(base_fixture, domain, request):
 @pytest.mark.test_lkz_lke_lkp
 @pytest.mark.order(3)
 @allure.story("smoke")
-@allure.feature('Подтвержение и завершение рейса от ЛКЗ к ЛКЭ, ЛКЭ к ЛКП')
-@allure.description('ЛКЗ, Тестирование: Принятие ФТЛ заявки за ЛКП и pfdthitybt')
+@allure.feature('Подтверждение и завершение рейса от ЛКЗ к ЛКЭ, ЛКЭ к ЛКП')
+@allure.description('ЛКЗ, Тестирование: Принятие ФТЛ заявки за ЛКП и завершение')
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_confirm_new_ftl_lke_lkp(base_fixture, domain, request):
     base, sidebar = base_fixture
@@ -213,6 +212,22 @@ def test_confirm_new_ftl_lke_lkp(base_fixture, domain, request):
     with allure.step("Выбираем заявку с уникальным id"):
         add.change_request_for_id(request)
         time.sleep(2)
+
+    with allure.step("Жмем принять обязательства"):
+        add.click_button(add.click_confirm_cdr)
+
+    with allure.step("Назначаем ТС на рейс"):
+        add.change_ts_and_driver()
+
+    with allure.step("Стартуем рейс"):
+        add.start_cdr()
+        time.sleep(2)
+
+    with allure.step("Заполняем время точек на рейсе"):
+        add.change_time_to_address()
+
+    with allure.step("Завершаем рейс через ЛК"):
+        add.complete_cdr()
 
 
 @allure.story("smoke")

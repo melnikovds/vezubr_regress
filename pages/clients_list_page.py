@@ -30,12 +30,8 @@ class ClientsList(Base):
         "reference_xpath": "//h4[@class='title' and text()='Auto LKZ']",
         "reference": "Auto LKZ"
     }
-    # accept_button = {
-    #     "xpath": "(//button[.//span[text()='Принять']])[2]",
-    #     "name": "accept_button"
-    # }
     accept_button = {
-        "css": "div#main>div>div:nth-of-type(3)>div:nth-of-type(2)>div>div>div>div>div>div>div:nth-of-type(3)>div:nth-of-type(2)>div>table>tbody>tr>td>div>div>button",
+        "xpath": "(//button[contains(@class,'ant-btn ant-btn-primary')])",
         "name": "accept_button"
     }
 

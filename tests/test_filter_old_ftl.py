@@ -51,7 +51,6 @@ def test_filter_old_ftl_lkz(base_fixture, domain):
     time.sleep(1)
     add.backspace_and_input(add.request_identifier, value='')
 
-
     # проверка фильтра "Дата публикации"
     add.click_button(add.publication_date)
     time.sleep(1)
@@ -73,7 +72,6 @@ def test_filter_old_ftl_lkz(base_fixture, domain):
     add.verify_text_on_page(text='R-25-17-2448-1', should_exist=False)
     time.sleep(1)
     add.backspace_and_input(add.order_number, value='')
-
 
 
 @allure.story("Extended test")
@@ -453,6 +451,14 @@ def test_filter_delayed_order_lkz(base_fixture, domain):
     add.click_on_the_cross(add.cross)
     time.sleep(2)
 
+    # проверка фильтра "номер рейса"
+    add.input_in_field(add.order_number_three, value='428', click_first=True)
+    time.sleep(3)
+    add.find_text_on_page(text='R-22-428-1598-1', occurrences=4)
+    add.verify_text_on_page(text='R-22-277-1598-1', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.request_number_two, value='')
+
     # проверка фильтра "номер заявки"
     add.input_in_field(add.request_number_two, value='24-177-2448', click_first=True)
     time.sleep(3)
@@ -489,6 +495,14 @@ def test_filter_delayed_order_lke(base_fixture, domain):
     add.click_on_the_cross(add.cross)
     time.sleep(2)
 
+    # # проверка фильтра "номер рейса"
+    # add.input_in_field(add.order_number_three, value='428', click_first=True)
+    # time.sleep(3)
+    # add.find_text_on_page(text='R-22-428-1598-1', occurrences=4)
+    # add.verify_text_on_page(text='R-22-277-1598-1', should_exist=False)
+    # time.sleep(1)
+    # add.backspace_and_input(add.request_number_two, value='')
+
     # проверка фильтра "номер заявки"
     add.input_in_field(add.request_number_two, value='24-1-2447', click_first=True)
     time.sleep(3)
@@ -497,13 +511,13 @@ def test_filter_delayed_order_lke(base_fixture, domain):
     time.sleep(1)
     add.backspace_and_input(add.request_number_two, value='')
 
-    # # проверка фильтра "Идентификатор рейса"
-    # add.input_in_field(add.order_identifier, value='vb-81', click_first=True)
-    # time.sleep(2)
-    # add.verify_text_on_page(text='25-67-2448', should_exist=True)
-    # add.verify_text_on_page(text='24-8-2448', should_exist=False)
-    # time.sleep(1)
-    # add.backspace_and_input(add.order_identifier, value='')
+    # проверка фильтра "Идентификатор рейса"
+    add.input_in_field(add.order_identifier, value='vb-81', click_first=True)
+    time.sleep(2)
+    add.verify_text_on_page(text='25-67-2448', should_exist=True)
+    add.verify_text_on_page(text='24-8-2448', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.order_identifier, value='')
 
 
 @allure.story("Extended test")
@@ -705,6 +719,88 @@ def test_filter_insured_order_lkz(base_fixture, domain):
     add.input_in_field(add.contract_number, value='111')
     time.sleep(3)
     add.verify_text_on_page(text='1-111', should_exist=True)
+    time.sleep(1)
+    add.backspace_and_input(add.contract_number, value='')
+
+
+@allure.story("Extended test")
+@allure.feature('Фильтры')
+@allure.description('ЛКЭ. Тест фильтров в разделе Застрахованные Рейсы ')
+@pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
+def test_filter_insured_order_lke(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # Переход в раздел "Страховые компании"
+    base.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button_lke,
+                        do_assert=True, wait='lst')
+
+    add = OldFTL(base.driver)
+
+    add.click_button(add.vsk)
+    add.click_button(add.insured_orders)
+
+    add.move_to_element(add.menu_calendar)
+    time.sleep(1)
+    add.click_on_the_cross(add.cross_four)
+
+    # проверка фильтра "стадии рейса"
+    add.dropdown_with_input(add.order_stage, option_text='подбор')
+    add.click_button(add.checkbox_one)
+    time.sleep(3)
+    add.verify_text_on_page(text='158-2447', should_exist=True)
+    add.verify_text_on_page(text='159-2447', should_exist=False)
+
+    add.move_to_element(add.order_stage)
+    time.sleep(1)
+    add.click_on_the_cross(add.cross_three)
+
+    add.dropdown_with_input(add.order_stage, option_text='исполнение')
+    add.click_button(add.checkbox_two)
+    time.sleep(3)
+    add.verify_text_on_page(text='159-2447', should_exist=True)
+    add.verify_text_on_page(text='158-2447', should_exist=False)
+
+    add.move_to_element(add.order_stage)
+    time.sleep(1)
+    add.click_on_the_cross(add.cross_three)
+
+    add.dropdown_with_input(add.order_stage, option_text='расч')
+    add.click_button(add.checkbox_three)
+    time.sleep(3)
+    add.verify_text_on_page(text='160-2447', should_exist=True)
+    add.verify_text_on_page(text='161-2447', should_exist=False)
+
+    add.move_to_element(add.order_stage)
+    time.sleep(1)
+    add.click_on_the_cross(add.cross_three)
+
+    add.dropdown_with_input(add.order_stage, option_text='отме')
+    add.click_button(add.checkbox_four)
+    time.sleep(3)
+    add.verify_text_on_page(text='161-2447', should_exist=True)
+    add.verify_text_on_page(text='160-2447', should_exist=False)
+
+    add.move_to_element(add.order_stage)
+    time.sleep(1)
+    add.click_on_the_cross(add.cross_three)
+
+    add.refresh_page()
+    time.sleep(3)
+
+    # проверка фильтра "номер рейса"
+    add.input_in_field(add.order_number_three, value='25-161')
+    time.sleep(3)
+    add.verify_text_on_page(text='R-25-161-2447-1', should_exist=True)
+    add.verify_text_on_page(text='R-25-160-2447-1', should_exist=False)
+    time.sleep(1)
+    add.backspace_and_input(add.order_number_three, value='')
+
+    # проверка фильтра номер договора
+    add.input_in_field(add.contract_number, value='001')
+    time.sleep(3)
+    add.verify_text_on_page(text='R-25-163', should_exist=True)
+    add.verify_text_on_page(text='R-25-162', should_exist=False)
     time.sleep(1)
     add.backspace_and_input(add.contract_number, value='')
 

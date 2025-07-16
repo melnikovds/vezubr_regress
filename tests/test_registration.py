@@ -1,6 +1,8 @@
 import time
 import allure
 import pytest
+from faker import Faker
+import random
 from selenium.webdriver.support.wait import WebDriverWait
 from pages.clients_list_page import ClientsList
 from pages.login import sms_center, base_password, base_lke
@@ -268,4 +270,59 @@ def test_registration_new_lkp(base_fixture, domain):
     # Проверка принятия пользователя по ИНН
     reg.verify_text_by_inn(inn_value=inn, reference_value="Нет договора")
     # Конец теста
+
+
+@allure.story("Smoke test")
+@allure.feature('Регистрация личного кабинета')
+@allure.description('Создания внутреннего грузовладельца')
+@pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)
+def test_create_inner_client(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # Переход к списку клиентов
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.clients_list_button,
+                           do_assert=True, wait="lst")
+
+    # Кликаем по кнопке создания внутреннего ГВ
+    client_list = ClientsList(base.driver)
+    client_list.click_button(client_list.button_inner_client, wait="lst")
+
+    # Заполнение данных внутреннего ГВ
+    # generated_inn = client_list.generate_inn("entity")
+    generated_inn = client_list.find_valid_inn()
+
+    client_list.input_in_field(client_list.inn_inner_client, value=generated_inn, click_first=True)
+    generated_kpp = ''.join([str(random.randint(0, 9)) for _ in range(9)])
+    client_list.input_in_field(client_list.kpp_inner_client, value=generated_kpp)
+
+    # Добавляем сотрудника
+    faker = Faker('ru_RU')
+    client_list.click_button(client_list.add_employee)
+    generated_last_name = faker.last_name()
+    client_list.input_in_field(client_list.last_name_field, value=generated_last_name)
+    generated_first_name = faker.first_name()
+    client_list.input_in_field(client_list.first_name_field, value=generated_first_name)
+    generated_middle_name = faker.middle_name()
+    client_list.input_in_field(client_list.middle_name_field, value=generated_middle_name)
+    generated_email = faker.email()
+    client_list.input_in_field(client_list.email_field, value=generated_email)
+    generated_phone = ''.join([str(random.randint(0, 9)) for _ in range(10)])
+    client_list.input_in_field(client_list.phone_field, value=generated_phone, click_first=True)
+
+    time.sleep(5)
+    # Нажимаем кнопку создать
+    client_list.click_button(client_list.create_client_button)
+    time.sleep(5)
+
+
+@allure.story("Smoke test")
+@allure.feature('Регистрация личного кабинета')
+@allure.description('Создания внутреннего подрядчика')
+@pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)
+def test_create_inner_producer(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, login = base_fixture
+
+
   

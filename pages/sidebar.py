@@ -129,11 +129,23 @@ class SideBar(Base):
         "xpath": "//span[@class='route-name no-events' and text()='Задания']",
         "name": "assignments_hover"
     }
-    cargo_place_list_button = {
+    tasks_list_button = {
         "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Задания')]",
-        "name": "cargo_place_list_button",
+        "name": "tasks_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Задания"
+    }
+    cargo_place_list_button = {
+        "xpath": "(//li[contains(@class,'ant-menu-item sidebar__dropdown-item')])[2]",
+        "name": "cargo_place_list_button",
+        "reference_xpath": base_reference_xpath,
+        "reference": "Грузоместа"
+    }
+    cargo_place_list_button_lke = {
+        "xpath": "//li[contains(@class,'ant-menu-item sidebar__dropdown-item')]",
+        "name": "cargo_place_list_button_lke",
+        "reference_xpath": base_reference_xpath,
+        "reference": "Грузоместа"
     }
     dispatch_list_button = {
         "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Отправления')]",

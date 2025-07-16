@@ -5,14 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="456948c0-3270-4b5d-a3cf-cc313c21f73e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/filter_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_filter_lke.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_filter_lkp.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_filter_lkz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/clients_list_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/clients_list_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/filter_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/filter_page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/producers_list_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/producers_list_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/user_add_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user_add_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_user_operations_lke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_user_operations_lke.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/registration_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/registration_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/sidebar.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/sidebar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytest.ini" beforeDir="false" afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_cargo_place_add.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_cargo_place_add.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_cargo_place_edit.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_cargo_place_edit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_filter_old_ftl.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_filter_old_ftl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_insurance_operations.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_insurance_operations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_registration.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +102,16 @@
       <workItem from="1750756896337" duration="7740000" />
       <workItem from="1750845086593" duration="6953000" />
       <workItem from="1751288833148" duration="622000" />
-      <workItem from="1751440716964" duration="1386000" />
+      <workItem from="1751440716964" duration="13294000" />
+      <workItem from="1751479142537" duration="10000" />
+      <workItem from="1751709077634" duration="2950000" />
+      <workItem from="1751797727647" duration="6000" />
+      <workItem from="1751981276276" duration="6246000" />
+      <workItem from="1752217677720" duration="16995000" />
+      <workItem from="1752418453314" duration="3411000" />
+      <workItem from="1752422542757" duration="6519000" />
+      <workItem from="1752473267087" duration="9989000" />
+      <workItem from="1752647484743" duration="8770000" />
     </task>
     <servers />
   </component>

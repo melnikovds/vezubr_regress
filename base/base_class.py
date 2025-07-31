@@ -63,11 +63,11 @@ class Base:
     """ Get driver """
 
     @classmethod
-        def get_driver(cls: Type['Base']) -> 'Base':
+    def get_driver(cls: Type['Base']) -> 'Base':
         """
         Создает и возвращает экземпляр драйвера.
-        В Jenkins — подключается к Selenoid.
-        Локально — запускает локальный Chrome.
+        В Jenkins — подключается к Selenoid или запускает headless Chrome.
+        Локально — запускает видимый Chrome.
         """
         options = Options()
 
@@ -76,7 +76,6 @@ class Base:
         options.add_argument('--force-device-scale-factor=0.8')
 
         if platform.system() != 'Windows':
-            # Настройки для Linux
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
@@ -84,15 +83,14 @@ class Base:
             options.add_argument('--disable-software-rasterizer')
             options.add_argument('--disable-setuid-sandbox')
 
-        # Проверяем, запущено ли в Jenkins и нужно ли использовать Selenoid
+        # Определяем, запущено ли в CI (Jenkins)
+        is_in_jenkins = 'JENKINS_HOME' in os.environ or 'USE_SELENOID' in os.environ
+
+        # Проверяем, нужно ли использовать Selenoid
         use_selenoid = os.getenv("USE_SELENOID", "false").lower() == "true"
 
         if use_selenoid:
-            print("🚀 Запуск в режиме Selenoid...")
-
-            # Убираем headless для Selenoid, чтобы видеть экран в VNC
-            # Если хотите headless — раскомментируйте:
-            # options.add_argument('--headless=new')
+            print(" Запуск в режиме Selenoid...")
 
             capabilities = options.to_capabilities()
             capabilities['enableVNC'] = True
@@ -104,17 +102,21 @@ class Base:
                 desired_capabilities=capabilities
             )
         else:
-            print("💻 Запуск локального Chrome...")
+            print(" Запуск локального Chrome...")
 
-            # Локально: используем Selenium Manager (не указываем Service)
-            # Он сам найдёт/скачает chromedriver
+            # Добавляем headless, если в Jenkins (даже при локальном Chrome)
+            if is_in_jenkins:
+                options.add_argument('--headless=new')
+                print("📌 Режим headless включен (Jenkins detected)")
+
+            # Используем Selenium Manager
             driver = webdriver.Chrome(options=options)
 
         # Шаг в Allure
         with allure.step(title="Start test"):
             print("Start test")
 
-        return cls(driver)
+        return cls(driver)  
 
     """ Test finish """
 

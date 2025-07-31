@@ -89,8 +89,7 @@ class Base:
             options.add_argument('--disable-software-rasterizer')
             options.add_argument('--disable-setuid-sandbox')
 
-        service = Service(chrome_driver_path)
-        driver = webdriver.Chrome(options=options, service=service)
+        driver = webdriver.Chrome(options=options)
 
         # Шаг в Allure и вывод в консоль
         with allure.step(title="Start test"):

@@ -99,7 +99,7 @@ class Base:
 
             driver = webdriver.Remote(
                 command_executor='http://192.168.1.200:4444/wd/hub',
-                desired_capabilities=capabilities
+                options=options  # Передаём объект Options с нужными capabilities
             )
         else:
             print(" Запуск локального Chrome...")

@@ -90,16 +90,22 @@ class Base:
         use_selenoid = os.getenv("USE_SELENOID", "false").lower() == "true"
 
         if use_selenoid:
-            print(" Запуск в режиме Selenoid...")
+            print("🚀 Запуск в режиме Selenoid...")
 
-            capabilities = options.to_capabilities()
-            capabilities['enableVNC'] = True
-            capabilities['enableVideo'] = True
-            capabilities['name'] = 'vezubr-autotest'
+            # Обязательные аргументы для Linux
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-gpu')
 
+            # Capabilities для Selenoid
+            options.set_capability('enableVNC', True)
+            options.set_capability('enableVideo', True)
+            options.set_capability('name', 'vezubr-autotest')
+
+            # Подключаемся к Selenoid
             driver = webdriver.Remote(
-                command_executor='http://192.168.1.200:4444/wd/hub',
-                options=options  # Передаём объект Options с нужными capabilities
+            command_executor='http://192.168.1.200:4444/wd/hub',
+            options=options
             )
         else:
             print(" Запуск локального Chrome...")

@@ -14,6 +14,7 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 
 """Variable"""
 # Определение пути к драйверам
@@ -63,39 +64,64 @@ class Base:
     @classmethod
     def get_driver(cls: Type['Base']) -> 'Base':
         """
-        Создает и возвращает экземпляр драйвера с нужными настройками в зависимости от операционной системы.
-
-        Returns
-        -------
-        Base
-            Экземпляр класса Base с инициализированным веб-драйвером.
+        Создает и возвращает экземпляр драйвера.
+        В Jenkins — подключается к Selenoid или запускает headless Chrome.
+        Локально — запускает видимый Chrome.
         """
-        options = webdriver.ChromeOptions()
+        options = Options()
 
-        # Настройки драйвера для разных операционных систем
-        chrome_driver_path = WINDOWS_DRIVER_PATH if platform.system() == 'Windows' else LINUX_DRIVER_PATH
-        # options.add_argument('--headless')
-        options.add_argument('--window-size=1920x1080')
+        # Общие настройки
+        options.add_argument('--window-size=1920,1080')
         options.add_argument('--force-device-scale-factor=0.8')
 
         if platform.system() != 'Windows':
-            # Дополнительные параметры для Linux
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
-            options.add_argument('--headless')
             options.add_argument('--remote-debugging-port=9222')
             options.add_argument('--disable-software-rasterizer')
             options.add_argument('--disable-setuid-sandbox')
 
-        service = Service(chrome_driver_path)
-        driver = webdriver.Chrome(options=options, service=service)
+        # Определяем, запущено ли в CI (Jenkins)
+        is_in_jenkins = 'JENKINS_HOME' in os.environ or 'USE_SELENOID' in os.environ
 
-        # Шаг в Allure и вывод в консоль
+        # Проверяем, нужно ли использовать Selenoid
+        use_selenoid = os.getenv("USE_SELENOID", "false").lower() == "true"
+
+        if use_selenoid:
+            print("🚀 Запуск в режиме Selenoid...")
+
+            # Обязательные аргументы для Linux
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-gpu')
+
+            # Capabilities для Selenoid
+            options.set_capability('enableVNC', True)
+            options.set_capability('enableVideo', True)
+            options.set_capability('name', 'vezubr-autotest')
+
+            # Подключаемся к Selenoid
+            driver = webdriver.Remote(
+            command_executor='http://192.168.1.200:4444/wd/hub',
+            options=options
+            )
+        else:
+            print(" Запуск локального Chrome...")
+
+            # Добавляем headless, если в Jenkins (даже при локальном Chrome)
+            if is_in_jenkins:
+                options.add_argument('--headless=new')
+                print("📌 Режим headless включен (Jenkins detected)")
+
+            # Используем Selenium Manager
+            driver = webdriver.Chrome(options=options)
+
+        # Шаг в Allure
         with allure.step(title="Start test"):
             print("Start test")
 
-        return cls(driver)
+        return cls(driver)  
 
     """ Test finish """
 

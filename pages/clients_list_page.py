@@ -1,13 +1,13 @@
 from base.base_class import Base
 import requests
 import time
+from tests.conftest import api_login
 
 
 class ClientsList(Base):
-    def __init__(self, driver, api_login=None):
+    def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
-        self.api_login = api_login
 
     # Locators
     client_lkz_inn = {
@@ -77,19 +77,26 @@ class ClientsList(Base):
         "xpath": "//button[contains(.,'Создать')]",
         "name": "create_client_button"
     }
+    ok_popup = {
+        "xpath": "//button[contains(.,'OK')]",
+        "name": "ok_popup"
+    }
 
     """Creation of a valid INN"""
-    def find_valid_inn(self) -> str | None:
+    def find_valid_inn(self, api_login) -> str | None:
+
+        token = api_login("lke")
 
         # получения токена
-        try:
-            token = self.api_login("lke")
-            if not token:
-                raise ValueError("Токен не получен")
-            print(f" Получен токен: {token}")
-        except Exception as e:
-            print(f"Ошибка при авторизации: {e}")
-            return None
+        # try:
+        #     token = self.api_login("lke")
+        #     if not token:
+        #         raise ValueError("токен не получен")
+        #     print(f"получен токен: {token}")
+        # except Exception as e:
+        #     print(f"ошибка при авторизации: {e}")
+        #     return None
+
 
         url = "https://api.vezubr.com/v1/api/organization/get"
         headers = {
@@ -115,7 +122,17 @@ class ClientsList(Base):
                     print(f"Найден валидный ИНН: {generated_inn}")
                     return generated_inn
 
-            time.sleep(1)  # чтобы не спамить API
+            time.sleep(1)  # антиспам
+
+
+    """Inner client"""
+    general_information = {
+        "xpath": "//div[contains(@class,'vz-tabs-modern vz-tabs-modern--has-matched-count-2 counterparty-tabs')]",
+        "name": "general_information"
+    }
+
+
+
 
 
 

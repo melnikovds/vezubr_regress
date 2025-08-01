@@ -500,10 +500,6 @@ class Filter(Base):
         "xpath": "//span[@class='ant-select-selection ant-select-selection--multiple']//ul[1]",
         "name": "specialist_type_check"
     }
-    # specialist_type_uncheck = {
-    #    "xpath": "//span[@class='ant-select-tree-checkbox ant-select-tree-checkbox-checked']//span[1]",
-    #    "name": "specialist_type_check"
-    # }
     surname_specialist = {
         "xpath": "(//input[@class='ant-input'])[1]",
         "name": "surname_specialist"

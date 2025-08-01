@@ -1,8 +1,6 @@
 import time
-
 import allure
 import pytest
-
 from pages.filters_gm_lkz_lke_page import GmFilters
 
 
@@ -14,7 +12,7 @@ def test_filter_assignment_lkz(base_fixture, domain, request):
     base, sidebar = base_fixture
 
     with allure.step("Переходим на вкладку 'Задания'"):
-        sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.assignments_list_button)
+        sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.tasks_list_button)
         add = GmFilters(base.driver)
 
     with allure.step("Проверка фильтра 'Номер заказа'"):

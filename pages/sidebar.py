@@ -29,8 +29,14 @@ class SideBar(Base):
         "xpath": "//li[contains(@class,'ant-menu-submenu ant-menu-submenu-vertical')]",
         "name": "new_order_hover"
     }
+    # new_ftl_city_button = {
+    #     "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'FTL Заказ - городской')]",
+    #     "name": "new_ftl_city_button",
+    #     "reference_xpath": new_order_reference_xpath,
+    #     "reference": "Новый Заказ FTL перевозки"
+    # }
     new_ftl_city_button = {
-        "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'FTL Заказ - городской')]",
+        "xpath": "//li[@class='ant-menu-item sidebar__dropdown-item ant-menu-item-active']",
         "name": "new_ftl_city_button",
         "reference_xpath": new_order_reference_xpath,
         "reference": "Новый Заказ FTL перевозки"
@@ -66,13 +72,13 @@ class SideBar(Base):
         "name": "requests_hover"
     }
     ftl_active_list_button = {
-        "xpath": "//*[@id='requests-rate-tariff-side']",
+        "xpath": "//li[contains(.,'Активные FTL Заказы')]",
         "name": "ftl_active_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Активные заявки"
     }
     cdr_active_list_button = {
-        "xpath": "//li[@id='requests-side']/following-sibling::li[1]",
+        "xpath": "//li[contains(.,'Заявки на доставку Груза (NEW)')]",
         "name": "cdr_active_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Заявки на доставку Груза"
@@ -94,13 +100,13 @@ class SideBar(Base):
         "name": "order_hover"
     }
     ftl_list_button = {
-        "xpath": "//li[@id='allOrder-side']",
+        "xpath": "//li[contains(.,'FTL рейсы')]",
         "name": "ftl_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Рейсы"
     }
     ftl_list_button_lkp = {
-        "xpath": "//ul[@id='2$Menu']/li[1]",
+        "xpath": "/html/body/div[6]/div/div/ul/li[1]",
         "name": "ftl_list_button_lkp",
         "reference_xpath": base_reference_xpath,
         "reference": "Рейсы"
@@ -172,7 +178,7 @@ class SideBar(Base):
         "reference": "Список контрагентов"
     }
     insurers_list_button = {
-        "xpath": "//li[@id='producers-side']/following-sibling::li[1]",
+        "xpath": "//li[contains(.,'Страховые компании')]",
         "name": "insurers_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Страховщики"
@@ -234,7 +240,7 @@ class SideBar(Base):
         "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Перевозочные документы')]",
         "name": "transport_doc_list_button",
         "reference_xpath": base_reference_xpath,
-        "reference": "Перевозочные документы"
+        "reference": "Перевозочные документы (OLD - Рейсы)"
     }
     verification_doc_list_button = {
         "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Проверка документов')]",

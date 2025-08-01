@@ -3,7 +3,7 @@ import allure
 import pytest
 from pages.driver_add_page import DriverAdd
 from pages.driver_list_page import DriverList
-from pages.manual_page import Manual
+from pages.filter_directory_page import Manual
 
 
 @allure.story("Smoke test")

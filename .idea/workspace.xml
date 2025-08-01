@@ -6,18 +6,32 @@
   <component name="ChangeListManager">
     <list default="true" id="456948c0-3270-4b5d-a3cf-cc313c21f73e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vezubr_regress.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vezubr_regress.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/base_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/base/base_class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/agreement_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/agreement_page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/clients_list_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/clients_list_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/filter_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/filter_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/filter_old_ftl_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/filter_old_ftl_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/filters_gm_lkz_lke_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/filters_gm_lkz_lke_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/manual_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/filter_directory_page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/producers_list_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/producers_list_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/registration_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/registration_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/settings_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/settings_page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/sidebar.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/sidebar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pytest.ini" beforeDir="false" afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_cargo_place_add.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_cargo_place_add.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_cargo_place_edit.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_cargo_place_edit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_driver_add_lkp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_driver_add_lkp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_driver_edit_lkp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_driver_edit_lkp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_extra_agreement_add_lkp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_extra_agreement_add_lkp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_extra_agreement_add_lkz.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_extra_agreement_add_lkz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_filter_lkz.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_filter_lkz.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_filter_old_ftl.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_filter_old_ftl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_insurance_operations.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_insurance_operations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_manual_lke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_filter_directory_lke.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_manual_lkp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_filter_directory_lkp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_manual_lkz.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_filter_directory_lkz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_profile_edit.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_profile_edit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_registration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_settings_custom_lkz.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_settings_custom_lkz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_sorting.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_sorting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_subdivision_lkp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_subdivision_lkp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +126,23 @@
       <workItem from="1752422542757" duration="6519000" />
       <workItem from="1752473267087" duration="9989000" />
       <workItem from="1752647484743" duration="8770000" />
+      <workItem from="1752664524570" duration="8809000" />
+      <workItem from="1752734891309" duration="6962000" />
+      <workItem from="1752746538563" duration="2681000" />
+      <workItem from="1752818579740" duration="1255000" />
+      <workItem from="1752824762232" duration="1978000" />
+      <workItem from="1752849821048" duration="41000" />
+      <workItem from="1753082801189" duration="8817000" />
+      <workItem from="1753176520182" duration="1092000" />
+      <workItem from="1753179431171" duration="1054000" />
+      <workItem from="1753347583549" duration="18721000" />
+      <workItem from="1753424755523" duration="19708000" />
+      <workItem from="1753635721660" duration="4207000" />
+      <workItem from="1753683290578" duration="7083000" />
+      <workItem from="1753721681148" duration="1056000" />
+      <workItem from="1753798486412" duration="3495000" />
+      <workItem from="1753967249779" duration="21000" />
+      <workItem from="1753969720352" duration="1864000" />
     </task>
     <servers />
   </component>

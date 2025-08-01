@@ -96,9 +96,13 @@ class OldFTL(Base):
         "name": "template_name"
     }
     template_status = {
-        "xpath": "//div[contains(@class,'ant-select-selection ')]",
+        "xpath": "//*[@id='active']/div",
         "name": "template_status"
     }
+    # template_status = {
+    #     "xpath": "//div[contains(@class,'ant-select-selection ')]",
+    #     "name": "template_status"
+    # }
     order_type = {
         "xpath": "(//div[@data-__field='[object Object]'])[2]",
         "name": "order_type"

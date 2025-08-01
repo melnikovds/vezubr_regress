@@ -48,7 +48,7 @@ def test_one_custom_settings_lkz(base_fixture, domain):
     edit_param = EditFieldsParam(base.driver)
 
     # редактируем кастомное поле
-    edit_param.click_button(edit_param.e_p)
+    edit_param.click_button(edit_param.e_p_one)
     add_param.backspace_and_input(add_param.add_ru, value="З24-00275", click_first=True)
     add_param.backspace_and_input(add_param.add_en, value="Z24-0013")
     add_param.dropdown_without_input(add_param.add_role, option_text="Рейс")
@@ -164,7 +164,7 @@ def test_two_custom_settings_lkz(base_fixture, domain):
     add_param.verify_text_on_page(text='фыва')
 
     # редактируем кастомное поле
-    edit_param.click_button(edit_param.e_p)
+    edit_param.click_button(edit_param.e_p_two)
 
     add_param.backspace_and_input(add_param.add_ru, value="537683")
     add_param.backspace_and_input(add_param.add_en, value="537683")

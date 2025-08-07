@@ -154,7 +154,6 @@ class GmFilters(Base):
         "name": "bar_code"
     }
 
-
     def to_whom_aplication(self) -> NoReturn:
         self.dropdown_without_input(self.to_aplication, "Маршрутизация Везубр")
         time.sleep(2)
@@ -208,12 +207,29 @@ class GmFilters(Base):
         self.verify_text_on_page(text="ГМ-20250304143122")
         self.backspace_and_input(self.delivery_address, "")
 
+    def filter_departures_address_lke(self) -> NoReturn:
+        self.input_in_field(self.departure_address, "Ижевск")
+        time.sleep(2)
+        self.verify_text_on_page(text="2448432780000")
+        self.backspace_and_input(self.departure_address, "")
+        self.input_in_field(self.delivery_address, "Ижевск")
+        time.sleep(2)
+        self.verify_text_on_page(text="2448432780000")
+        self.backspace_and_input(self.delivery_address, "")
+
     def filter_departure_status(self) -> NoReturn:
         self.click_button(self.status)
         time.sleep(2)
         self.click_button(self.waiting_shipment)
         time.sleep(2)
         self.verify_text_on_page(text="R-25-173-2448-1")
+
+    def filter_departure_status_lke(self) -> NoReturn:
+        self.click_button(self.status)
+        time.sleep(2)
+        self.click_button(self.waiting_shipment)
+        time.sleep(2)
+        self.verify_text_on_page(text="R-25-47-2447-1")
 
     def filter_type_gm(self) -> NoReturn:
         self.input_in_field(self.departure_address_gm, "Ижевск", wait='lst')

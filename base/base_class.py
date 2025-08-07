@@ -10,7 +10,7 @@ import allure
 from selenium import webdriver
 from selenium.common import TimeoutException, ElementClickInterceptedException
 from selenium.webdriver import ActionChains, Keys
-from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -63,37 +63,40 @@ class Base:
 
     @classmethod
     def get_driver(cls: Type['Base']) -> 'Base':
-        """
-        Создает и возвращает экземпляр драйвера с нужными настройками в зависимости от операционной системы.
+        options = Options()
 
-        Returns
-        -------
-        Base
-            Экземпляр класса Base с инициализированным веб-драйвером.
-        """
-        options = webdriver.ChromeOptions()
-
-        # Настройки драйвера для разных операционных систем
-        chrome_driver_path = WINDOWS_DRIVER_PATH if platform.system() == 'Windows' else LINUX_DRIVER_PATH
-        # options.add_argument('--headless')
-        options.add_argument('--window-size=1920x1080')
+        # Общие настройки
+        options.add_argument('--window-size=1920,1080')
         options.add_argument('--force-device-scale-factor=0.8')
 
         if platform.system() != 'Windows':
-            # Дополнительные параметры для Linux
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
-            options.add_argument('--headless')
             options.add_argument('--remote-debugging-port=9222')
             options.add_argument('--disable-software-rasterizer')
             options.add_argument('--disable-setuid-sandbox')
 
-        service = Service(chrome_driver_path)
-        driver = webdriver.Chrome(options=options, service=service)
+        # Определяем, запущено ли в Jenkins
+        is_in_jenkins = 'JENKINS_HOME' in os.environ
 
-        # Шаг в Allure и вывод в консоль
-        with allure.step(title="Start test"):
+        if is_in_jenkins:
+            print("🚀 Запуск в режиме Selenoid (автоопределение Jenkins)...")
+
+            # Capabilities для Selenoid
+            options.set_capability('enableVNC', True)
+            options.set_capability('enableVideo', True)
+            options.set_capability('name', 'vezubr-autotest')
+
+            driver = webdriver.Remote(
+                command_executor='http://192.168.1.200:4444/wd/hub',
+                options=options
+            )
+        else:
+            print("💻 Запуск локального Chrome...")
+            driver = webdriver.Chrome(options=options)
+
+        with allure.step("Start test"):
             print("Start test")
 
         return cls(driver)
@@ -1195,9 +1198,9 @@ class Base:
         self.click_button(click_to, index=click_index, wait_type=click_wait_type, do_assert=do_assert, wait=wait)
 
     def click_then_click(self, first_click: dict, second_click: dict,
-                                first_index: int = 1, second_index: int = 1,
-                                first_wait_type: str = 'clickable', second_wait_type: str = 'clickable',
-                                do_assert: bool = False, wait: str = None) -> None:
+                         first_index: int = 1, second_index: int = 1,
+                         first_wait_type: str = 'clickable', second_wait_type: str = 'clickable',
+                         do_assert: bool = False, wait: str = None) -> None:
         """
         Совершает клик по первому элементу, ждёт 1 секунду, затем кликает по второму.
 
@@ -1368,4 +1371,3 @@ class Base:
                         self.click_button(button_element, index=i, wait_type=wait_type)
                 except ElementClickInterceptedException:
                     print(f"ElementClickInterceptedException: unable to click button at index {i}")
-

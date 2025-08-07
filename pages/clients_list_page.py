@@ -1,3 +1,5 @@
+from typing import Optional
+
 from base.base_class import Base
 import requests
 import time
@@ -79,7 +81,7 @@ class ClientsList(Base):
     }
 
     """Creation of a valid INN"""
-    def find_valid_inn(self) -> str | None:
+    def find_valid_inn(self) -> Optional[str]:
 
         # получения токена
         try:

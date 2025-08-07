@@ -13,27 +13,27 @@ from pages.filters_gm_lkz_lke_page import GmFilters
 def test_filter_departures_lke(base_fixture, domain, request):
     base, sidebar = base_fixture
 
-    with allure.step("Переходим на вкладку 'Задания'"):
+    with allure.step("Переходим на вкладку 'отправления'"):
         sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.dispatch_list_button)
         add = GmFilters(base.driver)
 
     with allure.step("Проверка фильтра 'Номер рейса'"):
-        add.input_in_field(add.flight_number, "R-25-173-2448-1", wait='lst')
+        add.input_in_field(add.flight_number, "R-25-47-2447-1", wait='lst')
         time.sleep(2)
-        add.verify_text_on_page(text="2448445390000")
+        add.verify_text_on_page(text="2448436500000")
         add.backspace_and_input(add.flight_number, "")
 
     with allure.step("Проверка фильтра 'По заданию №'"):
-        add.input_in_field(add.according_task, "2448442650000", wait='lst')
+        add.input_in_field(add.according_task, "2448436500000", wait='lst')
         time.sleep(2)
-        add.verify_text_on_page(text="R-25-122-2448-1")
+        add.verify_text_on_page(text="R-25-47-2447-1")
         add.backspace_and_input(add.according_task, "")
 
     with allure.step("Проверка фильтров 'Адрес отправления/доставки'"):
-        add.filter_departures_address()
+        add.filter_departures_address_lke()
 
     with allure.step("Проверка фильтра 'Статус'"):
-        add.filter_departure_status()
+        add.filter_departure_status_lke()
 
 
 @allure.story("Extended")

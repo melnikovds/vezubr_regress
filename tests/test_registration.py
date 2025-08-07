@@ -10,6 +10,7 @@ from pages.producers_list_page import ProducersList
 from pages.registration_page import Registration
 from pages.sidebar import SideBar
 from pages.sms_center_page import SmsCenter
+from tests.conftest import api_login
 
 
 @allure.story("Smoke test")
@@ -276,7 +277,7 @@ def test_registration_new_lkp(base_fixture, domain):
 @allure.feature('Регистрация личного кабинета')
 @allure.description('Создания внутреннего грузовладельца')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)
-def test_create_inner_client(base_fixture, domain):
+def test_create_inner_client(base_fixture, domain, api_login):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
 
@@ -290,8 +291,7 @@ def test_create_inner_client(base_fixture, domain):
 
     # Заполнение данных внутреннего ГВ
     # generated_inn = client_list.generate_inn("entity")
-    generated_inn = client_list.find_valid_inn()
-
+    generated_inn = client_list.find_valid_inn(api_login)
     client_list.input_in_field(client_list.inn_inner_client, value=generated_inn, click_first=True)
     generated_kpp = ''.join([str(random.randint(0, 9)) for _ in range(9)])
     client_list.input_in_field(client_list.kpp_inner_client, value=generated_kpp)
@@ -310,19 +310,43 @@ def test_create_inner_client(base_fixture, domain):
     generated_phone = ''.join([str(random.randint(0, 9)) for _ in range(10)])
     client_list.input_in_field(client_list.phone_field, value=generated_phone, click_first=True)
 
-    time.sleep(5)
+    time.sleep(1)
     # Нажимаем кнопку создать
     client_list.click_button(client_list.create_client_button)
+    time.sleep(2)
+    client_list.click_button(client_list.ok_popup)
+
+    client_list.reload_page()
     time.sleep(5)
+
+    # Проверяем наличие созданных сущностей
+    client_list.click_button(client_list.general_information)
+    client_list.verify_text_on_page(text=generated_inn, should_exist=True)
+    client_list.verify_text_on_page(text=generated_kpp, should_exist=True)
+
+    client_list.verify_text_on_page(text=generated_last_name, should_exist=True)
+    client_list.verify_text_on_page(text=generated_first_name, should_exist=True)
+    client_list.verify_text_on_page(text=generated_middle_name, should_exist=True)
+    client_list.verify_text_on_page(text=generated_email, should_exist=True)
+    client_list.verify_text_on_page(text=generated_phone, should_exist=True)
+    # Конец теста
 
 
 @allure.story("Smoke test")
 @allure.feature('Регистрация личного кабинета')
 @allure.description('Создания внутреннего подрядчика')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)
-def test_create_inner_producer(base_fixture, domain):
+def test_create_inner_producer(base_fixture, domain, api_login):
     # Инициализация базовых объектов через фикстуру
-    base, login = base_fixture
+    base, sidebar = base_fixture
+
+    # Переход к списку подрядчиков
+    sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.producers_list_button,
+                           do_assert=True, wait="lst")
+
+
+
+
 
 
   

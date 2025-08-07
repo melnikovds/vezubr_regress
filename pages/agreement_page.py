@@ -7,9 +7,17 @@ class Agreement(Base):
         self.driver = driver
 
     # Locators
+    main_tab = {
+        "xpath": "//a[contains(.,'Основное')]",
+        "name": "main_tab"
+    }
     extra_agreement_tab = {
         "xpath": "//a[text()='ДУ тарификации']",
         "name": "extra_agreement_tab"
+    }
+    additional_tab = {
+        "xpath": "//a[contains(.,'Дополнительное')]",
+        "name": "additional_tab"
     }
     add_extra_agr_button = {
         "xpath": "//p[@class='no-margin']",

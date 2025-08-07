@@ -1,7 +1,7 @@
 import time
 import allure
 import pytest
-from pages.manual_page import Manual
+from pages.filter_directory_page import Manual
 
 
 @allure.story("Extended test")
@@ -18,10 +18,10 @@ def test_tariff_directory_lkp(base_fixture, domain):
 
     add = Manual(base.driver)
     # проверка фильтра "Название тарифа"
-    add.input_in_field(add.tariff_name, value='20241204172', click_first=True)
+    add.input_in_field(add.tariff_name, value='721104747', click_first=True)
     time.sleep(2)
-    add.verify_text_on_page(text='LTL-20241204172745', should_exist=True)
-    add.verify_text_on_page(text='ГГ-20241210025702', should_exist=False)
+    add.verify_text_on_page(text='LTL-20250721104747', should_exist=True)
+    add.verify_text_on_page(text='ГГ-20250721104109', should_exist=False)
     time.sleep(1)
     add.backspace_and_input(add.tariff_name, value='')
     time.sleep(2)
@@ -36,7 +36,7 @@ def test_tariff_directory_lkp(base_fixture, domain):
     # проверка №2 фильтра "Статус"
     add.dropdown_without_input(add.tariff_status, option_text='Активный')
     time.sleep(2)
-    add.verify_text_on_page(text='ПЧ-20250430024902', should_exist=True)
+    add.verify_text_on_page(text='ПЧ-20250721104038', should_exist=True)
     add.verify_text_on_page(text='ПРР-20241205194647', should_exist=False)
     time.sleep(2)
 
@@ -45,7 +45,7 @@ def test_tariff_directory_lkp(base_fixture, domain):
     add.dropdown_without_input(add.tariff_status, option_text='Не активный')
     time.sleep(2)
     add.find_text_on_page(text='83834', occurrences=3)
-    add.verify_text_on_page(text='10.12.2024 01:11', should_exist=True)
+    add.verify_text_on_page(text='10.12.2024 00:11', should_exist=True)
     add.verify_text_on_page(text='ПРР-20241209145054', should_exist=False)
     add.verify_text_on_page(text='212151', should_exist=False)
     time.sleep(2)
@@ -54,10 +54,10 @@ def test_tariff_directory_lkp(base_fixture, domain):
     add.backspace_and_input(add.tariff_name, value='')
 
     # проверка №2 фильтра с несколькими значениями
-    add.input_in_field(add.tariff_name, value='ПЧ-20240716214624', click_first=True)
+    add.input_in_field(add.tariff_name, value='ПЧ-20250705130434', click_first=True)
     add.dropdown_without_input(add.tariff_status, option_text='Активный')
     time.sleep(2)
-    add.find_text_on_page(text='624', occurrences=3)
+    add.find_text_on_page(text='30434', occurrences=3)
     add.verify_text_on_page(text='10.12.2024 00:11', should_exist=False)
     add.verify_text_on_page(text='ПРР-20241209145054', should_exist=False)
     add.verify_text_on_page(text='212151', should_exist=False)

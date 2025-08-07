@@ -9,7 +9,7 @@ from pages.setting_page import Settings
 @allure.feature('Тестирование подразделений')
 @allure.description('ЛКП, Создание подразделения')
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
-def test_create_subdivision_lkz(base_fixture, domain):
+def test_create_subdivision_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
     sidebar.click_button(sidebar.settings_button, do_assert=True)
@@ -35,7 +35,7 @@ def test_create_subdivision_lkz(base_fixture, domain):
 @allure.feature('Тестирование подразделений')
 @allure.description('ЛКП, Назначение пользователя в подразделение')
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
-def test_accept_user_to_division_lkz(base_fixture, domain):
+def test_accept_user_to_division_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
     # Открываем настройки профиля
@@ -55,7 +55,7 @@ def test_accept_user_to_division_lkz(base_fixture, domain):
 @allure.feature('Тестирование подразделений')
 @allure.description('ЛКП, Редактирование и удаление подразделения')
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
-def test_edit_subdivision_lkz(base_fixture, domain):
+def test_edit_subdivision_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
     sidebar.click_button(sidebar.settings_button, do_assert=True)

@@ -546,6 +546,12 @@ def test_filter_regular_order_lkz(base_fixture, domain):
     time.sleep(1)
     add.backspace_and_input(add.template_name, value='')
 
+    # проверка фильтра "статус"
+    add.dropdown_with_input(add.template_status, option_text='Активный')
+    time.sleep(1)
+    add.verify_text_on_page(text='25-172973', should_exist=True)
+    add.verify_text_on_page(text='1-22', should_exist=False)
+
     # проверка фильтра "тип рейса"
     add.click_and_select_with_arrows(add.order_type, arrow_presses=0)
     time.sleep(1)
@@ -667,7 +673,7 @@ def test_filter_insured_order_lkz(base_fixture, domain):
     add.dropdown_with_input(add.order_stage, option_text='подбор')
     add.click_button(add.checkbox_one)
     time.sleep(3)
-    add.verify_text_on_page(text='37099', should_exist=True)
+    add.verify_text_on_page(text='R-25-217', should_exist=True)
     add.verify_text_on_page(text='R-25-79-2448-1', should_exist=False)
 
     add.move_to_element(add.order_stage)
@@ -677,7 +683,7 @@ def test_filter_insured_order_lkz(base_fixture, domain):
     add.dropdown_with_input(add.order_stage, option_text='исполнение')
     add.click_button(add.checkbox_two)
     time.sleep(3)
-    add.verify_text_on_page(text='R-25-76-2448-1', should_exist=True)
+    add.verify_text_on_page(text='R-25-218', should_exist=True)
     add.verify_text_on_page(text='R-25-79-2448-1', should_exist=False)
 
     add.move_to_element(add.order_stage)
@@ -687,7 +693,7 @@ def test_filter_insured_order_lkz(base_fixture, domain):
     add.dropdown_with_input(add.order_stage, option_text='расч')
     add.click_button(add.checkbox_three)
     time.sleep(3)
-    add.verify_text_on_page(text='R-25-79-2448-1', should_exist=True)
+    add.verify_text_on_page(text='R-25-219', should_exist=True)
     add.verify_text_on_page(text='R-25-77-2448-1', should_exist=False)
 
     add.move_to_element(add.order_stage)
@@ -697,7 +703,7 @@ def test_filter_insured_order_lkz(base_fixture, domain):
     add.dropdown_with_input(add.order_stage, option_text='отме')
     add.click_button(add.checkbox_four)
     time.sleep(3)
-    add.verify_text_on_page(text='R-25-77-2448-1', should_exist=True)
+    add.verify_text_on_page(text='R-25-220', should_exist=True)
     add.verify_text_on_page(text='R-25-79-2448-1', should_exist=False)
 
     add.move_to_element(add.order_stage)

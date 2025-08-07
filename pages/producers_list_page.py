@@ -1,4 +1,7 @@
 from base.base_class import Base
+import requests
+import time
+from tests.conftest import api_login
 
 
 class ProducersList(Base):
@@ -96,4 +99,46 @@ class ProducersList(Base):
     create_producer_button = {
         "xpath": "//button[contains(.,'Создать')]",
         "name": "create_producer_button"
+    }
+    ok_popup = {
+        "xpath": "//button[contains(.,'OK')]",
+        "name": "ok_popup"
+    }
+
+    """Creation of a valid INN"""
+    def find_valid_inn(self, api_login) -> str | None:
+
+        token = api_login("lke")
+
+        url = "https://api.vezubr.com/v1/api/organization/get"
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {token}"
+        }
+
+        attempt = 1
+        while True:
+            generated_inn = self.generate_inn("entity")
+            response = requests.post(
+                url,
+                json={"inn": generated_inn},
+                headers=headers
+            )
+
+            print(f"[{attempt}] Проверка ИНН {generated_inn} — статус: {response.status_code}")
+            attempt += 1
+
+            if response.status_code == 200:
+                data = response.json()
+                if data:  # если список не пустой
+                    print(f"Найден валидный ИНН: {generated_inn}")
+                    return generated_inn
+
+            time.sleep(1)  # антиспам
+
+
+    """Inner producer"""
+    general_information = {
+        "xpath": "//div[contains(@class,'vz-tabs-modern vz-tabs-modern--has-matched-count-2 counterparty-tabs')]",
+        "name": "general_information"
     }

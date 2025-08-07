@@ -2,6 +2,7 @@ pages/login.py
 results/
 /screens/
 /allure-report/
+allure-report/
 /result_new/
 result_new
 
@@ -166,4 +167,3 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 /.idea/
-

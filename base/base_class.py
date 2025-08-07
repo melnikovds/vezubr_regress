@@ -10,11 +10,12 @@ import allure
 from selenium import webdriver
 from selenium.common import TimeoutException, ElementClickInterceptedException
 from selenium.webdriver import ActionChains, Keys
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 
 """Variable"""
 # Определение пути к драйверам
@@ -63,6 +64,11 @@ class Base:
 
     @classmethod
     def get_driver(cls: Type['Base']) -> 'Base':
+        """
+        Создает и возвращает экземпляр драйвера.
+        В Jenkins — подключается к Selenoid или запускает headless Chrome.
+        Локально — запускает видимый Chrome.
+        """
         options = Options()
 
         # Общие настройки
@@ -77,26 +83,43 @@ class Base:
             options.add_argument('--disable-software-rasterizer')
             options.add_argument('--disable-setuid-sandbox')
 
-        # Определяем, запущено ли в Jenkins
-        is_in_jenkins = 'JENKINS_HOME' in os.environ
+        # Определяем, запущено ли в CI (Jenkins)
+        is_in_jenkins = 'JENKINS_HOME' in os.environ or 'USE_SELENOID' in os.environ
 
-        if is_in_jenkins:
-            print("🚀 Запуск в режиме Selenoid (автоопределение Jenkins)...")
+        # Проверяем, нужно ли использовать Selenoid
+        use_selenoid = os.getenv("USE_SELENOID", "false").lower() == "true"
+
+        if use_selenoid:
+            print("🚀 Запуск в режиме Selenoid...")
+
+            # Обязательные аргументы для Linux
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-gpu')
 
             # Capabilities для Selenoid
             options.set_capability('enableVNC', True)
             options.set_capability('enableVideo', True)
             options.set_capability('name', 'vezubr-autotest')
 
+            # Подключаемся к Selenoid
             driver = webdriver.Remote(
-                command_executor='http://192.168.1.200:4444/wd/hub',
-                options=options
+            command_executor='http://192.168.1.200:4444/wd/hub',
+            options=options
             )
         else:
-            print("💻 Запуск локального Chrome...")
+            print(" Запуск локального Chrome...")
+
+            # Добавляем headless, если в Jenkins (даже при локальном Chrome)
+            if is_in_jenkins:
+                options.add_argument('--headless=new')
+                print("📌 Режим headless включен (Jenkins detected)")
+
+            # Используем Selenium Manager
             driver = webdriver.Chrome(options=options)
 
-        with allure.step("Start test"):
+        # Шаг в Allure
+        with allure.step(title="Start test"):
             print("Start test")
 
         return cls(driver)
@@ -1198,9 +1221,9 @@ class Base:
         self.click_button(click_to, index=click_index, wait_type=click_wait_type, do_assert=do_assert, wait=wait)
 
     def click_then_click(self, first_click: dict, second_click: dict,
-                         first_index: int = 1, second_index: int = 1,
-                         first_wait_type: str = 'clickable', second_wait_type: str = 'clickable',
-                         do_assert: bool = False, wait: str = None) -> None:
+                                first_index: int = 1, second_index: int = 1,
+                                first_wait_type: str = 'clickable', second_wait_type: str = 'clickable',
+                                do_assert: bool = False, wait: str = None) -> None:
         """
         Совершает клик по первому элементу, ждёт 1 секунду, затем кликает по второму.
 
@@ -1371,3 +1394,4 @@ class Base:
                         self.click_button(button_element, index=i, wait_type=wait_type)
                 except ElementClickInterceptedException:
                     print(f"ElementClickInterceptedException: unable to click button at index {i}")
+

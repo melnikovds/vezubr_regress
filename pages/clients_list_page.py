@@ -1,5 +1,3 @@
-from typing import Optional
-
 from base.base_class import Base
 import requests
 import time
@@ -79,19 +77,26 @@ class ClientsList(Base):
         "xpath": "//button[contains(.,'Создать')]",
         "name": "create_client_button"
     }
+    ok_popup = {
+        "xpath": "//button[contains(.,'OK')]",
+        "name": "ok_popup"
+    }
 
     """Creation of a valid INN"""
-    def find_valid_inn(self) -> Optional[str]:
+    def find_valid_inn(self, api_login) -> str | None:
+
+        token = api_login("lke")
 
         # получения токена
-        try:
-            token = self.api_login("lke")
-            if not token:
-                raise ValueError("Токен не получен")
-            print(f" Получен токен: {token}")
-        except Exception as e:
-            print(f"Ошибка при авторизации: {e}")
-            return None
+        # try:
+        #     token = self.api_login("lke")
+        #     if not token:
+        #         raise ValueError("токен не получен")
+        #     print(f"получен токен: {token}")
+        # except Exception as e:
+        #     print(f"ошибка при авторизации: {e}")
+        #     return None
+
 
         url = "https://api.vezubr.com/v1/api/organization/get"
         headers = {

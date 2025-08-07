@@ -1,7 +1,7 @@
 import time
 import allure
 import pytest
-from pages.manual_page import Manual
+from pages.filter_directory_page import Manual
 
 
 @allure.story("Extended test")
@@ -103,6 +103,9 @@ def test_address_directory_lkz(base_fixture, domain):
     # сброс фильтров
     add.click_button(element_dict=add.reset)
 
+    add.dropdown_without_input(add.filter_date_create, option_text='За все время')
+    time.sleep(2)
+
     # проверка фильтра регион
     add.dropdown_without_input(add.region, option_text='Псковская область')
     time.sleep(1)
@@ -111,6 +114,9 @@ def test_address_directory_lkz(base_fixture, domain):
 
     # сброс фильтров
     add.click_button(element_dict=add.reset)
+
+    add.dropdown_without_input(add.filter_date_create, option_text='За все время')
+    time.sleep(2)
 
     # проверка фильтра "Подтвердил"
     add.input_in_field(add.approved, value='auto@LKZ.com', wait='lst')
@@ -133,6 +139,9 @@ def test_address_directory_lkz(base_fixture, domain):
 
     # сброс фильтров
     add.click_button(element_dict=add.reset)
+
+    add.dropdown_without_input(add.filter_date_create, option_text='За все время')
+    time.sleep(2)
 
     # создание фильтра с несколькими значениями
     add.input_in_field(add.approved, value='auto@LKZ.com', wait='lst')
@@ -162,6 +171,9 @@ def test_address_directory_lkz(base_fixture, domain):
 
     # обновление страницы
     add.refresh_page()
+
+    add.dropdown_without_input(add.filter_date_create, option_text='За все время')
+    time.sleep(2)
 
     # проверка работы Сохранённого фильтра №2
     add.click_button(element_dict=add.saved_filters)
@@ -239,7 +251,7 @@ def test_tariff_directory_lkz(base_fixture, domain):
     # проверка №2 фильтра "Статус"
     add.dropdown_without_input(add.tariff_status, option_text='Активный')
     time.sleep(5)
-    add.verify_text_on_page(text='ГГ-20250514110632', should_exist=True)
+    add.verify_text_on_page(text='ГГ-20250705130741', should_exist=True)
     add.verify_text_on_page(text='ПРР-20241206111102', should_exist=False)
     time.sleep(2)
 

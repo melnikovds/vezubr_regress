@@ -78,7 +78,7 @@ def test_cargo_place_edit_own_lke(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку грузомест
-    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button,
+    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button_lke,
                            do_assert=True, wait="lst")
     
     time.sleep(1.5)

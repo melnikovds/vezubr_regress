@@ -5,33 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="456948c0-3270-4b5d-a3cf-cc313c21f73e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vezubr_regress.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vezubr_regress.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/base_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/base/base_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/agreement_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/agreement_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/clients_list_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/clients_list_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/filter_old_ftl_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/filter_old_ftl_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/filters_gm_lkz_lke_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/filters_gm_lkz_lke_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/manual_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/filter_directory_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/producers_list_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/producers_list_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/settings_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/settings_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/sidebar.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/sidebar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_driver_add_lkp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_driver_add_lkp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_driver_edit_lkp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_driver_edit_lkp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/notifications_lke_i_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/notifications_lke_i_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/notifications_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/notifications_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_cargo_place_edit.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_cargo_place_edit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_cargo_place_operations.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_cargo_place_operations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_driver_add_lke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_driver_add_lke.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_driver_edit_lke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_driver_edit_lke.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_extra_agreement_add_lke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_extra_agreement_add_lke.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_extra_agreement_add_lkp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_extra_agreement_add_lkp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_extra_agreement_add_lkz.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_extra_agreement_add_lkz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_filter_lkz.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_filter_lkz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_filter_old_ftl.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_filter_old_ftl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_manual_lke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_filter_directory_lke.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_manual_lkp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_filter_directory_lkp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_manual_lkz.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_filter_directory_lkz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_filter_lke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_filter_lke.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_notifications_lke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_notifications_lke.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_notifications_lkz.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_notifications_lkz.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_profile_edit.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_profile_edit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_registration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_settings_custom_lkz.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_settings_custom_lkz.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_sorting.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_sorting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_subdivision_lkp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_subdivision_lkp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,6 +132,15 @@
       <workItem from="1753798486412" duration="3495000" />
       <workItem from="1753967249779" duration="21000" />
       <workItem from="1753969720352" duration="1864000" />
+      <workItem from="1754066336047" duration="1484000" />
+      <workItem from="1754077269022" duration="6000" />
+      <workItem from="1754191128769" duration="4183000" />
+      <workItem from="1754391975556" duration="654000" />
+      <workItem from="1754401748526" duration="792000" />
+      <workItem from="1754551810819" duration="17997000" />
+      <workItem from="1754649766343" duration="7000" />
+      <workItem from="1755256401987" duration="4088000" />
+      <workItem from="1755616446100" duration="9237000" />
     </task>
     <servers />
   </component>

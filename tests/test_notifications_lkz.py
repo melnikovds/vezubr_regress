@@ -137,3 +137,12 @@ def test_notification_field_lkz(base_fixture, domain):
     add.click_button(add.safe_notifications, wait='form')
 
     # Конец теста
+
+
+
+    # add.dropdown_without_input(add.driver_search_sms, option_text="не уведомлять", index=1)
+
+
+
+
+

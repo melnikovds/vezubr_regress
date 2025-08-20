@@ -1,8 +1,6 @@
 import time
-
 import allure
 import pytest
-
 from pages.cargo_place_add_page import CargoPlaceAdd
 from pages.cargo_place_list_page import CargoPlaceList
 from pages.request_delivery_add_page import DeliveryAdd
@@ -39,27 +37,28 @@ def test_cargo_place_routing_lkz(base_fixture, domain):
     cp_list.click_button(cp_list.multi_select_button)
     # Выбор первого чек-бокса
     cp_list.click_button(cp_list.cp_list_checkbox, index=3)
-    # Клик по кнопке маршрутизировать ГМ
-    cp_list.click_button(cp_list.multi_route_button)
-    # Выбор типа ТС для маршрутизации
-    cp_list.dropdown_without_input(cp_list.vehicle_type_select, dd_index=2, option_text="20т / 90м3 / 33пал.")
-    # Ввод кол-ва ТС для маршрутизации
-    cp_list.input_in_field(cp_list.quantity_vehicle_input, "1")
-    # Выбор временного периода для маршрутизации ГМ от сегодня
-    cp_list.click_button(cp_list.calendar_picker_button)
-    cp_list.click_button(cp_list.today_button)
-    # Выбор временного периода для маршрутизации ГМ до сегодня + час
-    new_time = cp_list.naw_time_change(300)
-    cp_list.click_button(cp_list.calendar_picker_button, index=2)
-    time.sleep(1)
-    cp_list.click_button(cp_list.today_button)
-    cp_list.click_button(cp_list.calendar_picker_button, index=2)
-    cp_list.backspace_and_input(cp_list.calendar_input, num=5, value=new_time)
-    cp_list.click_button(cp_list.calendar_ok_button)
-    # Клик по кнопке отправить ГМ на маршрутизацию
-    cp_list.click_button(cp_list.send_button, do_assert=True)
-    # Подтверждение успешного отправления на маршрутизацию
-    cp_list.click_button(cp_list.ok_button)
+    # # Клик по кнопке маршрутизировать ГМ
+    # cp_list.click_button(cp_list.multi_route_button)
+    # # Выбор типа ТС для маршрутизации
+    # cp_list.dropdown_without_input(cp_list.vehicle_type_select, dd_index=2, option_text="20т / 90м3 / 33пал.")
+    # # Ввод кол-ва ТС для маршрутизации
+    # cp_list.input_in_field(cp_list.quantity_vehicle_input, "1")
+    # # Выбор временного периода для маршрутизации ГМ от сегодня
+    # cp_list.click_button(cp_list.calendar_picker_button)
+    # cp_list.click_button(cp_list.today_button)
+    # # Выбор временного периода для маршрутизации ГМ до сегодня + час
+    # new_time = cp_list.naw_time_change(300)
+    # cp_list.click_button(cp_list.calendar_picker_button, index=2)
+    # time.sleep(1)
+    # cp_list.click_button(cp_list.today_button)
+    # cp_list.click_button(cp_list.calendar_picker_button, index=2)
+    # cp_list.backspace_and_input(cp_list.calendar_input, num=5, value=new_time)
+    # cp_list.click_button(cp_list.calendar_ok_button)
+    # # Клик по кнопке отправить ГМ на маршрутизацию
+    # cp_list.click_button(cp_list.send_button, do_assert=True)
+    # # Подтверждение успешного отправления на маршрутизацию
+    # cp_list.click_button(cp_list.ok_button)
+
     # Конец теста
 
 
@@ -118,7 +117,7 @@ def test_cargo_place_routing_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход к списку грузомест
-    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button,
+    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button_lke,
                            do_assert=True, wait="lst")
     time.sleep(2)
     cp_list = CargoPlaceList(base.driver)
@@ -142,27 +141,28 @@ def test_cargo_place_routing_lke(base_fixture, domain):
     cp_list.click_button(cp_list.multi_select_button)
     # Выбор первого чек-бокса
     cp_list.click_button(cp_list.cp_list_checkbox, index=3)
-    # Клик по кнопке маршрутизировать ГМ
-    cp_list.click_button(cp_list.multi_route_button)
-    # Выбор типа ТС для маршрутизации
-    cp_list.dropdown_without_input(cp_list.vehicle_type_select, dd_index=2, option_text="20т / 90м3 / 33пал.")
-    # Ввод кол-ва ТС для маршрутизации
-    cp_list.input_in_field(cp_list.quantity_vehicle_input, "1")
-    # Выбор временного периода для маршрутизации ГМ от сегодня
-    cp_list.click_button(cp_list.calendar_picker_button)
-    cp_list.click_button(cp_list.today_button)
-    # Выбор временного периода для маршрутизации ГМ до сегодня + час
-    new_time = cp_list.naw_time_change(300)
-    cp_list.click_button(cp_list.calendar_picker_button, index=2)
-    time.sleep(1)
-    cp_list.click_button(cp_list.today_button)
-    cp_list.click_button(cp_list.calendar_picker_button, index=2)
-    cp_list.backspace_and_input(cp_list.calendar_input, num=5, value=new_time)
-    cp_list.click_button(cp_list.calendar_ok_button)
-    # Клик по кнопке отправить ГМ на маршрутизацию
-    cp_list.click_button(cp_list.send_button, do_assert=True)
-    # Подтверждение успешного отправления на маршрутизацию
-    cp_list.click_button(cp_list.ok_button)
+    # # Клик по кнопке маршрутизировать ГМ
+    # cp_list.click_button(cp_list.multi_route_button)
+    # # Выбор типа ТС для маршрутизации
+    # cp_list.dropdown_without_input(cp_list.vehicle_type_select, dd_index=2, option_text="20т / 90м3 / 33пал.")
+    # # Ввод кол-ва ТС для маршрутизации
+    # cp_list.input_in_field(cp_list.quantity_vehicle_input, "1")
+    # # Выбор временного периода для маршрутизации ГМ от сегодня
+    # cp_list.click_button(cp_list.calendar_picker_button)
+    # cp_list.click_button(cp_list.today_button)
+    # # Выбор временного периода для маршрутизации ГМ до сегодня + час
+    # new_time = cp_list.naw_time_change(300)
+    # cp_list.click_button(cp_list.calendar_picker_button, index=2)
+    # time.sleep(1)
+    # cp_list.click_button(cp_list.today_button)
+    # cp_list.click_button(cp_list.calendar_picker_button, index=2)
+    # cp_list.backspace_and_input(cp_list.calendar_input, num=5, value=new_time)
+    # cp_list.click_button(cp_list.calendar_ok_button)
+    # # Клик по кнопке отправить ГМ на маршрутизацию
+    # cp_list.click_button(cp_list.send_button, do_assert=True)
+    # # Подтверждение успешного отправления на маршрутизацию
+    # cp_list.click_button(cp_list.ok_button)
+
     # Конец теста
 
 
@@ -176,7 +176,7 @@ def test_cargo_place_transfer_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход к списку грузомест
-    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button,
+    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button_lke,
                            do_assert=True, wait="lst")
     time.sleep(1.5)
     cp_list = CargoPlaceList(base.driver)

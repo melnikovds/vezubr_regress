@@ -1,9 +1,7 @@
 import time
-
 import allure
 import pytest
-
-from pages.notifications_lke_i_page import Notification
+from pages.notifications_page import NotificationLKE
 from pages.setting_page import Settings
 
 
@@ -20,7 +18,7 @@ def test_notification_field_lke(base_fixture, domain):
     notification = Settings(base.driver)
     notification.click_button(notification.notification_field)
 
-    add = Notification(base.driver)
+    add = NotificationLKE(base.driver)
     add.click_button(add.click_sms)
     add.dropdown_without_input(add.day_to_allowed, "Никогда")
     add.dropdown_without_input(add.send_notification, "По всем Рейсам")

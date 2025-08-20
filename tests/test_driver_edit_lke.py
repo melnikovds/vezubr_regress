@@ -2,6 +2,7 @@ import allure
 import pytest
 from pages.driver_add_page import DriverAdd
 from pages.driver_list_page import DriverList
+from pages.filter_directory_page import Manual
 
 
 @allure.story("Critical path test")
@@ -29,6 +30,9 @@ def test_driver_edit_own_lke(base_fixture, domain):
     surname = add_driver.add_base_driver()
     
     # Поиск и выбор созданного водителя по фамилии
+    driver_filter = Manual(base.driver)
+    driver_filter.move_to_element(driver_filter.status_in_system)
+    driver_filter.click_on_the_cross(driver_filter.cross_two)
     driver_list.input_in_field(driver_list.surname_filter, value=surname, wait="lst")
     driver_list.click_button(driver_list.first_driver_link, wait="form")
     
@@ -102,6 +106,9 @@ def test_driver_edit_inner_lke(base_fixture, domain):
     surname = add_driver.add_base_inner_driver()
     
     # Поиск и выбор созданного водителя по фамилии
+    driver_filter = Manual(base.driver)
+    driver_filter.move_to_element(driver_filter.status_in_system)
+    driver_filter.click_on_the_cross(driver_filter.cross_two)
     driver_list.input_in_field(driver_list.surname_filter, value=surname, wait="lst")
     driver_list.click_button(driver_list.first_driver_link, wait="form")
     

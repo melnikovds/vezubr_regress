@@ -47,9 +47,10 @@ def test_extra_agreements_client_add_lkp(base_fixture, domain):
     # Клик по кнопке удаления ДУ
     agreement.click_button(agreement.delete_extra_agr_button)
     # Клик по кнопке подтверждения удаления ДУ
-    # agreement.click_button(agreement.yes_button, wait="form")
     agreement.click_button(agreement.yes_button, wait_type='visible')
-    time.sleep(1.5)
+    time.sleep(1)
     # Проверка отсутствия удаленного ДУ
+    agreement.refresh_page()
+    time.sleep(4)
     agreement.verify_text_on_page(extra_agr_number, should_exist=False)
     # Конец теста

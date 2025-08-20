@@ -1,8 +1,6 @@
 import time
-
 import allure
 import pytest
-
 from pages.filters_gm_lkz_lke_page import GmFilters
 
 

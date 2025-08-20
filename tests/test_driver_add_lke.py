@@ -3,7 +3,7 @@ import allure
 import pytest
 from pages.driver_add_page import DriverAdd
 from pages.driver_list_page import DriverList
-
+from pages.filter_directory_page import Manual
 
 @allure.story("Smoke test")
 @allure.feature('Создание и операции с водителями')
@@ -28,6 +28,9 @@ def test_own_driver_add_lke(base_fixture, domain):
     surname = add_driver.add_base_driver()
     
     # Фильтрация по фамилии водителя и переход к его профилю
+    driver_filter = Manual(base.driver)
+    driver_filter.move_to_element(driver_filter.status_in_system)
+    driver_filter.click_on_the_cross(driver_filter.cross_two)
     driver_list.input_in_field(driver_list.surname_filter, value=surname, wait="lst")
     driver_list.click_button(driver_list.first_driver_link, wait="form")
     
@@ -89,9 +92,12 @@ def test_inner_driver_add_lke(base_fixture, domain):
     surname = add_driver.add_base_inner_driver()
     
     # Фильтрация по фамилии водителя и переход к его профилю
+    driver_filter = Manual(base.driver)
+    driver_filter.move_to_element(driver_filter.status_in_system)
+    driver_filter.click_on_the_cross(driver_filter.cross_two)
     driver_list.input_in_field(driver_list.surname_filter, value=surname, wait="lst")
     driver_list.click_button(driver_list.first_driver_link, wait="form")
-    
+
     # Включить тогл готов работать как грузчик
     add_driver.click_button(add_driver.work_as_loader_toggl, wait="form")
     # Включить тогл никогда не делегировать

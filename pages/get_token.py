@@ -1,5 +1,6 @@
 import requests
 
+
 def get_access_token():
     # URL для получения токена
     auth_url = "https://api.vezubr.com/v1/api/user/login"
@@ -7,7 +8,7 @@ def get_access_token():
     # Данные для аутентификации (логин и пароль)
     auth_payload = {
         "username": "auto@LKZ.com",  # Замените на ваш логин
-        "password": "auto@LKZ.com"   # Замените на ваш пароль
+        "password": "auto@LKZ.com"  # Замените на ваш пароль
     }
 
     # Заголовки для запроса

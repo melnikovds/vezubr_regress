@@ -1,7 +1,9 @@
+import time
+
 import allure
 import pytest
 import requests
-import time
+
 from pages.generator_old_ftl_page import GeneratorFTL
 from pages.login import accounts
 from tests.base_test import base_test_with_login, base_test_without_login, base_test_with_login_via_link
@@ -23,29 +25,29 @@ def api_login(api_base_url):
     def _login(role: str):
         if role not in accounts:
             raise KeyError(f"Role '{role}' not found in accounts")
-        
+
         login_url = f"{api_base_url}/user/login"
         payload = {
             "username": accounts[role]["email"],
             "password": accounts[role]["password"]
         }
-        
+
         # Отправляем запрос на логин
         response = requests.post(login_url, json=payload)
         assert response.status_code == 200, f"Login failed for role {role}"
-        
+
         # Получаем токен
         token = response.json().get("token")
-        
+
         # Выводим сообщение о получении токена в консоль
         print(f"Token received for role '{role}'")
-        
+
         # Логируем получение токена в Allure
         with allure.step(f"Token received for role '{role}'"):
             pass  # Шаг отображается в Allure, но без токена
-        
+
         return token
-    
+
     return _login
 
 
@@ -58,10 +60,10 @@ def domain(request):
 def base_fixture(request, domain):
     # Проверяем, используется ли отчет Allure
     allure_dir = request.config.getoption("--alluredir", default=None)
-    
+
     # Получаем параметр из теста, который определяет тип теста и роль
     role = request.param
-    
+
     # Логика для выбора базового теста
     if role == 'without_login':
         base, login = base_test_without_login(domain)
@@ -74,10 +76,16 @@ def base_fixture(request, domain):
     else:
         base, sidebar = base_test_with_login(domain, role)
         base.allure_dir = allure_dir
-        yield base, sidebar
-    
-    # Завершаем сессию драйвера после выполнения теста
-    base.test_finish()
+
+    def fin():
+        base.test_finish()
+
+    request.addfinalizer(fin)
+
+    if role in ['without_login', 'via_link']:
+        return base, login
+    else:
+        return base, sidebar
 
 
 # Хук для сохранения скриншота в случае провала теста
@@ -86,13 +94,13 @@ def pytest_runtest_makereport(item, call):
     # Вызов теста и получение его результата
     outcome = yield
     report = outcome.get_result()
-    
+
     # Получаем кортеж (base, sidebar) через фикстуру
     base_fixture = item.funcargs.get('base_fixture', None)
-    
+
     if base_fixture:
         base, _ = base_fixture  # Извлекаем base из кортежа
-        
+
         # Если тест завершился с ошибкой и base доступен
         if report.when == "call" and report.failed and base:
             # Получаем имя теста

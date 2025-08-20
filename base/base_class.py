@@ -5,6 +5,7 @@ import re
 import time
 from datetime import datetime, timezone, timedelta
 from typing import Any, ClassVar, Dict, Type, NoReturn, Optional
+
 import allure
 from selenium import webdriver
 from selenium.common import TimeoutException, ElementClickInterceptedException
@@ -121,7 +122,7 @@ class Base:
         with allure.step(title="Start test"):
             print("Start test")
 
-        return cls(driver)  
+        return cls(driver)
 
     """ Test finish """
 

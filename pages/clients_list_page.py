@@ -1,13 +1,13 @@
 from base.base_class import Base
 import requests
 import time
-from tests.conftest import api_login
 
 
 class ClientsList(Base):
-    def __init__(self, driver):
+    def __init__(self, driver, api_login=None):
         super().__init__(driver)
         self.driver = driver
+        self.api_login = api_login
 
     # Locators
     client_lkz_inn = {
@@ -122,17 +122,7 @@ class ClientsList(Base):
                     print(f"Найден валидный ИНН: {generated_inn}")
                     return generated_inn
 
-            time.sleep(1)  # антиспам
-
-
-    """Inner client"""
-    general_information = {
-        "xpath": "//div[contains(@class,'vz-tabs-modern vz-tabs-modern--has-matched-count-2 counterparty-tabs')]",
-        "name": "general_information"
-    }
-
-
-
+            time.sleep(1)  # чтобы не спамить API
 
 
 

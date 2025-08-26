@@ -10,12 +10,11 @@ import allure
 from selenium import webdriver
 from selenium.common import TimeoutException, ElementClickInterceptedException
 from selenium.webdriver import ActionChains, Keys
-from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.chrome.options import Options
 
 """Variable"""
 # Определение пути к драйверам
@@ -104,8 +103,8 @@ class Base:
 
             # Подключаемся к Selenoid
             driver = webdriver.Remote(
-            command_executor='http://192.168.1.200:4444/wd/hub',
-            options=options
+                command_executor='http://192.168.1.200:4444/wd/hub',
+                options=options
             )
         else:
             print(" Запуск локального Chrome...")
@@ -133,7 +132,6 @@ class Base:
         # Шаг в Allure и вывод в консоль
         with allure.step(title="Test finish"):
             print("Test finish")
-            self.driver.quit()
 
     """ Get current url """
 
@@ -1221,9 +1219,9 @@ class Base:
         self.click_button(click_to, index=click_index, wait_type=click_wait_type, do_assert=do_assert, wait=wait)
 
     def click_then_click(self, first_click: dict, second_click: dict,
-                                first_index: int = 1, second_index: int = 1,
-                                first_wait_type: str = 'clickable', second_wait_type: str = 'clickable',
-                                do_assert: bool = False, wait: str = None) -> None:
+                         first_index: int = 1, second_index: int = 1,
+                         first_wait_type: str = 'clickable', second_wait_type: str = 'clickable',
+                         do_assert: bool = False, wait: str = None) -> None:
         """
         Совершает клик по первому элементу, ждёт 1 секунду, затем кликает по второму.
 
@@ -1394,4 +1392,3 @@ class Base:
                         self.click_button(button_element, index=i, wait_type=wait_type)
                 except ElementClickInterceptedException:
                     print(f"ElementClickInterceptedException: unable to click button at index {i}")
-

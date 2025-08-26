@@ -61,33 +61,39 @@ def base_fixture(request, domain):
     # Проверяем, используется ли отчет Allure
     allure_dir = request.config.getoption("--alluredir", default=None)
 
-    # Получаем параметр из теста, который определяет тип теста и роль
+    # Проверяем, что param передан
+    if not hasattr(request, 'param'):
+        pytest.fail("base_fixture требует параметр (например, 'lkz', 'lke', 'via_link')")
+
     role = request.param
 
     # Логика для выбора базового теста
     if role == 'without_login':
         base, login = base_test_without_login(domain)
-        base.allure_dir = allure_dir  # Устанавливаем директорию в base, если используется Allure
-        yield base, login
+        base.allure_dir = allure_dir
     elif role == 'via_link':
         base, login = base_test_with_login_via_link(domain)
         base.allure_dir = allure_dir
-        yield base, login
     else:
         base, sidebar = base_test_with_login(domain, role)
         base.allure_dir = allure_dir
 
-    # Возвращаем нужное значение через yield
+    # ✅ Один единственный yield — возвращаем нужное значение
     if role in ['without_login', 'via_link']:
         yield base, login
     else:
         yield base, sidebar
 
-    # Финализатор после теста
-    def fin():
-        base.test_finish()
+    # 🔽 ВСЁ, что ниже — финализатор (выполняется после теста и всех хуков)
 
-    request.addfinalizer(fin)
+    # Закрываем драйвер ТОЛЬКО здесь — после скриншота
+    if hasattr(base, 'driver') and base.driver is not None:
+        try:
+            base.driver.quit()
+        except Exception as e:
+            print(f"[WARNING] Ошибка при закрытии драйвера: {e}")
+        finally:
+            base.driver = None
 
 
 # Хук для сохранения скриншота в случае провала теста

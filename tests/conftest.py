@@ -58,23 +58,24 @@ def domain(request):
 
 @pytest.fixture
 def base_fixture(request, domain):
-    # Проверяем наличие param
-    if not hasattr(request, 'param'):
-        pytest.fail("base_fixture requires a param (e.g. 'lkz', 'lke', 'via_link', 'without_login')")
-
-    role = request.param
+    # Проверяем, используется ли отчет Allure
     allure_dir = request.config.getoption("--alluredir", default=None)
+
+    # Получаем параметр из теста, который определяет тип теста и роль
+    role = request.param
 
     # Логика для выбора базового теста
     if role == 'without_login':
         base, login = base_test_without_login(domain)
+        base.allure_dir = allure_dir  # Устанавливаем директорию в base, если используется Allure
+        yield base, login
     elif role == 'via_link':
         base, login = base_test_with_login_via_link(domain)
+        base.allure_dir = allure_dir
+        yield base, login
     else:
         base, sidebar = base_test_with_login(domain, role)
-
-    # Устанавливаем allure_dir
-    base.allure_dir = allure_dir
+        base.allure_dir = allure_dir
 
     # Возвращаем нужное значение через yield
     if role in ['without_login', 'via_link']:

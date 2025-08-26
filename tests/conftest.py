@@ -77,15 +77,17 @@ def base_fixture(request, domain):
         base, sidebar = base_test_with_login(domain, role)
         base.allure_dir = allure_dir
 
+    # Возвращаем нужное значение через yield
+    if role in ['without_login', 'via_link']:
+        yield base, login
+    else:
+        yield base, sidebar
+
+    # Финализатор после теста
     def fin():
         base.test_finish()
 
     request.addfinalizer(fin)
-
-    if role in ['without_login', 'via_link']:
-        return base, login
-    else:
-        return base, sidebar
 
 
 # Хук для сохранения скриншота в случае провала теста

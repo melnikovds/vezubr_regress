@@ -21,13 +21,13 @@ def test_address_directory_lkz(base_fixture, domain):
     add.click_button(element_dict=add.reset)
 
     # проверка фильтра "дата создания"
-    add.dropdown_without_input(add.filter_date_create, option_text='За год')
+    add.dropdown_without_input(add.filter_date_create, option_text='За все время')
     time.sleep(3)
 
     # проверка №1 фильтра "Подтвержденный адрес"
     add.input_in_field(add.verified_address, value='Ленина', click_first=True)
     time.sleep(1)
-    add.verify_text_on_page(text='г Екатеринбург, пр-кт Ленина, д 68')
+    add.verify_text_on_page(text='г Екатеринбург, пр-кт Ленина, д 112')
     add.verify_text_on_page(text='Зиминская', should_exist=False)
     time.sleep(1)
     add.backspace_and_input(add.verified_address, value='')

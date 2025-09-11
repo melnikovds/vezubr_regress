@@ -70,16 +70,36 @@ class EditFieldsParam(Base):
         super().__init__(driver)
 
     # Locators
+    # e_p_one = {
+    #     "xpath": "//*[@id='main']/div/div[3]/div[2]/div/div[3]/div/div/div[1]/div/div/div/div/div[2]/div[2]/div/table/tbody/tr[1]/td/div/div[1]/img",
+    #     "name": "e_p_one"
+    # }
     e_p_one = {
-        "xpath": "//*[@id='main']/div/div[3]/div[2]/div/div[3]/div/div/div[1]/div/div/div/div/div[2]/div[2]/div/table/tbody/tr[1]/td/div/div[1]/img",
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/table[1]/tbody[1]/tr[2]/td[1]/div[1]/div[1]/img[1]",
         "name": "e_p_one"
     }
+    # e_p_two = {
+    #     "xpath": "//*[@id='main']/div/div[3]/div[2]/div/div[3]/div/div/div[1]/div/div/div/div/div[2]/div[2]/div/table/tbody/tr[2]/td/div/div[1]/img",
+    #     "name": "e_p_two"
+    # }
+    # e_p_two = {
+    #     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[1]/div[1]/div[1]/img[1]",
+    #     "name": "e_p_two"
+    # }
     e_p_two = {
-        "xpath": "//*[@id='main']/div/div[3]/div[2]/div/div[3]/div/div/div[1]/div/div/div/div/div[2]/div[2]/div/table/tbody/tr[2]/td/div/div[1]/img",
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/table[1]/tbody[1]/tr[2]/td[1]/div[1]/div[1]/img[1]",
         "name": "e_p_two"
     }
+    # del_custom = {
+    #     "xpath": "//*[@id='main']/div/div[3]/div[2]/div/div[3]/div/div/div[1]/div/div/div/div/div[2]/div[2]/div/table/tbody/tr[2]/td/div/div[2]/img",
+    #     "name": "del_custom"
+    # }
+    # del_custom = {
+    #     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[1]/div[1]/div[2]/img[1]",
+    #     "name": "del_custom"
+    # }
     del_custom = {
-        "xpath": "//*[@id='main']/div/div[3]/div[2]/div/div[3]/div/div/div[1]/div/div/div/div/div[2]/div[2]/div/table/tbody/tr[2]/td/div/div[2]/img",
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/table[1]/tbody[1]/tr[2]/td[1]/div[1]/div[2]/img[1]",
         "name": "del_custom"
     }
     acc_del = {

@@ -1,6 +1,7 @@
 import time
 import allure
 import pytest
+import random
 from pages.cargo_place_add_page import CargoPlaceAdd
 from pages.cargo_place_list_page import CargoPlaceList
 
@@ -51,15 +52,28 @@ def test_cargo_place_edit_lkz(base_fixture, domain):
     add_cp.backspace_and_input(add_cp.lkz_cp_title_edit, cp_stamp)  # Название
     add_cp.backspace_and_input(add_cp.lkz_invoice_number_edit, cp_stamp)  # Номер накладной
     add_cp.backspace_and_input(add_cp.lkz_bar_code_edit, cp_stamp)  # Штрихкод
+
     add_cp.backspace_and_input(add_cp.lkz_seal_number_edit, cp_stamp)  # Номер пломбы
     add_cp.backspace_and_input(add_cp.temp_from_edit, add_cp.random_value_float_str(-5, 0))  # Температура от
     add_cp.backspace_and_input(add_cp.temp_until_edit, add_cp.random_value_float_str(0, 5))  # Температура до
     add_cp.backspace_and_input(add_cp.lkz_external_id_edit, cp_stamp)  # Внешний ID
     add_cp.backspace_and_input(add_cp.lkz_comment_edit, cp_stamp)  # Комментарий
+
     time.sleep(5)
+
+    tn_code = str(random.randint(1_000_000_000, 9_999_999_999))
+    add_cp.backspace_and_input(add_cp.lkz_nomenclature_code, tn_code)  # Код ТН ВЭД
+    time.sleep(20)
+
     # Клик по кнопке сохранения изменений
     add_cp.click_button(add_cp.save_button, wait="form")
-    time.sleep(5)
+    time.sleep(2)
+
+    # проверка наличия изменений
+    add_cp.reload_page()
+    time.sleep(3)
+    add_cp.verify_text_on_page(text=tn_code, should_exist=True)
+
     # Конец теста
 
 
@@ -89,6 +103,7 @@ def test_cargo_place_edit_own_lke(base_fixture, domain):
     
     add_cp = CargoPlaceAdd(base.driver)
     # Выбор владельца грузоместа "Auto LKZ"
+    # add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Auto LKZ")
     add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Auto LKZ")
     # Добавление полного базового грузоместа
     add_cp.add_full_cargo_place_lke()
@@ -137,7 +152,18 @@ def test_cargo_place_edit_own_lke(base_fixture, domain):
     add_cp.backspace_and_input(add_cp.temp_until_edit, add_cp.random_value_float_str(0, 5))  # Температура до
     add_cp.backspace_and_input(add_cp.lke_external_id_edit, cp_stamp)  # Внешний ID
     add_cp.backspace_and_input(add_cp.lke_comment_edit, cp_stamp)  # Комментарий
+
+    tn_code = str(random.randint(1_000_000_000, 9_999_999_999))
+    add_cp.backspace_and_input(add_cp.lkz_nomenclature_code, tn_code)  # Код ТН ВЭД
+    time.sleep(10)
     # Клик по кнопке сохранения изменений
     add_cp.click_button(add_cp.save_button, wait="form")
+    time.sleep(1)
+
+    # проверка наличия изменений
+    add_cp.reload_page()
+    time.sleep(3)
+    add_cp.verify_text_on_page(text=tn_code, should_exist=True)
+
     # Конец теста
 

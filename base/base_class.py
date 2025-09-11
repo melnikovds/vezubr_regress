@@ -273,8 +273,11 @@ class Base:
 
         # Шаг в Allure и вывод в консоль
         with allure.step(f"Assert \"{value_word}\" == \"{expected_value}\""):
+
             assert re.fullmatch(expected_value, value_word), f"Expected '{expected_value}', but found '{value_word}'."
             print(f"Assert \"{value_word}\" == \"{expected_value}\"")
+
+
 
     """ Verify text presence on the page """
 
@@ -1393,4 +1396,6 @@ class Base:
                         self.click_button(button_element, index=i, wait_type=wait_type)
                 except ElementClickInterceptedException:
                     print(f"ElementClickInterceptedException: unable to click button at index {i}")
+
+
 

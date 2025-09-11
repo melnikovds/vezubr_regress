@@ -362,7 +362,7 @@ def test_loader_edit_2_lkp(base_fixture, domain):
     add_loader.backspace_and_input(add_loader.contact_phone_input,
                                    add_loader.random_value_float_str(8650000000, 8659999999), click_first=True)
     add_loader.backspace_and_input(add_loader.reg_address_input, "Мой адрес – какой то Другой")
-    add_loader.backspace_and_input(add_loader.fact_address_input, "Мой адрес – какой то Другой")
+    add_loader.backspace_and_input(add_loader.fact_address_input, "Адрес такой")
     # Сохранение изменений
     add_loader.click_button(add_loader.confirm_edit_button, do_assert=True)
     add_loader.click_button(add_loader.confirm_add_button, wait="form")

@@ -30,40 +30,70 @@ class SideBar(Base):
         "name": "new_order_hover"
     }
     # new_ftl_city_button = {
-    #     "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'FTL Заказ - городской')]",
+    #     "xpath": "//li[@class='ant-menu-item sidebar__dropdown-item ant-menu-item-active']",
     #     "name": "new_ftl_city_button",
     #     "reference_xpath": new_order_reference_xpath,
     #     "reference": "Новый Заказ FTL перевозки"
     # }
     new_ftl_city_button = {
-        "xpath": "//li[@class='ant-menu-item sidebar__dropdown-item ant-menu-item-active']",
+        "xpath": "//ul[@id='newOrder$Menu']//li[@id='newOrderCity']",
         "name": "new_ftl_city_button",
         "reference_xpath": new_order_reference_xpath,
         "reference": "Новый Заказ FTL перевозки"
     }
+    # new_ftl_inter_button = {
+    #     "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'FTL Заказ - междугородний')]",
+    #     "name": "new_ftl_inter_button",
+    #     "reference_xpath": new_order_reference_xpath,
+    #     "reference": "Новый Заказ FTL перевозки"
+    # }
     new_ftl_inter_button = {
-        "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'FTL Заказ - междугородний')]",
+        "xpath": "//ul[@id='newOrder$Menu']//li[@id='newOrderIntercity']",
         "name": "new_ftl_inter_button",
         "reference_xpath": new_order_reference_xpath,
         "reference": "Новый Заказ FTL перевозки"
     }
+    # new_delivery_request_button = {
+    #     "xpath": "//*[@id='cargo-side']",
+    #     "name": "new_delivery_request_button",
+    #     "reference_xpath": "//div[@class='order-form__title']",
+    #     "reference": "Создание Заявки"
+    # }
     new_delivery_request_button = {
-        "xpath": "//*[@id='cargo-side']",
+        "xpath": "//ul[@id='newOrder$Menu']//li[@id='newRequestCargo']",
         "name": "new_delivery_request_button",
         "reference_xpath": "//div[@class='order-form__title']",
         "reference": "Создание Заявки"
     }
+    # new_ftl_regular_button = {
+    #     "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Регулярный рейс')]",
+    #     "name": "new_ftl_regular_button",
+    #     "reference_xpath": new_order_reference_xpath,
+    #     "reference": "Создание шаблона рейса"
+    # }
     new_ftl_regular_button = {
-        "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Регулярный рейс')]",
+        "xpath": "//ul[@id='newOrder$Menu']//li[@id='newOrderRegular']",
         "name": "new_ftl_regular_button",
         "reference_xpath": new_order_reference_xpath,
         "reference": "Создание шаблона рейса"
     }
+    # new_loaders_button = {
+    #     "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'ПРР')]",
+    #     "name": "new_loaders_button",
+    #     "reference_xpath": new_order_reference_xpath,
+    #     "reference": "Новый заказ ПРР"
+    # }
     new_loaders_button = {
-        "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'ПРР')]",
+        "xpath": "//ul[@id='newOrder$Menu']//li[@id='newOrderLoader']",
         "name": "new_loaders_button",
         "reference_xpath": new_order_reference_xpath,
         "reference": "Новый заказ ПРР"
+    }
+    new_delivery_regular_request_button = {
+        "xpath": "//ul[@id='newOrder$Menu']//li[@id='newRequestRegular']",
+        "name": "new_delivery_regular_request_button",
+        "reference_xpath": "//div[@class='order-form__title']",
+        "reference": "Создание Шаблона Заявки"
     }
 
     """Requests"""
@@ -83,8 +113,20 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Заявки на доставку Груза"
     }
+    delivery_regular_list_button = {
+        "xpath": "//li[@id='requestsFtlRegular']",
+        "name": "delivery_regular_list_button",
+        "reference_xpath": base_reference_xpath,
+        "reference": "Регулярные FTL Заявки"
+    }
+    # ftl_archive_list_button = {
+    #     "xpath": "//*[@id='requests-side']",
+    #     "name": "ftl_archive_list_button",
+    #     "reference_xpath": base_reference_xpath,
+    #     "reference": "Архив заявок"
+    # }
     ftl_archive_list_button = {
-        "xpath": "//*[@id='requests-side']",
+        "xpath": "//li[@id='requestsAll']",
         "name": "ftl_archive_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Архив заявок"
@@ -105,8 +147,14 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Рейсы"
     }
+    # ftl_list_button_lkp = {
+    #     "xpath": "/html/body/div[6]/div/div/ul/li[1]",
+    #     "name": "ftl_list_button_lkp",
+    #     "reference_xpath": base_reference_xpath,
+    #     "reference": "Рейсы"
+    # }
     ftl_list_button_lkp = {
-        "xpath": "/html/body/div[6]/div/div/ul/li[1]",
+        "xpath": "//ul[@id='orders$Menu']//li[@id='ordersAll']",
         "name": "ftl_list_button_lkp",
         "reference_xpath": base_reference_xpath,
         "reference": "Рейсы"
@@ -123,8 +171,20 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Отложенные рейсы"
     }
+    deferred_list_button_lkz = {
+        "xpath": "//li[contains(.,'Отложенные')]",
+        "name": "deferred_list_button_lkz",
+        "reference_xpath": base_reference_xpath,
+        "reference": "Отложенные рейсы"
+    }
+    # regular_list_button = {
+    #     "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Регулярные')]",
+    #     "name": "regular_list_button",
+    #     "reference_xpath": base_reference_xpath,
+    #     "reference": "Регулярные рейсы"
+    # }
     regular_list_button = {
-        "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Регулярные')]",
+        "xpath": "//li[@id='ordersRegular']",
         "name": "regular_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Регулярные рейсы"
@@ -141,8 +201,14 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Задания"
     }
+    # cargo_place_list_button = {
+    #     "xpath": "(//li[contains(@class,'ant-menu-item sidebar__dropdown-item')])[2]",
+    #     "name": "cargo_place_list_button",
+    #     "reference_xpath": base_reference_xpath,
+    #     "reference": "Грузоместа"
+    # }
     cargo_place_list_button = {
-        "xpath": "(//li[contains(@class,'ant-menu-item sidebar__dropdown-item')])[2]",
+        "xpath": "//li[@id='assignmentsList']",
         "name": "cargo_place_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Грузоместа"
@@ -184,7 +250,7 @@ class SideBar(Base):
         "reference": "Страховщики"
     }
     insurers_list_button_lke = {
-        "xpath": "//li[@id='producer-list-side']/following-sibling::li[1]",
+        "xpath": "//li[contains(.,'Страховые компании')]",
         "name": "insurers_list_button_lke",
         "reference_xpath": base_reference_xpath,
         "reference": "Страховщики"
@@ -231,23 +297,43 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Реестры от подрядчика"
     }
+
     """Documents"""
     documents_hover = {
         "xpath": "//span[@class='route-name no-events' and text()='Документооборот']",
         "name": "documents_hover"
     }
-    transport_doc_list_button = {
-        "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Перевозочные документы')]",
-        "name": "transport_doc_list_button",
+    # transport_doc_old_list_button = {
+    #     "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Перевозочные документы')]",
+    #     "name": "transport_doc_old_list_button",
+    #     "reference_xpath": base_reference_xpath,
+    #     "reference": "Перевозочные документы (OLD - Рейсы)"
+    # }
+    transport_doc_old_list_button = {
+        "xpath": "//li[@id='transportDocumentsOrders']",
+        "name": "transport_doc_old_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Перевозочные документы (OLD - Рейсы)"
     }
+    transport_doc_new_list_button = {
+        "xpath": "//li[@id='transportDocumentsRequests']",
+        "name": "transport_doc_new_list_button",
+        "reference_xpath": base_reference_xpath,
+        "reference": "Перевозочные документы (NEW - Заявки)"
+    }
+    # verification_doc_list_button = {
+    #     "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Проверка документов')]",
+    #     "name": "verification_doc_list_button",
+    #     "reference_xpath": base_reference_xpath,
+    #     "reference": "Проверка документов"
+    # }
     verification_doc_list_button = {
-        "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Проверка документов')]",
+        "xpath": "//li[@id='documents']",
         "name": "verification_doc_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Проверка документов"
     }
+
     """Directories"""
     directories_hover = {
         "xpath": "//span[@class='route-name no-events' and text()='Справочники']",

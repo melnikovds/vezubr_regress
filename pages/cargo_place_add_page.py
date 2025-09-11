@@ -1,4 +1,5 @@
 from base.base_class import Base
+import time
 
 
 class CargoPlaceAdd(Base):
@@ -137,7 +138,7 @@ class CargoPlaceAdd(Base):
 
     """Departure address drop-down list"""
     departure_address_select = {
-        "xpath": "//span[@class='vz-form-item__label ' and contains(text(),'Адрес отправления')]",
+        "xpath": "//*[@id='main']/div/div[3]/div[2]/div/div[2]/div[2]/div[1]/div[1]/div/div/button",
         "name": "departure_address_select"
     }
     select_dp_address_first = {
@@ -146,29 +147,73 @@ class CargoPlaceAdd(Base):
     }
 
     """Delivery address drop-down list"""
+    # delivery_address_select = {
+    #     "xpath": "//span[@class='vz-form-item__label ' and contains(text(),'Адрес доставки')]",
+    #     "name": "delivery_address_select"
+    # }
     delivery_address_select = {
-        "xpath": "//span[@class='vz-form-item__label ' and contains(text(),'Адрес доставки')]",
+        "xpath": "//*[@id='main']/div/div[3]/div[2]/div/div[2]/div[2]/div[2]/div[1]/div/div/button",
         "name": "delivery_address_select"
     }
     select_dl_address_first = {
         "xpath": "(//li[@class='ant-select-dropdown-menu-item ant-select-dropdown-menu-item-active'])[1]",
         "name": "select_dl_address_first"
     }
+
+
+    factual_address = {
+        "xpath": "//input[contains(@placeholder,'Фактический адрес')]",
+        "name": "factual_address"
+    }
+    identifier_address = {
+        "xpath": "//input[contains(@placeholder,'Идентификатор адреса')]",
+        "name": "identifier_address"
+    }
+    radio_button_first_address = {
+        "xpath": "//input[@class='ant-radio-input']",
+        "name": "radio_button_first_address"
+    }
+    save_selected_address = {
+        "xpath": "//button[contains(.,'Сохранить')]",
+        "name": "save_selected_address"
+    }
+
+
+    # confirm_cargo_place_create_button = {
+    #     "xpath": "//button[contains(.,'OK')]",
+    #     "name": "confirm_cargo_place_create_button",
+    #     "reference_xpath": "//div[@class='ant-modal-confirm-content' and text()='Грузоместо успешно создано']",
+    #     "reference": "Грузоместо успешно создано"
+    # }
+    confirm_cargo_place_create_button = {
+        "xpath": "//button[contains(.,'OK')]",
+        "name": "confirm_cargo_place_create_button",
+        "reference_xpath": "//span[contains(.,'Грузоместо успешно создано')]",
+        "reference": "Грузоместо успешно создано"
+    }
     create_cargo_place_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
         "name": "create_cargo_place_button",
-        "reference_xpath": "//div[@class='ant-modal-confirm-content' and text()='Грузоместо успешно создано']",
-        "reference": "Грузоместо успешно создано"
+        # "reference_xpath": "//div[@class='ant-modal-confirm-content' and text()='Грузоместо успешно создано']",
+        "reference": "Создать"
     }
     confirm_add_button = {
         "xpath": "(//button[@class='ant-btn ant-btn-primary'])[2]",
-        "name": "create_button"
+        "name": "confirm_add_button"
     }
+
+
+    # delete_button = {
+    #     "xpath": "//button[@class='ant-btn margin-right-5']",
+    #     "name": "delete_button",
+    #     "reference_xpath": "//span[@class='ant-modal-confirm-title']",
+    #     "reference": "Вы точно хотите удалить ГМ.*"
+    # }
     delete_button = {
         "xpath": "//button[@class='ant-btn margin-right-5']",
         "name": "delete_button",
         "reference_xpath": "//span[@class='ant-modal-confirm-title']",
-        "reference": "Вы точно хотите удалить ГМ.*"
+        "reference": "Подтвердите действие"
     }
     edit_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
@@ -180,60 +225,108 @@ class CargoPlaceAdd(Base):
     }
     ok_button = {
         "xpath": "//button[contains(., 'OK')]",
-        "name": "calendar_ok_button"
+        "name": "ok_button"
     }
     quantity_edit = {
         "xpath": "(//input[@role='spinbutton'])[2]",
         "name": "quantity_edit"
     }
+    # weight_edit = {
+    #     "xpath": "(//input[@role='spinbutton'])[3]",
+    #     "name": "weight_edit"
+    # }
     weight_edit = {
-        "xpath": "(//input[@role='spinbutton'])[3]",
+        "xpath": "(//input[@role='spinbutton'])[5]",
         "name": "weight_edit"
     }
+    # value_edit = {
+    #     "xpath": "(//input[@role='spinbutton'])[5]",
+    #     "name": "value_edit"
+    # }
     value_edit = {
-        "xpath": "(//input[@role='spinbutton'])[4]",
+        "xpath": "(//input[@role='spinbutton'])[3]",
         "name": "value_edit"
     }
+    # value_edit = {
+    #     "xpath": "(//input[@role='spinbutton'])[4]",
+    #     "name": "value_edit"
+    # }
+    # cost_edit = {
+    #     "xpath": "(//input[@role='spinbutton'])[5]",
+    #     "name": "cost_edit"
+    # }
     cost_edit = {
-        "xpath": "(//input[@role='spinbutton'])[5]",
+        "xpath": "(//input[@role='spinbutton'])[4]",
         "name": "cost_edit"
     }
+    # temp_from_edit = {
+    #     "xpath": "(//input[@role='spinbutton'])[6]",
+    #     "name": "temp_from_edit"
+    # }
     temp_from_edit = {
-        "xpath": "(//input[@role='spinbutton'])[6]",
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[23]/label[1]/div[1]/div[1]/div[1]/div[2]/input[1]",
         "name": "temp_from_edit"
     }
+    # temp_until_edit = {
+    #     "xpath": "(//input[@role='spinbutton'])[7]",
+    #     "name": "temp_until_edit"
+    # }
     temp_until_edit = {
-        "xpath": "(//input[@role='spinbutton'])[7]",
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[24]/label[1]/div[1]/div[1]/div[1]/div[2]/input[1]",
         "name": "temp_until_edit"
     }
+    # lkz_cp_title_edit = {
+    #     "xpath": "(//input[@type='text'])[4]",
+    #     "name": "lkz_cp_title_edit"
+    # }
     lkz_cp_title_edit = {
-        "xpath": "(//input[@type='text'])[4]",
+        "xpath": "//div[12]//label[1]//div[1]//div[1]//span[1]//input[1]",
         "name": "lkz_cp_title_edit"
     }
     lkz_invoice_number_edit = {
-        "xpath": "(//input[@type='text'])[5]",
+        "xpath": "//div[13]//label[1]//div[1]//div[1]//span[1]//input[1]",
         "name": "lkz_invoice_number_edit"
     }
     lkz_bar_code_edit = {
-        "xpath": "(//input[@type='text'])[6]",
+        "xpath": "//div[15]//label[1]//div[1]//div[1]//span[1]//input[1]",
         "name": "lkz_bar_code_edit"
     }
+    # lkz_seal_number_edit = {
+    #     "xpath": "(//input[@type='text'])[7]",
+    #     "name": "lkz_seal_number_edit"
+    # }
     lkz_seal_number_edit = {
-        "xpath": "(//input[@type='text'])[7]",
+        "xpath": "//div[16]//label[1]//div[1]//div[1]//span[1]//input[1]",
         "name": "lkz_seal_number_edit"
     }
+    # lkz_external_id_edit = {
+    #     "xpath": "(//input[@type='text'])[8]",
+    #     "name": "lkz_external_id_edit"
+    # }
     lkz_external_id_edit = {
-        "xpath": "(//input[@type='text'])[8]",
+        "xpath": "//div[17]//label[1]//div[1]//div[1]//span[1]//input[1]",
         "name": "lkz_external_id_edit"
     }
     lkz_wms_number_edit = {
         "xpath": "(//input[@type='text'])[10]",
         "name": "lkz_wms_number_edit"
     }
+    # lkz_comment_edit = {
+    #     "xpath": "//span[text()='Комментарий']/following::input",
+    #     "name": "lkz_comment_edit"
+    # }
     lkz_comment_edit = {
-        "xpath": "//span[text()='Комментарий']/following::input",
+        "xpath": "//div[@class='ant-col ant-col-24 vz-form-col']//input[@type='text']",
         "name": "lkz_comment_edit"
     }
+    lkz_nomenclature_code = {
+        "xpath": "//div[25]//label[1]//div[1]//div[1]//span[1]//input[1]",
+        "name": "lkz_nomenclature_code"
+    }
+
+
+
+
     lke_cp_title_edit = {
         "xpath": "(//input[@type='text'])[5]",
         "name": "lke_cp_title_edit"
@@ -296,11 +389,38 @@ class CargoPlaceAdd(Base):
         self.input_in_field(self.lkz_bar_code_input, cp_stamp)  # Штрихкод
         # Выбор статуса грузоместа
         self.dropdown_without_input(self.lkz_cp_status_select, "Новое")
+
+
+
         # Ввод адресов отправления и доставки
-        self.dropdown_with_input(self.departure_address_select,
-                                             "Свердловская обл, г Верхняя Пышма, Успенский пр-кт, д 103а")
-        self.dropdown_with_input(self.delivery_address_select,
-                                             "Свердловская обл, г Березовский, ул Театральная, д 13")
+        self.click_button(self.departure_address_select)
+        time.sleep(3)
+        self.input_in_field(self.factual_address,"г Сыктывкар, ул Юхнина, д 8")
+        time.sleep(1)
+        self.click_button(self.radio_button_first_address, wait_type="located")
+        time.sleep(1)
+        self.scroll_to_element(self.save_selected_address)
+        self.click_button(self.save_selected_address)
+        time.sleep(1)
+        self.click_button(self.delivery_address_select)
+        time.sleep(3)
+        self.input_in_field(self.factual_address,"г Мурманск, ул Академика Павлова, д 3")
+        time.sleep(1)
+        self.click_button(self.radio_button_first_address, wait_type="located")
+        time.sleep(1)
+        self.scroll_to_element(self.save_selected_address)
+        self.click_button(self.save_selected_address)
+        time.sleep(1)
+
+        # # Ввод адресов отправления и доставки
+        # self.click_button(self.departure_address_select)
+        # time.sleep(3)
+        # self.input_in_field(self.factual_address, value="г Сыктывкар, ул Юхнина, д 8")
+        # self.dropdown_with_input(self.departure_address_select,
+        #                                      "г Сыктывкар, ул Юхнина, д 8")
+        # self.dropdown_with_input(self.delivery_address_select,
+        #                                      "г Оренбург, ул Зиминская")
+
         # Последовательное нажатие на кнопки с условиями
         self.click_button(self.create_cargo_place_button, do_assert=True)
         self.click_button(self.confirm_add_button, wait="lst")
@@ -384,14 +504,30 @@ class CargoPlaceAdd(Base):
         self.input_in_field(self.lkz_external_id_input, cp_stamp)  # Внешний ID
         self.input_in_field(self.lkz_comment_input, cp_stamp)  # Комментарий
         # Ввод адресов отправления и доставки
-        self.dropdown_with_input(self.departure_address_select,
-                                             "Свердловская обл, г Верхняя Пышма, Успенский пр-кт, д 103а")
-        self.dropdown_with_input(self.delivery_address_select,
-                                             "Свердловская обл, г Березовский, ул Театральная, д 13")
+        self.click_button(self.departure_address_select)
+        time.sleep(3)
+        self.input_in_field(self.factual_address,"Великие Луки, ул С.Ковалевской, д 1А")
+        time.sleep(1)
+        self.click_button(self.radio_button_first_address, wait_type="located")
+        time.sleep(1)
+        self.scroll_to_element(self.save_selected_address)
+        self.click_button(self.save_selected_address)
+        time.sleep(1)
+        self.click_button(self.delivery_address_select)
+        time.sleep(3)
+        self.input_in_field(self.factual_address,"Череповец, ул Менделеева, д 10")
+        time.sleep(1)
+        self.click_button(self.radio_button_first_address, wait_type="located")
+        time.sleep(1)
+        self.scroll_to_element(self.save_selected_address)
+        self.click_button(self.save_selected_address)
+        time.sleep(1)
+
         # Клик по кнопке создания грузоместа
         self.click_button(self.create_cargo_place_button, do_assert=True)
         # Клик по кнопке подтверждения добавления
-        self.click_button(self.confirm_add_button, wait="lst")
+        # self.click_button(self.confirm_add_button, wait="lst")
+        self.click_button(self.confirm_cargo_place_create_button, do_assert=True)
         return cp_stamp
     
     def add_full_cargo_place_lke(self) -> str:

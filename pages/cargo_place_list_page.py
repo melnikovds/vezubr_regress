@@ -85,7 +85,7 @@ class CargoPlaceList(Base):
     }
     calendar_input = {
         "xpath": "//input[@class='ant-calendar-input ']",
-        "name": "today_button"
+        "name": "calendar_input"
     }
     send_button = {
         "xpath": "//button[contains(., 'Отправить')]",

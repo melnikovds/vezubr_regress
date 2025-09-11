@@ -583,3 +583,90 @@ class NotificationLKE(Base):
         "name": "click_save"
     }
 
+
+class ResetNotifications(Base):
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.driver = driver
+
+    fields_2 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[2]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_2"
+    }
+    fields_3 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[3]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_3"
+    }
+    fields_4 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[4]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_4"
+    }
+    fields_5 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[5]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_5"
+    }
+    fields_6 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[6]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_6"
+    }
+    fields_7 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[7]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_7"
+    }
+    fields_8 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[8]/td[4]/div[1]/div[1]/div[1]/div[2]",
+        "name": "fields_8"
+    }
+
+    fields_9 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_9"
+    }
+    fields_10 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[2]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_10"
+    }
+    fields_11 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[3]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_11"
+    }
+    fields_12 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[4]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_12"
+    }
+    fields_13 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[5]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_13"
+    }
+    fields_14 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[6]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_14"
+    }
+    fields_15 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_15"
+    }
+    fields_16 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[2]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_16"
+    }
+    fields_17 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[3]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_17"
+    }
+    fields_18 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[6]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_18"
+    }
+    fields_19 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[6]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[2]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_19"
+    }
+    fields_20 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[7]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_20"
+    }
+    fields_21 = {
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[7]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[2]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
+        "name": "fields_21"
+    }

@@ -89,11 +89,15 @@ class ProducersList(Base):
         "name": "first_name_field"
     }
     middle_name_field = {
-        "xpath": "",
+        "xpath": "//tbody/tr[@class='ant-table-row ant-table-row-level-0']/td[3]/label[1]/div[1]/div[1]/input[1]",
         "name": "middle_name_field"
     }
+    email_field = {
+        "xpath": "//tbody/tr[@class='ant-table-row ant-table-row-level-0']/td[4]/label[1]/div[1]/div[1]/input[1]",
+        "name": "email_field"
+    }
     phone_field = {
-        "xpath": "",
+        "xpath": "//input[@placeholder='+7 (___) ___-__-__']",
         "name": "phone_field"
     }
     create_producer_button = {

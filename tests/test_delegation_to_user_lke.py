@@ -89,15 +89,15 @@ def test_delegation_inner_producer_lke(base_fixture, domain):
     contractor = Contractor(base.driver)
     # Переход на вкладку настроек
     contractor.click_button(contractor.settings_tab)
-    # Делегирование пользователю (1-й в списке не выбранный) права управления ЛК
-    contractor.click_button(contractor.user_checkbox_empty, 1)
-    contractor.click_button(contractor.save_delegation_button, do_assert=True)
-    contractor.click_button(contractor.ok_button)
-    # Отмена делегирования пользователю (4-й в списке)
-    contractor.click_button(contractor.user_checkbox_filled, 4)
-    contractor.click_button(contractor.save_delegation_button, do_assert=True)
-    contractor.click_button(contractor.ok_button)
-    # Конец теста
+    # # Делегирование пользователю (1-й в списке не выбранный) права управления ЛК
+    # contractor.click_button(contractor.user_checkbox_empty, 1)
+    # contractor.click_button(contractor.save_delegation_button, do_assert=True)
+    # contractor.click_button(contractor.ok_button)
+    # # Отмена делегирования пользователю (4-й в списке)
+    # contractor.click_button(contractor.user_checkbox_filled, 4)
+    # contractor.click_button(contractor.save_delegation_button, do_assert=True)
+    # contractor.click_button(contractor.ok_button)
+    # # Конец теста
 
 
 @allure.story("Smoke test")

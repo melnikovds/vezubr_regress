@@ -24,7 +24,7 @@ def test_cargo_place_add_lkz(base_fixture, domain):
     cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
 
     add_cp = CargoPlaceAdd(base.driver)
-    # Добавление полного базового грузоместа
+    # Добавление полного грузоместа
     cp_stamp = add_cp.add_full_cargo_place_lkz()
 
     # Сброс фильтров
@@ -38,8 +38,14 @@ def test_cargo_place_add_lkz(base_fixture, domain):
     add_cp.click_button(add_cp.delete_button, do_assert=True)
     # Подтверждение удаления грузоместа
     add_cp.click_button(add_cp.yes_button)
-    # Подтверждение успешного удаления
-    add_cp.click_button(add_cp.ok_button, wait="lst")
+    # # Подтверждение успешного удаления
+    # add_cp.click_button(add_cp.ok_button, wait="lst")
+    # Проверка успешного удаления
+    time.sleep(1)
+    cp_list.input_in_field(cp_list.barcode_filter, value=cp_stamp, wait="lst")
+    time.sleep(2)
+    cp_list.find_text_on_page(text=cp_stamp, occurrences=2)
+
     # Конец теста
 
 
@@ -63,7 +69,7 @@ def test_cargo_place_from_lkz_add_lke(base_fixture, domain):
     add_cp = CargoPlaceAdd(base.driver)
     # Выбор владельца грузоместа "Auto LKZ"
     add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Auto LKZ")
-    # Добавление полного базового грузоместа
+    # Добавление полного грузоместа
     add_cp.add_full_cargo_place_lke()
     # Конец теста
 
@@ -95,7 +101,7 @@ def test_cargo_place_own_add_lke(base_fixture, domain):
     cp_list.move_and_click(move_to=cp_list.date_hover, click_to=cp_list.date_clear_button, wait="lst")
     cp_list.click_button(cp_list.cp_list_checkbox, index=2)
     cp_list.click_button(cp_list.confirm_button)
-    # Добавление полного базового грузоместа
+    # Добавление полного грузоместа
     cp_stamp = add_cp.add_full_cargo_place_lke()
     
     # Сброс фильтров

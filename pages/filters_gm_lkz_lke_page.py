@@ -56,6 +56,10 @@ class GmFilters(Base):
         "xpath": "(//i[contains(@class,'anticon anticon-down')])[5]",
         "name": "del_city_dispatch"
     }
+    # region_delivery = {
+    #     "xpath": "(//div[@class='ant-select-selection__rendered'])[6]",
+    #     "name": "region_delivery"
+    # }
     region_delivery = {
         "xpath": "(//div[@class='ant-select-selection__rendered'])[6]",
         "name": "region_delivery"
@@ -176,9 +180,9 @@ class GmFilters(Base):
         time.sleep(2)
         self.verify_text_on_page(text="11.06.2025 - 100")
         self.click_on_the_cross(self.del_city_dispatch)
-        self.dropdown_without_input(self.region_delivery, "Удмуртская республика")
+        self.dropdown_without_input(self.region_delivery, "Мурманская область")
         time.sleep(2)
-        self.verify_text_on_page(text="11.06.2025 - 100")
+        self.verify_text_on_page(text="khgjhf")
         self.click_on_the_cross(self.del_region_delivery)
         self.dropdown_without_input(self.city_delivery, "Ижевск")
         time.sleep(2)
@@ -198,13 +202,13 @@ class GmFilters(Base):
         time.sleep(2)
 
     def filter_departures_address(self) -> NoReturn:
-        self.input_in_field(self.departure_address, "Ижевск")
+        self.input_in_field(self.departure_address, "Владимир")
         time.sleep(2)
-        self.verify_text_on_page(text="ГМ-20250304143122")
+        self.verify_text_on_page(text="2448436160000")
         self.backspace_and_input(self.departure_address, "")
-        self.input_in_field(self.delivery_address, "Ижевск")
+        self.input_in_field(self.delivery_address, "Санкт")
         time.sleep(2)
-        self.verify_text_on_page(text="ГМ-20250304143122")
+        self.verify_text_on_page(text="2448436050000")
         self.backspace_and_input(self.delivery_address, "")
 
     def filter_departure_status(self) -> NoReturn:

@@ -321,6 +321,7 @@ def test_create_inner_client(base_fixture, domain, api_login):
 
     # Проверяем наличие созданных сущностей
     client_list.click_button(client_list.general_information)
+    time.sleep(10)
     client_list.verify_text_on_page(text=generated_inn, should_exist=True)
     client_list.verify_text_on_page(text=generated_kpp, should_exist=True)
 
@@ -343,6 +344,54 @@ def test_create_inner_producer(base_fixture, domain, api_login):
     # Переход к списку подрядчиков
     sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.producers_list_button,
                            do_assert=True, wait="lst")
+
+    # Кликаем по кнопке создания внутреннего ПВ
+    producer_list = ProducersList(base.driver)
+    producer_list.click_button(producer_list.button_inner_producer, wait="lst")
+
+    # Заполнение данных внутреннего ПВ
+    generated_inn = producer_list.find_valid_inn(api_login)
+    producer_list.input_in_field(producer_list.inn_inner_producer, value=generated_inn, click_first=True)
+    generated_kpp = ''.join([str(random.randint(0, 9)) for _ in range(9)])
+    producer_list.input_in_field(producer_list.kpp_inner_producer, value=generated_kpp)
+
+    # Добавляем сотрудника
+    faker = Faker('ru_RU')
+    producer_list.click_button(producer_list.add_employee)
+    generated_last_name = faker.last_name()
+    producer_list.input_in_field(producer_list.last_name_field, value=generated_last_name)
+    generated_first_name = faker.first_name()
+    producer_list.input_in_field(producer_list.first_name_field, value=generated_first_name)
+    generated_middle_name = faker.middle_name()
+    producer_list.input_in_field(producer_list.middle_name_field, value=generated_middle_name)
+    generated_email = faker.email()
+    producer_list.input_in_field(producer_list.email_field, value=generated_email)
+    generated_phone = ''.join([str(random.randint(0, 9)) for _ in range(10)])
+    producer_list.input_in_field(producer_list.phone_field, value=generated_phone, click_first=True)
+
+    time.sleep(1)
+    # Нажимаем кнопку создать
+    producer_list.click_button(producer_list.create_producer_button)
+    time.sleep(2)
+    producer_list.click_button(producer_list.ok_popup)
+
+    producer_list.reload_page()
+    time.sleep(5)
+
+    # Проверяем наличие созданных сущностей
+    producer_list.click_button(producer_list.general_information)
+    time.sleep(10)
+    producer_list.verify_text_on_page(text=generated_inn, should_exist=True)
+    producer_list.verify_text_on_page(text=generated_kpp, should_exist=True)
+
+    producer_list.verify_text_on_page(text=generated_last_name, should_exist=True)
+    producer_list.verify_text_on_page(text=generated_first_name, should_exist=True)
+    producer_list.verify_text_on_page(text=generated_middle_name, should_exist=True)
+    producer_list.verify_text_on_page(text=generated_email, should_exist=True)
+    producer_list.verify_text_on_page(text=generated_phone, should_exist=True)
+    # Конец теста
+
+
 
 
 

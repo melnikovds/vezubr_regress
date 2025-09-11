@@ -23,7 +23,7 @@ def test_cargo_place_routing_lkz(base_fixture, domain):
     cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
 
     add_cp = CargoPlaceAdd(base.driver)
-    # Добавление полного базового грузоместа
+    # Добавление базового грузоместа
     cp_stamp = add_cp.add_base_cargo_place_lkz()
 
     cp_list = CargoPlaceList(base.driver)
@@ -80,7 +80,7 @@ def test_cargo_place_transfer_lkz(base_fixture, domain):
     cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
 
     add_cp = CargoPlaceAdd(base.driver)
-    # Добавление полного базового грузоместа
+    # Добавление базового грузоместа
     cp_stamp = add_cp.add_base_cargo_place_lkz()
 
     cp_list = CargoPlaceList(base.driver)
@@ -127,7 +127,7 @@ def test_cargo_place_routing_lke(base_fixture, domain):
     add_cp = CargoPlaceAdd(base.driver)
     # Выбор владельца грузоместа "Auto LKZ"
     add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Auto LKZ")
-    # Добавление полного базового грузоместа
+    # Добавление базового грузоместа
     cp_stamp = add_cp.add_base_cargo_place_lke()
 
     cp_list = CargoPlaceList(base.driver)
@@ -186,7 +186,7 @@ def test_cargo_place_transfer_lke(base_fixture, domain):
     add_cp = CargoPlaceAdd(base.driver)
     # Выбор владельца грузоместа "Auto LKZ"
     add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Auto LKZ")
-    # Добавление полного базового грузоместа
+    # Добавление базового грузоместа
     cp_stamp = add_cp.add_base_cargo_place_lke()
 
     cp_list = CargoPlaceList(base.driver)

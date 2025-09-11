@@ -1,7 +1,7 @@
 import time
 import allure
 import pytest
-from pages.notifications_page import NotificationLKE
+from pages.notifications_page import *
 from pages.setting_page import Settings
 
 
@@ -97,6 +97,104 @@ def test_notification_field_lke(base_fixture, domain):
     add.click_and_select_with_arrows(add.gm_address_missing_mail, 1)
     add.click_and_select_with_arrows(add.gm_address_missing_phone, 1)
     add.click_and_select_with_arrows(add.gm_address_missing_sms, 1)
+
+    # Сохраняем изменения
+    add.click_button(add.click_save)
+    time.sleep(2)
+
+    # сброс уведомлений по смс
+    res = ResetNotifications(base.driver)
+
+    # сбрасываем поля "подбор"
+    add.dropdown_without_input(add.driver_search_sms, "не уведомлять", index=1)
+
+    add.click_button(add.min_cost_sms)
+    time.sleep(1)
+    res.click_button(res.fields_2)
+
+    add.click_button(add.executor_add_sms)
+    time.sleep(1)
+    res.click_button(res.fields_3)
+
+    add.click_button(add.ts_not_assigned_sms)
+    time.sleep(1)
+    res.click_button(res.fields_4)
+
+    add.click_button(add.driver_ts_replacement_sms)
+    time.sleep(1)
+    res.click_button(res.fields_5)
+
+    add.scroll_to_element(add.move_to_element1)
+
+    add.click_button(add.not_started_sms)
+    time.sleep(1)
+    res.click_button(res.fields_6)
+
+    add.click_button(add.cancel_by_contractor_sms)
+    time.sleep(1)
+    res.click_button(res.fields_7)
+
+    add.click_button(add.cancel_by_customer_sms)
+    time.sleep(1)
+    res.click_button(res.fields_8)
+
+    # сбрасываем поля "исполнение"
+    add.click_button(add.late_arrival_sms)
+    time.sleep(1)
+    res.click_button(res.fields_9)
+
+    add.click_button(add.arrived_sms)
+    time.sleep(1)
+    res.click_button(res.fields_10)
+
+    add.click_button(add.started_and_not_completed_sms)
+    time.sleep(1)
+    res.click_button(res.fields_11)
+
+    add.click_button(add.waiting_for_documents_sms)
+    time.sleep(1)
+    res.click_button(res.fields_12)
+
+    add.click_button(add.documents_received_sms)
+    time.sleep(1)
+    res.click_button(res.fields_13)
+
+    add.click_button(add.delivery_completed_sms)
+    time.sleep(1)
+    res.click_button(res.fields_14)
+
+    add.scroll_to_element(add.skroll2)
+
+    # сбрасываем поля "проверка"
+    add.click_button(add.being_confirmed_sms)
+    time.sleep(1)
+    res.click_button(res.fields_15)
+
+    add.click_button(add.registry_confirm_sms)
+    time.sleep(1)
+    res.click_button(res.fields_16)
+
+    add.click_button(add.register_not_confirm_sms)
+    time.sleep(1)
+    res.click_button(res.fields_17)
+
+    # сбрасываем поля "Мобильное приложение"
+    add.click_button(add.critical_charge_sms)
+    time.sleep(1)
+    res.click_button(res.fields_18)
+
+    add.click_button(add.mp_disconnect_sms)
+    time.sleep(1)
+    res.click_button(res.fields_19)
+
+    # сбрасываем поля "ГМ адрес пропущен"
+    add.click_button(add.gm_not_accepted_sms)
+    time.sleep(1)
+    res.click_button(res.fields_20)
+
+    add.click_button(add.gm_address_missing_sms)
+    time.sleep(1)
+    res.click_button(res.fields_21)
 
     # Сохраняем изменения
     add.click_button(add.click_save)

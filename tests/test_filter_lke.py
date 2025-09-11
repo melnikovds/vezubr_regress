@@ -16,15 +16,15 @@ def test_filter_departures_lke(base_fixture, domain, request):
         add = GmFilters(base.driver)
 
     with allure.step("Проверка фильтра 'Номер рейса'"):
-        add.input_in_field(add.flight_number, "R-25-173-2448-1", wait='lst')
+        add.input_in_field(add.flight_number, "R-25-47-2447-1", wait='lst')
         time.sleep(2)
-        add.verify_text_on_page(text="2448445390000")
+        add.verify_text_on_page(text="2448436500000")
         add.backspace_and_input(add.flight_number, "")
 
     with allure.step("Проверка фильтра 'По заданию №'"):
-        add.input_in_field(add.according_task, "2448442650000", wait='lst')
+        add.input_in_field(add.according_task, "2448436490000", wait='lst')
         time.sleep(2)
-        add.verify_text_on_page(text="R-25-122-2448-1")
+        add.verify_text_on_page(text="R-25-46-2447-1")
         add.backspace_and_input(add.according_task, "")
 
     with allure.step("Проверка фильтров 'Адрес отправления/доставки'"):

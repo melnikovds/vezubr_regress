@@ -1,7 +1,7 @@
 import allure
 import pytest
 import time
-from pages.notifications_page import Notification
+from pages.notifications_page import *
 from pages.settings_page import Settings
 
 
@@ -134,6 +134,103 @@ def test_notification_field_lkp(base_fixture, domain):
 
     # сохранение настроек
     add.click_button(add.safe_notifications, wait='form')
+
+    # сброс уведомлений по смс
+    res = ResetNotifications(base.driver)
+
+    add.dropdown_without_input(add.driver_search_sms, option_text="не уведомлять", index=1)
+
+    add.click_button(add.min_cost_sms)
+    time.sleep(1)
+    res.click_button(res.fields_2)
+
+    add.click_button(add.executor_add_sms)
+    time.sleep(1)
+    res.click_button(res.fields_3)
+
+    add.click_button(add.ts_not_assigned_sms)
+    time.sleep(1)
+    res.click_button(res.fields_4)
+
+    add.click_button(add.driver_ts_replacement_sms)
+    time.sleep(1)
+    res.click_button(res.fields_5)
+
+    add.click_button(add.not_started_sms)
+    time.sleep(1)
+    res.click_button(res.fields_6)
+
+    add.click_button(add.cancelled_contractor_sms)
+    time.sleep(1)
+    res.click_button(res.fields_7)
+
+    add.click_button(add.cancelled_owner_sms)
+    time.sleep(1)
+    res.click_button(res.fields_8)
+
+    # прокрутка страницы вниз
+    add.scroll_to_element(add.late_arrival_sms)
+
+    add.click_button(add.late_arrival_sms)
+    time.sleep(1)
+    res.click_button(res.fields_9)
+
+    add.click_button(add.arrived_sms)
+    time.sleep(1)
+    res.click_button(res.fields_10)
+
+    add.click_button(add.loading_begun_sms)
+    time.sleep(1)
+    res.click_button(res.fields_11)
+
+    # прокрутка страницы вниз
+    add.scroll_to_element(add.loading_completed_mail)
+
+    add.click_button(add.loading_completed_sms)
+    time.sleep(1)
+    res.click_button(res.fields_12)
+
+    add.click_button(add.documents_received_sms)
+    time.sleep(1)
+    res.click_button(res.fields_13)
+
+    add.click_button(add.flight_over_sms)
+    time.sleep(1)
+    res.click_button(res.fields_14)
+
+    # прокрутка страницы вниз
+    add.scroll_to_element(add.flight_confirmation_mail)
+
+    add.click_button(add.flight_confirmation_sms)
+    time.sleep(1)
+    res.click_button(res.fields_15)
+
+    add.click_button(add.register_confirmation_sms)
+    time.sleep(1)
+    res.click_button(res.fields_16)
+
+    add.click_button(add.registry_not_confirmed_sms)
+    time.sleep(1)
+    res.click_button(res.fields_17)
+
+    # прокрутка страницы вниз
+    add.scroll_to_element(add.critical_charge_mail)
+
+    add.click_button(add.critical_charge_sms)
+    time.sleep(1)
+    res.click_button(res.fields_18)
+
+    add.click_button(add.no_connection_sms)
+    time.sleep(1)
+    res.click_button(res.fields_19)
+
+    add.click_button(add.cargo_not_accepted_sms)
+    time.sleep(1)
+    res.click_button(res.fields_20)
+
+    add.click_button(add.address_missing_sms)
+    time.sleep(1)
+    res.click_button(res.fields_21)
 
     # Конец теста
 

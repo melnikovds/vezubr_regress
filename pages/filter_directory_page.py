@@ -336,9 +336,21 @@ class Filter(Base):
         "xpath": "//input[@placeholder='Отправитель/Получатель']",
         "name": "sender_recipient"
     }
+    # status = {
+    #     "xpath": "//div[@class='ant-select-selection__placeholder']",
+    #     "name": "status"
+    # }
     status = {
-        "xpath": "//div[@class='ant-select-selection__placeholder']",
+        "xpath": "//div[@id='status']//div[@class='ant-select-selection__rendered']//div[1]",
         "name": "status"
+    }
+    active_status = {
+        "xpath": "//li[@title='Активный']",
+        "name": "active_status"
+    }
+    inactive_status = {
+        "xpath": "//li[@title='Неактивный']",
+        "name": "inactive_status"
     }
     region = {
         "xpath": "(//div[@class='ant-select-selection__rendered'])[3]",
@@ -412,6 +424,8 @@ class Filter(Base):
         "xpath": "(//img[@class='element-icon pointer'])[3]",
         "name": "delete_filter"
     }
+
+
     tariff_name = {
         "xpath": "//input[@class='ant-input']",
         "name": "tariff_name"
@@ -420,9 +434,11 @@ class Filter(Base):
         "xpath": "//div[@data-__field='[object Object]']//div",
         "name": "tariff_not_active"
     }
-    soname_driver = {
+
+
+    surname_driver = {
         "xpath": "//input[@class='ant-input']",
-        "name": "soname_driver"
+        "name": "surname_driver"
     }
     status_driver = {
         "xpath": "//div[@class='ant-select-selection__placeholder']",
@@ -432,13 +448,17 @@ class Filter(Base):
         "xpath": "(//input[@class='ant-input'])[3]",
         "name": "name_driver"
     }
+    driver_status = {
+        "xpath": "//div[@id='status']//div[@class='ant-select-selection__rendered']",
+        "name": "driver_status"
+    }
     flight_status = {
         "xpath": "(//div[@class='ant-select-selection__rendered'])[2]",
         "name": "flight_status"
     }
-    surname = {
+    patronymic_driver = {
         "xpath": "(//input[@class='ant-input'])[5]",
-        "name": "surname"
+        "name": "patronymic_driver"
     }
     phone_driver = {
         "xpath": "(//input[@class='ant-input'])[7]",
@@ -448,6 +468,16 @@ class Filter(Base):
         "xpath": "(//input[@class='ant-input'])[9]",
         "name": "contractor"
     }
+    cross_status_in_the_system = {
+        "xpath": "//div[@id='status']//i[@aria-label='icon: close-circle']//*[name()='svg']//*[name()='path' and contains(@d,'M512 64C26')]",
+        "name": "cross_status_in_the_system"
+    }
+    cross_status_in_flight = {
+        "xpath": "//div[@id='uiState']//i[@aria-label='icon: close-circle']//*[name()='svg']",
+        "name": "cross_status_in_flight"
+    }
+
+
     number_of_tractor = {
         "xpath": "//label[text()='Госномер Тягача']/following::input",
         "name": "number_of_tractor"
@@ -464,6 +494,25 @@ class Filter(Base):
         "xpath": "(//input[@class='ant-input'])[3]",
         "name": "contractor_tractor"
     }
+    # cross_status_in_the_system_tractor = {
+    #     "xpath": "//i[@aria-label='icon: close-circle']//*[name()='svg']//*[name()='path' and contains(@d,'M512 64C26')]",
+    #     "name": "cross_status_in_the_system_tractor"
+    # }
+    cross_status_in_the_system_tractor = {
+        "xpath": "//i[@aria-label='icon: close-circle']//*[name()='svg']",
+        "name": "cross_status_in_the_system_tractor"
+    }
+    cross_status_in_flight_tractor = {
+        "xpath": "//div[@id='uiState']//i[@aria-label='icon: close-circle']//*[name()='svg']",
+        "name": "cross_status_in_flight_tractor"
+    }
+    tractor_status = {
+        "xpath": "//div[@id='status']//div[@class='ant-select-selection__rendered']",
+        "name": "tractor_status"
+    }
+
+
+
     number_of_trailer = {
         "xpath": "//label[text()='Госномер Полуприцепа']/following::input",
         "name": "number_of_trailer"
@@ -488,6 +537,29 @@ class Filter(Base):
         "xpath": "(//input[@class='ant-input'])[3]",
         "name": "contractor_trailer"
     }
+    cross_status_in_the_system_trailer = {
+        "xpath": "//div[@id='status']//i[@aria-label='icon: close-circle']//*[name()='svg']",
+        "name": "cross_status_in_the_system_trailer"
+    }
+    cross_status_in_flight_trailer = {
+        "xpath": "//div[@id='uiState']//i[@aria-label='icon: close-circle']//*[name()='svg']//*[name()='path' and contains(@d,'M512 64C26')]",
+        "name": "cross_status_in_flight_trailer"
+    }
+    cross_type_of_road_trailer = {
+        "xpath": "//*[name()='path' and contains(@d,'M512 64C26')]",
+        "name": "cross_type_of_road_trailer"
+    }
+    trailer_status = {
+        "xpath": "//div[@id='status']//div[@class='ant-select-selection__rendered']",
+        "name": "trailer_status"
+    }
+    trailer_cargo_transportation = {
+        "xpath": "//span[@title='Грузовая']",
+        "name": "trailer_cargo_transportation"
+    }
+
+
+
     specialist_type = {
         "xpath": "//ul[@class='ant-select-selection__rendered']/following-sibling::span[1]",
         "name": "specialist_type"
@@ -557,6 +629,9 @@ class Filter(Base):
         "css": ".filter-item:nth-child(2) .ant-select-selection__clear:nth-child(2) path:nth-child(1)",
         "name": "x4_button"
     }
+
+
+
     number_vehicles = {
         "xpath": "//input[@class='ant-input']",
         "name": "number_vehicles"

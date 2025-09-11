@@ -3,11 +3,13 @@ import signal
 import subprocess
 import sys
 
-# Константы
-ALLURE_RESULTS_DIR = "C:\\Users\\l2new\\PycharmProjects\\Vezubr_Autotests\\result_new"
-ALLURE_REPORT_DIR = "C:\\Users\\l2new\\PycharmProjects\\Vezubr_Autotests\\allure-report"
+# === НАСТРОЙКИ ПОД ВАШ НОВЫЙ ПРОЕКТ ===
+PROJECT_ROOT = "C:\\Users\\l2new\\PycharmProjects\\vezubr_regress"
+ALLURE_RESULTS_DIR = os.path.join(PROJECT_ROOT, "allure-results")
+ALLURE_REPORT_DIR = os.path.join(PROJECT_ROOT, "allure-report")
 
-os.chdir("C:\\Users\\l2new\\PycharmProjects\\Vezubr_Autotests")
+# Меняем рабочую директорию на текущий проект
+os.chdir(PROJECT_ROOT)
 
 
 def signal_handler(sig, frame):
@@ -26,7 +28,6 @@ def run_tests():
     print("Запуск тестов...")
     pytest_command = f"pytest -s -v --alluredir={ALLURE_RESULTS_DIR}"
     try:
-        # Запуск pytest
         pytest_result = subprocess.run(pytest_command, shell=True)
         if pytest_result.returncode != 0:
             print("Некоторые тесты завершились с ошибками, но выполнение продолжается.")
@@ -46,7 +47,6 @@ def generate_allure_report():
 
     allure_generate_command = f"allure generate {ALLURE_RESULTS_DIR} -o {ALLURE_REPORT_DIR} --clean"
     try:
-        # Генерация отчета
         subprocess.run(allure_generate_command, shell=True, check=True)
         print("Отчет успешно сгенерирован.")
     except subprocess.CalledProcessError as e:
@@ -65,21 +65,13 @@ def open_allure_report():
 
     allure_open_command = f"allure open {ALLURE_REPORT_DIR}"
     try:
-        # Открытие отчета
         subprocess.run(allure_open_command, shell=True, check=True)
     except subprocess.CalledProcessError as e:
         print(f"Ошибка при открытии отчета: {e}")
 
 
 if __name__ == "__main__":
-    # Регистрация обработчика сигнала Ctrl+C
     signal.signal(signal.SIGINT, signal_handler)
-
-    # 1. Запуск тестов
     run_tests()
-
-    # 2. Генерация отчета
     generate_allure_report()
-
-    # 3. Открытие отчета
     open_allure_report()

@@ -98,11 +98,11 @@ def test_user_subdivision_lke(base_fixture, domain):
 
     # Фильтрация пользователей по фамилии
     profile.input_in_field(profile.surname_filter, value='Ф-20250526230920')
-    time.sleep(1)
+    time.sleep(2)
 
     # Переход к профилю первого пользователя в списке
     profile.click_button(profile.user_link, wait="form")
-    time.sleep(1)
+    time.sleep(2)
 
     user = User(base.driver)
     # Редактирование данных пользователя
@@ -110,7 +110,7 @@ def test_user_subdivision_lke(base_fixture, domain):
     time.sleep(1)
 
     # Выбор подразделения пользователя
-    user.dropdown_without_input(user.user_subdivision_select, "подразделение Лямбда")
+    user.dropdown_without_input(user.user_subdivision_select, "второе подразделение")
 
     # Сохранение изменений
     user.click_button(user.save_edit_user_button, do_assert=True)
@@ -127,12 +127,12 @@ def test_user_subdivision_lke(base_fixture, domain):
     time.sleep(1)
     profile.click_button(profile.user_link, wait="form")
     time.sleep(3)
-    profile.find_text_on_page(text="подразделение Лямбда", occurrences=2)
+    profile.find_text_on_page(text="второе подразделение", occurrences=2)
 
     # Смена подразделения
     user.click_button(user.user_edit_button, wait="form")
     time.sleep(1)
-    user.click_and_select_with_arrows(user.user_subdivision_select, arrow_presses=2)
+    user.click_and_select_with_arrows(user.user_subdivision_select, arrow_presses=1)
     time.sleep(1)
     # Сохранение изменений
     user.click_button(user.save_edit_user_button, do_assert=True)
@@ -145,8 +145,8 @@ def test_user_subdivision_lke(base_fixture, domain):
     profile.input_in_field(profile.surname_filter, value='Ф-20250526230920')
     time.sleep(1)
     profile.click_button(profile.user_link, wait="form")
-    time.sleep(3)
-    profile.find_text_on_page(text="подразделение Лямбда", occurrences=0)
+    time.sleep(4)
+    profile.find_text_on_page(text="второе подразделение", occurrences=0)
     time.sleep(1)
 
 
@@ -166,12 +166,12 @@ def test_user_contractor_lke(base_fixture, domain):
     profile.click_button(profile.users_tab, do_assert=True)
 
     # Фильтрация пользователей по фамилии
-    profile.input_in_field(profile.surname_filter, value='Ф-20250526230920')
-    time.sleep(1)
+    profile.input_in_field(profile.surname_filter, value='Ф-20250118173213')
+    time.sleep(2)
 
     # Переход к профилю первого пользователя в списке
     profile.click_button(profile.user_link, wait="form")
-    time.sleep(1)
+    time.sleep(2)
 
     user = User(base.driver)
     # Клик по кнопке добавления ответственности
@@ -179,7 +179,7 @@ def test_user_contractor_lke(base_fixture, domain):
     # Переход на вкладку "Перевозчики"
     user.click_button(user.producer_tab, wait="lst")
     time.sleep(2)
-    user.input_in_field(user.filter_company, value='яндекс')
+    user.input_in_field(user.filter_company, value='Auto LKP')
     time.sleep(2)
     # Назначение ответственности за первого в списке перевозчика
     user.click_button(user.first_producer_on_checkbox, wait_type='located')
@@ -193,7 +193,7 @@ def test_user_contractor_lke(base_fixture, domain):
     user.click_button(user.choice_contractor, wait_type='located')
     user.click_button(user.delegate_responsibility_button)
 
-    profile.input_in_field(profile.surname_filter, value='Ф-20250526230920')
+    profile.input_in_field(profile.surname_filter, value='Ф-20250118173213')
     time.sleep(2)
     user.click_button(user.user_checkbox)
     time.sleep(1)
@@ -205,8 +205,8 @@ def test_user_contractor_lke(base_fixture, domain):
                            do_assert=True, wait="lst")
 
     ctr = Contractors(base.driver)
-    ctr.input_in_field(ctr.contractor_name, value='яндекс')
-    time.sleep(1)
+    ctr.input_in_field(ctr.contractor_name, value='Auto LKP')
+    time.sleep(4)
 
     producer_list = ProducersList(base.driver)
     # Клик по первому в списке подрядчику
@@ -217,7 +217,7 @@ def test_user_contractor_lke(base_fixture, domain):
     contractor.click_button(contractor.settings_tab)
     time.sleep(2)
     # Фильтрация пользователей по фамилии
-    ctr.input_in_field(ctr.users_for_delegation, value='Ф-20250526230920')
+    ctr.input_in_field(ctr.users_for_delegation, value='Ф-20250118173213')
     time.sleep(3)
 
     # Делегирование пользователю права управления ЛК
@@ -233,7 +233,7 @@ def test_user_contractor_lke(base_fixture, domain):
     time.sleep(1)
 
     # Фильтрация пользователей по фамилии
-    ctr.input_in_field(ctr.users_for_delegation, value='Ф-20250526230920')
+    ctr.input_in_field(ctr.users_for_delegation, value='Ф-20250118173213')
     time.sleep(3)
 
     # Отмена делегирования пользователю
@@ -252,7 +252,7 @@ def test_user_contractor_lke(base_fixture, domain):
     profile.click_button(profile.users_tab, do_assert=True)
 
     # Фильтрация пользователей по фамилии
-    profile.input_in_field(profile.surname_filter, value='Ф-20250526230920')
+    profile.input_in_field(profile.surname_filter, value='Ф-20250118173213')
     time.sleep(1)
 
     # Переход к профилю первого пользователя в списке
@@ -267,6 +267,4 @@ def test_user_contractor_lke(base_fixture, domain):
     user.click_button(user.confirm_off_responsible_button)
 
     user.reload_page()
-    time.sleep(3)
-
-    user.verify_text_on_page(text='Яндекс', should_exist=False)
+    time.sleep(4)

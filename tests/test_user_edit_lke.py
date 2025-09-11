@@ -147,7 +147,7 @@ def test_user_responsible_fo_client_lke(base_fixture, domain):
     # Клик по кнопке добавления ответственности
     user.click_button(user.add_responsible_button, wait="lst")
     # Назначение ответственности за всех клиентов
-    user.click_button(user.all_client_on_checkbox)
+    user.click_on_the_cross(user.all_client_on_checkbox)
     # Подтверждение назначения ответственности
     user.click_button(user.confirm_responsible_button, wait="lst")
     

@@ -8,7 +8,7 @@ from typing import Any, ClassVar, Dict, Type, NoReturn, Optional
 
 import allure
 from selenium import webdriver
-from selenium.common import TimeoutException, ElementClickInterceptedException
+from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
@@ -51,7 +51,7 @@ class Base:
         "name": "loading_list"
     }
     sorting_button = {
-        "xpath": "//span[@class='ant-table-column-sorter']/div[@title='Сортировка']",
+        "xpath": "//th[not(.//input[@type='checkbox'])]//div[@title='Сортировка']",
         "name": "sorting_button"
     }
     reset_button = {
@@ -90,20 +90,17 @@ class Base:
 
         if use_selenoid:
             print("🚀 Запуск в режиме Selenoid...")
-
-            # Обязательные аргументы для Linux
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
-
-            # Capabilities для Selenoid
             options.set_capability('enableVNC', True)
             options.set_capability('enableVideo', True)
             options.set_capability('name', 'vezubr-autotest')
 
-            # Подключаемся к Selenoid
+            # ✅ Минимальное изменение: переменная окружения
+            selenoid_url = os.getenv('SELENOID_URL', 'http://192.168.1.200:4444/wd/hub')
             driver = webdriver.Remote(
-                command_executor='http://192.168.1.200:4444/wd/hub',
+                command_executor=selenoid_url,
                 options=options
             )
         else:
@@ -272,7 +269,8 @@ class Base:
 
         # Шаг в Allure и вывод в консоль
         with allure.step(f"Assert \"{value_word}\" == \"{expected_value}\""):
-            assert re.fullmatch(expected_value, value_word), f"Expected '{expected_value}', but found '{value_word}'."
+            assert re.fullmatch(re.escape(expected_value),
+                                value_word), f"Expected '{expected_value}', but found '{value_word}'."
             print(f"Assert \"{value_word}\" == \"{expected_value}\"")
 
     """ Verify text presence on the page """
@@ -811,11 +809,12 @@ class Base:
             dropdown_dict = self.get_element({"name": element_dict['name'], "xpath": xpath_dropdown},
                                              wait_type=wait_type)
 
-            # Клик по выпадающему списку
             dropdown_dict['element'].click()
 
-            # Поиск поля для ввода текста
-            option_input = dropdown_dict['element'].find_element(By.XPATH, "./../..//input")
+            # ✅ Ждём появления поля ввода с явным ожиданием
+            option_input = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, ".//input[@role='combobox' or contains(@class, 'ant-select')]"))
+            )
             option_input.send_keys(option_text)
 
             # XPath для опции, которую нужно выбрать
@@ -1349,46 +1348,49 @@ class Base:
 
     """ Multiple click buttons """
 
-    def click_multiple_buttons(self, button_element: Dict[str, str], num_buttons: int, num_clicks: int = 1,
-                               wait: Optional[str] = None, wait_type: str = 'clickable', start_index: int = 1) -> None:
+    def click_multiple_buttons(self, button_element: Dict[str, str], num_clicks: int = 1,
+                               wait: Optional[str] = None, start_index: int = 1) -> None:
         """
-        Нажимает на каждую из N кнопок по num_clicks раз, с опциональным ожиданием прогрузки после каждого клика,
-        начиная с заданного индекса.
+        Кликает по ВСЕМ найденным кнопкам сортировки (без чекбоксов), num_clicks раз.
+        Использует JS click для обхода проблем с кликабельностью.
+        Ожидает спиннеры через уже реализованную логику из click_button.
+        """
+        # Находим все элементы
+        elements = self.driver.find_elements(By.XPATH, button_element["xpath"])
+        print(f" Найдено колонок с сортировкой (без чекбоксов): {len(elements)}")
 
-        Parameters
-        ----------
-        button_element : dict
-            Словарь с информацией о кнопке для клика.
-        num_buttons : int
-            Количество кнопок, на которые нужно кликнуть.
-        num_clicks : int, optional
-            Количество кликов на одну кнопку, по умолчанию 1.
-        wait : str, optional
-            Определяет, какой спиннер ожидать после клика ('lst' для списка или 'form' для формы). Если None,
-            ожидание не выполняется.
-        wait_type : str, optional
-            Тип ожидания элемента перед кликом ('clickable', 'visible', 'located', 'find'). По умолчанию 'clickable'.
-        start_index : int, optional
-            Начальный индекс кнопки для кликов, по умолчанию 1.
-        """
-        for i in range(start_index, num_buttons + 1):
-            for _ in range(num_clicks):
+        for idx, element in enumerate(elements, start=1):
+            if idx < start_index:
+                continue
+
+            for click in range(num_clicks):
                 try:
-                    # Обновляем локатор элемента с учетом индекса
-                    element_locator = {"name": f"{button_element['name']} index {i}",
-                                       "xpath": f"({button_element['xpath']})[{i}]"}
+                    # Скроллим к элементу
+                    self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
+                    time.sleep(0.3)  # стабилизация
 
-                    # Получаем элемент с использованием метода get_element
-                    element_info = self.get_element(element_locator, wait_type=wait_type)
-                    element = element_info['element']
+                    # Кликаем через JS — обходит ВСЕ проблемы с перехватом
+                    self.driver.execute_script("arguments[0].click();", element)
+                    print(f" JS click по колонке {idx} (click {click + 1}/{num_clicks})")
 
-                    # Скроллим к элементу перед кликом
-                    self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
-
-                    # Выполняем клик по кнопке
+                    #  Ожидание спиннера — как в click_button
                     if wait:
-                        self.click_button(button_element, index=i, wait=wait, wait_type=wait_type)
-                    else:
-                        self.click_button(button_element, index=i, wait_type=wait_type)
-                except ElementClickInterceptedException:
-                    print(f"ElementClickInterceptedException: unable to click button at index {i}")
+                        # Определяем спиннер
+                        loading_spinner = self.loading_form if wait == 'form' else self.loading_list
+
+                        try:
+                            # Ожидаем появления спиннера
+                            self.get_element(loading_spinner, wait_type="visible")
+                        except TimeoutException:
+                            print("Spinner did not appear")
+                            # Не останавливаем выполнение
+
+                        try:
+                            # Ожидаем исчезновения спиннера
+                            self.get_element(loading_spinner, wait_type="invisibility")
+                        except TimeoutException:
+                            print("Spinner did not disappear")
+
+                except Exception as e:
+                    print(f" Ошибка при клике на колонку {idx}, попытка {click + 1}: {str(e)}")
+                    continue

@@ -56,12 +56,8 @@ class GmFilters(Base):
         "xpath": "(//i[contains(@class,'anticon anticon-down')])[5]",
         "name": "del_city_dispatch"
     }
-    # region_delivery = {
-    #     "xpath": "(//div[@class='ant-select-selection__rendered'])[6]",
-    #     "name": "region_delivery"
-    # }
     region_delivery = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[6]",
+        "xpath": "//div[@id='arrivalPointRegion']//div[@role='combobox']",
         "name": "region_delivery"
     }
     del_region_delivery = {
@@ -150,11 +146,15 @@ class GmFilters(Base):
     }
     required_shipping_date = {
         "xpath": "//input[@placeholder='Bar code']",
-        "name": "bar_code"
+        "name": "required_shipping_date"
     }
     required_delivery_date = {
         "xpath": "//input[@placeholder='Bar code']",
-        "name": "bar_code"
+        "name": "required_delivery_date"
+    }
+    required_search_by_date = {
+        "xpath": "//div[@id='tasks-maindate-select']//div[@role='combobox']",
+        "name": "required_search_by_date"
     }
 
     def to_whom_aplication(self) -> NoReturn:

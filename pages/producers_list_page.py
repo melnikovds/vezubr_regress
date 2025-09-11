@@ -9,6 +9,10 @@ class ProducersList(Base):
         super().__init__(driver)
         self.driver = driver
 
+    first_producer = {
+        "xpath": "//a[normalize-space()='6883106209']",
+        "name": "first_producer"
+    }
     # Locators
     producer_lkp_inn = {
         "xpath": "//a[@class='link-back' and contains(text(), '6883106209')]",

@@ -2,7 +2,9 @@ import random
 import time
 from datetime import datetime
 from typing import NoReturn
+
 from selenium.webdriver import ActionChains, Keys
+
 from base.base_class import Base
 from pages.generator.flight_generator import fake
 
@@ -182,7 +184,7 @@ class AddCdr(Base):
         "name": "documents_for_city_button"
     }
     save_and_publish_button = {
-        "xpath": "(//button[@class='ant-btn ant-btn-primary'])[2]",
+        "xpath": "//button[3]",
         "name": "save_and_publish_button"
     }
     change_one_time_tariff = {
@@ -194,13 +196,22 @@ class AddCdr(Base):
         "name": "change_publication_rate"
     }
     change_publication_rate_asr = {
-        "xpath": "(//div[@class='ant-input-number-input-wrap']//input)[5]",
+        "xpath": "//div[@class='ant-input-number order-field-number']//input[@role='spinbutton']",
         "name": "change_publication_rate_asr"
     }
+    change_publication_rate_dop = {
+        "xpath": "//input[@role='spinbutton']",
+        "name": "change_publication_rate_dop"
+    }
     select_contractors = {
-        "xpath": "(//div[@class='ant-select-selection__placeholder'])[5]",
+        "xpath": "//div[@class='ant-col ant-col-24 vz-form-col']//input[@type='text']",
         "name": "select_contractors"
     }
+    select_lkp = {
+        "xpath": "//div[@class='ant-table-selection']//input[@type='checkbox']",
+        "name": "select_lkp"
+    }
+
     select_contractors_asr_lkz_lkp = {
         "xpath": "(//div[@class='ant-select-selection__placeholder'])[4]",
         "name": "select_contractors_asr_lkz_lke"
@@ -217,9 +228,17 @@ class AddCdr(Base):
         "xpath": "(//button[@class='ant-btn ant-btn-primary'])[3]",
         "name": "publish_button"
     }
+    publish_button_ltl = {
+        "xpath": "//div[@class='ant-modal-root']//button[2]",
+        "name": "publish_button_ltl"
+    }
     publish_ok_button = {
         "xpath": "(//button[@class='ant-btn ant-btn-primary'])[4]",
         "name": "publish_ok_button"
+    }
+    publish_ok_button_ltl = {
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[@type='button']",
+        "name": "publish_ok_button_ltl"
     }
     additional_requirements_button = {
         "xpath": "//div[@class='ant-collapse-item']//div[1]",
@@ -286,11 +305,11 @@ class AddCdr(Base):
         "name": "removal_packaging_flag_on"
     }
     additional_service_button = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[6]",
+        "xpath": "(//div[@class='ant-select-selection__rendered'])[7]",
         "name": "additional_service_button"
     }
     additional_service_time = {
-        "xpath": "(//input[@class='ant-calendar-picker-input ant-input'])[4]",
+        "xpath": "//div[@class='vz-form-item__elem']//span[@class='ant-calendar-picker']//div//input[@placeholder='Выберите дату']",
         "name": "additional_service_time"
     }
     change_volume_prr = {
@@ -302,28 +321,28 @@ class AddCdr(Base):
         "name": "change_weight_prr"
     }
     first_address_select_prr = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[6]",
+        "xpath": "(//div[@role='combobox'])[7]",
         "name": "first_address_select_prr"
     }
 
     change_specialization_prr = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[7]",
+        "xpath": "(//div[@class='ant-select-selection__rendered'])[8]",
         "name": "change_specialization_prr"
     }
     change_quantity_specialization_prr = {
-        "xpath": "(//input[@class='ant-input-number-input'])[3]",
+        "xpath": "//input[@role='spinbutton']",
         "name": "change_quantity_specialization_prr"
     }
     add_insurance = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[9]",
+        "xpath": "(//div[@class='ant-select-selection__rendered'])[10]",
         "name": "add_insurance"
     }
     change_value_insurance = {
-        "xpath": "(//input[@class='ant-input-number-input'])[4]",
+        "xpath": "//div[@class='ant-col ant-col-12 vz-form-col']//input[@role='spinbutton']",
         "name": "change_value_insurance"
     }
     change_category_insurance = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[9]",
+        "xpath": "(//div[@class='ant-select-selection__rendered'])[10]",
         "name": "change_category_insurance"
     }
     input_id_cdr = {
@@ -431,8 +450,8 @@ class AddCdr(Base):
         """
         Изменение даты и времени начала подачи.
         """
-        # Генерация нового времени с заданным сдвигом (30 минут)
-        new_time = self.naw_time_change(30)
+        # Генерация нового времени с заданным сдвигом (70 минут)
+        new_time = self.naw_time_change(70)
         # Клик по кнопке выбора даты и времени начала подачи
         self.click_button(self.start_at_from_button)
         # Выбор сегодняшней даты из календаря
@@ -531,15 +550,16 @@ class AddCdr(Base):
         # Нажатие на кнопку сохранения и публикации
         self.click_button(self.save_and_publish_button)
         time.sleep(2)
-        # Изменение тарифа за один раз
+        # Выбираем по ставке
         self.click_button(self.change_one_time_tariff)
         time.sleep(2)
         # Установка случайной ставки публикации
         self.dropdown_with_input(self.change_publication_rate, str(random.randint(100000, 800000)))
         time.sleep(2)
-        # Выбор подрядчиков через выпадающий список
-        self.dropdown_without_input(self.select_contractors, "Auto LKP")
-        ActionChains(self.driver).send_keys(Keys.TAB).perform()
+        # Выбор подрядчиков
+        self.input_in_field(self.select_contractors, "Auto LKP")
+
+        self.click_on_the_cross(self.select_lkp)
         # Подтверждение публикации заказа
         self.click_button(self.publish_button)
         self.click_button(self.publish_ok_button)
@@ -558,8 +578,9 @@ class AddCdr(Base):
         self.dropdown_with_input(self.change_publication_rate, str(random.randint(100000, 800000)))
         time.sleep(2)
         # Выбор подрядчиков через выпадающий список
-        self.dropdown_without_input(self.select_contractors, "Auto LKE")
-        ActionChains(self.driver).send_keys(Keys.TAB).perform()
+        self.input_in_field(self.select_contractors, "Auto LKE")
+
+        self.click_on_the_cross(self.select_lkp)
         # Подтверждение публикации заказа
         self.click_button(self.publish_button)
         self.click_button(self.publish_ok_button)
@@ -575,11 +596,12 @@ class AddCdr(Base):
         self.click_button(self.change_one_time_tariff)
         time.sleep(2)
         # Установка случайной ставки публикации
-        self.dropdown_with_input(self.change_publication_rate_asr, str(random.randint(100000, 800000)))
+        self.input_in_field(self.change_publication_rate_asr, str(random.randint(100000, 800000)))
         time.sleep(2)
         # Выбор подрядчиков через выпадающий список
-        self.dropdown_without_input(self.select_contractors_asr_lkz_lkp, "Auto LKP")
-        ActionChains(self.driver).send_keys(Keys.TAB).perform()
+        self.input_in_field(self.select_contractors, "Auto LKP")
+
+        self.click_on_the_cross(self.select_lkp)
         # Подтверждение публикации заказа
         self.click_button(self.publish_button)
         self.click_button(self.publish_ok_button)
@@ -595,11 +617,12 @@ class AddCdr(Base):
         self.click_button(self.change_one_time_tariff)
         time.sleep(2)
         # Установка случайной ставки публикации
-        self.dropdown_with_input(self.change_publication_rate_asr, str(random.randint(100000, 800000)))
+        self.dropdown_with_input(self.change_publication_rate_dop, str(random.randint(100000, 800000)))
         time.sleep(2)
         # Выбор подрядчиков через выпадающий список
-        self.dropdown_without_input(self.select_contractors_asr_lkz_lkp, "Auto LKP")
-        ActionChains(self.driver).send_keys(Keys.TAB).perform()
+        self.input_in_field(self.select_contractors, "Auto LKP")
+
+        self.click_on_the_cross(self.select_lkp)
         # Подтверждение публикации заказа
         self.click_button(self.publish_button)
         self.click_button(self.publish_ok_button)
@@ -656,14 +679,13 @@ class AddCdr(Base):
         # Установка случайной ставки публикации
         self.dropdown_with_input(self.change_publication_rate, str(random.randint(100000, 800000)))
         # Выбор подрядчиков через выпадающий список
-        self.dropdown_without_input(self.select_contractors_ltl, "Auto LKP")
-        ActionChains(self.driver).send_keys(Keys.TAB).perform()
-        self.dropdown_without_input(self.select_contractors_ltl, "Auto LKE")
-        ActionChains(self.driver).send_keys(Keys.TAB).perform()
+        self.input_in_field(self.select_contractors, "Auto LKP")
+
         # Подтверждение публикации заказа
-        self.click_button(self.publish_button)
-        time.sleep(1)
-        self.click_button(self.publish_ok_button)
+        self.click_on_the_cross(self.select_lkp)
+        # Подтверждение публикации заказа
+        self.click_button(self.publish_button_ltl)
+        self.click_button(self.publish_ok_button_ltl)
 
     def add_additional_requirements(self) -> NoReturn:
         """
@@ -706,7 +728,7 @@ class AddCdr(Base):
     def additional_service_add_prr(self) -> NoReturn:
         self.dropdown_without_input(self.additional_service_button, "ПРР")
         self.scroll_to_element(self.save_and_publish_button)
-        new_time = self.naw_time_change(50)
+        new_time = self.naw_time_change(80)
         # Клик по кнопке выбора даты и времени начала подачи
         self.click_button(self.additional_service_time)
         # Выбор сегодняшней даты из календаря
@@ -717,8 +739,8 @@ class AddCdr(Base):
         self.backspace_and_input(self.start_at_from_input, num=5, value=new_time)
         # Подтверждение выбора даты и времени нажатием кнопки "OK"
         self.click_button(self.calendar_ok_button)
-        self.input_in_field(self.change_volume_prr, str(random.randint(1, 6)))
-        self.input_in_field(self.change_weight_prr, str(random.randint(500, 1500)))
+        # self.input_in_field(self.change_volume_prr, str(random.randint(1, 6)))
+        # self.input_in_field(self.change_weight_prr, str(random.randint(500, 1500)))
         # Выбор первого адреса из списка доступных адресов
         self.click_and_select_with_arrows(self.first_address_select_prr, 1)
         ActionChains(self.driver).send_keys(Keys.TAB).perform()

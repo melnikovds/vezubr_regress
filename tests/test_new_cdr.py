@@ -1,7 +1,9 @@
 import os
 import time
+
 import allure
 import pytest
+
 from pages.new_cdr_page import AddCdr
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Игнорировать INFO и WARNING сообщения
@@ -309,7 +311,7 @@ def test_add_new_ftl_lkz_dop(base_fixture, domain):
     with allure.step("Выбор полного списка документов"):
         add.required_documents()
 
-    with allure.step("Публикация заявки на ЛКЭ и ЛКП"):
+    with allure.step("Публикация заявки на ЛКП"):
         add.save_and_publish_dop()
         time.sleep(3)
 
@@ -345,14 +347,8 @@ def test_add_new_ftl_lkz_asr(base_fixture, domain):
         add.click_button(add.change_closed_body_type)
         add.click_button(add.change_body_type_close)
 
-    with allure.step("Добавление доп. услуг"):
-        add.add_additional_requirements()
-
     with allure.step("Добавление адресов"):
         add.change_address()
-
-    with allure.step("Прокрутка до кнопки 'Сохранить и опубликовать'"):
-        add.scroll_to_element(add.save_and_publish_button)
 
     with allure.step("Выбор возможности изменять маршрут водителем"):
         add.random_point_change_type()
@@ -362,6 +358,9 @@ def test_add_new_ftl_lkz_asr(base_fixture, domain):
 
     with allure.step("Выбор полного списка документов"):
         add.required_documents()
+
+    with allure.step("Прокрутка до кнопки 'Сохранить и опубликовать'"):
+        add.scroll_to_element(add.save_and_publish_button)
 
     with allure.step("Добавление услуги ПРР"):
         add.additional_service_add_prr()

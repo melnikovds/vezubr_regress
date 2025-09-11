@@ -1,6 +1,8 @@
 import time
+
 import allure
 import pytest
+
 from pages.filters_gm_lkz_lke_page import GmFilters
 
 
@@ -14,6 +16,9 @@ def test_filter_assignment_lkz(base_fixture, domain, request):
     with allure.step("Переходим на вкладку 'Задания'"):
         sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.tasks_list_button)
         add = GmFilters(base.driver)
+
+    with allure.step("Устанавливаем дату создания 'За все время'"):
+        add.dropdown_without_input(add.required_search_by_date, "За все время")
 
     with allure.step("Проверка фильтра 'Номер заказа'"):
         add.input_in_field(add.order_number, "очень", wait='lst')

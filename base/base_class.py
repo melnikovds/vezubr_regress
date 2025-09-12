@@ -88,16 +88,16 @@ class Base:
         # Проверяем, нужно ли использовать Selenoid
         use_selenoid = os.getenv("USE_SELENOID", "false").lower() == "true"
 
-        if use_selenoid:
+                if use_selenoid:
             print("🚀 Запуск в режиме Selenoid...")
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
 
-            # 🔥 Указываем версию браузера!
+            # 🔥 ДОБАВЬТЕ ЭТУ СТРОКУ!
+            options.set_capability('browserName', 'chrome')
             options.set_capability('browserVersion', '116.0')
 
-            # Капабилити Selenoid
             options.set_capability('enableVNC', True)
             options.set_capability('enableVideo', True)
             options.set_capability('name', 'vezubr-autotest')

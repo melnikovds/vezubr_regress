@@ -88,7 +88,7 @@ class Base:
         # Проверяем, нужно ли использовать Selenoid
         use_selenoid = os.getenv("USE_SELENOID", "false").lower() == "true"
 
-                if use_selenoid:
+        if use_selenoid:
             print("🚀 Запуск в режиме Selenoid...")
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')

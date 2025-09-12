@@ -94,10 +94,10 @@ class Base:
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
 
-            # 🔥 Указываем версию браузера!
+            # 🔥 ДОБАВЬТЕ ЭТУ СТРОКУ!
+            options.set_capability('browserName', 'chrome')
             options.set_capability('browserVersion', '116.0')
 
-            # Капабилити Selenoid
             options.set_capability('enableVNC', True)
             options.set_capability('enableVideo', True)
             options.set_capability('name', 'vezubr-autotest')

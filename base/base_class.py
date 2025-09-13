@@ -98,8 +98,8 @@ class Base:
             options.set_capability('browserName', 'chrome')
             options.set_capability('browserVersion', '116.0')
 
-            options.set_capability('enableVNC', True)
-            options.set_capability('enableVideo', True)
+            
+            
             options.set_capability('name', 'vezubr-autotest')
 
             selenoid_url = os.getenv('SELENOID_URL', 'http://localhost:4444/wd/hub')

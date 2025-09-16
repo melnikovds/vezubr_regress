@@ -48,7 +48,7 @@ def test_transport_inner_edit_lke(base_fixture, domain):
     add_ts.input_in_field(add_ts.height_from_ground_input, "1")
     add_ts.dropdown_without_input(add_ts.number_passengers_select, "4")
     # Создание транспортного средства
-    add_ts.click_button(add_ts.create_vehicle_button, do_assert=True)
+    add_ts.click_button(add_ts.create_transport_button, do_assert=True)
     add_ts.click_button(add_ts.confirm_button, wait="form")
     # Редактирование транспортного средства
     add_ts.click_button(add_ts.edit_button)
@@ -76,7 +76,7 @@ def test_transport_inner_edit_lke(base_fixture, domain):
     add_ts.all_additional_params_without_gps()
     add_ts.click_button(add_ts.side_loading_toggl)
     add_ts.click_button(add_ts.top_loading_toggl)
-    add_ts.click_button(add_ts.edit_confirm_button, do_assert=True)
+    add_ts.click_button(add_ts.edit_confirm_transport_button, do_assert=True)
     # Конец теста
 
 
@@ -130,7 +130,7 @@ def test_semitrailer_inner_edit_lke(base_fixture, domain):
     add_ts.click_button(add_ts.side_loading_toggl)
     add_ts.click_button(add_ts.top_loading_toggl)
     # Создание транспортного средства
-    add_ts.click_button(add_ts.create_vehicle_button, do_assert=True)
+    add_ts.click_button(add_ts.create_trailer_button, do_assert=True)
     add_ts.click_button(add_ts.confirm_button, wait="form")
     # Редактирование транспортного средства
     add_ts.click_button(add_ts.edit_button)
@@ -143,7 +143,7 @@ def test_semitrailer_inner_edit_lke(base_fixture, domain):
     add_ts.click_button(add_ts.side_loading_toggl)
     add_ts.click_button(add_ts.top_loading_toggl)
     # Сохранение внесенных изменений транспортного средства
-    add_ts.click_button(add_ts.edit_confirm_button, do_assert=True)
+    add_ts.click_button(add_ts.edit_confirm_trailer_button, do_assert=True)
     # Конец теста
 
 
@@ -181,7 +181,7 @@ def test_semitrailer_edit_lke(base_fixture, domain):
     add_ts.input_in_field(add_ts.height_from_ground_input, "1")
     add_ts.input_in_field(add_ts.compartment_count_input, "1")
     # Создание транспортного средства
-    add_ts.click_button(add_ts.create_vehicle_button, do_assert=True)
+    add_ts.click_button(add_ts.create_trailer_button, do_assert=True)
     add_ts.click_button(add_ts.confirm_button, wait="form")
     # Редактирование транспортного средства
     add_ts.click_button(add_ts.edit_button)
@@ -198,7 +198,7 @@ def test_semitrailer_edit_lke(base_fixture, domain):
     add_ts.click_button(add_ts.top_loading_toggl)
     add_ts.all_additional_params_without_gps()
     # Сохранение внесенных изменений транспортного средства
-    add_ts.click_button(add_ts.edit_confirm_button, do_assert=True)
+    add_ts.click_button(add_ts.edit_confirm_trailer_button, do_assert=True)
     # Конец теста
 
 
@@ -248,7 +248,7 @@ def test_tractor_inner_edit_lke(base_fixture, domain):
     add_ts.input_in_field(add_ts.calendar_input, "10102045")
     add_ts.click_button(add_ts.gps_monitoring_toggl)
     # Создание транспортного средства
-    add_ts.click_button(add_ts.create_vehicle_button, do_assert=True)
+    add_ts.click_button(add_ts.create_tractor_button, do_assert=True)
     add_ts.click_button(add_ts.confirm_button, wait="form")
     # Редактирование транспортного средства
     add_ts.click_button(add_ts.edit_button)
@@ -259,5 +259,5 @@ def test_tractor_inner_edit_lke(base_fixture, domain):
     add_ts.move_and_click(move_to=add_ts.first_pass_type_select, click_to=add_ts.close_circle_button, click_index=5)
     add_ts.click_button(add_ts.gps_monitoring_toggl)
     # Сохранение внесенных изменений транспортного средства
-    add_ts.click_button(add_ts.edit_confirm_button, do_assert=True)
+    add_ts.click_button(add_ts.edit_confirm_tractor_button, do_assert=True)
     # Конец теста

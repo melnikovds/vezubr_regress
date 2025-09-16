@@ -39,7 +39,7 @@ def test_transport_add_lke(base_fixture, domain):
     add_ts.input_in_field(add_ts.pallets_input, base.random_value_float_str(0, 35))
     add_ts.input_in_field(add_ts.height_from_ground_input, base.random_value_float_str(1.0, 4.0))
     # Создание транспортного средства
-    add_ts.click_button(add_ts.create_vehicle_button, do_assert=True)
+    add_ts.click_button(add_ts.create_transport_button, do_assert=True)
     add_ts.click_button(add_ts.confirm_button, wait="form")
     # Прикрепление водителей
     add_ts.click_button(add_ts.attach_button)
@@ -98,7 +98,7 @@ def test_trailer_add_lke(base_fixture, domain):
     add_ts.input_in_field(add_ts.pallets_input, base.random_value_float_str(0, 35))
     add_ts.input_in_field(add_ts.height_from_ground_input, base.random_value_float_str(1.0, 4.0))
     # Создание транспортного средства
-    add_ts.click_button(add_ts.create_vehicle_button, do_assert=True)
+    add_ts.click_button(add_ts.create_trailer_button, do_assert=True)
     add_ts.click_button(add_ts.confirm_button, wait="form")
     # Прикрепление тягача
     add_ts.click_button(add_ts.attach_button, wait="form")
@@ -143,7 +143,7 @@ def test_tractor1_add_lke(base_fixture, domain):
     add_ts.dropdown_without_input(add_ts.owner_types_select, "Подрядчик является собственником")
     add_ts.dropdown_without_input(add_ts.year_select, "2023")
     # Создание транспортного средства
-    add_ts.click_button(add_ts.create_vehicle_button, do_assert=True)
+    add_ts.click_button(add_ts.create_tractor_button, do_assert=True)
     add_ts.click_button(add_ts.confirm_button, wait="form")
     # Прикрепление водителей
     add_ts.click_button(add_ts.attach_button)
@@ -191,7 +191,7 @@ def test_tractor2_add_lke(base_fixture, domain):
     add_ts.dropdown_without_input(add_ts.owner_types_select, "Подрядчик является собственником")
     add_ts.dropdown_without_input(add_ts.year_select, "2023")
     # Создание транспортного средства
-    add_ts.click_button(add_ts.create_vehicle_button, do_assert=True)
+    add_ts.click_button(add_ts.create_tractor_button, do_assert=True)
     add_ts.click_button(add_ts.confirm_button, wait="form")
     # Прикрепление полуприцепа
     add_ts.click_button(add_ts.attach_button, index=2, wait="form")
@@ -237,6 +237,7 @@ def test_transport_inner_add_lke(base_fixture, domain):
     producer_list = ProducersList(base.driver)
     # Выбор первого перевозчика в списке
     producer_list.click_button(producer_list.first_radio_button, wait_type="located")
+    # producer_list.click_button(producer_list.first_radio_button, wait_type="find")
     producer_list.click_button(producer_list.confirm_choice_button)
     
     # Заполнение данных о транспортном средстве
@@ -251,7 +252,7 @@ def test_transport_inner_add_lke(base_fixture, domain):
     add_ts.input_in_field(add_ts.pallets_input, base.random_value_float_str(0, 35))
     add_ts.input_in_field(add_ts.height_from_ground_input, base.random_value_float_str(1.0, 4.0))
     # Создание транспортного средства
-    add_ts.click_button(add_ts.create_vehicle_button, do_assert=True)
+    add_ts.click_button(add_ts.create_transport_button, do_assert=True)
     add_ts.click_button(add_ts.confirm_button, wait="form")
     # Прикрепление водителей
     add_ts.click_button(add_ts.attach_button)
@@ -318,7 +319,7 @@ def test_trailer_inner_add_lke(base_fixture, domain):
     add_ts.input_in_field(add_ts.pallets_input, base.random_value_float_str(0, 35))
     add_ts.input_in_field(add_ts.height_from_ground_input, base.random_value_float_str(1.0, 4.0))
     # Создание транспортного средства
-    add_ts.click_button(add_ts.create_vehicle_button, do_assert=True)
+    add_ts.click_button(add_ts.create_trailer_button, do_assert=True)
     add_ts.click_button(add_ts.confirm_button, wait="form")
     # Прикрепление тягача
     add_ts.click_button(add_ts.attach_button)
@@ -372,7 +373,7 @@ def test_tractor1_inner_add_lke(base_fixture, domain):
     add_ts.dropdown_without_input(add_ts.owner_types_select, "Подрядчик является собственником")
     add_ts.dropdown_without_input(add_ts.year_select, "2023")
     # Создание транспортного средства
-    add_ts.click_button(add_ts.create_vehicle_button, do_assert=True)
+    add_ts.click_button(add_ts.create_tractor_button, do_assert=True)
     add_ts.click_button(add_ts.confirm_button, wait="form")
     # Прикрепление водителей
     add_ts.click_button(add_ts.attach_button)
@@ -428,7 +429,7 @@ def test_tractor2_inner_add_lke(base_fixture, domain):
     add_ts.dropdown_without_input(add_ts.owner_types_select, "Подрядчик является собственником")
     add_ts.dropdown_without_input(add_ts.year_select, "2023")
     # Создание транспортного средства
-    add_ts.click_button(add_ts.create_vehicle_button, do_assert=True)
+    add_ts.click_button(add_ts.create_tractor_button, do_assert=True)
     add_ts.click_button(add_ts.confirm_button, wait="form")
     # Прикрепление полуприцепа
     add_ts.click_button(add_ts.attach_button, index=2, wait="form")

@@ -77,17 +77,53 @@ class TransportAdd(Base):
         "xpath": "//input[@name='carCount']",
         "name": "car_count_input"
     }
-    create_vehicle_button = {
+    # create_vehicle_button = {
+    #     "xpath": "//button[contains(@class, 'ant-btn-primary') and .//span[text()='Создать ТС']]",
+    #     "name": "create_vehicle_button",
+    #     "reference_xpath": "//span[@class='ant-modal-confirm-title' and contains(text(), 'успешно создан')]",
+    #     "reference": ".* успешно создан.*"
+    # }
+    # create_vehicle_button = {
+    #     "xpath": "//button[contains(@class, 'ant-btn-primary') and .//span[text()='Создать ТС']]",
+    #     "name": "create_vehicle_button",
+    #     "reference_xpath": "//span[@class='ant-modal-confirm-title' and contains(text(), 'успешно создан')]",
+    #     "reference": "ТС было успешно создано"
+    # }
+    create_transport_button = {
         "xpath": "//button[contains(@class, 'ant-btn-primary') and .//span[text()='Создать ТС']]",
-        "name": "create_vehicle_button",
+        "name": "create_transport_button",
         "reference_xpath": "//span[@class='ant-modal-confirm-title' and contains(text(), 'успешно создан')]",
-        "reference": ".* успешно создан.*"
+        "reference": "ТС было успешно создано"
     }
-    edit_confirm_button = {
+    create_trailer_button = {
+        "xpath": "//button[contains(@class, 'ant-btn-primary') and .//span[text()='Создать ТС']]",
+        "name": "create_trailer_button",
+        "reference_xpath": "//span[@class='ant-modal-confirm-title' and contains(text(), 'успешно создан')]",
+        "reference": "Полуприцеп был успешно создан"
+    }
+    create_tractor_button = {
+        "xpath": "//button[contains(@class, 'ant-btn-primary') and .//span[text()='Создать ТС']]",
+        "name": "create_tractor_button",
+        "reference_xpath": "//span[@class='ant-modal-confirm-title' and contains(text(), 'успешно создан')]",
+        "reference": "Тягач был успешно создан"
+    }
+    edit_confirm_transport_button = {
         "xpath": "//button[contains(@class, 'ant-btn-primary') and .//span[text()='Сохранить']]",
-        "name": "edit_confirm_vehicle_button",
+        "name": "edit_confirm_transport_button",
         "reference_xpath": "//span[contains(text(), 'успешно обновлен')]",
-        "reference": ".* успешно обновлен.*"
+        "reference": "Транспорт успешно обновлен"
+    }
+    edit_confirm_trailer_button = {
+        "xpath": "//button[contains(@class, 'ant-btn-primary') and .//span[text()='Сохранить']]",
+        "name": "edit_confirm_trailer_button",
+        "reference_xpath": "//span[contains(text(), 'успешно обновлен')]",
+        "reference": "Полуприцеп успешно обновлен"
+    }
+    edit_confirm_tractor_button = {
+        "xpath": "//button[contains(@class, 'ant-btn-primary') and .//span[text()='Сохранить']]",
+        "name": "edit_confirm_tractor_button",
+        "reference_xpath": "//span[contains(text(), 'успешно обновлен')]",
+        "reference": "Данные тягача успешно обновлены"
     }
     confirm_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",

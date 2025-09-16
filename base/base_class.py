@@ -93,16 +93,17 @@ class Base:
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
-            options.set_capability('enableVNC', True)
-            options.set_capability('enableVideo', True)
-            options.set_capability('name', 'vezubr-autotest')
 
-            # ✅ Минимальное изменение: переменная окружения
-            selenoid_url = os.getenv('SELENOID_URL', 'http://192.168.1.200:4444/wd/hub')
+            # 🔥 ДОБАВЬТЕ ЭТУ СТРОКУ!
+            options.set_capability('browserName', 'chrome')
+            options.set_capability('browserVersion', '116.0')
+    
+            selenoid_url = os.getenv('SELENOID_URL', 'http://host.docker.internal:4444/wd/hub')
             driver = webdriver.Remote(
                 command_executor=selenoid_url,
                 options=options
             )
+
         else:
             print(" Запуск локального Chrome...")
 

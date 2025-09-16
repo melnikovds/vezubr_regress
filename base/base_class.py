@@ -98,7 +98,7 @@ class Base:
             options.set_capability('browserName', 'chrome')
             options.set_capability('browserVersion', '116.0')
     
-            selenoid_url = os.getenv('SELENOID_URL', 'http://localhost:4444/wd/hub')
+            selenoid_url = os.getenv('SELENOID_URL', 'http://host.docker.internal:4444/wd/hub')
             driver = webdriver.Remote(
                 command_executor=selenoid_url,
                 options=options

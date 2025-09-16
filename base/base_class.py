@@ -97,11 +97,7 @@ class Base:
             # 🔥 ДОБАВЬТЕ ЭТУ СТРОКУ!
             options.set_capability('browserName', 'chrome')
             options.set_capability('browserVersion', '116.0')
-
-            
-            
-            options.set_capability('name', 'vezubr-autotest')
-
+    
             selenoid_url = os.getenv('SELENOID_URL', 'http://localhost:4444/wd/hub')
             driver = webdriver.Remote(
                 command_executor=selenoid_url,

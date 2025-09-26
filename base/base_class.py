@@ -84,25 +84,25 @@ class Base:
         use_selenoid = os.getenv("USE_SELENOID", "false").lower() == "true"
 
         if use_selenoid:
-    print("🚀 Запуск в режиме Selenoid...")
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    options.add_argument('--disable-gpu')
+            print("🚀 Запуск в режиме Selenoid...")
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-gpu')
 
-    # Включаем VNC только если нужно визуальное наблюдение
-    enable_vnc = os.getenv("ENABLE_VNC", "false").lower() == "true"
-    selenoid_options = {
-        "enableVNC": enable_vnc,
-        "enableVideo": False,
-        "name": "vezubr-autotest"
-    }
-    options.set_capability("selenoid:options", selenoid_options)
+            # Включаем VNC только если нужно визуальное наблюдение
+            enable_vnc = os.getenv("ENABLE_VNC", "false").lower() == "true"
+            selenoid_options = {
+                "enableVNC": enable_vnc,
+                "enableVideo": False,
+                "name": "vezubr-autotest"
+            }
+            options.set_capability("selenoid:options", selenoid_options)
 
-    selenoid_url = os.getenv('SELENOID_URL', 'http://localhost:4444/wd/hub')
-    driver = webdriver.Remote(
-        command_executor=selenoid_url,
-        options=options
-    )
+            selenoid_url = os.getenv('SELENOID_URL', 'http://localhost:4444/wd/hub')
+            driver = webdriver.Remote(
+                command_executor=selenoid_url,
+                options=options
+            )
 
         else:
             print("📌 Запуск локального Chrome...")

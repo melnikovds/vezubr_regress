@@ -63,11 +63,6 @@ class Base:
 
     @classmethod
     def get_driver(cls: Type['Base']) -> 'Base':
-        """
-        Создает и возвращает экземпляр драйвера.
-        В Jenkins — подключается к Selenoid или запускает headless Chrome.
-        Локально — запускает видимый Chrome.
-        """
         options = Options()
 
         # Общие настройки
@@ -94,23 +89,34 @@ class Base:
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
 
-            # 🔥 ДОБАВЬТЕ ЭТУ СТРОКУ!
             options.set_capability('browserName', 'chrome')
             options.set_capability('browserVersion', '116.0')
-    
-            selenoid_url = os.getenv('SELENOID_URL', 'http://host.docker.internal:4444/wd/hub')
+
+            # Включаем VNC только если нужно визуальное наблюдение
+            enable_vnc = os.getenv("ENABLE_VNC", "false").lower() == "true"
+            options.set_capability('enableVNC', enable_vnc)
+            options.set_capability('enableVideo', False)  # Отключаем видео по умолчанию
+
+            options.set_capability('name', 'vezubr-autotest')
+
+            selenoid_url = os.getenv('SELENOID_URL', 'http://localhost:4444/wd/hub')
             driver = webdriver.Remote(
                 command_executor=selenoid_url,
                 options=options
             )
 
         else:
-            print(" Запуск локального Chrome...")
+            print("📌 Запуск локального Chrome...")
 
             # Добавляем headless, если в Jenkins (даже при локальном Chrome)
             if is_in_jenkins:
                 options.add_argument('--headless=new')
-                print("📌 Режим headless включен (Jenkins detected)")
+                print("✅ Режим headless включен (Jenkins detected)")
+            else:
+                # На локальной машине — без headless, если не указано иначе
+                if os.getenv("HEADLESS", "false").lower() == "true":
+                    options.add_argument('--headless=new')
+                    print("✅ Режим headless включен (по запросу)")
 
             # Используем Selenium Manager
             driver = webdriver.Chrome(options=options)

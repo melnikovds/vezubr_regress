@@ -94,10 +94,12 @@ class Base:
 
             # Включаем VNC только если нужно визуальное наблюдение
             enable_vnc = os.getenv("ENABLE_VNC", "false").lower() == "true"
-            options.set_capability('enableVNC', enable_vnc)
-            options.set_capability('enableVideo', False)  # Отключаем видео по умолчанию
-
-            options.set_capability('name', 'vezubr-autotest')
+            selenoid_options = {
+                "enableVNC": enable_vnc,
+                "enableVideo": False,  # или True, если нужно
+                "name": "vezubr-autotest"
+            }
+            options.set_capability("selenoid:options", selenoid_options)
 
             selenoid_url = os.getenv('SELENOID_URL', 'http://localhost:4444/wd/hub')
             driver = webdriver.Remote(

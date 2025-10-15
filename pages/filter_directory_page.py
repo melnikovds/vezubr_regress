@@ -1,3 +1,5 @@
+from typing import NoReturn
+
 from base.base_class import Base
 
 
@@ -313,6 +315,49 @@ class Manual(Base):
         "xpath": "//span[@class='ant-select-tree-checkbox-inner']",
         "name": "loader"
     }
+    cross_type_transport = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[1]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_type_transport"
+    }
+    cross_num_ts = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[2]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_num_ts"
+    }
+    cross_status = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[3]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_status"
+    }
+    cross_flight_status = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[4]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_flight_status"
+    }
+    cross_familia = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[5]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_familia"
+    }
+    cross_name = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[6]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_name"
+    }
+    cross_otch = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[7]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_otch"
+    }
+    cross_contractor = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[8]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_contractor"
+    }
+
+    def del_all_filter_vehicle_lkp(self) -> NoReturn:
+        """Очищаем все фильтры ТС"""
+        self.click_element_with_options(self.cross_type_transport)
+        self.click_element_with_options(self.cross_num_ts)
+        self.click_element_with_options(self.cross_status)
+        self.click_element_with_options(self.cross_flight_status)
+        self.click_element_with_options(self.cross_familia)
+        self.click_element_with_options(self.cross_name)
+        self.click_element_with_options(self.cross_otch)
+        self.click_element_with_options(self.cross_contractor)
 
 
 class Filter(Base):
@@ -425,7 +470,6 @@ class Filter(Base):
         "name": "delete_filter"
     }
 
-
     tariff_name = {
         "xpath": "//input[@class='ant-input']",
         "name": "tariff_name"
@@ -434,7 +478,6 @@ class Filter(Base):
         "xpath": "//div[@data-__field='[object Object]']//div",
         "name": "tariff_not_active"
     }
-
 
     surname_driver = {
         "xpath": "//input[@class='ant-input']",
@@ -477,7 +520,6 @@ class Filter(Base):
         "name": "cross_status_in_flight"
     }
 
-
     number_of_tractor = {
         "xpath": "//label[text()='Госномер Тягача']/following::input",
         "name": "number_of_tractor"
@@ -510,8 +552,6 @@ class Filter(Base):
         "xpath": "//div[@id='status']//div[@class='ant-select-selection__rendered']",
         "name": "tractor_status"
     }
-
-
 
     number_of_trailer = {
         "xpath": "//label[text()='Госномер Полуприцепа']/following::input",
@@ -557,8 +597,6 @@ class Filter(Base):
         "xpath": "//span[@title='Грузовая']",
         "name": "trailer_cargo_transportation"
     }
-
-
 
     specialist_type = {
         "xpath": "//ul[@class='ant-select-selection__rendered']/following-sibling::span[1]",
@@ -630,8 +668,6 @@ class Filter(Base):
         "name": "x4_button"
     }
 
-
-
     number_vehicles = {
         "xpath": "//input[@class='ant-input']",
         "name": "number_vehicles"
@@ -652,3 +688,46 @@ class Filter(Base):
         "xpath": "(//input[@class='ant-input'])[9]",
         "name": "contractor_vehicle"
     }
+    cross_type_transport = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[1]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_type_transport"
+    }
+    cross_num_ts = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[2]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_num_ts"
+    }
+    cross_status = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[3]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_status"
+    }
+    cross_flight_status = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[4]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_flight_status"
+    }
+    cross_familia = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[5]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_familia"
+    }
+    cross_name = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[6]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_name"
+    }
+    cross_otch = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[7]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_otch"
+    }
+    cross_contractor = {
+        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/form[1]/div[2]/div[8]/div[1]/div[2]/div[1]/span[1]/span[1]/span[1]/i[1]",
+        "name": "cross_contractor"
+    }
+
+    def del_all_filter_vehicle(self) -> NoReturn:
+        """Очищаем все фильтры ТС"""
+        self.click_element_with_options(self.cross_type_transport)
+        self.click_element_with_options(self.cross_num_ts)
+        self.click_element_with_options(self.cross_status)
+        self.click_element_with_options(self.cross_flight_status)
+        self.click_element_with_options(self.cross_familia)
+        self.click_element_with_options(self.cross_name)
+        self.click_element_with_options(self.cross_otch)
+        self.click_element_with_options(self.cross_contractor)

@@ -1,5 +1,8 @@
+import time
+
 import allure
 import pytest
+
 from pages.address_add_page import AddressAdd
 from pages.address_list_page import AddressesList
 
@@ -32,13 +35,17 @@ def test_address_add_lkz(base_fixture, domain):
     # Установка статуса адреса в "Активный"
     add_address.click_button(add_address.address_status_toggl)
     # Ввод фактического адреса и выбор из выпадающего списка
-    add_address.dropdown_with_input(
+    add_address.dropdown_with_input_force_enter(
         add_address.address_input,
         f"г Екатеринбург, пр-кт Ленина, д {base.random_value_float_str(1, 150)}",
-        wait_presence=True
+        wait_seconds=4
     )
+    # Закрываем все dropdown'ы перед переходом к ИНН
+    # add_address.click_outside()
+    # time.sleep(1)
     # Ввод ИНН владельца адреса и выбор из выпадающего списка
-    add_address.dropdown_with_input(add_address.owner_inn_input, "77", wait_presence=True)
+    # add_address.dropdown_with_input_force_enter(add_address.owner_inn_input, "77", wait_seconds=4)
+    time.sleep(2)
     # Ввод id адреса партнера
     add_address.input_in_field(add_address.external_id_input, address_stamp)
     # Ввод требований к ТС на адресе
@@ -84,15 +91,15 @@ def test_address_add_lkz(base_fixture, domain):
 def test_address_add_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
-    
+
     # Переход к списку адресов
     sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.addresses_list_button,
                            do_assert=True, wait="lst")
-    
+
     address_list = AddressesList(base.driver)
     # Клик по кнопке добавления адреса
     address_list.click_button(address_list.add_address_button)
-    
+
     add_address = AddressAdd(base.driver)
     # Генерация уникального идентификатора для адреса
     address_stamp = f"Адрес-{add_address.get_timestamp()}"
@@ -105,13 +112,13 @@ def test_address_add_lke(base_fixture, domain):
     # Установка статуса адреса в "Активный"
     add_address.click_button(add_address.address_status_toggl)
     # Ввод фактического адреса и выбор из выпадающего списка
-    add_address.dropdown_with_input(
+    add_address.dropdown_with_input_force_enter(
         add_address.address_input,
         f"г Екатеринбург, пр-кт Ленина, д {base.random_value_float_str(1, 150)}",
-        wait_presence=True
+        wait_seconds=4
     )
     # Ввод ИНН владельца адреса и выбор из выпадающего списка
-    add_address.dropdown_with_input(add_address.owner_inn_input, "77", wait_presence=True)
+    # add_address.dropdown_with_input(add_address.owner_inn_input, "77", wait_presence=True)
     # Ввод id адреса партнера
     add_address.input_in_field(add_address.external_id_input, address_stamp)
     # Ввод требований к ТС на адресе
@@ -138,16 +145,13 @@ def test_address_add_lke(base_fixture, domain):
     add_address.click_button(add_address.create_address_button, do_assert=True)
     # Клик по кнопке подтверждения добавления
     add_address.click_button(add_address.confirm_button, wait="lst")
-    
+
     # Сброс фильтров и поиск созданного адреса
     address_list.click_button(address_list.reset_button, wait="lst")
     address_list.input_in_field(address_list.name_filter, address_stamp, wait="lst")
     address_list.click_button(address_list.first_address_link, wait="form")
-    
+
     # Удаление созданного адреса
     add_address.click_button(add_address.delete_button, do_assert=True)
     add_address.click_button(add_address.confirm_button, wait="lst")
     # Конец теста
-
-
-    

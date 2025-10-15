@@ -1,3 +1,4 @@
+import time
 import allure
 import pytest
 from pages.driver_add_page import DriverAdd
@@ -23,8 +24,8 @@ def test_driver_edit_own_lke(base_fixture, domain):
     
     driver_list = DriverList(base.driver)
     # Клик по кнопке добавления водителя
-    driver_list.click_button(driver_list.add_driver_button, wait="form")
-    
+    driver_list.click_button(driver_list.add_driver_button)
+    time.sleep(2)
     add_driver = DriverAdd(base.driver)
     # Создание нового собственного водителя
     surname = add_driver.add_base_driver()
@@ -33,11 +34,14 @@ def test_driver_edit_own_lke(base_fixture, domain):
     driver_filter = Manual(base.driver)
     driver_filter.move_to_element(driver_filter.status_in_system)
     driver_filter.click_on_the_cross(driver_filter.cross_two)
-    driver_list.input_in_field(driver_list.surname_filter, value=surname, wait="lst")
-    driver_list.click_button(driver_list.first_driver_link, wait="form")
+    driver_list.input_in_field(driver_list.surname_filter, value=surname)
+    time.sleep(2)
+    driver_list.click_button(driver_list.first_driver_link)
+    time.sleep(2)
     
     # Редактирование данных водителя
-    add_driver.click_button(add_driver.driver_edit_button, wait="form")
+    add_driver.click_button(add_driver.driver_edit_button)
+    time.sleep(2)
     # Включить тогл паспорт
     add_driver.click_button(add_driver.passport_toggl)
     # Выбор страны - Албания
@@ -76,8 +80,10 @@ def test_driver_edit_own_lke(base_fixture, domain):
     add_driver.input_in_field(add_driver.sanitary_book_date_input_open, '10102045')
     # Сохранение изменений
     add_driver.click_button(add_driver.save_button, do_assert=True)
+    time.sleep(2)
     # Подтверждение успешного сохранения изменений
-    add_driver.click_button(add_driver.ok_button, wait="form")
+    add_driver.click_button(add_driver.ok_button)
+    time.sleep(2)
     # Конец теста
 
 
@@ -99,7 +105,8 @@ def test_driver_edit_inner_lke(base_fixture, domain):
     
     driver_list = DriverList(base.driver)
     # Клик по кнопке добавления водителя
-    driver_list.click_button(driver_list.add_driver_button, wait="form")
+    driver_list.click_button(driver_list.add_driver_button)
+    time.sleep(2)
     
     add_driver = DriverAdd(base.driver)
     # Создание нового водителя
@@ -109,11 +116,14 @@ def test_driver_edit_inner_lke(base_fixture, domain):
     driver_filter = Manual(base.driver)
     driver_filter.move_to_element(driver_filter.status_in_system)
     driver_filter.click_on_the_cross(driver_filter.cross_two)
-    driver_list.input_in_field(driver_list.surname_filter, value=surname, wait="lst")
-    driver_list.click_button(driver_list.first_driver_link, wait="form")
+    driver_list.input_in_field(driver_list.surname_filter, value=surname)
+    time.sleep(2)
+    driver_list.click_button(driver_list.first_driver_link)
+    time.sleep(2)
     
     # Редактирование данных водителя
-    add_driver.click_button(add_driver.driver_edit_button, wait="form")
+    add_driver.click_button(add_driver.driver_edit_button)
+    time.sleep(2)
     # Ввод новой фамилии
     add_driver.backspace_and_input(add_driver.surname_input, f"ВФ-{base.get_timestamp()}")
     # Ввод нового имени
@@ -154,6 +164,8 @@ def test_driver_edit_inner_lke(base_fixture, domain):
     add_driver.input_in_field(add_driver.sanitary_book_date_input_open, '10102045')
     # Сохранение изменений
     add_driver.click_button(add_driver.save_button, do_assert=True)
+    time.sleep(2)
     # Подтверждение успешного сохранения изменений
-    add_driver.click_button(add_driver.ok_button, wait="form")
+    add_driver.click_button(add_driver.ok_button)
+    time.sleep(2)
     # Конец теста

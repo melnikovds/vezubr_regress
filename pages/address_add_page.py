@@ -28,7 +28,7 @@ class AddressAdd(Base):
         "name": "address_input"
     }
     owner_inn_input = {
-        "xpath": "(//input[@class='ant-input ant-select-search__field'])[2]",
+        "xpath": "//input[contains(@class,'ant-input ant-select-search__field')]",
         "name": "owner_inn_input"
     }
     update_address_toggl = {

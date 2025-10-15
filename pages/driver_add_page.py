@@ -12,7 +12,7 @@ class DriverAdd(Base):
         "name": "driver_owner_button"
     }
     select_first_radio = {
-        "xpath": "(//input[@type='radio'])[3]",
+        "xpath": "//td[@class='ant-table-selection-column']",
         "name": "select_first_radio"
     }
     confirm_owner_button = {
@@ -253,7 +253,7 @@ class DriverAdd(Base):
         """
         # Выбор владельца водителя
         self.click_button(self.driver_owner_button, wait="lst")
-        self.click_button(self.select_first_radio, wait_type='located')
+        self.click_button(self.select_first_radio, wait_type='clickable')
         self.click_button(self.confirm_owner_button)
         
         # Ввод информации о водителе

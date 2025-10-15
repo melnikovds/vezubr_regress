@@ -63,11 +63,6 @@ class Base:
 
     @classmethod
     def get_driver(cls: Type['Base']) -> 'Base':
-        """
-        Создает и возвращает экземпляр драйвера.
-        В Jenkins — подключается к Selenoid или запускает headless Chrome.
-        Локально — запускает видимый Chrome.
-        """
         options = Options()
 
         # Общие настройки
@@ -94,27 +89,33 @@ class Base:
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
 
-            # 🔥 ДОБАВЬТЕ ЭТУ СТРОКУ!
-            options.set_capability('browserName', 'chrome')
-            options.set_capability('browserVersion', '116.0')
-
-            options.set_capability('enableVNC', True)
-            options.set_capability('enableVideo', True)
-            options.set_capability('name', 'vezubr-autotest')
+            # Включаем VNC только если нужно визуальное наблюдение
+            enable_vnc = os.getenv("ENABLE_VNC", "false").lower() == "true"
+            selenoid_options = {
+                "enableVNC": enable_vnc,
+                "enableVideo": False,
+                "name": "vezubr-autotest"
+            }
+            options.set_capability("selenoid:options", selenoid_options)
 
             selenoid_url = os.getenv('SELENOID_URL', 'http://localhost:4444/wd/hub')
             driver = webdriver.Remote(
                 command_executor=selenoid_url,
-                options=options
+                options=options  # ✅ Только options!
             )
 
         else:
-            print(" Запуск локального Chrome...")
+            print("📌 Запуск локального Chrome...")
 
             # Добавляем headless, если в Jenkins (даже при локальном Chrome)
             if is_in_jenkins:
                 options.add_argument('--headless=new')
-                print("📌 Режим headless включен (Jenkins detected)")
+                print("✅ Режим headless включен (Jenkins detected)")
+            else:
+                # На локальной машине — без headless, если не указано иначе
+                if os.getenv("HEADLESS", "false").lower() == "true":
+                    options.add_argument('--headless=new')
+                    print("✅ Режим headless включен (по запросу)")
 
             # Используем Selenium Manager
             driver = webdriver.Chrome(options=options)
@@ -1399,3 +1400,159 @@ class Base:
                 except Exception as e:
                     print(f" Ошибка при клике на колонку {idx}, попытка {click + 1}: {str(e)}")
                     continue
+
+    def dropdown_with_input_force_enter(
+            self,
+            element_dict: Dict[str, str],
+            option_text: str,
+            dd_index: int = 1,
+            wait_seconds: int = 5
+    ) -> None:
+        """
+        Принудительный ввод текста и нажатие Enter через фиксированную задержку.
+        Используется, когда dropdown нестабилен или не находится через ожидания.
+        """
+        message = f"Force input '{option_text}' and press Enter after {wait_seconds} sec in {element_dict['name']}"
+        if dd_index != 1:
+            message += f" at dropdown index {dd_index}"
+
+        with allure.step(message):
+            # Формируем XPath для элемента
+            xpath_dropdown = f"({element_dict['xpath']})[{dd_index}]" if dd_index > 1 else element_dict['xpath']
+            dropdown_dict = self.get_element({"name": element_dict['name'], "xpath": xpath_dropdown},
+                                             wait_type="clickable")
+
+            # Кликаем, чтобы активировать (если нужно)
+            try:
+                dropdown_dict['element'].click()
+            except:
+                pass  # Игнорируем, если клик не нужен
+
+            # Ищем поле ввода
+            option_input = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, "//input[@class='ant-input ant-select-search__field']"))
+            )
+
+            # Очищаем и вводим текст
+            option_input.clear()
+            option_input.send_keys(option_text)
+
+            # 🚨 Ждём фиксированное время, чтобы фронт подгрузил список
+            print(f"Waiting {wait_seconds} seconds for dropdown to load...")
+            time.sleep(wait_seconds)
+
+            # 🚨 Принудительно нажимаем Enter
+            print("Pressing ENTER forcefully...")
+            option_input.send_keys(Keys.ENTER)
+
+            print(message)
+
+    def click_outside(self):
+        """Кликает в пустое место (body), чтобы закрыть все открытые dropdown'ы, модалки и т.п."""
+        try:
+            self.driver.find_element(By.TAG_NAME, "body").click()
+            print("Clicked outside to close dropdowns")
+        except Exception as e:
+            print(f"Failed to click outside: {e}")
+
+    def click_element_with_options(self, element_dict: Dict[str, str], index: int = 1, do_assert: bool = False,
+                                   wait: Optional[str] = None, wait_type: str = 'clickable',
+                                   skip_if_not_clickable: bool = False) -> None:
+        """
+        Кликает по элементу с заданным типом ожидания и опционально по индексу элемента.
+        Если элемент не найден или не кликабелен, шаг может быть пропущен.
+        Опционально проверяет текст элемента после клика и ожидает исчезновения спиннеров.
+
+        Parameters
+        ----------
+        element_dict : dict
+            Словарь с информацией о кнопке/крестике для клика.
+        index : int, optional
+            Индекс элемента в списке однотипных элементов. По умолчанию 1 (первый элемент).
+        do_assert : bool, optional
+            Если True, выполнит проверку текста элемента после клика.
+        wait : str, optional
+            Тип спиннера ('lst' или 'form'), который нужно ожидать после клика.
+        wait_type : str, optional
+            Тип ожидания перед кликом ('clickable', 'visible', 'located', 'find'). По умолчанию 'clickable'.
+        skip_if_not_clickable : bool, optional
+            Если True, шаг будет пропущен, если элемент не кликабельный. По умолчанию False.
+        """
+
+        # Формирование имени и локатора
+        element_name = f"{element_dict['name']} index {index}" if index > 1 else element_dict['name']
+
+        if 'xpath' in element_dict:
+            locator = f"({element_dict['xpath']})[{index}]" if index > 1 else element_dict['xpath']
+            locator_type = 'xpath'
+        elif 'css' in element_dict:
+            locator = f"{element_dict['css']}:nth-of-type({index})" if index > 1 else element_dict['css']
+            locator_type = 'css'
+        else:
+            raise ValueError("Не указан ни XPath, ни CSS-селектор для элемента")
+
+        updated_element_dict = {
+            "name": element_name,
+            locator_type: locator
+        }
+
+        message = f"Click on {element_name}"
+
+        with allure.step(title=message if not skip_if_not_clickable else f"{message} (если доступно)"):
+            try:
+                # Проверка наличия элемента
+                try:
+                    element = WebDriverWait(self.driver, timeout=3).until(
+                        EC.presence_of_element_located(
+                            (By.XPATH if locator_type == 'xpath' else By.CSS_SELECTOR, locator))
+                    )
+                except TimeoutException:
+                    # Пропуск шага, если элемент отсутствует
+                    with allure.step(f"Element not present, skipping action: {element_name}"):
+                        print(f"Element not present, skipping action: {element_name}")
+                    return
+
+                # Проверка кликабельности элемента
+                if wait_type == 'clickable':
+                    try:
+                        WebDriverWait(self.driver, timeout=3).until(
+                            EC.element_to_be_clickable(
+                                (By.XPATH if locator_type == 'xpath' else By.CSS_SELECTOR, locator))
+                        )
+                    except TimeoutException:
+                        if skip_if_not_clickable:
+                            with allure.step(f"Element '{element_name}' is not clickable, skipping step"):
+                                print(f"[INFO] Пропущен клик на элемент '{element_name}', так как он не кликабельный.")
+                            return
+                        else:
+                            raise TimeoutException(f"Element '{element_name}' is not clickable.")
+
+                # Клик по элементу
+                ActionChains(self.driver).move_to_element(element).click().perform()
+                print(message)
+
+                # Ожидание спиннера, если задано
+                if wait:
+                    loading_spinner = self.loading_form if wait == 'form' else self.loading_list
+                    try:
+                        self.get_element(loading_spinner, wait_type="visible")
+                    except TimeoutException:
+                        with allure.step("Spinner did not appear"):
+                            print("Spinner did not appear")
+                            return
+
+                    try:
+                        self.get_element(loading_spinner, wait_type="invisibility")
+                    except TimeoutException:
+                        with allure.step("Spinner did not disappear"):
+                            print("Spinner did not disappear")
+
+                # Ассерт текста, если нужен
+                if do_assert:
+                    self.assert_element_text(updated_element_dict)
+
+            except Exception as e:
+                message = f"Error clicking element: {element_name}. Error: {str(e)}"
+                with allure.step(message):
+                    print(message)
+                raise

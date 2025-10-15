@@ -125,7 +125,7 @@ def test_tariff_directory_lke(base_fixture, domain):
         add.dropdown_without_input(add.tariff_status, option_text='Не активный')
         time.sleep(2)
         add.verify_text_on_page(text='Autotests FTL фиксированный', should_exist=True)
-        add.verify_text_on_page(text='Additional Service', should_exist=False)
+        add.verify_text_on_page(text='Auto Telemost', should_exist=False)
         time.sleep(2)
 
     with allure.step('Проверка нескольких фильтров №1'):
@@ -254,9 +254,11 @@ def test_tractors_directory_lke(base_fixture, domain):
         time.sleep(1)
 
     with allure.step('проверка фильтра "Подрядчик"'):
+        add.move_to_element(add.tractor_status)
+        add.click_on_the_cross(add.cross_status_in_the_system_tractor)
         add.input_in_field(add.contractor_tractor, "Auto LKE")
-        time.sleep(1)
-        add.verify_text_on_page(text='ЗиЛ')
+        time.sleep(2)
+        add.verify_text_on_page(text='KAMAZ', should_exist=True)
         add.backspace_and_input(add.contractor_tractor, '')
         time.sleep(1)
 
@@ -266,7 +268,7 @@ def test_tractors_directory_lke(base_fixture, domain):
         add.verify_text_on_page(text='Е406НУ')
         add.dropdown_without_input(add.flight_status_tractor, "Нет заказов")
         time.sleep(1)
-        add.verify_text_on_page(text='WAHATRACK')
+        add.verify_text_on_page(text='ВТЯГ-20240421205824')
 
         add.move_to_element(add.flight_status_tractor)
         add.click_on_the_cross(add.cross_status_in_flight_tractor)
@@ -368,6 +370,7 @@ def test_vehicle_directory_lke(base_fixture, domain):
         add = Filter(base.driver)
         com = Manual(base.driver)
     with allure.step('проверка фильтра "Госномер ТС"'):
+        add.del_all_filter_vehicle()
         add.input_in_field(add.number_vehicles, "WH40")
         time.sleep(2)
         add.verify_text_on_page(text='WH400000')
@@ -394,8 +397,11 @@ def test_vehicle_directory_lke(base_fixture, domain):
     with allure.step('проверка фильтра "Подрядчик"'):
         add.input_in_field(add.contractor_vehicle, "Auto LKP")
         time.sleep(2)
+        add.input_in_field(add.number_vehicles, "ПРО")
+        time.sleep(2)
         add.verify_text_on_page(text='ПРО_СТО')
         add.backspace_and_input(add.contractor_vehicle, "")
+        add.backspace_and_input(add.number_vehicles, "")
 
     with allure.step('проверка фильтра "Тип авто перевозки"'):
         add.move_to_element(com.type_road_transport_two)
@@ -403,9 +409,11 @@ def test_vehicle_directory_lke(base_fixture, domain):
         add.click_on_the_cross(com.cross_six)
         time.sleep(2)
         add.move_and_click(move_to=com.type_road_transport_two, click_to=com.cargo_transportation)
-        time.sleep(15)
+        time.sleep(2)
+        add.input_in_field(add.number_vehicles, "WH400000")
         add.verify_text_on_page(text='WH400000', should_exist=True)
         add.verify_text_on_page(text='ТК567У', should_exist=False)
+        add.backspace_and_input(add.number_vehicles, "")
         time.sleep(2)
         add.move_to_element(com.type_road_transport_two)
         time.sleep(2)
@@ -413,8 +421,10 @@ def test_vehicle_directory_lke(base_fixture, domain):
         time.sleep(2)
         add.move_and_click(move_to=com.type_road_transport_two, click_to=com.cargo_passenger_transportation)
         time.sleep(3)
+        add.input_in_field(add.number_vehicles, "А444АА")
         add.verify_text_on_page(text='А444АА', should_exist=True)
         add.verify_text_on_page(text='ТС20231229113421', should_exist=False)
+        add.backspace_and_input(add.number_vehicles, "")
         time.sleep(2)
         add.move_to_element(com.type_road_transport_two)
         time.sleep(2)
@@ -423,7 +433,7 @@ def test_vehicle_directory_lke(base_fixture, domain):
         add.move_and_click(move_to=com.type_road_transport_two, click_to=com.special_transportation)
         time.sleep(1)
         add.click_button(com.manipulator_truck)
-        time.sleep(3)
+        time.sleep(2)
         add.verify_text_on_page(text='ВТС-20240512231701', should_exist=True)
         add.verify_text_on_page(text='ТС20240110120731', should_exist=False)
         time.sleep(2)

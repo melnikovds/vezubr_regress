@@ -21,8 +21,8 @@ def test_own_driver_add_lke(base_fixture, domain):
     
     driver_list = DriverList(base.driver)
     # Клик по кнопке добавления водителя
-    driver_list.click_button(driver_list.add_driver_button, wait="form")
-    
+    driver_list.click_button(driver_list.add_driver_button)
+    time.sleep(2)
     add_driver = DriverAdd(base.driver)
     # Добавление нового водителя и получение его фамилии
     surname = add_driver.add_base_driver()
@@ -31,34 +31,43 @@ def test_own_driver_add_lke(base_fixture, domain):
     driver_filter = Manual(base.driver)
     driver_filter.move_to_element(driver_filter.status_in_system)
     driver_filter.click_on_the_cross(driver_filter.cross_two)
-    driver_list.input_in_field(driver_list.surname_filter, value=surname, wait="lst")
-    driver_list.click_button(driver_list.first_driver_link, wait="form")
+    driver_list.input_in_field(driver_list.surname_filter, value=surname)
+    time.sleep(2)
+    driver_list.click_button(driver_list.first_driver_link)
+    time.sleep(2)
     
     # Включить тогл готов работать как грузчик
-    add_driver.click_button(add_driver.work_as_loader_toggl, wait="form")
+    add_driver.click_button(add_driver.work_as_loader_toggl)
+    time.sleep(2)
     # Включить тогл никогда не делегировать
-    add_driver.click_button(add_driver.never_delegate_toggl, wait="form")
+    add_driver.click_button(add_driver.never_delegate_toggl)
+    time.sleep(2)
     # Клик по кнопке прикрепить ТС
-    add_driver.click_button(add_driver.attach_button, wait="form")
+    add_driver.click_button(add_driver.attach_button)
+    time.sleep(2)
     # Прикрепить первый ТС в списке
     add_driver.click_button(add_driver.select_button)
     # Прикрепить второй ТС в списке
     add_driver.click_button(add_driver.select_button)
     # Клик по кнопке подтвердить прикрепление ТС
-    add_driver.click_button(add_driver.assign_selected_button, wait="form")
-    time.sleep(1)
+    add_driver.click_button(add_driver.assign_selected_button)
+    time.sleep(2)
     # Клик по кнопке прикрепить ТС
-    add_driver.click_button(add_driver.attach_button, wait="form")
+    add_driver.click_button(add_driver.attach_button)
+    time.sleep(2)
     # Открепить первый ТС в списке
     add_driver.click_button(add_driver.unselect_button)
     # Клик по кнопке подтвердить прикрепление ТС
-    add_driver.click_button(add_driver.assign_selected_button, wait="form")
+    add_driver.click_button(add_driver.assign_selected_button)
+    time.sleep(2)
     # Открытие меню действий - приостановка работы водителя
     add_driver.click_button(add_driver.action_menu_button)
-    add_driver.click_button(add_driver.suspend_work_button, wait="form")
+    add_driver.click_button(add_driver.suspend_work_button)
+    time.sleep(2)
     # Открытие меню действий - возобновления работы водителя
     add_driver.click_button(add_driver.action_menu_button)
-    add_driver.click_button(add_driver.ready_to_work_button, wait="form")
+    add_driver.click_button(add_driver.ready_to_work_button)
+    time.sleep(2)
     # Открытие меню действий - увольнение водителя
     add_driver.click_button(add_driver.action_menu_button)
     add_driver.click_button(add_driver.fire_button)
@@ -95,34 +104,42 @@ def test_inner_driver_add_lke(base_fixture, domain):
     driver_filter = Manual(base.driver)
     driver_filter.move_to_element(driver_filter.status_in_system)
     driver_filter.click_on_the_cross(driver_filter.cross_two)
-    driver_list.input_in_field(driver_list.surname_filter, value=surname, wait="lst")
-    driver_list.click_button(driver_list.first_driver_link, wait="form")
-
+    driver_list.input_in_field(driver_list.surname_filter, value=surname)
+    time.sleep(2)
+    driver_list.click_button(driver_list.first_driver_link)
+    time.sleep(2)
     # Включить тогл готов работать как грузчик
-    add_driver.click_button(add_driver.work_as_loader_toggl, wait="form")
+    add_driver.click_button(add_driver.work_as_loader_toggl)
+    time.sleep(2)
     # Включить тогл никогда не делегировать
-    add_driver.click_button(add_driver.never_delegate_toggl, wait="form")
+    add_driver.click_button(add_driver.never_delegate_toggl)
+    time.sleep(2)
     # Клик по кнопке прикрепить ТС
-    add_driver.click_button(add_driver.attach_button, wait="form")
+    add_driver.click_button(add_driver.attach_button)
+    time.sleep(2)
     # Прикрепить первый ТС в списке
     add_driver.click_button(add_driver.select_button)
     # Прикрепить второй ТС в списке
     add_driver.click_button(add_driver.select_button)
     # Клик по кнопке подтвердить прикрепление ТС
-    add_driver.click_button(add_driver.assign_selected_button, wait="form")
-    time.sleep(1)
+    add_driver.click_button(add_driver.assign_selected_button)
+    time.sleep(2)
     # Клик по кнопке прикрепить ТС
-    add_driver.click_button(add_driver.attach_button, wait="form")
+    add_driver.click_button(add_driver.attach_button)
+    time.sleep(2)
     # Открепить первый ТС в списке
     add_driver.click_button(add_driver.unselect_button)
     # Клик по кнопке подтвердить прикрепление ТС
-    add_driver.click_button(add_driver.assign_selected_button, wait="form")
+    add_driver.click_button(add_driver.assign_selected_button)
+    time.sleep(2)
     # Открытие меню действий - приостановка работы водителя
     add_driver.click_button(add_driver.action_menu_button)
-    add_driver.click_button(add_driver.suspend_work_button, wait="form")
+    add_driver.click_button(add_driver.suspend_work_button)
+    time.sleep(2)
     # Открытие меню действий - возобновления работы водителя
     add_driver.click_button(add_driver.action_menu_button)
-    add_driver.click_button(add_driver.ready_to_work_button, wait="form")
+    add_driver.click_button(add_driver.ready_to_work_button)
+    time.sleep(2)
     # Открытие меню действий - увольнение водителя
     add_driver.click_button(add_driver.action_menu_button)
     add_driver.click_button(add_driver.fire_button)

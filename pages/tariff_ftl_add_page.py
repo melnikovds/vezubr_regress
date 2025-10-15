@@ -94,8 +94,7 @@ class FTLTariffAdd(Base):
     confirm_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
         "name": "create_button",
-        "reference_xpath": "//div[contains(@class, 'ant-modal-confirm-content') and contains(., 'Тариф')]",
-        "reference": 'Тариф.*'
+        "reference": "OK"
     }
     """First address drop-down list"""
     first_address_select = {

@@ -1,7 +1,7 @@
 pages/login.py
 results/
 screens/
-allure-report/
+/allure-report/
 allure-results/
 result_new/
 

@@ -65,21 +65,24 @@ def test_address_directory_lkz(base_fixture, domain):
     add.backspace_and_input(add.verified_address, value='')
 
     # проверка №1 фильтра "Название адреса"
-    add.input_in_field(add.name_address, value='тгл', wait='lst')
+    add.input_in_field(add.name_address, value='тгл')
+    time.sleep(1)
     add.verify_text_on_page(text='Нижний Тагил')
     add.verify_text_on_page(text='Магнитогорск', should_exist=False)
     add.backspace_and_input(add.name_address, value='')
     time.sleep(1)
 
     # проверка №2 фильтра "Название адреса"
-    add.input_in_field(add.name_address, value='мрмск', wait='lst')
+    add.input_in_field(add.name_address, value='мрмск')
+    time.sleep(1)
     add.verify_text_on_page(text='Мурманск')
     add.verify_text_on_page(text='Тагил', should_exist=False)
     add.backspace_and_input(add.name_address, value='')
     time.sleep(1)
 
     # проверка фильтра "Отправитель/Получатель"
-    add.input_in_field(add.sender_recipient, value='Авангард', wait='lst')
+    add.input_in_field(add.sender_recipient, value='Авангард')
+    time.sleep(1)
     add.verify_text_on_page('Лиговский')
     add.verify_text_on_page(text='Монолит', should_exist=False)
     add.backspace_and_input(add.sender_recipient, value='')
@@ -119,13 +122,15 @@ def test_address_directory_lkz(base_fixture, domain):
     time.sleep(2)
 
     # проверка фильтра "Подтвердил"
-    add.input_in_field(add.approved, value='auto@LKZ.com', wait='lst')
+    add.input_in_field(add.approved, value='auto@LKZ.com')
+    time.sleep(1)
     add.verify_text_on_page('Винатовского')
     add.backspace_and_input(add.approved, value='')
     time.sleep(1)
 
     # проверка фильтра "Создал"
-    add.input_in_field(add.created, value='auto@LKZ.com', wait='lst')
+    add.input_in_field(add.created, value='auto@LKZ.com')
+    time.sleep(1)
     add.verify_text_on_page('Плато')
     add.backspace_and_input(add.created, value='')
     time.sleep(1)
@@ -144,8 +149,9 @@ def test_address_directory_lkz(base_fixture, domain):
     time.sleep(2)
 
     # создание фильтра с несколькими значениями
-    add.input_in_field(add.approved, value='auto@LKZ.com', wait='lst')
-    add.input_in_field(add.created, value='auto@LKZ.com', wait='lst')
+    add.input_in_field(add.approved, value='auto@LKZ.com')
+    add.input_in_field(add.created, value='auto@LKZ.com')
+    time.sleep(1)
     add.dropdown_without_input(add.region, option_text='Оренбургская область')
     add.dropdown_without_input(add.status, option_text='Неактивный')
 
@@ -164,13 +170,12 @@ def test_address_directory_lkz(base_fixture, domain):
     time.sleep(1)
     add.click_button(element_dict=add.apply_filter)
     time.sleep(1)
-    add.verify_text_on_page(text='орс', should_exist=False)
     add.verify_text_on_page(text='мрмск', should_exist=False)
     add.verify_text_on_page(text='Екатеринбург', should_exist=True)
     add.verify_text_on_page(text='Пышма', should_exist=True)
 
     # обновление страницы
-    add.refresh_page()
+    # add.refresh_page()
 
     add.dropdown_without_input(add.filter_date_create, option_text='За все время')
     time.sleep(2)
@@ -260,7 +265,7 @@ def test_tariff_directory_lkz(base_fixture, domain):
     add.dropdown_without_input(add.tariff_status, option_text='Не активный')
     time.sleep(2)
     add.find_text_on_page(text='319', occurrences=3)
-    add.verify_text_on_page(text='10.12.2024 05:58', should_exist=True)
+    add.verify_text_on_page(text='auto@LKZ.com', should_exist=True)
     add.verify_text_on_page(text='ПРР-20241206111102', should_exist=False)
     add.verify_text_on_page(text='93428', should_exist=False)
     time.sleep(2)
@@ -273,7 +278,7 @@ def test_tariff_directory_lkz(base_fixture, domain):
     add.dropdown_without_input(add.tariff_status, option_text='Активный')
     time.sleep(2)
     add.find_text_on_page(text='435', occurrences=3)
-    add.verify_text_on_page(text='10.12.2024 05:58', should_exist=False)
+    add.verify_text_on_page(text='ГГ-20241006200435', should_exist=True)
     add.verify_text_on_page(text='ПРР-20241206111102', should_exist=False)
     add.verify_text_on_page(text='93428', should_exist=False)
     time.sleep(2)

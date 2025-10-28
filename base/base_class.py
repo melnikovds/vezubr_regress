@@ -61,7 +61,7 @@ class Base:
 
     """ Get driver """
 
-    @classmethod
+@classmethod
 def get_driver(cls: Type['Base']) -> 'Base':
     options = Options()
 

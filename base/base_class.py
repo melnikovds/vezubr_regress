@@ -88,7 +88,7 @@ class Base:
             options.add_argument('--disable-gpu')
 
             # Получаем версию из переменной окружения (по умолчанию — latest)
-            browser_version = os.getenv("BROWSER_VERSION", "latest")
+            browser_version = os.getenv("BROWSER_VERSION", "128.0")
 
             enable_vnc = os.getenv("ENABLE_VNC", "false").lower() == "true"
             selenoid_options = {

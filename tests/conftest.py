@@ -1,9 +1,7 @@
 import time
-
 import allure
 import pytest
 import requests
-
 from pages.generator_old_ftl_page import GeneratorFTL
 from pages.login import accounts
 from tests.base_test import base_test_with_login, base_test_without_login, base_test_with_login_via_link

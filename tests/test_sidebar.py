@@ -56,7 +56,10 @@ def test_sidebar_lkz(base_fixture, domain):
     sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
                            do_assert=True, wait="lst")
 
-    sidebar.click_button(sidebar.registries_list_button_lkz, do_assert=True, wait="lst")
+    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.registries_list_button_lkz,
+                           do_assert=True, wait="lst")
+
+    # sidebar.click_button(sidebar.registries_list_button_lkz, do_assert=True, wait="lst")
 
     sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.transport_doc_old_list_button,
                            do_assert=True, wait="lst")
@@ -142,13 +145,13 @@ def test_sidebar_lke(base_fixture, domain):
     sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button_lke,
                            do_assert=True, wait="lst")
 
-    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.reg_client_create_list_button,
+    sidebar.move_and_click(move_to=sidebar.registries_hover_old_lke, click_to=sidebar.reg_client_create_list_button,
                            do_assert=True, wait="lst")
-    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.reg_producer_create_list_button,
+    sidebar.move_and_click(move_to=sidebar.registries_hover_old_lke, click_to=sidebar.reg_producer_create_list_button,
                            do_assert=True, wait="lst")
-    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.registries_client_list_button,
+    sidebar.move_and_click(move_to=sidebar.registries_hover_old_lke, click_to=sidebar.registries_client_list_button,
                            do_assert=True, wait="lst")
-    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.registries_producer_list_button,
+    sidebar.move_and_click(move_to=sidebar.registries_hover_old_lke, click_to=sidebar.registries_producer_list_button,
                            do_assert=True, wait="lst")
 
     sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.transport_doc_old_list_button,

@@ -9,11 +9,11 @@ class ProducersList(Base):
         super().__init__(driver)
         self.driver = driver
 
+    # Locators
     first_producer = {
         "xpath": "//a[normalize-space()='6883106209']",
         "name": "first_producer"
     }
-    # Locators
     producer_lkp_inn = {
         "xpath": "//a[@class='link-back' and contains(text(), '6883106209')]",
         "name": "producer_lkp_inn"
@@ -30,8 +30,12 @@ class ProducersList(Base):
         "xpath": "//a[@class='link-back' and contains(text(), '5178860124')]",
         "name": "producer_lke_inn"
     }
+    # action_button_lkp = {
+    #     "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/table[1]/tbody[1]/tr[3]/td[1]/div[1]/button[1]",
+    #     "name": "action_button_lkp"
+    # }
     action_button_lkp = {
-        "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/table[1]/tbody[1]/tr[3]/td[1]/div[1]/button[1]",
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/table[1]/tbody[1]/tr[9]/td[1]/div[1]/button[1]",
         "name": "action_button_lkp"
     }
     action_button_vaz = {

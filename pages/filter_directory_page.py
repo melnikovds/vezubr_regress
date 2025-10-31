@@ -1,5 +1,4 @@
 from typing import NoReturn
-
 from base.base_class import Base
 
 
@@ -511,6 +510,33 @@ class Filter(Base):
         "xpath": "(//input[@class='ant-input'])[9]",
         "name": "contractor"
     }
+    # contractor = {
+    #     "xpath": "//div[7]//div[1]//div[2]//div[1]//span[1]//span[1]//input[1]",
+    #     "name": "contractor"
+    # }
+
+    add_filter = {
+        "xpath": "//div[@class='table-filters-title-zone-item table-filters-title-right']//div[2]//div[1]",
+        "name": "add_filter"
+    }
+    default_filter_lke = {
+        "xpath": "//button[contains(text(),'По умолчанию')]",
+        "name": "default_filter_lke"
+    }
+    # add_filter_contractor = {
+    #     "xpath": "//div[@class='flexbox additional-input']",
+    #     "name": "add_filter_contractor"
+    # }
+    add_filter_contractor = {
+        "xpath": "//span[@class='checkmark']",
+        "name": "add_filter_contractor"
+    }
+    apply_add_filter = {
+        "xpath": "//button[contains(text(),'Применить')]",
+        "name": "apply_add_filter"
+    }
+
+
     cross_status_in_the_system = {
         "xpath": "//div[@id='status']//i[@aria-label='icon: close-circle']//*[name()='svg']//*[name()='path' and contains(@d,'M512 64C26')]",
         "name": "cross_status_in_the_system"
@@ -668,6 +694,35 @@ class Filter(Base):
         "name": "x4_button"
     }
 
+    add_filter_vehicle = {
+        "xpath": "//p[contains(text(),'Доп фильтры')]",
+        "name": "add_filter_vehicle"
+    }
+    default_filter_vehicle = {
+        "xpath": "//button[contains(text(),'По умолчанию')]",
+        "name": "default_filter_vehicle"
+    }
+    add_vehicle_filter_surname = {
+        "xpath": "//div[@class='flexbox wrap choose-additional-filters column size-1']//div[1]//label[1]//span[2]",
+        "name": "add_vehicle_filter_surname"
+    }
+    add_vehicle_filter_name = {
+        "xpath": "//body//div[@id='main']//div[contains(@role,'dialog')]//div[contains(@role,'dialog')]//div[2]//label[1]//span[2]",
+        "name": "add_vehicle_filter_name"
+    }
+    add_vehicle_filter_patronymic = {
+        "xpath": "//div[contains(@class,'modal-body')]//div[3]//label[1]//span[2]",
+        "name": "add_vehicle_filter_patronymic"
+    }
+    add_vehicle_filter_contractor = {
+        "xpath": "//div[4]//label[1]//span[2]",
+        "name": "add_vehicle_filter_contractor"
+    }
+    apply_filter_vehicle = {
+        "xpath": "//button[contains(text(),'Применить')]",
+        "name": "apply_filter_vehicle"
+    }
+
     number_vehicles = {
         "xpath": "//input[@class='ant-input']",
         "name": "number_vehicles"
@@ -676,6 +731,10 @@ class Filter(Base):
         "xpath": "(//input[@class='ant-input'])[5]",
         "name": "name_driver_vehicle"
     }
+    # name_driver_vehicle = {
+    #     "xpath": "//input[@placeholder='Имя водителя']",
+    #     "name": "name_driver_vehicle"
+    # }
     surname_driver_vehicle = {
         "xpath": "//input[@placeholder='Фамилия водителя']",
         "name": "surname_driver_vehicle"

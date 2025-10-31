@@ -188,6 +188,17 @@ def test_drivers_directory_lke(base_fixture, domain):
         add.backspace_and_input(add.phone_driver, value='')
 
     with allure.step('проверка фильтра "Подрядчик"'):
+        # включение доп.фильтра
+        add.click_button(add.add_filter)
+        time.sleep(1)
+        add.click_button(add.default_filter_lke)
+        time.sleep(1)
+        add.click_button(add.add_filter_contractor)
+        time.sleep(1)
+        add.click_button(add.apply_add_filter)
+        time.sleep(1)
+
+        # проверка фильтра
         add.input_in_field(add.contractor, "Auto LKE")
         time.sleep(1)
         add.verify_text_on_page(text='Avtobot')
@@ -268,8 +279,11 @@ def test_tractors_directory_lke(base_fixture, domain):
         add.verify_text_on_page(text='Е406НУ')
         add.dropdown_without_input(add.flight_status_tractor, "Нет заказов")
         time.sleep(1)
-        add.verify_text_on_page(text='ВТЯГ-20240421205824')
-
+        add.input_in_field(add.number_of_tractor, "5938")
+        time.sleep(1)
+        add.verify_text_on_page(text='ВТЯГ-20240421205938')
+        time.sleep(1)
+        add.backspace_and_input(add.number_of_tractor, '')
         add.move_to_element(add.flight_status_tractor)
         add.click_on_the_cross(add.cross_status_in_flight_tractor)
 
@@ -377,6 +391,22 @@ def test_vehicle_directory_lke(base_fixture, domain):
         add.backspace_and_input(add.number_vehicles, "")
 
     with allure.step('проверка фильтра "Имя водителя"'):
+        # включение доп. фильтров
+        add.click_button(add.add_filter_vehicle)
+        time.sleep(1)
+        add.click_button(add.default_filter_vehicle)
+        time.sleep(1)
+        add.click_button(add.add_vehicle_filter_surname)
+        time.sleep(1)
+        add.click_button(add.add_vehicle_filter_name)
+        time.sleep(1)
+        add.click_button(add.add_vehicle_filter_patronymic)
+        time.sleep(1)
+        add.click_button(add.add_vehicle_filter_contractor)
+        time.sleep(1)
+        add.click_button(add.apply_filter_vehicle)
+        time.sleep(1)
+
         add.input_in_field(add.name_driver_vehicle, "Дан")
         time.sleep(2)
         add.verify_text_on_page(text='Д404ОН')
@@ -389,9 +419,9 @@ def test_vehicle_directory_lke(base_fixture, domain):
         add.backspace_and_input(add.surname_driver_vehicle, "")
 
     with allure.step('проверка фильтра "Отчество водителя"'):
-        add.input_in_field(add.patronymic_driver_vehicle, "О-20250309172534")
+        add.input_in_field(add.patronymic_driver_vehicle, "ВО-20240512121331")
         time.sleep(2)
-        add.verify_text_on_page(text='617212142')
+        add.verify_text_on_page(text='2062626')
         add.backspace_and_input(add.patronymic_driver_vehicle, "")
 
     with allure.step('проверка фильтра "Подрядчик"'):

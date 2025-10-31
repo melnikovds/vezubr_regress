@@ -20,56 +20,71 @@ def test_filter_old_ftl_lkz(base_fixture, domain):
     add = OldFTL(base.driver)
     # сброс фильтров
     add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.click_button(add.start_date)
+    time.sleep(1)
+    add.click_button(add.all_time)
+    time.sleep(1)
 
     # проверка фильтра "номер заявки"
-    add.input_in_field(add.request_number, value='25-28-2448', click_first=True)
+    add.input_in_field(add.request_number, value='25-297-2448', click_first=True)
     time.sleep(3)
-    add.find_text_on_page(text='25-28-2448', occurrences=3)
-    add.verify_text_on_page(text='25-29-2448', should_exist=False)
+    add.find_text_on_page(text='25-297-2448', occurrences=3)
+    add.verify_text_on_page(text='25-304-2448', should_exist=False)
     time.sleep(1)
     add.backspace_and_input(add.request_number, value='')
 
     # проверка фильтра "статус заявки"
     add.dropdown_without_input(add.request_status, option_text='Заявка опубликована')
     time.sleep(2)
-    add.verify_text_on_page(text='25-51-2448', should_exist=True)
-    add.verify_text_on_page(text='25-30-2448', should_exist=False)
+    add.verify_text_on_page(text='25-297-2448', should_exist=True)
+    add.verify_text_on_page(text='25-299-2448', should_exist=False)
     time.sleep(1)
     add.dropdown_without_input(add.request_status, option_text='Заявка принята')
     time.sleep(2)
     add.verify_text_on_page(text='25-51-2448', should_exist=False)
-    add.verify_text_on_page(text='25-30-2448', should_exist=True)
+    add.verify_text_on_page(text='25-301-2448', should_exist=True)
     time.sleep(1)
 
     add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.click_button(add.start_date)
+    time.sleep(1)
+    add.click_button(add.all_time)
+    time.sleep(1)
 
     # проверка фильтра "Идентификатор заявки"
-    add.input_in_field(add.request_identifier, value='671', click_first=True)
+    add.input_in_field(add.request_identifier, value='681', click_first=True)
     time.sleep(2)
-    add.verify_text_on_page(text='дж-671', should_exist=True)
-    add.verify_text_on_page(text='дж-678', should_exist=False)
+    add.verify_text_on_page(text='дж-681', should_exist=True)
+    add.verify_text_on_page(text='дж-688', should_exist=False)
     time.sleep(1)
     add.backspace_and_input(add.request_identifier, value='')
 
     # проверка фильтра "Дата публикации"
     add.click_button(add.publication_date)
     time.sleep(1)
-    add.input_in_field(add.publication_from, value='10022025', click_first=True)
+    add.input_in_field(add.publication_from, value='01102025', click_first=True)
     time.sleep(3)
-    add.input_in_field(add.publication_before, value='10032025', click_first=True)
+    add.input_in_field(add.publication_before, value='31102025', click_first=True)
     time.sleep(3)
-    add.verify_text_on_page(text='25-44-2448', should_exist=True)
+    add.verify_text_on_page(text='25-305-2448', should_exist=True)
     time.sleep(1)
     add.verify_text_on_page(text='25-28-2448', should_exist=False)
     time.sleep(1)
 
     add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.click_button(add.start_date)
+    time.sleep(1)
+    add.click_button(add.all_time)
+    time.sleep(1)
 
     # проверка фильтра "номер рейса"
-    add.input_in_field(add.order_number, value='21-2448', click_first=True)
+    add.input_in_field(add.order_number, value='25-307', click_first=True)
     time.sleep(1)
-    add.verify_text_on_page(text='R-25-21-2448-1', should_exist=True)
-    add.verify_text_on_page(text='R-25-17-2448-1', should_exist=False)
+    add.verify_text_on_page(text='R-25-307-2448-1', should_exist=True)
+    add.verify_text_on_page(text='R-25-308-2448-1', should_exist=False)
     time.sleep(1)
     add.backspace_and_input(add.order_number, value='')
 
@@ -89,28 +104,38 @@ def test_filter_old_ftl_lke(base_fixture, domain):
     add = OldFTL(base.driver)
     # сброс фильтров
     add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.click_button(add.start_date)
+    time.sleep(1)
+    add.click_button(add.all_time)
+    time.sleep(1)
 
     # проверка фильтра "номер заявки"
-    add.input_in_field(add.request_number, value='25-30-2447', click_first=True)
+    add.input_in_field(add.request_number, value='25-226-2447', click_first=True)
     time.sleep(3)
-    add.find_text_on_page(text='25-30-2447', occurrences=3)
-    add.verify_text_on_page(text='25-29-2447', should_exist=False)
+    add.find_text_on_page(text='25-226-2447', occurrences=3)
+    add.verify_text_on_page(text='25-228-2447', should_exist=False)
     time.sleep(1)
     add.backspace_and_input(add.request_number, value='')
 
     # проверка фильтра "статус заявки"
     add.dropdown_without_input(add.request_status, option_text='Заявка опубликована')
     time.sleep(3)
-    add.verify_text_on_page(text='25-31-2447', should_exist=True)
-    add.verify_text_on_page(text='25-15-2447', should_exist=False)
+    add.verify_text_on_page(text='25-230-2447', should_exist=True)
+    add.verify_text_on_page(text='25-228-2447', should_exist=False)
     time.sleep(1)
     add.dropdown_without_input(add.request_status, option_text='Заявка принята')
     time.sleep(3)
-    add.verify_text_on_page(text='25-31-2447', should_exist=False)
-    add.verify_text_on_page(text='25-15-2447', should_exist=True)
+    add.verify_text_on_page(text='25-233-2447', should_exist=True)
+    add.verify_text_on_page(text='25-226-2447', should_exist=False)
     time.sleep(1)
 
     add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.click_button(add.start_date)
+    time.sleep(1)
+    add.click_button(add.all_time)
+    time.sleep(1)
 
     # проверка фильтра "Идентификатор заявки"
     add.input_in_field(add.request_identifier, value='342', click_first=True)
@@ -121,12 +146,17 @@ def test_filter_old_ftl_lke(base_fixture, domain):
     add.backspace_and_input(add.request_identifier, value='')
 
     add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.click_button(add.start_date)
+    time.sleep(1)
+    add.click_button(add.all_time)
+    time.sleep(1)
 
     # проверка фильтра "номер рейса"
-    add.input_in_field(add.order_number, value='36-2447', click_first=True)
+    add.input_in_field(add.order_number, value='25-233', click_first=True)
     time.sleep(3)
-    add.verify_text_on_page(text='R-25-36-2447-1', should_exist=True)
-    add.verify_text_on_page(text='R-25-35-2447-1', should_exist=False)
+    add.verify_text_on_page(text='R-25-233-2447-1', should_exist=True)
+    add.verify_text_on_page(text='R-25-228-2447-1', should_exist=False)
     time.sleep(1)
     add.backspace_and_input(add.order_number, value='')
 
@@ -146,28 +176,38 @@ def test_filter_old_ftl_lkp(base_fixture, domain):
     add = OldFTL(base.driver)
     # сброс фильтров
     add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.click_button(add.start_date)
+    time.sleep(1)
+    add.click_button(add.all_time)
+    time.sleep(1)
 
     # проверка фильтра "номер заявки"
-    add.input_in_field(add.request_number, value='25-23-2449', click_first=True)
+    add.input_in_field(add.request_number, value='25-112201-2449', click_first=True)
     time.sleep(3)
-    add.find_text_on_page(text='25-23-2449', occurrences=3)
-    add.verify_text_on_page(text='25-24-2449', should_exist=False)
+    add.find_text_on_page(text='25-112201-2449', occurrences=3)
+    add.verify_text_on_page(text='25-112564-2449', should_exist=False)
     time.sleep(1)
     add.backspace_and_input(add.request_number, value='')
 
     # проверка фильтра "статус заявки"
     add.dropdown_without_input(add.request_status, option_text='Заявка опубликована')
     time.sleep(3)
-    add.verify_text_on_page(text='25-35-2449', should_exist=True)
-    add.verify_text_on_page(text='25-24-2449', should_exist=False)
+    add.verify_text_on_page(text='25-114898-2449', should_exist=True)
+    add.verify_text_on_page(text='25-114880-2449', should_exist=False)
     time.sleep(1)
     add.dropdown_without_input(add.request_status, option_text='Заявка принята')
     time.sleep(3)
-    add.verify_text_on_page(text='25-33-2449', should_exist=False)
-    add.verify_text_on_page(text='25-24-2449', should_exist=True)
+    add.verify_text_on_page(text='25-114878-2449', should_exist=True)
+    add.verify_text_on_page(text='25-114877-2449', should_exist=False)
     time.sleep(1)
 
     add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.click_button(add.start_date)
+    time.sleep(1)
+    add.click_button(add.all_time)
+    time.sleep(1)
 
     # проверка фильтра "Идентификатор заявки"
     add.input_in_field(add.request_identifier, value='78', click_first=True)
@@ -177,14 +217,18 @@ def test_filter_old_ftl_lkp(base_fixture, domain):
     time.sleep(1)
     add.backspace_and_input(add.request_identifier, value='')
 
-
     add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.click_button(add.start_date)
+    time.sleep(1)
+    add.click_button(add.all_time)
+    time.sleep(1)
 
     # проверка фильтра "номер рейса"
-    add.input_in_field(add.order_number, value='13-2449', click_first=True)
+    add.input_in_field(add.order_number, value='880-2449', click_first=True)
     time.sleep(3)
-    add.verify_text_on_page(text='R-25-13-2449-1', should_exist=True)
-    add.verify_text_on_page(text='R-25-16-2449-1', should_exist=False)
+    add.verify_text_on_page(text='R-25-114880-2449-1', should_exist=True)
+    add.verify_text_on_page(text='R-25-114879-2449-1', should_exist=False)
     time.sleep(1)
     add.backspace_and_input(add.order_number, value='')
 
@@ -205,6 +249,10 @@ def test_filter_order_ftl_lkz(base_fixture, domain):
     # сброс фильтров
     add.click_button(element_dict=add.reset_filters)
     time.sleep(1)
+    add.click_button(add.order_start_date)
+    time.sleep(1)
+    add.click_button(add.order_all_time)
+    time.sleep(1)
 
     # проверка фильтра "номер рейса"
     add.input_in_field(add.order_number_two, value='60-2448', click_first=True)
@@ -224,24 +272,36 @@ def test_filter_order_ftl_lkz(base_fixture, domain):
 
     add.click_button(element_dict=add.reset_filters)
     time.sleep(1)
+    add.click_button(add.order_start_date)
+    time.sleep(1)
+    add.click_button(add.order_all_time)
+    time.sleep(1)
 
     # проверка фильтра "стадии заявки"
     add.dropdown_with_input(add.order_stage, option_text='подбор')
     add.click_button(add.checkbox_one)
     time.sleep(3)
-    add.verify_text_on_page(text='R-25-69-2448-1', should_exist=True)
-    add.verify_text_on_page(text='R-25-48-2448-1', should_exist=False)
+    add.verify_text_on_page(text='R-25-311-2448-1', should_exist=True)
+    add.verify_text_on_page(text='R-25-258-2448-1', should_exist=False)
 
     add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.click_button(add.order_start_date)
+    time.sleep(1)
+    add.click_button(add.order_all_time)
     time.sleep(1)
 
     add.dropdown_with_input(add.order_stage, option_text='исполнение')
     add.click_button(add.checkbox_two)
     time.sleep(3)
-    add.verify_text_on_page(text='R-25-21-2448-1', should_exist=True)
+    add.verify_text_on_page(text='R-25-312-2448-1', should_exist=True)
     add.verify_text_on_page(text='R-25-68-2448-1', should_exist=False)
 
     add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.click_button(add.order_start_date)
+    time.sleep(1)
+    add.click_button(add.order_all_time)
     time.sleep(1)
 
     add.dropdown_with_input(add.order_stage, option_text='расч')
@@ -252,14 +312,24 @@ def test_filter_order_ftl_lkz(base_fixture, domain):
 
     add.click_button(element_dict=add.reset_filters)
     time.sleep(1)
+    add.click_button(add.order_start_date)
+    time.sleep(1)
+    add.click_button(add.order_all_time)
+    time.sleep(1)
 
     add.dropdown_with_input(add.order_stage, option_text='отме')
     add.click_button(add.checkbox_four)
+    time.sleep(1)
+    add.input_in_field(add.order_number_two, value='25-16', click_first=True)
     time.sleep(3)
     add.verify_text_on_page(text='R-25-16-2448-1', should_exist=True)
     add.verify_text_on_page(text='R-25-49-2448-1', should_exist=False)
 
     add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.click_button(add.order_start_date)
+    time.sleep(1)
+    add.click_button(add.order_all_time)
     time.sleep(1)
 
     # проверка фильтра ответственный пользователь

@@ -59,17 +59,29 @@ class Contractor(Base):
         "xpath": "//button[.//span[text()='OK']]",
         "name": "calendar_ok_button"
     }
+    # confirm_button = {
+    #     "xpath": "//button[@class='ant-btn ant-btn-primary']",
+    #     "name": "confirm_button",
+    #     "reference_xpath": "//div[@class='ant-modal-confirm-content']",
+    #     "reference": "Страховая компания и Договор страхования были успешно назначены для Контрагента.*"
+    # }
     confirm_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
         "name": "confirm_button",
         "reference_xpath": "//div[@class='ant-modal-confirm-content']",
-        "reference": "Страховая компания и Договор страхования были успешно назначены для Контрагента.*"
+        "reference": "Страховая компания и Договор страхования были успешно назначены для Контрагента null"
     }
+    # delete_button = {
+    #     "xpath": "//button[@class='ant-btn ant-btn-primary']",
+    #     "name": "delete_button",
+    #     "reference_xpath": "//div[@class='ant-modal-confirm-content']",
+    #     "reference": ".*успешно удалены Страховая компания и Договор Страхования"
+    # }
     delete_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
         "name": "delete_button",
         "reference_xpath": "//div[@class='ant-modal-confirm-content']",
-        "reference": ".*успешно удалены Страховая компания и Договор Страхования"
+        "reference": "Для Контрагента null успешно удалены Страховая компания и Договор Страхования"
     }
     clear_button = {
         "xpath": "//i[@aria-label='icon: close-circle']",

@@ -28,10 +28,10 @@ def test_filter_departures_lke(base_fixture, domain, request):
         add.backspace_and_input(add.according_task, "")
 
     with allure.step("Проверка фильтров 'Адрес отправления/доставки'"):
-        add.filter_departures_address()
+        add.filter_departures_address_lke()
 
     with allure.step("Проверка фильтра 'Статус'"):
-        add.filter_departure_status()
+        add.filter_departure_status_lke()
 
 
 @allure.story("Extended")

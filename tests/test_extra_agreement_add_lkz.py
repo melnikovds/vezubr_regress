@@ -52,7 +52,7 @@ def test_extra_agreements_producer_add_lkz(base_fixture, domain):
     agreement.click_button(agreement.yes_button, wait_type='visible')
     time.sleep(5)
     # Проверка отсутствия удаленного ДУ
-    # agreement.reload_page()
-    # time.sleep(5)
+    agreement.reload_page()
+    time.sleep(5)
     agreement.verify_text_on_page(extra_agr_number, should_exist=False)
     # Конец теста

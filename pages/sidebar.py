@@ -261,17 +261,30 @@ class SideBar(Base):
         "xpath": "//span[@class='route-name no-events' and text()='Реестры']",
         "name": "registries_hover"
     }
+    # registries_hover = {
+    #     "xpath": "//div[@aria-expanded='true']",
+    #     "name": "registries_hover_two"
+    # }
+    registries_hover_old_lke = {
+        "xpath": "(//div[@class='flexbox size-1 align-right justify-right'])[6]",
+        "name": "registries_hover_old_lke"
+    }
+    registries_hover_new_lke = {
+        "xpath": "",
+        "name": "registries_hover_new_lke"
+    }
+
     reg_client_create_list_button = {
         "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Сформировать')]",
         "name": "reg_client_create_list_button",
         "reference_xpath": base_reference_xpath,
-        "reference": "Формирование .*"
+        "reference": "Формирование Реестра для Заказчика"
     }
     reg_producer_create_list_button = {
         "xpath": "(//li[contains(@class, 'ant-menu-item') and contains(., 'Сформировать')])[2]",
         "name": "reg_producer_create_list_button",
         "reference_xpath": base_reference_xpath,
-        "reference": "Формирование .*"
+        "reference": "Формирование Реестра от Подрядчика"
     }
     registries_client_list_button = {
         "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Реестры для Заказчика')]",
@@ -279,14 +292,27 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Реестры для заказчика"
     }
+
     registries_list_button_lkp = {
         "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Список реестров')]",
         "name": "registries_list_button_lkp",
         "reference_xpath": base_reference_xpath,
         "reference": "Реестры"
     }
+    reg_client_create_list_button_lkp = {
+        "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Сформировать')]",
+        "name": "reg_client_create_list_button_lkp",
+        "reference_xpath": base_reference_xpath,
+        "reference": "Формирование реестра"
+    }
+    # registries_list_button_lkz = {
+    #     "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Реестры')]",
+    #     "name": "registries_list_button_lkz",
+    #     "reference_xpath": base_reference_xpath,
+    #     "reference": "Реестры"
+    # }
     registries_list_button_lkz = {
-        "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Реестры')]",
+        "xpath": "//li[@id='registriesList']",
         "name": "registries_list_button_lkz",
         "reference_xpath": base_reference_xpath,
         "reference": "Реестры"

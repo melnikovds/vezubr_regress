@@ -33,7 +33,7 @@ class LUOTariffAdd(Base):
         "xpath": "(//div[@class='tariff-cost-wrap tariff-cost-wrap--editable'])[2]",
         "name": "price_mrr_input"
     }
-    params_input = {
+    hourly_params_input = {
         "xpath": "//input[@role='spinbutton']",
         "name": "hourly_params_input"
     }
@@ -45,7 +45,7 @@ class LUOTariffAdd(Base):
     }
     confirm_add_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
-        "name": "create_button"
+        "name": "confirm_add_button"
     }
     clone_tariff_button = {
         "xpath": "//button[contains(., 'Клонировать')]",
@@ -61,7 +61,6 @@ class LUOTariffAdd(Base):
     }
     confirm_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
-        "name": "create_button",
+        "name": "confirm_button",
         "reference": "OK"
-
     }

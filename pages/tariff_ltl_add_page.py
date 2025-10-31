@@ -69,13 +69,13 @@ class LTLTariffAdd(Base):
     }
     add_tariff_button = {
         "xpath": "//button[@class='ant-btn semi-wide margin-left-16 ant-btn-primary']",
-        "name": "add_hourly_tariff_button",
+        "name": "add_tariff_button",
         "reference_xpath": "//div[@class='ant-modal-confirm-content' and text()='Тариф был успешно создан']",
         "reference": "Тариф был успешно создан"
     }
     confirm_add_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
-        "name": "create_button"
+        "name": "confirm_add_button"
     }
     action_menu_button = {
         "xpath": "//button[@class='filter-button circle default']",
@@ -87,7 +87,6 @@ class LTLTariffAdd(Base):
     }
     confirm_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
-        "name": "create_button",
+        "name": "confirm_button",
         "reference": "OK"
-
     }

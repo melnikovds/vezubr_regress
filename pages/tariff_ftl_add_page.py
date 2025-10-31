@@ -93,7 +93,7 @@ class FTLTariffAdd(Base):
     }
     confirm_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
-        "name": "create_button",
+        "name": "confirm_button",
         "reference": "OK"
     }
     """First address drop-down list"""
@@ -112,7 +112,7 @@ class FTLTariffAdd(Base):
     }
     select_second_radio = {
         "xpath": "(//span[@class='ant-radio'])[2]",
-        "name": "select_first_radio"
+        "name": "select_second_radio"
     }
     confirm_address_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary' and span[contains(text(), 'Применить выбранный')]]",

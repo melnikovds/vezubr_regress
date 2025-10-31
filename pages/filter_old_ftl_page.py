@@ -12,6 +12,14 @@ class OldFTL(Base):
         self.driver = driver
 
     # Locators
+    start_date = {
+        "xpath": "//div[@id='undefined-select']//div[@class='ant-select-selection__rendered']",
+        "name": "start_date"
+    }
+    all_time = {
+        "xpath": "//li[@id='undefined-select-option-6']",
+        "name": "all_time"
+    }
     reset_filters = {
         "xpath": "//button[contains(@class,'ant-btn semi-wide')]",
         "name": "reset_filters"
@@ -45,6 +53,14 @@ class OldFTL(Base):
         "name": "order_number"
     }
 
+    order_start_date = {
+        "xpath": "//div[@id='orders-maindate-select']//div[@role='combobox']",
+        "name": "order_start_date"
+    }
+    order_all_time = {
+        "xpath": "//li[@id='orders-maindate-select-option-6']",
+        "name": "order_all_time"
+    }
     order_number_two = {
         "xpath": "(//input[@class='ant-input'])[3]",
         "name": "order_number_two"
@@ -146,9 +162,6 @@ class OldFTL(Base):
     }
 
 
-
-
-
     # start_at_from_button = {
     #
     #
@@ -166,8 +179,6 @@ class OldFTL(Base):
     #     self.backspace_and_input(self.start_at_from_input, num=5, value=new_time)
     #     # Клик по кнопке подтверждения выбора даты и времени
     #     self.click_button(self.calendar_ok_button)
-
-
 
 
 def create_entity():

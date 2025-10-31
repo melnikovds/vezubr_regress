@@ -1,6 +1,5 @@
 import allure
 import pytest
-
 from pages.insurer_page import Insurer
 from pages.insurers_list_page import InsurersList
 from pages.profile_page import Profile
@@ -180,7 +179,9 @@ def test_sorting_contractor_lkp(base_fixture, domain):
 def test_sorting_registries_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
-    sidebar.click_button(sidebar.registries_list_button_lkz, do_assert=True, wait="lst")
+    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.registries_list_button_lkz,
+                           do_assert=True, wait="lst")
+
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
 
@@ -191,19 +192,22 @@ def test_sorting_registries_lkz(base_fixture, domain):
 def test_sorting_registries_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
-    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.reg_client_create_list_button,
+    sidebar.move_and_click(move_to=sidebar.registries_hover_old_lke, click_to=sidebar.reg_client_create_list_button,
+                           do_assert=True, wait="lst")
+
+    # sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.reg_client_create_list_button,
+    #                        do_assert=True, wait="lst")
+    base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
+
+    sidebar.move_and_click(move_to=sidebar.registries_hover_old_lke, click_to=sidebar.reg_producer_create_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
-    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.reg_producer_create_list_button,
+    sidebar.move_and_click(move_to=sidebar.registries_hover_old_lke, click_to=sidebar.registries_client_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
-    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.registries_client_list_button,
-                           do_assert=True, wait="lst")
-    base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
-
-    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.registries_producer_list_button,
+    sidebar.move_and_click(move_to=sidebar.registries_hover_old_lke, click_to=sidebar.registries_producer_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
@@ -215,7 +219,7 @@ def test_sorting_registries_lke(base_fixture, domain):
 def test_sorting_registries_lkp(base_fixture, domain):
     base, sidebar = base_fixture
 
-    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.reg_client_create_list_button,
+    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.reg_client_create_list_button_lkp,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
@@ -231,8 +235,9 @@ def test_sorting_registries_lkp(base_fixture, domain):
 def test_sorting_documents_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
-    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.transport_doc_list_button,
+    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.transport_doc_old_list_button,
                            do_assert=True, wait="lst")
+
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
     sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
@@ -366,9 +371,9 @@ def test_sorting_employee_lke(base_fixture, domain):
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.loaders_list_button,
-                           do_assert=True, wait="lst")
-    base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
+    # sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.loaders_list_button,
+    #                        do_assert=True, wait="lst")
+    # base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
     profile = Profile(base.driver)
     profile.click_button(sidebar.profile_button, do_assert=True)

@@ -58,11 +58,11 @@ def test_tariff_luo_copy_lke(base_fixture, domain):
     tariff.backspace_and_input(tariff.tariff_name_input, f"ПРР-{base.get_timestamp()}")
     # Изменение параметров тарифа
     tariff.click_button(tariff.price_input)
-    tariff.backspace_and_input(tariff.params_input, base.random_value_float_str(2500, 4000))
+    tariff.backspace_and_input(tariff.hourly_params_input, base.random_value_float_str(2500, 4000))
     tariff.click_button(tariff.price_hour_input)
-    tariff.backspace_and_input(tariff.params_input, base.random_value_float_str(500, 1000))
+    tariff.backspace_and_input(tariff.hourly_params_input, base.random_value_float_str(500, 1000))
     tariff.click_button(tariff.price_mrr_input)
-    tariff.backspace_and_input(tariff.params_input, base.random_value_float_str(100, 500))
+    tariff.backspace_and_input(tariff.hourly_params_input, base.random_value_float_str(100, 500))
     # Сохранение изменений тарифа
     tariff.click_button(tariff.add_tariff_button)
     tariff.click_button(tariff.confirm_button)
@@ -101,8 +101,6 @@ def test_tariff_ftl_h_copy_lke(base_fixture, domain):
     tariff.backspace_and_input(tariff.hourly_params_input, base.random_value_float_str(3000, 5000))
     # Сохранение изменений тарифа
     tariff.click_button(tariff.add_hourly_tariff_button)
-    time.sleep(5)
-    tariff.click_button(tariff.confirm_button)
     time.sleep(5)
     tariff.click_button(tariff.confirm_button)
     time.sleep(5)

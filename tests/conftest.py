@@ -97,21 +97,20 @@ def base_fixture(request, domain):
 # Хук для сохранения скриншота в случае провала теста
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    # Вызов теста и получение его результата
     outcome = yield
     report = outcome.get_result()
 
-    # Получаем кортеж (base, sidebar) через фикстуру
     base_fixture = item.funcargs.get('base_fixture', None)
 
     if base_fixture:
-        base, _ = base_fixture  # Извлекаем base из кортежа
+        base, _ = base_fixture
 
-        # Если тест завершился с ошибкой и base доступен
         if report.when == "call" and report.failed and base:
-            # Получаем имя теста
             test_name = item.nodeid.replace("::", "_").replace("/", "_")
-            base.get_screenshot(test_name)  # Передаем имя теста в метод скриншота
+            try:
+                base.get_screenshot(test_name)
+            except Exception as e:
+                print(f"[WARNING] Не удалось сделать скриншот для {test_name}: {e}")
 
 
 @pytest.fixture(scope="session")

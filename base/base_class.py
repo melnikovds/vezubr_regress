@@ -77,55 +77,50 @@ class Base:
             options.add_argument('--disable-software-rasterizer')
             options.add_argument('--disable-setuid-sandbox')
 
-        # Определяем, запущено ли в CI (Jenkins)
-        is_in_jenkins = 'JENKINS_HOME' in os.environ or 'USE_SELENOID' in os.environ
-
         # Проверяем, нужно ли использовать Selenoid
         use_selenoid = os.getenv("USE_SELENOID", "false").lower() == "true"
 
         if use_selenoid:
             print("🚀 Запуск в режиме Selenoid...")
+            options.add_argument('--headless=new')
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
 
-            # Включаем VNC только если нужно визуальное наблюдение
+            # Получаем версию из переменной окружения (по умолчанию — latest)
+            browser_version = os.getenv("BROWSER_VERSION", "128.0")
+
             enable_vnc = os.getenv("ENABLE_VNC", "false").lower() == "true"
             selenoid_options = {
                 "enableVNC": enable_vnc,
                 "enableVideo": False,
                 "name": "vezubr-autotest"
             }
+            options.set_capability("browserName", "chrome")
+            options.set_capability("browserVersion", browser_version)
             options.set_capability("selenoid:options", selenoid_options)
 
             selenoid_url = os.getenv('SELENOID_URL', 'http://localhost:4444/wd/hub')
             driver = webdriver.Remote(
                 command_executor=selenoid_url,
-                options=options  # ✅ Только options!
+                options=options
             )
 
         else:
             print("📌 Запуск локального Chrome...")
-
-            # Добавляем headless, если в Jenkins (даже при локальном Chrome)
-            if is_in_jenkins:
+            if 'JENKINS_HOME' in os.environ:
                 options.add_argument('--headless=new')
                 print("✅ Режим headless включен (Jenkins detected)")
-            else:
-                # На локальной машине — без headless, если не указано иначе
-                if os.getenv("HEADLESS", "false").lower() == "true":
-                    options.add_argument('--headless=new')
-                    print("✅ Режим headless включен (по запросу)")
+            elif os.getenv("HEADLESS", "false").lower() == "true":
+                options.add_argument('--headless=new')
+                print("✅ Режим headless включен (по запросу)")
 
-            # Используем Selenium Manager
             driver = webdriver.Chrome(options=options)
 
-        # Шаг в Allure
         with allure.step(title="Start test"):
             print("Start test")
 
         return cls(driver)
-
     """ Test finish """
 
     def test_finish(self) -> None:

@@ -388,37 +388,58 @@ class Base:
 
     """ Get screenshot """
 
-    def get_screenshot(self, test_name: str = None) -> NoReturn:
-        """
-        Сохраняет скриншот текущего состояния браузера в папку screens внутри проекта.
-        Если тест запускается с Allure, прикрепляет скриншот к отчету Allure.
+    def get_screenshot(self, test_name: str = None) -> None:
+    """
+    Сохраняет скриншот текущего состояния браузера в папку screens внутри проекта.
+    Если тест запускается с Allure, прикрепляет скриншот к отчету Allure.
 
-        Parameters
-        ----------
-        test_name : str, optional
-            Название теста, добавляемое к имени скриншота. Если не указано, используется только таймштамп.
-        """
-        # Определяем путь к папке screens внутри корня проекта
-        screenshot_dir = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')), 'screens')
+    Parameters
+    ----------
+    test_name : str, optional
+        Название теста, добавляемое к имени скриншота. Если не указано, используется только таймштамп.
+    """
+    # Защита от отсутствующего или закрытого драйвера
+    if not hasattr(self, 'driver') or self.driver is None:
+        print("[WARNING] Драйвер недоступен — скриншот невозможен")
+        return
 
-        # Создаем имя файла скриншота с таймштампом и названием теста (если указано)
-        name_screenshot = f"{test_name + '_' if test_name else ''}{self.get_timestamp(dot=True)}.png"
-        screenshot_path = os.path.join(screenshot_dir, name_screenshot)
+    try:
+        # Проверим, можно ли взаимодействовать с драйвером
+        _ = self.driver.title  # лёгкая проверка активности сессии
+    except Exception as e:
+        print(f"[WARNING] Сессия браузера недоступна — скриншот невозможен: {e}")
+        return
 
-        # Проверяем существование папки и создаем ее при необходимости
-        os.makedirs(screenshot_dir, exist_ok=True)
+    # Определяем путь к папке screens внутри корня проекта
+    screenshot_dir = os.path.join(
+        os.path.abspath(os.path.join(os.path.dirname(__file__), '..')),
+        'screens'
+    )
 
+    # Создаем имя файла скриншота с таймштампом и названием теста (если указано)
+    name_screenshot = f"{test_name + '_' if test_name else ''}{self.get_timestamp(dot=True)}.png"
+    screenshot_path = os.path.join(screenshot_dir, name_screenshot)
+
+    # Создаём папку при необходимости
+    os.makedirs(screenshot_dir, exist_ok=True)
+
+    try:
         # Сохраняем скриншот
         self.driver.save_screenshot(screenshot_path)
-
-        # Шаг в Allure и вывод в консоль
         message = f"Screenshot saved at: {screenshot_path}"
-        with allure.step(title=f"Screen taken: {name_screenshot}"):
-            print(message)
+        print(message)
 
+        # Шаг в Allure
+        with allure.step(title=f"Screen taken: {name_screenshot}"):
             # Прикрепляем файл скриншота только если используется Allure
-            if hasattr(self, 'allure_dir') and self.allure_dir:
-                allure.attach.file(screenshot_path, name="Screenshot", attachment_type=allure.attachment_type.PNG)
+            if getattr(self, 'allure_dir', None):
+                allure.attach.file(
+                    screenshot_path,
+                    name="Screenshot",
+                    attachment_type=allure.attachment_type.PNG
+                )
+    except Exception as e:
+        print(f"[ERROR] Не удалось сохранить скриншот: {e}")
 
     """Click button with optional assertion and loading wait"""
 

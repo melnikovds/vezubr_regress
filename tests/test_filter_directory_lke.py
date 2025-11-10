@@ -152,6 +152,8 @@ def test_tariff_directory_lke(base_fixture, domain):
 def test_drivers_directory_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
+    time.sleep(2)
+
     with allure.step("Переход к списку водителей"):
         base.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.drivers_list_button,
                             do_assert=True, wait='lst')

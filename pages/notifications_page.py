@@ -589,6 +589,10 @@ class ResetNotifications(Base):
         super().__init__(driver)
         self.driver = driver
 
+    fields_1 = {
+        "xpath": "//li[contains(text(),'не уведомлять')]",
+        "name": "fields_1"
+    }
     fields_2 = {
         "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[2]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
         "name": "fields_2"
@@ -613,10 +617,15 @@ class ResetNotifications(Base):
         "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[7]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
         "name": "fields_7"
     }
+    # fields_8 = {
+    #     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[8]/td[4]/div[1]/div[1]/div[1]/div[2]",
+    #     "name": "fields_8"
+    # }
     fields_8 = {
-        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[8]/td[4]/div[1]/div[1]/div[1]/div[2]",
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[8]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",
         "name": "fields_8"
     }
+
 
     fields_9 = {
         "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/form[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[4]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]",

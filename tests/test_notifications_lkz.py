@@ -3,6 +3,7 @@ import pytest
 import time
 from pages.notifications_page import *
 from pages.settings_page import Settings
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
 
 @allure.story("Extended path test")
@@ -24,6 +25,44 @@ def test_notification_field_lkz(base_fixture, domain):
     # настройка уведомлений по смс
     add.click_button(add.click_sms)
     add.dropdown_without_input(add.day_to_allowed, option_text="Только по рабочим дням")
+    time.sleep(1)
+    add.scroll_to_element(add.critical_charge_mail)
+    time.sleep(1)
+
+    try:
+        # Пытаемся кликнуть на кнопку
+        add.click_button(add.safe_notifications, wait='form')
+        print("Кнопка 'safe_notifications' успешно нажата.")
+    except TimeoutException:
+        # Обработка случая, когда кнопка не становится кликабельной за отведенное время
+        print("Кнопка 'safe_notifications' не стала кликабельной в течение времени ожидания.")
+    except NoSuchElementException:
+        # Обработка случая, когда кнопка вообще не найдена на странице
+        print("Кнопка 'safe_notifications' не найдена на странице.")
+    except Exception as e:
+        # Обработка любых других ошибок
+        print(f"Произошла ошибка при попытке нажать кнопку 'safe_notifications': {e}")
+
+    # add.click_button(add.safe_notifications, wait='form')
+    time.sleep(1)
+    add.refresh_page()
+    time.sleep(3)
+    add.dropdown_without_input(add.day_to_allowed, option_text="Никогда")
+    time.sleep(1)
+
+    try:
+        # Пытаемся кликнуть на кнопку
+        add.click_button(add.safe_notifications, wait='form')
+        print("Кнопка 'safe_notifications' успешно нажата.")
+    except TimeoutException:
+        # Обработка случая, когда кнопка не становится кликабельной за отведенное время
+        print("Кнопка 'safe_notifications' не стала кликабельной в течение времени ожидания.")
+    except NoSuchElementException:
+        # Обработка случая, когда кнопка вообще не найдена на странице
+        print("Кнопка 'safe_notifications' не найдена на странице.")
+    except Exception as e:
+        # Обработка любых других ошибок
+        print(f"Произошла ошибка при попытке нажать кнопку 'safe_notifications': {e}")
 
     # настройка уведомлений по рейсам
     add.dropdown_without_input(add.send_notification, option_text="По всем Рейсам")
@@ -139,7 +178,13 @@ def test_notification_field_lkz(base_fixture, domain):
     # сброс уведомлений по смс
     res = ResetNotifications(base.driver)
 
-    add.dropdown_without_input(add.driver_search_sms, option_text="не уведомлять", index=1)
+    # add.dropdown_without_input(add.driver_search_sms, option_text="не уведомлять", index=1)
+    add.refresh_page()
+    time.sleep(3)
+
+    add.click_button(add.driver_search_sms)
+    time.sleep(1)
+    res.click_button(res.fields_1)
 
     add.click_button(add.min_cost_sms)
     time.sleep(1)

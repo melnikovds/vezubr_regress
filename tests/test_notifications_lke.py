@@ -104,9 +104,13 @@ def test_notification_field_lke(base_fixture, domain):
 
     # сброс уведомлений по смс
     res = ResetNotifications(base.driver)
+    add.refresh_page()
+    time.sleep(3)
 
     # сбрасываем поля "подбор"
-    add.dropdown_without_input(add.driver_search_sms, "не уведомлять", index=1)
+    add.click_button(add.driver_search_sms)
+    time.sleep(1)
+    res.click_button(res.fields_1)
 
     add.click_button(add.min_cost_sms)
     time.sleep(1)

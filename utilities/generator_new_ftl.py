@@ -3,7 +3,7 @@ import time
 
 import requests
 from pages.get_token import get_access_token  # Импортируем функцию получения токена
-from pages.generator.flight_generator import generate_random_flight
+from utilities.flight_generator import generate_random_flight
 
 # URL эндпоинта API
 API_URL = "https://api.vezubr.com/v1/api/cargo-delivery-requests/create-and-publish"

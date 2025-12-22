@@ -6,7 +6,7 @@ from typing import NoReturn
 from selenium.webdriver import ActionChains, Keys
 
 from base.base_class import Base
-from pages.generator.flight_generator import fake
+from utilities.flight_generator import fake
 
 
 class AddCdr(Base):

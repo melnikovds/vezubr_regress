@@ -221,7 +221,7 @@ def test_sidebar_lkp(base_fixture, domain):
     sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
                            do_assert=True, wait="lst")
 
-    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.reg_client_create_list_button,
+    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.reg_client_create_list_button_lkp,
                            do_assert=True, wait="lst")
     sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.registries_list_button_lkp,
                            do_assert=True, wait="lst")

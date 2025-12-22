@@ -2,6 +2,7 @@ import time
 from typing import NoReturn
 import allure
 from base.base_class import Base
+import random
 
 
 class Registration(Base):
@@ -114,4 +115,17 @@ class Registration(Base):
         with allure.step(title=f"Assert \"{value_word}\" == \"{reference_value}\""):
             assert value_word == reference_value, f"Expected '{reference_value}', but found '{value_word}'."
             print(f"Assert \"{value_word}\" == \"{reference_value}\"")
+
+    @staticmethod
+    def generate_phone_number():
+        # Выбираем префикс: либо "954", либо "955"
+        prefix = random.choice(["954", "955"])
+
+        # Генерируем 7 случайных цифр
+        random_digits = ''.join(random.choices('0123456789', k=7))
+
+        # Формируем полный номер телефона
+        phone_number = prefix + random_digits
+
+        return phone_number
     

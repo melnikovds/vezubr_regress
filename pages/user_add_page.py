@@ -100,6 +100,10 @@ class User(Base):
         "xpath": "//a[contains(text(),'Подрядчики')]",
         "name": "producer_tab"
     }
+    client_tab = {
+        "xpath": "//a[contains(text(),'Заказчики')]",
+        "name": "client_tab"
+    }
 
 
     """Assign responsibility list"""
@@ -122,6 +126,10 @@ class User(Base):
     filter_company = {
         "xpath": "(//input[@class='ant-input'])[3]",
         "name": "filter_company"
+    }
+    selected_contractor_checkbox = {
+        "xpath": "//th[@class='ant-table-selection-column react-resizable']//label[@class='ant-checkbox-wrapper']//input[@type='checkbox']",
+        "name": "selected_contractor_checkbox"
     }
 
 

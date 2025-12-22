@@ -236,7 +236,7 @@ class Base:
     """ Assert element text"""
 
     def assert_element_text(self, element_dict: Dict[str, str], reference_value: Optional[str] = None,
-                            wait_type: str = 'clickable') -> None:
+                            wait_type: str = 'clickable', match_type: str = 'exact') -> None:
         """
         Проверяет, что текст элемента соответствует заданному значению или условию.
         Использует 'reference_xpath' из 'element_dict' для получения текста элемента, если указан.
@@ -250,6 +250,9 @@ class Base:
             Ожидаемый текст для сравнения, если указан.
         wait_type : str, optional
             Тип ожидания элемента ('clickable', 'visible', 'located', 'find'). По умолчанию 'clickable'.
+        match_type : str, optional
+            Тип сравнения: 'exact' — полное совпадение (через regex), 'contains' — вхождение подстроки.
+            По умолчанию 'exact'.
 
         Raises
         ------
@@ -262,6 +265,7 @@ class Base:
         else:
             element_info = {'name': element_dict['name'], 'xpath': element_dict['xpath']}
 
+        # Получаем элемент
         element = self.get_element(element_info, wait_type=wait_type)['element']
         value_word = element.text or element.get_attribute('value')
 
@@ -269,10 +273,18 @@ class Base:
         expected_value = reference_value if reference_value else element_dict.get('reference', '')
 
         # Шаг в Allure и вывод в консоль
-        with allure.step(f"Assert \"{value_word}\" == \"{expected_value}\""):
-            assert re.fullmatch(re.escape(expected_value),
-                                value_word), f"Expected '{expected_value}', but found '{value_word}'."
-            print(f"Assert \"{value_word}\" == \"{expected_value}\"")
+        with allure.step(f"Assert \"{value_word}\" {match_type} \"{expected_value}\""):
+            if match_type == 'contains':
+                assert expected_value in value_word, \
+                    f"Expected substring '{expected_value}' not found in '{value_word}'"
+            elif match_type == 'exact':
+                assert re.fullmatch(re.escape(expected_value), value_word), \
+                    f"Expected '{expected_value}', but found '{value_word}'."
+            else:
+                raise ValueError(f"Unknown match_type: {match_type}. Use 'exact' or 'contains'.")
+
+            print(f"Assert \"{value_word}\" {match_type} \"{expected_value}\"")
+
 
     """ Verify text presence on the page """
 
@@ -508,7 +520,8 @@ class Base:
 
             # Выполнение ассерта текста элемента, если do_assert = True
             if do_assert:
-                self.assert_element_text(element_dict)
+                match_type = element_dict.get('match_type', 'exact')
+                self.assert_element_text(element_dict, wait_type=wait_type, match_type=match_type)
 
     def click_button_option(self, element_dict: Dict[str, str], index: int = 1, do_assert: bool = False,
                             wait: Optional[str] = None, wait_type: str = 'clickable',
@@ -1324,50 +1337,101 @@ class Base:
 
     """ Generate INN """
 
+    # @staticmethod
+    # def generate_inn(entity_type: str) -> str:
+    #     """
+    #     Генерирует ИНН для физического лица (individual) или юридического лица (entity).
+    #
+    #     Parameters
+    #     ----------
+    #     entity_type : str
+    #         Тип сущности, для которой генерируется ИНН. Допустимые значения: 'individual', 'entity'.
+    #
+    #     Returns
+    #     -------
+    #     str
+    #         Сгенерированный ИНН в виде строки.
+    #         Для юридического лица ИНН состоит из 10 цифр, для физического лица - из 12 цифр.
+    #
+    #     Raises
+    #     ------
+    #     ValueError
+    #         Если передан неизвестный тип сущности. Допустимые значения параметра entity_type: 'individual', 'entity'.
+    #     """
+    #
+    #     def calculate_control_sum(numbers: list[int], local_coeffs: list[int]) -> int:
+    #         """Вычисляет контрольную сумму по заданным коэффициентам."""
+    #         return sum(a * b for a, b in zip(numbers, local_coeffs)) % 11 % 10
+    #
+    #     if entity_type == "entity":
+    #         # Генерация ИНН для юридического лица
+    #         base = [random.randint(0, 9) for _ in range(9)]
+    #         entity_coeffs = [2, 4, 10, 3, 5, 9, 4, 6, 8]
+    #         control_sum = calculate_control_sum(base, entity_coeffs)
+    #         inn = ''.join(map(str, base)) + str(control_sum)
+    #     elif entity_type == "individual":
+    #         # Генерация ИНН для физического лица
+    #         base = [random.randint(0, 9) for _ in range(10)]
+    #         individual_coeffs_first = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8]
+    #         individual_coeffs_second = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 5]
+    #         first_control_sum = calculate_control_sum(base, individual_coeffs_first)
+    #         second_control_sum = calculate_control_sum(base + [first_control_sum], individual_coeffs_second)
+    #         inn = ''.join(map(str, base)) + str(first_control_sum) + str(second_control_sum)
+    #     else:
+    #         raise ValueError("Неизвестный тип сущности. Допустимые значения: 'individual', 'entity'.")
+    #
+    #     return inn
+
     @staticmethod
     def generate_inn(entity_type: str) -> str:
-        """
-        Генерирует ИНН для физического лица (individual) или юридического лица (entity).
 
-        Parameters
-        ----------
-        entity_type : str
-            Тип сущности, для которой генерируется ИНН. Допустимые значения: 'individual', 'entity'.
+        # Реальные коды регионов РФ
+        REAL_REGIONS = [
+            1, 2, 3, 4, 5, 7, 10, 11, 12, 13, 14, 15,
+            16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
+            28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+            40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
+            52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63,
+            64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75,
+            76, 77, 78, 79, 82, 86, 87, 89
+        ]
 
-        Returns
-        -------
-        str
-            Сгенерированный ИНН в виде строки.
-            Для юридического лица ИНН состоит из 10 цифр, для физического лица - из 12 цифр.
+        # Наиболее распространённые коды налоговых инспекций
+        REAL_IFNS = [
+            1, 2, 3, 4, 5, 6, 7, 8, 9,
+            10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+            20, 21, 22, 23, 24, 25
+        ]
 
-        Raises
-        ------
-        ValueError
-            Если передан неизвестный тип сущности. Допустимые значения параметра entity_type: 'individual', 'entity'.
-        """
+        def calc(nums, coeffs):
+            return sum(a * b for a, b in zip(nums, coeffs)) % 11 % 10
 
-        def calculate_control_sum(numbers: list[int], local_coeffs: list[int]) -> int:
-            """Вычисляет контрольную сумму по заданным коэффициентам."""
-            return sum(a * b for a, b in zip(numbers, local_coeffs)) % 11 % 10
+        # Формируем реальные первые 4 цифры
+        region = random.choice(REAL_REGIONS)
+        ifns = random.choice(REAL_IFNS)
+
+        prefix = [
+            region // 10, region % 10,
+            ifns // 10, ifns % 10
+        ]
 
         if entity_type == "entity":
-            # Генерация ИНН для юридического лица
-            base = [random.randint(0, 9) for _ in range(9)]
-            entity_coeffs = [2, 4, 10, 3, 5, 9, 4, 6, 8]
-            control_sum = calculate_control_sum(base, entity_coeffs)
-            inn = ''.join(map(str, base)) + str(control_sum)
-        elif entity_type == "individual":
-            # Генерация ИНН для физического лица
-            base = [random.randint(0, 9) for _ in range(10)]
-            individual_coeffs_first = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8]
-            individual_coeffs_second = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 5]
-            first_control_sum = calculate_control_sum(base, individual_coeffs_first)
-            second_control_sum = calculate_control_sum(base + [first_control_sum], individual_coeffs_second)
-            inn = ''.join(map(str, base)) + str(first_control_sum) + str(second_control_sum)
-        else:
-            raise ValueError("Неизвестный тип сущности. Допустимые значения: 'individual', 'entity'.")
+            body = prefix + [random.randint(0, 9) for _ in range(5)]
+            coeffs = [2, 4, 10, 3, 5, 9, 4, 6, 8]
+            control = calc(body, coeffs)
+            return ''.join(map(str, body)) + str(control)
 
-        return inn
+        elif entity_type == "individual":
+            body = prefix + [random.randint(0, 9) for _ in range(6)]
+            coeffs1 = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8]
+            coeffs2 = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 5]
+            d11 = calc(body, coeffs1)
+            d12 = calc(body + [d11], coeffs2)
+            return ''.join(map(str, body)) + str(d11) + str(d12)
+
+        else:
+            raise ValueError("Тип должен быть 'individual' или 'entity'")
+
 
     """ Multiple click buttons """
 

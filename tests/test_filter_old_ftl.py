@@ -332,7 +332,7 @@ def test_filter_order_ftl_lkz(base_fixture, domain):
     add.click_button(add.order_all_time)
     time.sleep(1)
 
-    # проверка фильтра ответственный пользователь
+    # проверка фильтра "ответственный пользователь"
     add.click_and_select_with_arrows(add.responsible_user, arrow_presses=0)
     time.sleep(1)
     add.verify_text_on_page(text='1555 1555', should_exist=True)
@@ -413,7 +413,7 @@ def test_filter_order_ftl_lke(base_fixture, domain):
     add.click_button(element_dict=add.reset_filters)
     time.sleep(1)
 
-    # проверка фильтра ответственный пользователь
+    # проверка фильтра "ответственный пользователь"
     add.click_and_select_with_arrows(add.responsible_user, arrow_presses=0)
     time.sleep(1)
     add.verify_text_on_page(text='1555 1555', should_exist=True)
@@ -494,7 +494,7 @@ def test_filter_order_ftl_lkp(base_fixture, domain):
     add.click_button(element_dict=add.reset_filters)
     time.sleep(1)
 
-    # проверка фильтра ответственный пользователь
+    # проверка фильтра "ответственный пользователь"
     add.click_and_select_with_arrows(add.responsible_user, arrow_presses=4)
     time.sleep(3)
     add.verify_text_on_page(text='120544', should_exist=True)
@@ -791,7 +791,7 @@ def test_filter_insured_order_lkz(base_fixture, domain):
     time.sleep(1)
     add.backspace_and_input(add.order_number_three, value='')
 
-    # проверка фильтра номер договора
+    # проверка фильтра "номер договора"
     add.input_in_field(add.contract_number, value='111')
     time.sleep(3)
     add.verify_text_on_page(text='1-111', should_exist=True)
@@ -872,7 +872,7 @@ def test_filter_insured_order_lke(base_fixture, domain):
     time.sleep(1)
     add.backspace_and_input(add.order_number_three, value='')
 
-    # проверка фильтра номер договора
+    # проверка фильтра "номер договора"
     add.input_in_field(add.contract_number, value='001')
     time.sleep(3)
     add.verify_text_on_page(text='R-25-163', should_exist=True)
@@ -958,7 +958,7 @@ def test_filter_insured_order_lkp(base_fixture, domain):
     time.sleep(1)
     add.backspace_and_input(add.order_number_three, value='')
 
-    # проверка фильтра номер договора
+    # проверка фильтра "номер договора"
     add.input_in_field(add.contract_number, value='111')
     time.sleep(3)
     add.verify_text_on_page(text='1-111', should_exist=True)

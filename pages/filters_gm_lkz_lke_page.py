@@ -173,6 +173,15 @@ class GmFilters(Base):
         "name": "required_search_by_date"
     }
 
+    cross_status_dispatch = {
+        "xpath": "//i[@aria-label='icon: close-circle']//*[name()='svg']",
+        "name": "cross_status_dispatch"
+    }
+    status_modified = {
+        "xpath": "//ul[@role='menubar']",
+        "name": "status_modified"
+    }
+
     def to_whom_aplication(self) -> NoReturn:
         self.dropdown_without_input(self.to_aplication, "Маршрутизация Везубр")
         time.sleep(2)
@@ -218,7 +227,7 @@ class GmFilters(Base):
         self.click_on_the_cross(self.del_region_dispatch_gm)
         self.dropdown_without_input(self.region_delivery, 'Тверская область')
         time.sleep(2)
-        self.verify_text_on_page(text="2447450300000")
+        self.verify_text_on_page(text="2448000046449")
         self.click_on_the_cross(self.del_region_delivery)
         time.sleep(2)
 

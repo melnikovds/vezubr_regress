@@ -1,8 +1,7 @@
 import json
 import time
-
 import requests
-from pages.get_token import get_access_token  # Импортируем функцию получения токена
+from utilities.get_token import get_access_token  # Импортируем функцию получения токена
 from utilities.flight_generator import generate_random_flight
 
 # URL эндпоинта API

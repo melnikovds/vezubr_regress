@@ -107,8 +107,14 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Активные заявки"
     }
+    # cdr_active_list_button = {
+    #     "xpath": "//li[contains(.,'Заявки на доставку Груза (NEW)')]",
+    #     "name": "cdr_active_list_button",
+    #     "reference_xpath": base_reference_xpath,
+    #     "reference": "Заявки на доставку Груза"
+    # }
     cdr_active_list_button = {
-        "xpath": "//li[contains(.,'Заявки на доставку Груза (NEW)')]",
+        "xpath": "//ul[@id='requests$Menu']//li[@id='requestsLtl']",
         "name": "cdr_active_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Заявки на доставку Груза"
@@ -279,6 +285,12 @@ class SideBar(Base):
         "name": "reg_client_create_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Формирование Реестра для Заказчика"
+    }
+    reg_client_create_list_button_lkp = {
+        "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Сформировать')]",
+        "name": "reg_client_create_list_button_lkp",
+        "reference_xpath": base_reference_xpath,
+        "reference": "Формирование реестра"
     }
     reg_producer_create_list_button = {
         "xpath": "(//li[contains(@class, 'ant-menu-item') and contains(., 'Сформировать')])[2]",

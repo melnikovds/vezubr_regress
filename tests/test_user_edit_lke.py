@@ -3,6 +3,7 @@ import allure
 import pytest
 from pages.profile_page import Profile
 from pages.user_add_page import User
+from pages.contractor_list_page import ContractorList
 
 
 @allure.story("Smoke test")
@@ -223,8 +224,12 @@ def test_user_responsible_fo_producer_lke(base_fixture, domain):
     # Переход на вкладку "Перевозчики"
     user.click_button(user.producer_tab, wait="lst")
     time.sleep(2)
-    # Назначение ответственности за всех перевозчиков
-    user.click_button(user.all_producer_on_checkbox)
+    # Назначение ответственности за перевозчика
+    add = ContractorList(base.driver)
+    add.input_in_field(add.contractor_name, value='яндекс')
+    time.sleep(2)
+    user.click_button(user.selected_contractor_checkbox, wait_type='located')
+
     # Подтверждение назначения ответственности
     user.click_button(user.confirm_responsible_button, wait="lst")
     

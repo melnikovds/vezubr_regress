@@ -157,22 +157,24 @@ def test_address_directory_lkz(base_fixture, domain):
 
     # сохранение фильтра с несколькими значениями
     add.click_button(element_dict=add.save_filter)
-    time.sleep(1)
+    time.sleep(5)
     add.input_in_field(add.name_filter, value='Фильтр Filter_11')
-    time.sleep(1)
+    time.sleep(5)
     add.click_button(element_dict=add.second_save_filter)
-    time.sleep(1)
+    time.sleep(5)
 
     # проверка работы Сохранённого фильтра №1
     add.click_button(element_dict=add.saved_filters)
     time.sleep(3)
     add.click_button(element_dict=add.radio_input_one, wait_type='located')
-    time.sleep(1)
+    time.sleep(5)
     add.click_button(element_dict=add.apply_filter)
-    time.sleep(1)
+    time.sleep(5)
     add.verify_text_on_page(text='мрмск', should_exist=False)
-    add.verify_text_on_page(text='Екатеринбург', should_exist=True)
-    add.verify_text_on_page(text='Пышма', should_exist=True)
+    # add.verify_text_on_page(text='Екатеринбург', should_exist=True)
+    # add.verify_text_on_page(text='Пышма', should_exist=True)
+    add.verify_text_on_page(text='Зиминская', should_exist=True)
+    add.verify_text_on_page(text='Ясный', should_exist=True)
 
     # обновление страницы
     # add.refresh_page()
@@ -248,10 +250,12 @@ def test_tariff_directory_lkz(base_fixture, domain):
 
     # проверка №1 фильтра "Статус"
     add.dropdown_without_input(add.tariff_status, option_text='Не активный')
+    add.input_in_field(add.tariff_name, value='ПРР-202504', click_first=True)
     time.sleep(2)
     add.verify_text_on_page(text='ПРР-20250427180818', should_exist=True)
     add.verify_text_on_page(text='ТТ-20240910124407', should_exist=False)
     time.sleep(2)
+    add.backspace_and_input(add.tariff_name, value='')
 
     # проверка №2 фильтра "Статус"
     add.dropdown_without_input(add.tariff_status, option_text='Активный')

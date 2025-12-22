@@ -9,8 +9,12 @@ class CargoPlaceAdd(Base):
 
     # Locators
     """Cargo place owner drop-down list"""
+    # cargo_place_owner_select = {
+    #     "xpath": "//span[@class='vz-form-item__label ' and contains(text(),'Владелец Задания')]",
+    #     "name": "cargo_place_owner_select"
+    # }
     cargo_place_owner_select = {
-        "xpath": "//span[@class='vz-form-item__label ' and contains(text(),'Владелец Задания')]",
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/label[1]/div[1]/div[1]/div[1]/div[1]/div[1]",
         "name": "cargo_place_owner_select"
     }
     select_own_cargo_place = {

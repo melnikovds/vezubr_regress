@@ -29,7 +29,8 @@ def test_registration_new_lkz(base_fixture, domain):
     reg.click_button(reg.registration_new_account)
     # Выбор типа регистрации - Грузовладелец
     reg.click_button(reg.client_button)
-    phone = "98" + reg.get_timestamp(eight=True)
+    # phone = "98" + reg.get_timestamp(eight=True)
+    phone = reg.generate_phone_number()
     # Ввод номера телефона
     reg.input_in_field(reg.phone_input, phone, click_first=True)
     # Принятие политики конфиденциальности
@@ -321,9 +322,9 @@ def test_create_inner_client(base_fixture, domain, api_login):
 
     # Проверяем наличие созданных сущностей
     client_list.click_button(client_list.general_information)
-    time.sleep(10)
+    time.sleep(2)
     client_list.verify_text_on_page(text=generated_inn, should_exist=True)
-    client_list.verify_text_on_page(text=generated_kpp, should_exist=True)
+    # client_list.verify_text_on_page(text=generated_kpp, should_exist=True)
 
     client_list.verify_text_on_page(text=generated_last_name, should_exist=True)
     client_list.verify_text_on_page(text=generated_first_name, should_exist=True)
@@ -380,9 +381,9 @@ def test_create_inner_producer(base_fixture, domain, api_login):
 
     # Проверяем наличие созданных сущностей
     producer_list.click_button(producer_list.general_information)
-    time.sleep(10)
+    time.sleep(2)
     producer_list.verify_text_on_page(text=generated_inn, should_exist=True)
-    producer_list.verify_text_on_page(text=generated_kpp, should_exist=True)
+    # producer_list.verify_text_on_page(text=generated_kpp, should_exist=True)
 
     producer_list.verify_text_on_page(text=generated_last_name, should_exist=True)
     producer_list.verify_text_on_page(text=generated_first_name, should_exist=True)

@@ -155,6 +155,6 @@ class ProducersList(Base):
 
     """Inner producer"""
     general_information = {
-        "xpath": "//div[contains(@class,'vz-tabs-modern vz-tabs-modern--has-matched-count-2 counterparty-tabs')]",
+        "xpath": "//a[contains(text(),'Общая информация')]",
         "name": "general_information"
     }

@@ -94,9 +94,11 @@ def test_address_directory_lke(base_fixture, domain):
 
     with allure.step('проверка фильтра "Владелец Адреса"'):
         add.input_in_field(add.address_owner, "Auto LKE")
+        add.input_in_field(add.confirm_address, "теле")
         time.sleep(2)
         add.verify_text_on_page(text='Ижевск, ул Телегина')
         add.backspace_and_input(add.address_owner, value='')
+        add.backspace_and_input(add.confirm_address, value='')
 
     with allure.step("сброс фильтров"):
         add.click_button(element_dict=add.refresh)
@@ -123,10 +125,12 @@ def test_tariff_directory_lke(base_fixture, domain):
 
     with allure.step('проверка фильтра "Статус"'):
         add.dropdown_without_input(add.tariff_status, option_text='Не активный')
+        add.input_in_field(add.tariff_name, "фикс")
         time.sleep(2)
         add.verify_text_on_page(text='Autotests FTL фиксированный', should_exist=True)
         add.verify_text_on_page(text='Auto Telemost', should_exist=False)
         time.sleep(2)
+        add.backspace_and_input(add.tariff_name, value='')
 
     with allure.step('Проверка нескольких фильтров №1'):
         add.input_in_field(add.tariff_name, "26182211")
@@ -202,9 +206,11 @@ def test_drivers_directory_lke(base_fixture, domain):
 
         # проверка фильтра
         add.input_in_field(add.contractor, "Auto LKE")
+        add.input_in_field(add.surname_driver, "данов")
         time.sleep(1)
-        add.verify_text_on_page(text='Avtobot')
+        add.verify_text_on_page(text='Даныч')
         add.backspace_and_input(add.contractor, value='')
+        add.backspace_and_input(add.surname_driver, value='')
 
     with allure.step('проверка фильтра "Статус в рейсе"'):
         add.dropdown_without_input(add.flight_status, "Назначен на заказ")
@@ -350,7 +356,12 @@ def test_trailer_directory_lke(base_fixture, domain):
         time.sleep(1)
         add.verify_text_on_page(text='ПП20240126103514')
         add.dropdown_without_input(add.flight_status_trailer, "Нет заказов")
-        add.verify_text_on_page(text='WAHATRACK')
+        add.input_in_field(add.number_of_trailer, "111201")
+        time.sleep(1)
+        add.verify_text_on_page(text='20240508111201')
+        time.sleep(1)
+        add.backspace_and_input(add.number_of_trailer, '')
+        time.sleep(1)
         add.dropdown_without_input(add.flight_status_trailer, "Назначен на заказ")
         add.verify_text_on_page(text='ПП-20250309203400')
 

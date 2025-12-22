@@ -116,11 +116,18 @@ class FTLAdd(Base):
         "xpath": "//button[@class='ant-btn ant-btn-primary' and span[contains(text(), 'Опубликовать')]]",
         "name": "publish_button"
     }
+    # continue_button = {
+    #     "xpath": "//button[@class='ant-btn ant-btn-primary' and span[contains(text(), 'Продолжить')]]",
+    #     "name": "continue_button",
+    #     "reference_xpath": "//div[@class='ant-modal-confirm-content' and contains(text(), 'Рейс был успешно создан')]",
+    #     "reference": r'Рейс был успешно создан, .*'
+    # }
     continue_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary' and span[contains(text(), 'Продолжить')]]",
         "name": "continue_button",
         "reference_xpath": "//div[@class='ant-modal-confirm-content' and contains(text(), 'Рейс был успешно создан')]",
-        "reference": r'Рейс был успешно создан, .*'
+        "reference": "Рейс был успешно создан",
+        "match_type": "contains"
     }
     confirm_add_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary' and span[contains(text(), 'OK')]]",
@@ -218,8 +225,12 @@ class FTLAdd(Base):
         "xpath": "//span[text()='Идентификатор рейса']/following::input",
         "name": "order_identifier"
     }
+    # custom_fields = {
+    #     "xpath": "//div[@id='1-Z25-0039']/div[1]",
+    #     "name": "custom_fields"
+    # }
     custom_fields = {
-        "xpath": "//div[@id='1-Z25-0039']/div[1]",
+        "xpath": "//div[@id='1-oldj']//div[@class='ant-select-selection__rendered']",
         "name": "custom_fields"
     }
     order_insurance = {

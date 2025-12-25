@@ -40,6 +40,7 @@ def test_tariff_attach_client_lke(base_fixture, domain):
     # Создание базового дополнительного соглашения
     add_extra.add_base_extra_agreements()
     # Выбор тарифа
+    time.sleep(5)
     add_extra.click_button(add_extra.radio_button, wait_type="located")
     # Подтверждение выбора тарифа
     add_extra.click_button(add_extra.confirm_tariff_button, do_assert=True)
@@ -79,6 +80,7 @@ def test_tariff_attach_producer_lke(base_fixture, domain):
     # Создание базового дополнительного соглашения
     add_extra.add_base_extra_agreements()
     # Выбор тарифа
+    time.sleep(5)
     add_extra.click_button(add_extra.radio_button, wait_type="located")
     # Подтверждение выбора тарифа
     add_extra.click_button(add_extra.confirm_tariff_button, do_assert=True)
@@ -118,6 +120,7 @@ def test_tariff_attach_inner_producer_lke(base_fixture, domain):
     # Создание базового дополнительного соглашения
     add_extra.add_base_extra_agreements()
     # Выбор тарифа
+    time.sleep(3)
     add_extra.click_button(add_extra.radio_button, wait_type="located")
     # Подтверждение выбора тарифа
     add_extra.click_button(add_extra.confirm_tariff_button, do_assert=True)

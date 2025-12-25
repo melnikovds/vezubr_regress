@@ -1,3 +1,5 @@
+import time
+
 from base.base_class import Base
 
 
@@ -203,6 +205,12 @@ class DriverAdd(Base):
         "name": "never_delegate_toggl"
     }
 
+
+    contractor_name = {
+        "xpath": "//div[@class='table-filters-main-zone']//div[2]//div[1]//div[2]//div[1]//span[1]//span[1]//input[1]",
+        "name": "contractor_name"
+    }
+
     # Methods
     def add_base_driver(self) -> str:
         """
@@ -253,6 +261,8 @@ class DriverAdd(Base):
         """
         # Выбор владельца водителя
         self.click_button(self.driver_owner_button, wait="lst")
+        self.input_in_field(self.contractor_name, value='яндекс')
+        time.sleep(2)
         self.click_button(self.select_first_radio, wait_type='clickable')
         self.click_button(self.confirm_owner_button)
         
@@ -272,8 +282,8 @@ class DriverAdd(Base):
         self.input_in_field(self.app_phone_input, self.random_value_float_str(9650000000, 9659999999), click_first=True)
         self.input_in_field(self.contact_phone_input, self.random_value_float_str(9650000000, 9659999999),
                             click_first=True)
-        self.input_in_field(self.reg_address_input, "Мой адрес – Не дом и не улица")
-        self.input_in_field(self.fact_address_input, "Мой адрес – Советский Союз.")
+        self.input_in_field(self.reg_address_input, "РФ г. Мурманск, ул. Книповича 21к2 квартира 833")
+        self.input_in_field(self.fact_address_input, "Мурманская область, г. Мурманск, ул. Новое Плато д.12 кв.52")
         
         # Управление настройками санитарной книжки и подтверждение создания водителя
         self.click_button(self.sanitary_book_toggl)

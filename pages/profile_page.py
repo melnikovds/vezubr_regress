@@ -196,11 +196,11 @@ class UsersFilter(Base):
         "name": "subdivision_filter"
     }
     subdivision_one = {
-        "xpath": "//span[contains(text(),'SIPRI')]",
+        "xpath": "//span[@title='Альфа']",
         "name": "subdivision_one"
     }
     subdivision_two = {
-        "xpath": "//span[contains(text(),'SEAL')]",
+        "xpath": "//span[@title='Бета']",
         "name": "subdivision_two"
     }
     driver_dispatcher_role = {

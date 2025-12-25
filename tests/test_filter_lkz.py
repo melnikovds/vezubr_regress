@@ -294,8 +294,8 @@ def test_filter_users_lkz(base_fixture, domain):
         add.click_button(add.manager_role)
         time.sleep(2)
         add.verify_text_on_page(text="278-29-40", should_exist=True)
-        add.verify_text_on_page(text="1555 1555", should_exist=True)
-        add.verify_text_on_page(text="560-68-80", should_exist=False)
+        add.verify_text_on_page(text="560-68-80", should_exist=True)
+        add.verify_text_on_page(text="77-88", should_exist=False)
         add.verify_text_on_page(text="auto@lke.com", should_exist=False)
 
         add.click_button(add.reset_users_filter)

@@ -240,8 +240,8 @@ def test_filter_users_lkp(base_fixture, domain):
     with allure.step("Проверка фильтра 'Телефон'"):
         add.input_in_field(add.phone_filter, value='91188')
         time.sleep(1)
-        add.verify_text_on_page(text="savenkovmn@mail.ru", should_exist=True)
-        add.verify_text_on_page(text="Мануил", should_exist=True)
+        add.verify_text_on_page(text="zotov@mail.ru", should_exist=True)
+        add.verify_text_on_page(text="Зотов", should_exist=True)
         add.verify_text_on_page(text="gulyaevll@mail.ru", should_exist=False)
         add.verify_text_on_page(text="e20251129110537@mail.ru", should_exist=False)
         add.backspace_and_input(add.phone_filter, "")

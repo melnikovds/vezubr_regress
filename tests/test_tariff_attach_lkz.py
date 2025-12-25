@@ -29,7 +29,6 @@ def test_tariff_attach_producer_lkz(base_fixture, domain):
     contractor.click_button(contractor.agreements_link, wait="form")
     time.sleep(1)
 
-
     agreement = Agreement(base.driver)
     # Переход на вкладку дополнительных соглашений
     agreement.click_button(agreement.extra_agreement_tab)

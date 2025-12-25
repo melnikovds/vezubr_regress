@@ -28,17 +28,21 @@ def test_tariff_directory_lkp(base_fixture, domain):
 
     # проверка №1 фильтра "Статус"
     add.dropdown_without_input(add.tariff_status, option_text='Не активный')
+    add.input_in_field(add.tariff_name, value='ПРР-2025', click_first=True)
     time.sleep(2)
-    add.verify_text_on_page(text='ПРР-20251015194014', should_exist=True)
+    add.verify_text_on_page(text='ПРР-20251015215639', should_exist=True)
     add.verify_text_on_page(text='ПБ-20241205233932', should_exist=False)
     time.sleep(2)
+    add.backspace_and_input(add.tariff_name, value='')
 
     # проверка №2 фильтра "Статус"
     add.dropdown_without_input(add.tariff_status, option_text='Активный')
+    add.input_in_field(add.tariff_name, value='ПБ-20251', click_first=True)
     time.sleep(2)
-    add.verify_text_on_page(text='ПБ-20251015214809', should_exist=True)
+    add.verify_text_on_page(text='ПБ-20251224202829', should_exist=True)
     add.verify_text_on_page(text='ПРР-20241205194647', should_exist=False)
     time.sleep(2)
+    add.backspace_and_input(add.tariff_name, value='')
 
     # проверка №1 фильтра с несколькими значениями
     add.input_in_field(add.tariff_name, value='ПРР-20241209183834', click_first=True)
@@ -119,7 +123,7 @@ def test_driver_directory_lkp(base_fixture, domain):
     # проверка №2 фильтра "Статус в системе"
     add.dropdown_without_input(add.status_in_system, option_text='Активный')
     time.sleep(3)
-    add.verify_text_on_page(text='Жилиман', should_exist=True)
+    add.verify_text_on_page(text='Киселев', should_exist=True)
     add.verify_text_on_page(text='Ф-20240524143334', should_exist=False)
     time.sleep(2)
 

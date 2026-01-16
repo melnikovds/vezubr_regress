@@ -266,14 +266,15 @@ def test_vehicle_directory_lkp(base_fixture, domain):
     add.click_on_the_cross(add.cross_six)
     time.sleep(2)
 
-
     # проверка фильтра "Тип автоперевозки"
     add.move_and_click(move_to=add.type_road_transport_two, click_to=add.cargo_transportation)
+    add.input_in_field(add.transport_number, value='001')
     time.sleep(4)
     add.verify_text_on_page(text='TRANSPORT001', should_exist=True)
     add.verify_text_on_page(text='ТК567У', should_exist=False)
     add.verify_text_on_page(text='ТС-20240417063916', should_exist=False)
     add.verify_text_on_page(text='ТС-20240515211030', should_exist=False)
+    add.backspace_and_input(add.tractor_number, value='')
     time.sleep(2)
 
     add.move_to_element(add.type_road_transport_two)
@@ -362,16 +363,16 @@ def test_vehicle_directory_lkp(base_fixture, domain):
     time.sleep(2)
 
     # проверка №3 фильтра "Статус в рейсе"
-    # add.dropdown_without_input(add.status_on_flight, option_text='На заказе')
-    # time.sleep(3)
-    # add.verify_text_on_page(text='ТС20240110120731', should_exist=True)
-    # add.verify_text_on_page(text='ТС20240116131611', should_exist=False)
-    # time.sleep(2)
+    add.dropdown_without_input(add.status_on_flight, option_text='На заказе')
+    time.sleep(3)
+    add.verify_text_on_page(text='ТС20240110120731', should_exist=True)
+    add.verify_text_on_page(text='ТС20240116131611', should_exist=False)
+    time.sleep(2)
 
-    # add.move_to_element(add.status_on_flight)
-    # time.sleep(2)
-    # add.click_on_the_cross(add.cross_eight)
-    # time.sleep(2)
+    add.move_to_element(add.status_on_flight)
+    time.sleep(2)
+    add.click_on_the_cross(add.cross_eight)
+    time.sleep(2)
 
     # проверка №4 фильтра "Статус в рейсе"
     add.dropdown_without_input(add.status_on_flight, option_text='Эксплуатация приостановлена')
@@ -657,22 +658,24 @@ def test_trailer_directory_lkp(base_fixture, domain):
 
     # проверка №1 фильтра "Статус в рейсе"
     add.dropdown_without_input(add.status_on_flight_three, option_text='Нет заказов')
+    add.input_in_field(add.trailer_number, value='24010', click_first=True)
     time.sleep(2)
     add.verify_text_on_page(text='ПП20240202124010', should_exist=True)
     add.verify_text_on_page(text='ПП20240126103514', should_exist=False)
+    add.backspace_and_input(add.trailer_number, value='')
     time.sleep(2)
 
     # проверка №2 фильтра "Статус в рейсе"
     add.dropdown_without_input(add.status_on_flight_three, option_text='Назначен на заказ')
     time.sleep(2)
-    # add.verify_text_on_page(text='ПП-20240828215650', should_exist=True)
+    add.verify_text_on_page(text='СЛОТОВ_ПРИЦЕП', should_exist=True)
     add.verify_text_on_page(text='ПП-20240524194437', should_exist=False)
     time.sleep(2)
 
     # проверка №3 фильтра "Статус в рейсе"
     add.dropdown_without_input(add.status_on_flight_three, option_text='На заказе')
     time.sleep(2)
-    # add.verify_text_on_page(text='ПП-20241210035413', should_exist=True)
+    add.verify_text_on_page(text='НАЗАКАЗОВ_ПРИЦЕП', should_exist=True)
     add.verify_text_on_page(text='ПП-20240421211400', should_exist=False)
     time.sleep(2)
 
@@ -687,7 +690,7 @@ def test_trailer_directory_lkp(base_fixture, domain):
     add.input_in_field(add.trailer_number, value='ПП-20240524193241', click_first=True)
     add.dropdown_without_input(add.status_on_flight_three, option_text='Нет заказов')
     time.sleep(2)
-    add.find_text_on_page(text='3241', occurrences=4)
+    add.find_text_on_page(text='3241', occurrences=3)
     add.verify_text_on_page(text='ПП-20240615162454', should_exist=False)
     time.sleep(2)
 

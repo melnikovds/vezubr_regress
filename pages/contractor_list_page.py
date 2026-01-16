@@ -40,4 +40,15 @@ class ContractorList(Base):
     }
 
 
+    user_fio = {
+        "xpath": "//input[@placeholder='Ф.И.О. пользователя']",
+        "name": "user_fio"
+    }
+    user_email = {
+        "xpath": "//input[@placeholder='Email']",
+        "name": "user_email"
+    }
+
+
+
 

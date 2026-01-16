@@ -148,6 +148,27 @@ def test_address_directory_lkz(base_fixture, domain):
     add.dropdown_without_input(add.filter_date_create, option_text='За все время')
     time.sleep(2)
 
+    # создание фильтра с одним значением
+    add.dropdown_without_input(add.region, option_text='Свердловская область')
+    add.dropdown_without_input(add.status, option_text='Активный')
+
+    # сохранение фильтра с одним значением
+    add.click_button(element_dict=add.save_filter)
+    time.sleep(5)
+    add.input_in_field(add.name_filter, value='Свердловская')
+    time.sleep(5)
+    add.click_button(element_dict=add.second_save_filter)
+    time.sleep(5)
+
+    # обновление страницы
+    add.refresh_page()
+
+    # сброс фильтров
+    add.click_button(element_dict=add.reset)
+
+    add.dropdown_without_input(add.filter_date_create, option_text='За все время')
+    time.sleep(2)
+
     # создание фильтра с несколькими значениями
     add.input_in_field(add.approved, value='auto@LKZ.com')
     add.input_in_field(add.created, value='auto@LKZ.com')
@@ -163,6 +184,12 @@ def test_address_directory_lkz(base_fixture, domain):
     add.click_button(element_dict=add.second_save_filter)
     time.sleep(5)
 
+    # обновление страницы
+    add.refresh_page()
+
+    # сброс фильтров
+    add.click_button(element_dict=add.reset)
+
     # проверка работы Сохранённого фильтра №1
     add.click_button(element_dict=add.saved_filters)
     time.sleep(3)
@@ -171,13 +198,13 @@ def test_address_directory_lkz(base_fixture, domain):
     add.click_button(element_dict=add.apply_filter)
     time.sleep(5)
     add.verify_text_on_page(text='мрмск', should_exist=False)
-    # add.verify_text_on_page(text='Екатеринбург', should_exist=True)
-    # add.verify_text_on_page(text='Пышма', should_exist=True)
-    add.verify_text_on_page(text='Зиминская', should_exist=True)
-    add.verify_text_on_page(text='Ясный', should_exist=True)
+    add.verify_text_on_page(text='Екатеринбург', should_exist=True)
+    add.verify_text_on_page(text='Пышма', should_exist=True)
+    add.verify_text_on_page(text='Зиминская', should_exist=False)
+    add.verify_text_on_page(text='Ясный', should_exist=False)
 
     # обновление страницы
-    # add.refresh_page()
+    add.refresh_page()
 
     add.dropdown_without_input(add.filter_date_create, option_text='За все время')
     time.sleep(2)

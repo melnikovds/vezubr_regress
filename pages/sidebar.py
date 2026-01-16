@@ -311,12 +311,7 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Реестры"
     }
-    reg_client_create_list_button_lkp = {
-        "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Сформировать')]",
-        "name": "reg_client_create_list_button_lkp",
-        "reference_xpath": base_reference_xpath,
-        "reference": "Формирование реестра"
-    }
+
     # registries_list_button_lkz = {
     #     "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Реестры')]",
     #     "name": "registries_list_button_lkz",

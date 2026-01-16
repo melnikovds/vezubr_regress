@@ -31,11 +31,11 @@ class ProducersList(Base):
         "name": "producer_lke_inn"
     }
     # action_button_lkp = {
-    #     "xpath": "//div[@id='main']/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/table[1]/tbody[1]/tr[3]/td[1]/div[1]/button[1]",
+    #     "xpath": "//button[@class='ant-btn ant-dropdown-trigger ant-dropdown-open ant-btn-primary ant-btn-sm']",
     #     "name": "action_button_lkp"
     # }
     action_button_lkp = {
-        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/table[1]/tbody[1]/tr[9]/td[1]/div[1]/button[1]",
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/table[1]/tbody[1]/tr[16]/td[1]/div[1]/button[1]",
         "name": "action_button_lkp"
     }
     action_button_vaz = {

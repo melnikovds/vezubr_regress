@@ -5,6 +5,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from pages.clients_list_page import ClientsList
 from pages.contractor_page import Contractor
 from pages.producers_list_page import ProducersList
+from pages.contractor_list_page import ContractorList
 
 
 @allure.story("Smoke test")
@@ -23,18 +24,38 @@ def test_delegation_client_lke(base_fixture, domain):
     client_list = ClientsList(base.driver)
     # Клик по клиенту с ИНН "client_lkz_inn"
     client_list.click_button(client_list.client_lkz_inn, wait="lst")
+    time.sleep(2)
     
     contractor = Contractor(base.driver)
     # Переход на вкладку настроек
     contractor.click_button(contractor.settings_tab)
+    time.sleep(2)
     # Делегирование пользователю (1-й в списке не выбранный) права управления ЛК
     contractor.click_button(contractor.user_checkbox_empty, 1)
+    time.sleep(3)
     contractor.click_button(contractor.save_delegation_button, do_assert=True)
+    time.sleep(3)
     contractor.click_button(contractor.ok_button)
+    time.sleep(3)
     # Отмена делегирования пользователю (4-й в списке)
     contractor.click_button(contractor.user_checkbox_filled, 4)
+    time.sleep(3)
     contractor.click_button(contractor.save_delegation_button, do_assert=True)
+    time.sleep(3)
     contractor.click_button(contractor.ok_button)
+    time.sleep(3)
+    # Проверка фильтра ФИО пользователей для делегирования
+    c = ContractorList(base.driver)
+    c.input_in_field(c.user_fio, value='титов')
+    time.sleep(3)
+    c.verify_text_on_page(text='Борис', should_exist=True)
+    c.verify_text_on_page(text='Виктор', should_exist=False)
+    c.verify_text_on_page(text='Ф-20240115110307', should_exist=False)
+    c.backspace_and_input(c.user_fio, value='сув', click_first=True)
+    time.sleep(3)
+    c.verify_text_on_page(text='Суворов', should_exist=True)
+    c.verify_text_on_page(text='Титов', should_exist=False)
+    c.verify_text_on_page(text='Ф-20240208094824', should_exist=False)
     # Конец теста
 
 
@@ -54,18 +75,38 @@ def test_delegation_producer_lke(base_fixture, domain):
     producer_list = ProducersList(base.driver)
     # Клик по перевозчику с ИНН "producer_lkp_inn"
     producer_list.click_button(producer_list.producer_lkp_inn, wait="lst")
+    time.sleep(2)
     
     contractor = Contractor(base.driver)
     # Переход на вкладку настроек
     contractor.click_button(contractor.settings_tab)
+    time.sleep(2)
     # Делегирование пользователю (1-й в списке не выбранный) права управления ЛК
     contractor.click_button(contractor.user_checkbox_empty, 1)
+    time.sleep(3)
     contractor.click_button(contractor.save_delegation_button, do_assert=True)
+    time.sleep(3)
     contractor.click_button(contractor.ok_button)
+    time.sleep(3)
     # Отмена делегирования пользователю (4-й в списке)
     contractor.click_button(contractor.user_checkbox_filled, 4)
+    time.sleep(3)
     contractor.click_button(contractor.save_delegation_button, do_assert=True)
+    time.sleep(3)
     contractor.click_button(contractor.ok_button)
+    time.sleep(3)
+    # Проверка фильтра Почта пользователей для делегирования
+    c = ContractorList(base.driver)
+    c.input_in_field(c.user_email, value='lkjhjkk')
+    time.sleep(3)
+    c.verify_text_on_page(text='Фёдоров', should_exist=True)
+    c.verify_text_on_page(text='Суворов', should_exist=False)
+    c.verify_text_on_page(text='Ф-20240208094824', should_exist=False)
+    c.backspace_and_input(c.user_email, value='dsdoopp@mail.ru', click_first=True)
+    time.sleep(3)
+    c.verify_text_on_page(text='Суворов', should_exist=True)
+    c.verify_text_on_page(text='Фёдоров', should_exist=False)
+    c.verify_text_on_page(text='e20240115110308@mail.ru', should_exist=False)
     # Конец теста
 
 
@@ -146,7 +187,7 @@ def test_go_to_account_producer_lke(base_fixture, domain):
     # Переход в ЛК перевозчика
     producer_list.move_and_click(move_to=producer_list.action_button_lkp, click_to=producer_list.go_to_account_button)
     time.sleep(2)
-    
+
     # Ожидание открытия новой вкладки и переключение на нее
     WebDriverWait(base.driver, 60).until(lambda d: len(d.window_handles) > 1)
     time.sleep(2)

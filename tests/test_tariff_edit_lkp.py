@@ -47,17 +47,23 @@ def test_tariff_luo_copy_lkp(base_fixture, domain):
     tariff_list = TariffsList(base.driver)
     # Фильтрация тарифов по названию "ПРР"
     tariff_list.input_in_field(tariff_list.tariff_name_filter, "ПРР", wait="lst")
+    time.sleep(1)
     # Выбор первого тарифа в списке
     tariff_list.click_button(tariff_list.first_tariff_link, wait="form")
+    time.sleep(1)
 
     tariff = LUOTariffAdd(base.driver)
     # Открытие меню действий и копирование тарифа
     tariff.click_button(tariff.action_menu_button)
+    time.sleep(1)
     tariff.click_button(tariff.copy_tariff_button, wait="form")
+    time.sleep(1)
     # Изменение названия тарифа
     tariff.backspace_and_input(tariff.tariff_name_input, f"ПРР-{base.get_timestamp()}")
+    time.sleep(3)
     # Изменение параметров тарифа
     tariff.click_button(tariff.price_input)
+    time.sleep(3)
     tariff.backspace_and_input_int(tariff.params_input, base.random_value_int(2500, 4000))
     time.sleep(1)
     tariff.click_button(tariff.price_hour_input)
@@ -216,13 +222,17 @@ def test_tariff_ltl_copy_lkp(base_fixture, domain):
     tariff_list = TariffsList(base.driver)
     # Фильтрация тарифов по названию "LTL"
     tariff_list.input_in_field(tariff_list.tariff_name_filter, "LTL", wait="lst")
+    time.sleep(3)
     # Выбор первого тарифа в списке
     tariff_list.click_button(tariff_list.first_tariff_link, wait="form")
+    time.sleep(3)
 
     tariff = LTLTariffAdd(base.driver)
     # Открытие меню действий и копирование тарифа
     tariff.click_button(tariff.action_menu_button)
+    time.sleep(3)
     tariff.click_button(tariff.copy_tariff_button, wait="form")
+    time.sleep(3)
     # Изменение параметров тарифа
     tariff.backspace_and_input(tariff.min_weight_input, base.random_value_float_str(10, 100))
     tariff.backspace_and_input(tariff.volumetric_weight_input, base.random_value_float_str(10, 100))
@@ -234,7 +244,8 @@ def test_tariff_ltl_copy_lkp(base_fixture, domain):
     tariff.backspace_and_input(tariff.delivery_time_input, base.random_value_float_str(5, 50))
     # Сохранение изменений тарифа
     tariff.click_button(tariff.add_tariff_button)
+    time.sleep(2)
     tariff.click_button(tariff.confirm_button)
-    time.sleep(1)
+    time.sleep(2)
     tariff.click_button(tariff.confirm_button, do_assert=True)
     # Конец теста

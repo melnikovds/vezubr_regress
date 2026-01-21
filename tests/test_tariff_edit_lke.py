@@ -166,15 +166,18 @@ def test_ftl_ml_tariff_copy_lke(base_fixture, domain):
     tariff_list = TariffsList(base.driver)
     # Фильтрация тарифов по названию "ПБ"
     tariff_list.input_in_field(tariff_list.tariff_name_filter, "ПБ", wait="lst")
+    time.sleep(1)
     # Выбор первого тарифа в списке
     tariff_list.click_button(tariff_list.first_tariff_link, wait="form")
 
     tariff = FTLTariffAdd(base.driver)
     # Открытие меню действий и копирование тарифа
     tariff.click_button(tariff.action_menu_button)
+    time.sleep(3)
     tariff.click_button(tariff.copy_tariff_button, wait="form")
     # Изменение названия тарифа
     tariff.backspace_and_input(tariff.tariff_name_input, f"ПБ-{base.get_timestamp()}")
+    time.sleep(3)
     # Изменение параметров тарифа
     tariff.click_button(tariff.extra_mileage_input)
     tariff.backspace_and_input(tariff.mileage_params_input, base.random_value_float_str(10, 50))
@@ -184,13 +187,16 @@ def test_ftl_ml_tariff_copy_lke(base_fixture, domain):
     tariff.backspace_and_input(tariff.mileage_params_input, base.random_value_float_str(10, 60))
     tariff.click_button(tariff.add_min_price_button)
     tariff.backspace_and_input(tariff.mileage_params_input, base.random_value_float_str(2500, 10000))
+    time.sleep(3)
     # Подтверждение изменений тарифа
     tariff.click_button(tariff.add_confirm_button)
     tariff.backspace_and_input(tariff.mileage_params_input, base.random_value_float_str(10, 30))
     tariff.backspace_and_input(tariff.mileage_params_input_2, base.random_value_float_str(1, 5))
     tariff.backspace_and_input(tariff.mileage_params_input_3, base.random_value_float_str(10, 60))
+    time.sleep(3)
     # Сохранение изменений тарифа
     tariff.click_button(tariff.add_fm_tariff_button)
+    time.sleep(1)
     tariff.click_button(tariff.confirm_button)
     time.sleep(1)
     tariff.click_button(tariff.confirm_button, do_assert=True)

@@ -25,6 +25,10 @@ class LUOTariffAdd(Base):
         "xpath": "//div[@class='tariff-cost-wrap tariff-cost-wrap--editable']",
         "name": "price_input"
     }
+    params_input = {
+        "xpath": "//input[@role='spinbutton']",
+        "name": "params_input"
+    }
     price_hour_input = {
         "xpath": "//div[@class='tariff-cost-wrap tariff-cost-wrap--editable']",
         "name": "price_hour_input"

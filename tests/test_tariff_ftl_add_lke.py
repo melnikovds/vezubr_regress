@@ -3,6 +3,8 @@ import allure
 import pytest
 from pages.tariff_ftl_add_page import FTLTariffAdd
 from pages.tariffs_list_page import TariffsList
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 
 @allure.story("Smoke test")
@@ -69,8 +71,13 @@ def test_ftl_cc_tariff_add_lke(base_fixture, domain):
     # Выбор типа маршрута "Нас. пункт - Нас. пункт"
     add_tariff.dropdown_without_input(add_tariff.fixed_type_select, "Нас. пункт - Нас. пункт")
     # Ввод города отправления
-    add_tariff.dropdown_with_input(add_tariff.departures_city_input, wait_presence=True,
-                                   option_text="г Екатеринбург")
+    add_tariff.input_in_field(add_tariff.departures_city_input, value='г Екатеринбург')
+    time.sleep(1)
+    # ActionChains(base.driver).send_keys(Keys.ENTER).perform()
+    base.driver.switch_to.active_element.send_keys(Keys.ENTER)
+
+    # add_tariff.dropdown_with_input(add_tariff.departures_city_input, wait_presence=True,
+    #                                option_text="г Екатеринбург")
     # Ввод города прибытия
     add_tariff.dropdown_with_input(add_tariff.arrival_city_input, wait_presence=True,
                                    option_text="г Уфа")

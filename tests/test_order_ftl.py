@@ -1,11 +1,10 @@
 import time
 import allure
 import pytest
+import re
 from pages.request_old_ftl_add_page import FTLAdd
 from pages.login_page import Login
 from pages.filter_old_ftl_page import OldFTL
-
-import re
 from selenium.webdriver.common.by import By
 
 

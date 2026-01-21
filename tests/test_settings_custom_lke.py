@@ -8,6 +8,7 @@ from pages.setting_page import Settings
 @allure.story("Extended path test")
 @allure.feature('Кастомные поля')
 @allure.description('ЛКЭ. Создание полей')
+@pytest.mark.order(1)
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_create_custom_field_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -31,6 +32,7 @@ def test_create_custom_field_lke(base_fixture, domain):
 @allure.story("Extended path test")
 @allure.feature('Пользовательские поля')
 @allure.description('ЛКЭ. Редактирование полей')
+@pytest.mark.order(2)
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_edit_custom_field_lke(base_fixture, domain):
     base, sidebar = base_fixture
@@ -51,6 +53,7 @@ def test_edit_custom_field_lke(base_fixture, domain):
 @allure.story("Extended path test")
 @allure.feature('Пользовательские поля')
 @allure.description('ЛКЭ. Удаление полей')
+@pytest.mark.order(3)
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_delete_custom_field_lke(base_fixture, domain):
     base, sidebar = base_fixture
@@ -65,6 +68,7 @@ def test_delete_custom_field_lke(base_fixture, domain):
 @allure.story("Extended path test")
 @allure.feature('Пользовательские поля')
 @allure.description('ЛКЭ. Создание полей')
+@pytest.mark.order(4)
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_create_custom_field2_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -86,6 +90,7 @@ def test_create_custom_field2_lke(base_fixture, domain):
 @allure.story("Critical path test")
 @allure.feature('Пользовательские поля')
 @allure.description('ЛКЭ. Редактирование полей')
+@pytest.mark.order(5)
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_edit_custom_field2_lke(base_fixture, domain):
     base, sidebar = base_fixture
@@ -110,6 +115,7 @@ def test_edit_custom_field2_lke(base_fixture, domain):
 @allure.story("Critical path test")
 @allure.feature('Пользовательские поля')
 @allure.description('ЛКЭ. Удаление полей')
+@pytest.mark.order(6)
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_delete_custom_field2_lke(base_fixture, domain):
     base, sidebar = base_fixture

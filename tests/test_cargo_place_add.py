@@ -45,7 +45,6 @@ def test_cargo_place_add_lkz(base_fixture, domain):
     cp_list.input_in_field(cp_list.barcode_filter, value=cp_stamp, wait="lst")
     time.sleep(2)
     cp_list.find_text_on_page(text=cp_stamp, occurrences=4)
-
     # Конец теста
 
 

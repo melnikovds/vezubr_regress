@@ -46,6 +46,46 @@ def test_filter_assignment_lkz(base_fixture, domain, request):
     with allure.step("Проверка фильтров 'Регионы/города'"):
         add.filters_region()
 
+    with allure.step("Проверка фильтра 'Статус"):
+        add.click_button(add.task_status)
+        add.click_button(add.task_status_created)
+        time.sleep(2)
+        add.verify_text_on_page(text='khgjhf', should_exist=True)
+        add.verify_text_on_page(text='jdghfdgfd', should_exist=True)
+        add.verify_text_on_page(text='шортики', should_exist=False)
+        add.verify_text_on_page(text='dfyneahb', should_exist=False)
+
+        # add.move_to_element(add.task_status, wait_type='located')
+        # time.sleep(1)
+        add.click_on_the_cross(add.task_cross)
+        time.sleep(1)
+
+        add.click_button(add.task_status)
+        add.click_button(add.task_status_pick_pending)
+        time.sleep(2)
+        add.verify_text_on_page(text='восэм', should_exist=True)
+        add.verify_text_on_page(text='выфавфы', should_exist=True)
+        add.verify_text_on_page(text='jdghfdgfd', should_exist=False)
+        add.verify_text_on_page(text='fhjcbvc', should_exist=False)
+
+        # add.move_to_element(add.task_status)
+        # time.sleep(1)
+        add.click_on_the_cross(add.task_cross)
+        time.sleep(1)
+
+        add.click_button(add.task_status)
+        add.click_button(add.task_status_in_progress)
+        time.sleep(2)
+        add.verify_text_on_page(text='dfyneahb', should_exist=True)
+        add.verify_text_on_page(text='59779', should_exist=True)
+        add.verify_text_on_page(text='выфавфы', should_exist=False)
+        add.verify_text_on_page(text='4556747', should_exist=False)
+
+        # add.move_to_element(add.task_status)
+        # time.sleep(1)
+        add.click_on_the_cross(add.task_cross)
+        time.sleep(1)
+
 
 @allure.story("Extended")
 @allure.feature('Фильтры')

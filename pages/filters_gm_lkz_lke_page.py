@@ -182,6 +182,33 @@ class GmFilters(Base):
         "name": "status_modified"
     }
 
+
+    task_status = {
+        "xpath": "//div[@id='status']//div[@class='ant-select-selection__rendered']//div[1]",
+        "name": "task_status"
+    }
+    task_status_created = {
+        "xpath": "//li[@title='Создано']",
+        "name": "task_status_created"
+    }
+    task_status_pick_pending = {
+        "xpath": "//li[@title='Ожидание сборки']",
+        "name": "task_status_pick_pending"
+    }
+    task_status_in_progress = {
+        "xpath": "//li[@title='В работе']",
+        "name": "task_status_in_progress"
+    }
+    task_status_completed = {
+        "xpath": "//li[@title='Исполнено']",
+        "name": "task_status_completed"
+    }
+    task_cross = {
+        "xpath": "//i[@aria-label='icon: close-circle']//*[name()='svg']//*[name()='path' and contains(@d,'M512 64C26')]",
+        "name": "task_cross"
+    }
+
+
     def to_whom_aplication(self) -> NoReturn:
         self.dropdown_without_input(self.to_aplication, "Маршрутизация Везубр")
         time.sleep(2)

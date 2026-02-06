@@ -46,8 +46,8 @@ def test_address_edit_lkz(base_fixture, domain):
     add_address.input_in_field(add_address.max_capacity_input, base.random_value_float_str(1000, 5000))
     add_address.dropdown_without_input(add_address.loading_type_select, "Боковая")
     add_address.click_button(add_address.entry_pass_toggl)
-    add_address.input_in_field(add_address.time_departure_input, base.random_value_float_str(10, 60))
-    add_address.input_in_field(add_address.time_arrival_input, base.random_value_float_str(10, 60))
+    # add_address.input_in_field(add_address.time_departure_input, base.random_value_float_str(10, 60))
+    # add_address.input_in_field(add_address.time_arrival_input, base.random_value_float_str(10, 60))
     # Ввод комментария к адресу
     add_address.input_in_field(add_address.comment_input, "Адрес создан автотестом")
     # Ввод контактной информации владельца адреса
@@ -101,8 +101,8 @@ def test_address_edit_lkz(base_fixture, domain):
     add_address.backspace_and_input(add_address.max_capacity_input, base.random_value_float_str(1000, 5000))
     add_address.dropdown_without_input(add_address.loading_type_select, "Задняя")
     add_address.click_button(add_address.entry_pass_toggl)
-    add_address.backspace_and_input(add_address.time_departure_input, base.random_value_float_str(10, 60))
-    add_address.backspace_and_input(add_address.time_arrival_input, base.random_value_float_str(10, 60))
+    # add_address.backspace_and_input(add_address.time_departure_input, base.random_value_float_str(10, 60))
+    # add_address.backspace_and_input(add_address.time_arrival_input, base.random_value_float_str(10, 60))
     # Редактирование комментария к адресу
     add_address.backspace_and_input(add_address.comment_input, "Адрес отредактирован автотестом")
     add_address.click_button(add_address.contacts_tab)
@@ -168,8 +168,8 @@ def test_address_edit_lke(base_fixture, domain):
     add_address.input_in_field(add_address.max_capacity_input, base.random_value_float_str(1000, 5000))
     add_address.dropdown_without_input(add_address.loading_type_select, "Верхняя")
     add_address.click_button(add_address.entry_pass_toggl)
-    add_address.input_in_field(add_address.time_departure_input, base.random_value_float_str(10, 60))
-    add_address.input_in_field(add_address.time_arrival_input, base.random_value_float_str(10, 60))
+    # add_address.input_in_field(add_address.time_departure_input, base.random_value_float_str(10, 60))
+    # add_address.input_in_field(add_address.time_arrival_input, base.random_value_float_str(10, 60))
     # Ввод комментария к адресу
     add_address.input_in_field(add_address.comment_input, "Адрес создан автотестом")
     # Ввод контактной информации владельца адреса
@@ -223,8 +223,8 @@ def test_address_edit_lke(base_fixture, domain):
     add_address.backspace_and_input(add_address.max_capacity_input, base.random_value_float_str(1000, 5000))
     add_address.dropdown_without_input(add_address.loading_type_select, "Задняя")
     add_address.click_button(add_address.entry_pass_toggl)
-    add_address.backspace_and_input(add_address.time_departure_input, base.random_value_float_str(10, 60))
-    add_address.backspace_and_input(add_address.time_arrival_input, base.random_value_float_str(10, 60))
+    # add_address.backspace_and_input(add_address.time_departure_input, base.random_value_float_str(10, 60))
+    # add_address.backspace_and_input(add_address.time_arrival_input, base.random_value_float_str(10, 60))
     # Редактирование комментария к адресу
     add_address.backspace_and_input(add_address.comment_input, "Адрес отредактирован автотестом")
     add_address.click_button(add_address.contacts_tab)

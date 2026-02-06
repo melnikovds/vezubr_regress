@@ -1,7 +1,11 @@
 import time
 import allure
 import pytest
+import random
+from faker import Faker
 from pages.shipment_task_page import ShipmentTaskAdd
+from pages.address_list_page import AddressesList
+from pages.filters_gm_lkz_lke_page import GmFilters
 from pages.cargo_place_list_page import CargoPlaceList
 
 
@@ -21,6 +25,128 @@ def test_shipment_task_without_gm_add_lkz(base_fixture, domain):
 
     # Клик по кнопке создания задания
     add.click_button(add.task_create_button)
+    time.sleep(1)
+    # Заполняем параметры Задания
+    a = str(base.random_value_int(2000, 3000))
+    add. input_in_field(add.task_number, value=a)
+    b = base.random_value_float_str(50, 100, 2)
+    add.input_in_field(add.task_weight, value=b)
+    c = base.random_value_float_str(1, 10, 2)
+    add.input_in_field(add.task_volume, value=c)
+    d = base.random_value_float_str(1000, 100000, 2)
+    add.input_in_field(add.task_cost, value=d)
+    e = str(base.random_value_int(10, 100))
+    add.input_in_field(add.number_place, value=e)
+    fake = Faker('en_US')
+    h = fake.word()
+    add.input_in_field(add.product_name, value=h)
+    time.sleep(2)
+    add.click_button(add.departure_address)
+    al = AddressesList(base.driver)
+    al.input_in_field(al.factual_address, value='Фрунзе, д 15')
+    time.sleep(2)
+    al.click_button(al.first_radio_button_19225, wait_type='located')
+    al.click_button(al.save_selected_address)
+    time.sleep(1)
+    add.click_button(add.delivery_address)
+    al.input_in_field(al.factual_address, value='Ковалевской')
+    time.sleep(2)
+    al.click_button(al.first_radio_button_18466, wait_type='located')
+    al.click_button(al.save_selected_address)
+    time.sleep(1)
+    add.dropdown_without_input(add.type_package, option_text='Короб')
+    add.dropdown_without_input(add.whom_task, option_text='Маршрутизация Везубр')
+    time.sleep(1)
+    add.click_button(add.creation_complete)
+    time.sleep(1)
+    add.click_button(add.successfully_created)
+    time.sleep(1)
+
+    add.reload_page()
+    time.sleep(5)
+
+    add.verify_text_on_page(text=a)
+    add.verify_text_on_page(text=b)
+    add.verify_text_on_page(text=c)
+    add.verify_text_on_page(text=d)
+    add.verify_text_on_page(text=e)
+    add.verify_text_on_page(text=h)
+
+
+@allure.story("Smoke test")
+@allure.feature('Создание и удаление заданий')
+@allure.description('ЛКЗ. Тест обновления Задания с включенной комплектацией грузоместами')
+@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)
+def test_shipment_task_with_gm_edit_lkz(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # Переход к списку заданий
+    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.tasks_list_button,
+                           do_assert=True, wait="lst")
+    time.sleep(1)
+    lst = GmFilters(base.driver)
+
+    # Выбор нужного Задания
+    lst.dropdown_without_input(lst.required_search_by_date, "За все время")
+    time.sleep(2)
+    lst.input_in_field(lst.order_number, "дэвять", wait='lst')
+    time.sleep(3)
+    lst.click_button(lst.first_task_click)
+    time.sleep(2)
+
+    # Редактируем Задание
+    add = ShipmentTaskAdd(base.driver)
+    add.click_button(add.task_edit_button)
+    time.sleep(1)
+    a = ["Телефоны", "Ноутбуки", "Наушники", "Клавиатуры", "Принтеры", "Мониторы"]
+    b = random.choice(a)
+    add.backspace_and_input(add.product_name, value=b)
+    c = ["FM", "Маршрутизация Везубр", "Почта РФ"]
+    d = random.choice(c)
+    add.dropdown_without_input(add.whom_task_edit_button, option_text=d)
+    add.click_button(add.save_edit_button)
+    time.sleep(1)
+
+    add.reload_page()
+    time.sleep(5)
+
+    add.verify_text_on_page(text=b)
+    add.verify_text_on_page(text=d)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

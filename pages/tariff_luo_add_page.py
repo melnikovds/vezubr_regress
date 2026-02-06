@@ -63,8 +63,15 @@ class LUOTariffAdd(Base):
         "xpath": "//span[contains(., 'Копировать тариф')]",
         "name": "copy_tariff_button"
     }
+    # confirm_button = {
+    #     "xpath": "//button[@class='ant-btn ant-btn-primary']",
+    #     "name": "confirm_button",
+    #     "reference": "OK"
+    # }
     confirm_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
         "name": "confirm_button",
-        "reference": "OK"
+        "reference_xpath": "//div[@class='ant-modal-confirm-content']",
+        "reference": "был удален",
+        "match_type": "contains"
     }

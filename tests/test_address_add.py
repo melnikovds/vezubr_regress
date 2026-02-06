@@ -1,8 +1,6 @@
 import time
-
 import allure
 import pytest
-
 from pages.address_add_page import AddressAdd
 from pages.address_list_page import AddressesList
 
@@ -53,8 +51,8 @@ def test_address_add_lkz(base_fixture, domain):
     add_address.input_in_field(add_address.max_capacity_input, base.random_value_float_str(1000, 5000))
     add_address.dropdown_without_input(add_address.loading_type_select, "Верхняя")
     add_address.click_button(add_address.entry_pass_toggl)
-    add_address.input_in_field(add_address.time_departure_input, base.random_value_float_str(10, 60))
-    add_address.input_in_field(add_address.time_arrival_input, base.random_value_float_str(10, 60))
+    # add_address.input_in_field(add_address.time_departure_input, base.random_value_float_str(10, 60))
+    # add_address.input_in_field(add_address.time_arrival_input, base.random_value_float_str(10, 60))
     # Ввод комментария к адресу
     add_address.input_in_field(add_address.comment_input, "Адрес создан автотестом")
     # Ввод контактной информации владельца адреса
@@ -126,8 +124,8 @@ def test_address_add_lke(base_fixture, domain):
     add_address.input_in_field(add_address.max_capacity_input, base.random_value_float_str(1000, 5000))
     add_address.dropdown_without_input(add_address.loading_type_select, "Верхняя")
     add_address.click_button(add_address.entry_pass_toggl)
-    add_address.input_in_field(add_address.time_departure_input, base.random_value_float_str(10, 60))
-    add_address.input_in_field(add_address.time_arrival_input, base.random_value_float_str(10, 60))
+    # add_address.input_in_field(add_address.time_departure_input, base.random_value_float_str(10, 60))
+    # add_address.input_in_field(add_address.time_arrival_input, base.random_value_float_str(10, 60))
     # Ввод комментария к адресу
     add_address.input_in_field(add_address.comment_input, "Адрес создан автотестом")
     # Ввод контактной информации владельца адреса

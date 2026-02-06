@@ -23,4 +23,25 @@ class AddressesList(Base):
         "xpath": "//a[@class='link-back']",
         "name": "first_address_link"
     }
-    
+
+    """Address list"""
+    factual_address = {
+        "xpath": "//input[@placeholder='Фактический адрес']",
+        "name": "factual_address"
+    }
+    identifier_address = {
+        "xpath": "//input[@placeholder='Идентификатор адреса']",
+        "name": "identifier_address"
+    }
+    first_radio_button_19225 = {
+        "xpath": "//input[@value='19225']",
+        "name": "first_radio_button_19225"
+    }
+    first_radio_button_18466 = {
+        "xpath": "//input[@value='18466']",
+        "name": "first_radio_button_18466"
+    }
+    save_selected_address = {
+        "xpath": "//div[@class='ant-modal-root']//button[2]",
+        "name": "save_selected_address"
+    }

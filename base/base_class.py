@@ -121,6 +121,7 @@ class Base:
             print("Start test")
 
         return cls(driver)
+
     """ Test finish """
 
     def test_finish(self) -> None:
@@ -1336,51 +1337,6 @@ class Base:
         return time_str[:-4] + rounded_time_str if new == 'datetime' else rounded_time_str
 
     """ Generate INN """
-
-    # @staticmethod
-    # def generate_inn(entity_type: str) -> str:
-    #     """
-    #     Генерирует ИНН для физического лица (individual) или юридического лица (entity).
-    #
-    #     Parameters
-    #     ----------
-    #     entity_type : str
-    #         Тип сущности, для которой генерируется ИНН. Допустимые значения: 'individual', 'entity'.
-    #
-    #     Returns
-    #     -------
-    #     str
-    #         Сгенерированный ИНН в виде строки.
-    #         Для юридического лица ИНН состоит из 10 цифр, для физического лица - из 12 цифр.
-    #
-    #     Raises
-    #     ------
-    #     ValueError
-    #         Если передан неизвестный тип сущности. Допустимые значения параметра entity_type: 'individual', 'entity'.
-    #     """
-    #
-    #     def calculate_control_sum(numbers: list[int], local_coeffs: list[int]) -> int:
-    #         """Вычисляет контрольную сумму по заданным коэффициентам."""
-    #         return sum(a * b for a, b in zip(numbers, local_coeffs)) % 11 % 10
-    #
-    #     if entity_type == "entity":
-    #         # Генерация ИНН для юридического лица
-    #         base = [random.randint(0, 9) for _ in range(9)]
-    #         entity_coeffs = [2, 4, 10, 3, 5, 9, 4, 6, 8]
-    #         control_sum = calculate_control_sum(base, entity_coeffs)
-    #         inn = ''.join(map(str, base)) + str(control_sum)
-    #     elif entity_type == "individual":
-    #         # Генерация ИНН для физического лица
-    #         base = [random.randint(0, 9) for _ in range(10)]
-    #         individual_coeffs_first = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8]
-    #         individual_coeffs_second = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 5]
-    #         first_control_sum = calculate_control_sum(base, individual_coeffs_first)
-    #         second_control_sum = calculate_control_sum(base + [first_control_sum], individual_coeffs_second)
-    #         inn = ''.join(map(str, base)) + str(first_control_sum) + str(second_control_sum)
-    #     else:
-    #         raise ValueError("Неизвестный тип сущности. Допустимые значения: 'individual', 'entity'.")
-    #
-    #     return inn
 
     @staticmethod
     def generate_inn(entity_type: str) -> str:

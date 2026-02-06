@@ -155,4 +155,45 @@ class AddressAdd(Base):
         "xpath": "//a[@class='vz-tabs-modern__item' and contains(text(), 'История')]",
         "name": "history_tab"
     }
-    
+
+    """Routing"""
+    settings_tab = {
+        "xpath": "//a[contains(text(),'Настройки маршрутизации')]",
+        "name": "settings_tab"
+    }
+    redact_routing = {
+        "xpath": "//button[@class='ant-btn ant-btn-primary']",
+        "name": "redact_routing"
+    }
+    time_calculation_algorithm = {
+        "xpath": "//input[@class='ant-select-search__field']",
+        "name": "time_calculation_algorithm"
+    }
+    cross_algorithm = {
+        "xpath": "//i[@aria-label='icon: close-circle']//*[name()='svg']",
+        "name": "cross_algorithm"
+    }
+    average_arrival_time = {
+        "xpath": "//div[@class='address-detail__body']//div[2]//label[1]",
+        "name": "average_arrival_time"
+    }
+    average_departure_time = {
+        "xpath": "//div[@class='dashboard-content margin-top-60']//div[3]//label[1]",
+        "name": "average_departure_time"
+    }
+    routing_group = {
+        "xpath": "//div[@class='ant-select ant-select-enabled']//div[@role='combobox']",
+        "name": "routing_group"
+    }
+    maximum_loading_time = {
+        "xpath": "//label[@class='vz-form-item vz-form-item--required']",
+        "name": "maximum_loading_time"
+    }
+    fixed_loading_time = {
+        "xpath": "",
+        "name": "fixed_loading_time"
+    }
+    save_routing = {
+        "xpath": "//button[@class='ant-btn ant-btn-primary']",
+        "name": "save_routing"
+    }

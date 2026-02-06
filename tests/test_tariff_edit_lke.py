@@ -66,8 +66,9 @@ def test_tariff_luo_copy_lke(base_fixture, domain):
     # Сохранение изменений тарифа
     tariff.click_button(tariff.add_tariff_button)
     tariff.click_button(tariff.confirm_button)
-    tariff.click_button(tariff.confirm_button)
+    time.sleep(3)
     tariff.click_button(tariff.confirm_button, do_assert=True)
+    time.sleep(3)
     # Конец теста
 
 

@@ -45,3 +45,50 @@ class Settings(Base):
         "xpath": "(//li[contains(@class,'ant-menu-item sidebar__list-item')])[2]",
         "name": "profile_field_lkz"
     }
+    """Address Group"""
+    addresses_subsection = {
+        "xpath": "//div[contains(text(),'Показать/скрыть настройки групп')]",
+        "name": "addresses_subsection"
+    }
+    create_group = {
+        "xpath": "//p[@class='no-margin']",
+        "name": "create_group"
+    }
+    name_group_rus = {
+        "xpath": "//label[@class='vz-form-item vz-form-item--required']//input[@type='text']",
+        "name": "name_group_rus"
+    }
+    name_group_eng = {
+        "xpath": "//div[@class='ant-col ant-col-12 vz-form-col']//label[@class='vz-form-item']//input[@type='text']",
+        "name": "name_group_eng"
+    }
+    save_group = {
+        "xpath": "//button[@class='ant-btn margin-top-35 margin-left-auto ant-btn-primary']",
+        "name": "save_group"
+    }
+    add_confirm = {
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[@type='button']",
+        "name": "add_confirm"
+    }
+    edit_group = {
+        "xpath": "//tbody/tr[3]/td[4]/div[1]/div[1]/img[1]",
+        "name": "edit_group"
+    }
+    delete_group = {
+        "xpath": "//tbody/tr[3]/td[4]/div[1]/div[2]/img[1]",
+        "name": "delete_group"
+    }
+    reject_delete = {
+        "xpath": "//button[@class='ant-btn']",
+        "name": "reject_delete"
+    }
+    accept_delete = {
+        "xpath": "//body//div//button[2]",
+        "name": "accept_delete"
+    }
+    add_del = {
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[@type='button']",
+        "name": "add_del"
+    }
+
+

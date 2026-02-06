@@ -209,6 +209,12 @@ class GmFilters(Base):
     }
 
 
+    first_task_click = {
+        "xpath": "//a[@class='link-back'][normalize-space()='1']",
+        "name": "first_task_click"
+    }
+
+
     def to_whom_aplication(self) -> NoReturn:
         self.dropdown_without_input(self.to_aplication, "Маршрутизация Везубр")
         time.sleep(2)

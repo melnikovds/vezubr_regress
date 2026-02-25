@@ -1,7 +1,7 @@
 import allure
 import pytest
 import time
-from pages.filter_old_ftl_page import OldFTL
+from pages.filters_old_ftl_page import OldFTL
 
 
 @allure.story("Extended test")

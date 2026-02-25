@@ -59,8 +59,6 @@ class Base:
         "name": "reset_button"
     }
 
-    """ Get driver """
-
     @classmethod
     def get_driver(cls: Type['Base']) -> 'Base':
         options = Options()
@@ -122,8 +120,6 @@ class Base:
 
         return cls(driver)
 
-    """ Test finish """
-
     def test_finish(self) -> None:
         """
         Завершает тест и закрывает браузер.
@@ -131,8 +127,6 @@ class Base:
         # Шаг в Allure и вывод в консоль
         with allure.step(title="Test finish"):
             print("Test finish")
-
-    """ Get current url """
 
     def get_current_url(self) -> None:
         """
@@ -142,8 +136,6 @@ class Base:
         # Шаг в Allure и вывод в консоль
         with allure.step(title="Current url: " + get_url):
             print("Current url: " + get_url)
-
-    """ Get element with choosing a method for obtaining an element """
 
     def get_element(self, element_info: Dict[str, str], wait_type: str = 'clickable') -> Dict[str, Any]:
         """
@@ -200,8 +192,6 @@ class Base:
                 print(message)
             raise TimeoutException(message)
 
-    """ Get timestamp """
-
     @staticmethod
     def get_timestamp(dot: bool = False, eight: bool = False) -> str:
         """
@@ -233,8 +223,6 @@ class Base:
             timestamp = current_time.strftime("%Y%m%d%H%M%S")
 
         return timestamp
-
-    """ Assert element text"""
 
     def assert_element_text(self, element_dict: Dict[str, str], reference_value: Optional[str] = None,
                             wait_type: str = 'clickable', match_type: str = 'exact') -> None:
@@ -285,9 +273,6 @@ class Base:
                 raise ValueError(f"Unknown match_type: {match_type}. Use 'exact' or 'contains'.")
 
             print(f"Assert \"{value_word}\" {match_type} \"{expected_value}\"")
-
-
-    """ Verify text presence on the page """
 
     def verify_text_on_page(self, text: str, should_exist: bool = True) -> None:
         """
@@ -354,8 +339,6 @@ class Base:
                 print(message)
             raise
 
-    """ Get random value float to str"""
-
     @staticmethod
     def random_value_float_str(of: float, to: float, precision: int = 0) -> str:
         """
@@ -398,8 +381,6 @@ class Base:
         """
         # Генерируем случайное целое число в указанном диапазоне
         return random.randint(of, to)
-
-    """ Get screenshot """
 
     def get_screenshot(self, test_name: str = None) -> None:
         
@@ -454,8 +435,6 @@ class Base:
                     )
         except Exception as e:
             print(f"[ERROR] Не удалось сохранить скриншот: {e}")
-
-    """Click button with optional assertion and loading wait"""
 
     def click_button(self, element_dict: Dict[str, str], index: int = 1, do_assert: bool = False,
                      wait: Optional[str] = None, wait_type: str = 'clickable') -> None:
@@ -807,8 +786,6 @@ class Base:
                 print(message)
             raise
 
-    """ In dropdown click, wait, input and enter"""
-
     def dropdown_with_input(self, element_dict: Dict[str, str], option_text: str, press_enter: bool = True,
                             wait_presence: bool = False, wait_type: str = 'clickable',
                             dd_index: int = 1, index: int = 1) -> None:
@@ -873,8 +850,6 @@ class Base:
             # Вывод сообщения в консоль
             print(message)
 
-    """ In dropdown click input + index click """
-
     def dropdown_without_input(self, element_dict: Dict[str, str], option_text: str, dd_index: int = 1,
                                index: int = 1) -> None:
         """
@@ -921,8 +896,6 @@ class Base:
             # Вывод сообщения в консоль
             print(message)
 
-    """ Move to element"""
-
     def move_to_element(self, element_dict: Dict[str, str], index: int = 1, wait_type: str = 'clickable') -> None:
         """
         Перемещает курсор мыши к элементу с заданным типом ожидания и опционально по индексу элемента.
@@ -956,8 +929,6 @@ class Base:
             # Вывод сообщения в консоль
             print(message)
 
-    """ Switch to original window """
-
     def switch_to_original_window(self) -> None:
         """
         Переключается обратно к оригинальному окну браузера.
@@ -972,8 +943,6 @@ class Base:
 
             # Вывод сообщения в консоль
             print(message)
-
-    """ Input in field with optional click, enter, index, and wait for loading """
 
     def input_in_field(self, element_dict: Dict[str, str], value: str, click_first: bool = False,
                        press_enter: bool = False, wait: Optional[str] = None, safe: bool = False,
@@ -1035,8 +1004,6 @@ class Base:
                 except TimeoutException:
                     with allure.step("Spinner did not disappear"):
                         print("Spinner did not disappear")
-
-    """ Backspace num times/all and input with optional click, enter, and wait type"""
 
     def input_in_field_recaptchav3(self, element_dict: Dict[str, str], value: str, click_first: bool = False,
                                    press_enter: bool = False, wait: Optional[str] = None, safe: bool = False,
@@ -1219,8 +1186,6 @@ class Base:
             # Вывод сообщения в консоль
             print(message)
 
-    """Move to element and click another element"""
-
     def move_and_click(self, move_to: Dict[str, str], click_to: Dict[str, str], move_index: int = 1,
                        click_index: int = 1, move_wait_type: str = 'clickable', click_wait_type: str = 'clickable',
                        do_assert: bool = False, wait: Optional[str] = None) -> None:
@@ -1290,8 +1255,6 @@ class Base:
         # Кликаем по второму элементу
         self.click_button(second_click, index=second_index, wait_type=second_wait_type, do_assert=do_assert, wait=wait)
 
-    """ Naw time/datetime change"""
-
     @staticmethod
     def naw_time_change(minutes: int, new: str = 'time') -> str:
         """
@@ -1335,8 +1298,6 @@ class Base:
 
         # Возвращаем строку с правильным форматом
         return time_str[:-4] + rounded_time_str if new == 'datetime' else rounded_time_str
-
-    """ Generate INN """
 
     @staticmethod
     def generate_inn(entity_type: str) -> str:
@@ -1388,9 +1349,6 @@ class Base:
         else:
             raise ValueError("Тип должен быть 'individual' или 'entity'")
 
-
-    """ Multiple click buttons """
-
     def click_multiple_buttons(self, button_element: Dict[str, str], num_clicks: int = 1,
                                wait: Optional[str] = None, start_index: int = 1) -> None:
         """
@@ -1438,13 +1396,8 @@ class Base:
                     print(f" Ошибка при клике на колонку {idx}, попытка {click + 1}: {str(e)}")
                     continue
 
-    def dropdown_with_input_force_enter(
-            self,
-            element_dict: Dict[str, str],
-            option_text: str,
-            dd_index: int = 1,
-            wait_seconds: int = 5
-    ) -> None:
+    def dropdown_with_input_force_enter(self, element_dict: Dict[str, str], option_text: str,
+                                        dd_index: int = 1, wait_seconds: int = 5) -> None:
         """
         Принудительный ввод текста и нажатие Enter через фиксированную задержку.
         Используется, когда dropdown нестабилен или не находится через ожидания.
@@ -1593,3 +1546,74 @@ class Base:
                 with allure.step(message):
                     print(message)
                 raise
+
+    def click_all_elements(self, element_dict: Dict[str, str], wait: Optional[str] = None) -> None:
+        """
+        Кликает по всем элементам, соответствующим заданному локатору.
+
+        Parameters
+        ----------
+        element_dict : dict
+            Словарь с информацией о локаторе (должен содержать 'xpath' или 'css' и 'name').
+        wait : str, optional
+            Тип спиннера для ожидания после каждого клика: 'form' или 'lst'. По умолчанию None.
+        """
+        # Определяем тип локатора
+        if 'xpath' in element_dict:
+            locator = (By.XPATH, element_dict['xpath'])
+        elif 'css' in element_dict:
+            locator = (By.CSS_SELECTOR, element_dict['css'])
+        else:
+            raise ValueError("Не указан ни XPath, ни CSS-селектор для элемента")
+
+        # Находим все элементы
+        try:
+            elements = WebDriverWait(self.driver, 15).until(
+                lambda driver: driver.find_elements(*locator)
+            )
+            if not elements:
+                raise TimeoutException(f"No elements found for {element_dict.get('name', 'unnamed')}")
+        except TimeoutException as e:
+            message = f"Failed to find any elements for '{element_dict.get('name', 'unnamed')}'"
+            with allure.step(message):
+                print(message)
+            raise e
+
+        element_name = element_dict.get('name', 'unnamed')
+        message = f"Click on all {len(elements)} elements: {element_name}"
+        with allure.step(message):
+            print(message)
+
+            for i, element in enumerate(elements, start=1):
+                # Прокликиваем каждый элемент
+                try:
+                    element.click()
+                    print(f"  → Clicked element #{i}")
+
+                    # Опциональное ожидание спиннера
+                    if wait:
+                        loading_spinner = self.loading_form if wait == 'form' else self.loading_list
+                        try:
+                            # Ждём появления спиннера (если есть)
+                            WebDriverWait(self.driver, 5).until(
+                                EC.visibility_of_element_located(
+                                    (By.XPATH, loading_spinner['xpath']) if 'xpath' in loading_spinner else (
+                                    By.CSS_SELECTOR, loading_spinner['css'])
+                                )
+                            )
+                        except TimeoutException:
+                            pass  # Спиннер не обязателен
+
+                        try:
+                            # Ждём исчезновения спиннера
+                            WebDriverWait(self.driver, 15).until(
+                                EC.invisibility_of_element_located(
+                                    (By.XPATH, loading_spinner['xpath']) if 'xpath' in loading_spinner else (
+                                    By.CSS_SELECTOR, loading_spinner['css'])
+                                )
+                            )
+                        except TimeoutException:
+                            print(f"  ⚠️ Spinner did not disappear after click #{i}")
+                except Exception as e:
+                    print(f"  ❌ Failed to click element #{i}: {e}")
+                    raise

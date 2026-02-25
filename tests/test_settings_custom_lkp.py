@@ -7,6 +7,7 @@ from pages.custom_page import Settings, CustomFieldParam
 @allure.story("Extended path test")
 @allure.feature('Кастомные поля')
 @allure.description('ЛКП. Создание поля Заявка')
+@pytest.mark.order(1)
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_create_custom_field_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -59,6 +60,7 @@ def test_create_custom_field_lkp(base_fixture, domain):
 @allure.story("Extended path test")
 @allure.feature('Кастомные поля')
 @allure.description('ЛКП. Редактирование поля Заявка на Договор')
+@pytest.mark.order(2)
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_edit_custom_field_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -99,6 +101,7 @@ def test_edit_custom_field_lkp(base_fixture, domain):
 @allure.story("Extended path test")
 @allure.feature('Кастомные поля')
 @allure.description('ЛКП. Удаления поля Договор')
+@pytest.mark.order(3)
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_delete_custom_field_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -128,6 +131,7 @@ def test_delete_custom_field_lkp(base_fixture, domain):
 @allure.story("Extended path test")
 @allure.feature('Кастомные поля')
 @allure.description('ЛКП. Создание поля Договор')
+@pytest.mark.order(4)
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_create_custom_field2_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -165,6 +169,7 @@ def test_create_custom_field2_lkp(base_fixture, domain):
 @allure.story("Extended path test")
 @allure.feature('Кастомные поля')
 @allure.description('ЛКП. Редактирование поля Договор на Контрагент')
+@pytest.mark.order(5)
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_edit_custom_field2_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -208,6 +213,7 @@ def test_edit_custom_field2_lkp(base_fixture, domain):
 @allure.story("Extended path test")
 @allure.feature('Кастомные поля')
 @allure.description('ЛКП. Удаление поля Контрагент')
+@pytest.mark.order(6)
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_delete_custom_field2_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру

@@ -8,6 +8,7 @@ from pages.setting_page import Settings
 @allure.story("Extended path test")
 @allure.feature('Тестирование подразделений')
 @allure.description('ЛКЗ, Создание подразделения')
+@pytest.mark.order(1)
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
 def test_create_subdivision_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -27,12 +28,13 @@ def test_create_subdivision_lkz(base_fixture, domain):
     add.input_in_field(add.id_subdivision, "007")
     add.click_button(add.save_subdivision)
     time.sleep(2)
-    add.click_button(add.ok_button)
+    add.click_button(add.ok_button, do_assert=True)
 
 
 @allure.story("Extended path test")
 @allure.feature('Тестирование подразделений')
 @allure.description('ЛКЗ, Назначение пользователя в подразделение')
+@pytest.mark.order(2)
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
 def test_accept_user_to_division_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -47,12 +49,13 @@ def test_accept_user_to_division_lkz(base_fixture, domain):
     add.dropdown_without_input(add.change_user_to_subdivision, "подразделение ОРКИ")
     add.click_button(add.click_save)
     time.sleep(2)
-    add.click_button(add.click_ok)
+    add.click_button(add.click_ok, do_assert=True)
 
 
 @allure.story("Extended path test")
 @allure.feature('Тестирование подразделений')
 @allure.description('ЛКЗ, Редактирование и удаление подразделения')
+@pytest.mark.order(3)
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
 def test_edit_subdivision_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -71,5 +74,6 @@ def test_edit_subdivision_lkz(base_fixture, domain):
     add.click_button(add.save_subdivision)
     add.click_button(add.del_subdivision)
     add.click_button(add.del_confirm)
-    time.sleep(2)
+    time.sleep(1)
+    add.verify_text_on_page(text='Подразделение удалено')
     add.click_button(add.ok_button)

@@ -44,7 +44,9 @@ class Company(Base):
     }
     ok_button = {
         "xpath": "(//button[@class='ant-btn ant-btn-primary'])[2]",
-        "name": "ok_button"
+        "name": "ok_button",
+        "reference_xpath": "//div[@class='ant-modal-confirm-content']",
+        "reference": "Подразделение добавлено"
     }
     click_users = {
         "xpath": "(//a[@class='vz-tabs-modern__item'])[3]",
@@ -65,7 +67,9 @@ class Company(Base):
     }
     click_ok = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
-        "name": "click_ok"
+        "name": "click_ok",
+        "reference_xpath": "//div[@class='ant-modal-confirm-content']",
+        "reference": "Данные пользователя успешно изменены"
     }
     click_users_lkz_lkp = {
         "xpath": "(//a[@class='vz-tabs-modern__item'])[2]",

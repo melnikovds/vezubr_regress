@@ -4,7 +4,7 @@ import pytest
 import re
 from pages.request_old_ftl_add_page import FTLAdd
 from pages.login_page import Login
-from pages.filter_old_ftl_page import OldFTL
+from pages.filters_old_ftl_page import OldFTL
 from selenium.webdriver.common.by import By
 
 
@@ -18,7 +18,7 @@ def test_ftl_request_add_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход к созданию новой FTL заявки
-    sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_ftl_city_button,
+    sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.new_ftl_city_button,
                            do_assert=True)
 
     ftl = FTLAdd(base.driver)
@@ -26,7 +26,7 @@ def test_ftl_request_add_lkz(base_fixture, domain):
     ftl.click_button(ftl.cancel_button)
 
     # Переход к созданию новой FTL заявки
-    sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_ftl_city_button,
+    sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.new_ftl_city_button,
                            do_assert=True)
 
     # Установка даты подачи заявки на сегодня
@@ -58,8 +58,8 @@ def test_ftl_request_add_lkz(base_fixture, domain):
     ftl.click_button(ftl.select_first_radio)
     ftl.click_button(ftl.confirm_address_button)
 
-    time.sleep(1)
-    ftl.click_and_select_with_arrows(ftl.custom_fields, arrow_presses=1)
+    # time.sleep(1)
+    # ftl.click_and_select_with_arrows(ftl.custom_fields, arrow_presses=1)
 
     # Ожидание завершения расчета стоимости
     base.get_element(ftl.calculate_finish)
@@ -98,7 +98,7 @@ def test_ftl_request_add_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход к созданию новой FTL заявки
-    sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_ftl_city_button,
+    sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.new_ftl_city_button,
                            do_assert=True)
 
     ftl = FTLAdd(base.driver)
@@ -106,7 +106,7 @@ def test_ftl_request_add_lke(base_fixture, domain):
     ftl.click_button(ftl.cancel_button)
     
     # Переход к созданию новой FTL заявки
-    sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_ftl_city_button,
+    sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.new_ftl_city_button,
                            do_assert=True)
     
     # Выбор владельца заявки
@@ -166,7 +166,7 @@ def test_ftl_order_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Новая FTL заявка
-    sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_ftl_city_button,
+    sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.new_ftl_city_button,
                            do_assert=True)
 
     ftl = FTLAdd(base.driver)
@@ -174,7 +174,7 @@ def test_ftl_order_lkz(base_fixture, domain):
     ftl.click_button(ftl.cancel_button)
 
     # Создание новой FTL заявки
-    sidebar.move_and_click(move_to=sidebar.new_order_hover, click_to=sidebar.new_ftl_city_button,
+    sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.new_ftl_city_button,
                            do_assert=True)
 
     # Установка даты подачи заявки на сегодня

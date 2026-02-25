@@ -197,3 +197,48 @@ class AddressAdd(Base):
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
         "name": "save_routing"
     }
+
+    schedule_edit = {
+        "xpath": "//button[@class='ant-btn semi-wide margin-left-16 margin-right-16']",
+        "name": "schedule_edit"
+    }
+    save_schedule_edit = {
+        "xpath": "//button[contains(text(),'Сохранить')]",
+        "name": "save_schedule_edit"
+    }
+    monday_add = {
+        "xpath": "//div[@class='vz-form-group']//div[1]//div[1]//button[1]//span[1]//img[1]",
+        "name": "monday_add"
+    }
+    tuesday_add_one = {
+        "xpath": "//div[@class='address-detail__body']//div[2]//div[1]//button[1]//span[1]//img[1]",
+        "name": "tuesday_add_one"
+    }
+    tuesday_add_two = {
+        "xpath": "//div[@class='address-detail__body']//div[2]//div[1]//button[1]//span[1]//img[1]",
+        "name": "tuesday_add_two"
+    }
+    fill_monday = {
+        "xpath": "//input[@id='address_schedule_form_workTime0/0']",
+        "name": "fill_monday"
+    }
+    fill_tuesday_one = {
+        "xpath": "//input[@id='address_schedule_form_workTime1/0']",
+        "name": "fill_tuesday_one"
+    }
+    fill_tuesday_two = {
+        "xpath": "//input[@id='address_schedule_form_workTime1/1']",
+        "name": "fill_tuesday_two"
+    }
+    cross_one = {
+        "xpath": "//div[@class='vz-form-group']//div[1]//div[1]//div[2]//label[1]//div[1]//div[1]//span[1]//span[1]//i[1]//*[name()='svg']",
+        "name": "cross_one"
+    }
+    cross_two = {
+        "xpath": "//div[@class='address-detail__body']//div[2]//div[1]//div[2]//label[1]//div[1]//div[1]//span[1]//span[1]//i[1]//*[name()='svg']//*[name()='path' and contains(@d,'M512 64C26')]",
+        "name": "cross_two"
+    }
+    cross_three = {
+        "xpath": "//div[@class='dashboard-content margin-top-60']//div[3]//label[1]//div[1]//div[1]//span[1]//span[1]//i[1]//*[name()='svg']//*[name()='path' and contains(@d,'M512 64C26')]",
+        "name": "cross_three"
+    }

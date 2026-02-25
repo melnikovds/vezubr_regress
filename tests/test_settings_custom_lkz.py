@@ -9,6 +9,7 @@ from pages.settings_page import EditFieldsParam
 @allure.story("Extended test")
 @allure.feature('Кастомные поля')
 @allure.description('ЛКЗ. Тест №1 Редактирование кастомных полей')
+@pytest.mark.order(1)
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
 def test_one_custom_settings_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -108,6 +109,7 @@ def test_one_custom_settings_lkz(base_fixture, domain):
 @allure.story("Extended test")
 @allure.feature('Кастомные поля')
 @allure.description('ЛКЗ. Тест №2 Редактирование кастомных полей')
+@pytest.mark.order(2)
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
 def test_two_custom_settings_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру

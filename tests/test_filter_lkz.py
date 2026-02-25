@@ -94,7 +94,7 @@ def test_filter_assignment_lkz(base_fixture, domain, request):
 def test_filter_departures_lkz(base_fixture, domain, request):
     base, sidebar = base_fixture
 
-    with allure.step("Переходим на вкладку 'отправления'"):
+    with allure.step("Переходим на вкладку 'Отправления'"):
         sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.dispatch_list_button)
         add = GmFilters(base.driver)
 
@@ -124,7 +124,7 @@ def test_filter_departures_lkz(base_fixture, domain, request):
 def test_filter_gm_lkz(base_fixture, domain, request):
     base, sidebar = base_fixture
 
-    with allure.step("Переходим на вкладку 'Задания'"):
+    with allure.step("Переходим на вкладку 'Грузоместа'"):
         sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button)
         add = GmFilters(base.driver)
 

@@ -95,6 +95,70 @@ def test_address_routing_two_lkz(base_fixture, domain):
     sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.addresses_list_button,
                            do_assert=True, wait="lst")
 
+    # Поиск нужного адреса
+    fltr = Manual(base.driver)
+    fltr.click_button(element_dict=fltr.reset)
+    fltr.dropdown_without_input(fltr.filter_date_create, option_text='За все время')
+    time.sleep(1)
+    fltr.input_in_field(fltr.name_address, value='график', click_first=True)
+    time.sleep(1)
+
+    # Редактирование графика у выбранного адреса
+    lst = AddressesList(base.driver)
+    lst.click_button(lst.first_address_link, wait="form")
+    add = AddressAdd(base.driver)
+    add.click_button(add.schedule_tab)
+    time.sleep(1)
+    add.click_button(add.schedule_edit)
+    time.sleep(1)
+    add.click_button(add.monday_add)
+    time.sleep(1)
+    add.input_in_field(add.fill_monday, value='11351245',click_first=True)
+    time.sleep(1)
+    add.click_button(add.tuesday_add_one)
+    add.input_in_field(add.fill_tuesday_one, value='06280755',click_first=True)
+    time.sleep(1)
+    add.click_button(add.tuesday_add_two)
+    add.input_in_field(add.fill_tuesday_two, value='20372152',click_first=True)
+    time.sleep(1)
+    add.click_button(add.save_schedule_edit)
+    time.sleep(1)
+    add.click_button(add.settings_tab)
+
+    add.refresh_page()
+    time.sleep(3)
+
+    # Проверяем наличие созданного графика работы
+    add.click_button(add.schedule_tab)
+    add.verify_text_on_page(text='11:35 - 12:45')
+    add.verify_text_on_page(text='06:28 - 07:55')
+    add.verify_text_on_page(text='20:37 - 21:52')
+
+    # Удаляем созданный график работы
+    add.click_button(add.schedule_edit)
+    time.sleep(1)
+    add.move_to_element(add.fill_monday)
+    add.click_on_the_cross(add.cross_one)
+    time.sleep(1)
+    add.move_to_element(add.tuesday_add_one)
+    add.click_on_the_cross(add.cross_two)
+    time.sleep(1)
+    add.move_to_element(add.tuesday_add_two)
+    add.click_on_the_cross(add.cross_three)
+    time.sleep(1)
+    add.click_button(add.save_schedule_edit)
+    time.sleep(1)
+    add.click_button(add.settings_tab)
+
+    add.refresh_page()
+    time.sleep(3)
+
+    # Проверяем отсутствие созданного графика работы
+    add.click_button(add.schedule_tab)
+    add.verify_text_on_page(text='11:35 - 12:45', should_exist=False)
+    add.verify_text_on_page(text='06:28 - 07:55', should_exist=False)
+    add.verify_text_on_page(text='20:37 - 21:52', should_exist=False)
+
 
 @allure.story("Critical path test")
 @allure.feature('Создание группы Адресов')

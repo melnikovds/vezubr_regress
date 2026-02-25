@@ -24,9 +24,9 @@ def test_create_custom_field_lke(base_fixture, domain):
     add_param.dropdown_without_input(add_param.add_role, "Договор")
     add_param.dropdown_without_input(add_param.add_type, "Числовое значение")
     add_param.click_button(add_param.click_save)
-    time.sleep(3)
-    add_param.click_button(add_param.click_ok)
-    time.sleep(5)
+    time.sleep(2)
+    add_param.click_button(add_param.click_ok, do_assert=True)
+    time.sleep(1)
 
 
 @allure.story("Extended path test")
@@ -84,7 +84,9 @@ def test_create_custom_field2_lke(base_fixture, domain):
     add_param.dropdown_without_input(add_param.add_role, "Контрагент")
     add_param.dropdown_without_input(add_param.add_type, "Текстовое значение")
     add_param.click_button(add_param.click_save)
-    add_param.click_button(add_param.click_ok)
+    time.sleep(2)
+    add_param.click_button(add_param.click_ok, do_assert=True)
+    time.sleep(1)
 
 
 @allure.story("Critical path test")

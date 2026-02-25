@@ -9,12 +9,26 @@ from pages.user_add_page import *
 
 @allure.story("Extended")
 @allure.feature('Фильтры')
+@allure.description('ЛКЭ, Тестирование: фильтры в разделе "Задания"')
+@pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
+def test_filter_assignment_lke(base_fixture, domain, request):
+    base, sidebar = base_fixture
+
+    with allure.step("Переходим на вкладку 'Задания'"):
+        sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.tasks_list_button)
+        add = GmFilters(base.driver)
+
+        time.sleep(3)
+
+
+@allure.story("Extended")
+@allure.feature('Фильтры')
 @allure.description('ЛКЭ, Тестирование: фильтры в разделе "Отправления"')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_filter_departures_lke(base_fixture, domain, request):
     base, sidebar = base_fixture
 
-    with allure.step("Переходим на вкладку 'Задания'"):
+    with allure.step("Переходим на вкладку 'Отправления'"):
         sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.dispatch_list_button)
         add = GmFilters(base.driver)
 
@@ -44,7 +58,7 @@ def test_filter_departures_lke(base_fixture, domain, request):
 def test_filter_gm_lke(base_fixture, domain, request):
     base, sidebar = base_fixture
 
-    with allure.step("Переходим на вкладку 'Задания'"):
+    with allure.step("Переходим на вкладку 'Грузоместа'"):
         sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button)
         add = GmFilters(base.driver)
 

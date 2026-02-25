@@ -31,7 +31,8 @@ class CustomFieldParam(Base):
     click_ok = {
         "xpath": "(//button[@class='ant-btn ant-btn-primary'])[2]",
         "name": "click_ok",
-        #"reference_xpath": "//button[@class='ant-btn margin-right-16']/following-sibling::button[1]"
+        "reference_xpath": "//div[@class='ant-modal-confirm-content']",
+        "reference": "Поле успешно создано"
     }
     click_meaning = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",

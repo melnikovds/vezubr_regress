@@ -197,6 +197,10 @@ class AddressAdd(Base):
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
         "name": "save_routing"
     }
+    address_priority = {
+        "xpath": "//div[5]//label[1]//div[1]//div[1]//div[1]//div[2]//input[1]",
+        "name": "address_priority"
+    }
 
     schedule_edit = {
         "xpath": "//button[@class='ant-btn semi-wide margin-left-16 margin-right-16']",

@@ -21,11 +21,13 @@ def test_cargo_place_edit_lkz(base_fixture, domain):
     # Переход к списку грузомест
     sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button,
                            do_assert=True, wait="lst")
-    time.sleep(1.5)
+    time.sleep(2)
     cp_list = CargoPlaceList(base.driver)
     # Шаг 1: Создание грузоместа
     # Клик по кнопке добавления грузоместа
-    cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    # cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    cp_list.click_button(cp_list.add_cargo_place_button)
+    time.sleep(2)
 
     add_cp = CargoPlaceAdd(base.driver)
     # Добавление полного базового грузоместа
@@ -59,11 +61,11 @@ def test_cargo_place_edit_lkz(base_fixture, domain):
     add_cp.backspace_and_input(add_cp.lkz_external_id_edit, cp_stamp)  # Внешний ID
     add_cp.backspace_and_input(add_cp.lkz_comment_edit, cp_stamp)  # Комментарий
 
-    time.sleep(5)
+    time.sleep(2)
 
     tn_code = str(random.randint(1_000_000_000, 9_999_999_999))
     add_cp.backspace_and_input(add_cp.lkz_nomenclature_code, tn_code)  # Код ТН ВЭД
-    time.sleep(20)
+    time.sleep(2)
 
     # Клик по кнопке сохранения изменений
     add_cp.click_button(add_cp.save_button, wait="form")
@@ -92,27 +94,28 @@ def test_cargo_place_edit_own_lke(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку грузомест
-    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button_lke,
+    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button,
                            do_assert=True, wait="lst")
     
-    time.sleep(1.5)
+    time.sleep(2)
     cp_list = CargoPlaceList(base.driver)
     # Шаг 1: Создание грузоместа ГВ
     # Клик по кнопке добавления грузоместа
-    cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    # cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    cp_list.click_button(cp_list.add_cargo_place_button)
     
     add_cp = CargoPlaceAdd(base.driver)
     # Выбор владельца грузоместа "Auto LKZ"
-    # add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Auto LKZ")
     add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Auto LKZ")
     # Добавление полного базового грузоместа
     add_cp.add_full_cargo_place_lke()
     
-    time.sleep(1.5)
+    time.sleep(2)
     # Шаг 2: Создание грузоместа Экс с вложенным грузоместом
     # Клик по кнопке добавления грузоместа
-    cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
-    
+    cp_list.click_button(cp_list.add_cargo_place_button)
+    time.sleep(2)
+
     # Выбор владельца грузоместа "Собственное Задание Экспедитора"
     add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Собственное Задание Экспедитора")
     # Выбор вложенного грузоместа

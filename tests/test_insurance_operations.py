@@ -56,12 +56,25 @@ def test_insurance_contract_attach_lke(base_fixture, domain):
     contractor.click_button(contractor.confirm_button, do_assert=True)
     # Подтверждение успешного выполнения действия
     contractor.click_button(contractor.ok_button)
+
+    contractor.reload_page()
+    time.sleep(7)
+    contractor.click_button(contractor.insurance_expandable_list)
+
     # Очистка выбора договора страхования для дальнейшего открепления
     contractor.move_and_click(move_to=contractor.insurance_contract_select, click_to=contractor.clear_button)
     # Клик по кнопке открепления договора
     contractor.click_button(contractor.delete_button, do_assert=True)
     # Подтверждение открепления договора
     contractor.click_button(contractor.ok_button)
+
+    # Проверка отсутствия договора на странице
+    contractor.reload_page()
+    time.sleep(7)
+    contractor.click_button(contractor.insurance_expandable_list)
+    time.sleep(2)
+    contractor.verify_text_on_page(text='15171206', should_exist=False)
+
     # Конец теста
 
 
@@ -105,14 +118,25 @@ def test_insurance_contract_attach_lkp(base_fixture, domain):
 
     # Выбор страховой компании "Энергогарант"
     contractor.dropdown_without_input(contractor.insurance_company_select, "Энергогарант")
+    # # # Выбор случайного договора страхования
+    # contractor.click_and_select_with_arrows(contractor.insurance_contract_select, arrow_presses=4)
+
     # Выбор конкретного договора страхования
-    contractor.click_and_select_with_arrows(contractor.insurance_contract_select, arrow_presses=4)
+    contractor.click_button(contractor.insurance_contract_select)
+    time.sleep(2)
+    contractor.click_button(contractor.insurance_contract_select_lkp)
+
     # Подтверждение привязки договора
     contractor.click_button(contractor.confirm_button, do_assert=True)
     # Подтверждение успешного выполнения действия
     contractor.click_button(contractor.ok_button)
     time.sleep(2)
-    # # Проверка наличия одного из договоров на странице
+
+    contractor.reload_page()
+    time.sleep(7)
+    contractor.click_button(contractor.insurance_expandable_list)
+
+    # # Проверка наличия договора на странице
     # contractor.verify_text_on_page(text='123241', should_exist=True)
     # Очистка выбора договора страхования для дальнейшего открепления
     contractor.move_and_click(move_to=contractor.insurance_contract_select, click_to=contractor.clear_button)
@@ -120,5 +144,12 @@ def test_insurance_contract_attach_lkp(base_fixture, domain):
     contractor.click_button(contractor.delete_button, do_assert=True)
     # Подтверждение открепления договора
     contractor.click_button(contractor.ok_button)
+
+    # Проверка отсутствия договора на странице
+    contractor.reload_page()
+    time.sleep(7)
+    contractor.click_button(contractor.insurance_expandable_list)
+    time.sleep(2)
+    contractor.verify_text_on_page(text='183134', should_exist=False)
     # Конец теста
     

@@ -1,6 +1,7 @@
 import allure
 import pytest
 import time
+import random
 from pages.address_add_page import AddressAdd
 from pages.address_list_page import AddressesList
 from pages.filter_directory_page import Manual
@@ -234,6 +235,51 @@ def test_address_group_lkz(base_fixture, domain):
     time.sleep(1)
     settings.verify_text_on_page(text='Ночь', should_exist=False)
     settings.verify_text_on_page(text='Night', should_exist=False)
+
+
+@allure.story("Critical path test")
+@allure.feature('Редактирование настроек маршрутизации в Адресе')
+@allure.description('ЛКЗ. Тест изменения полей маршрутизации, изменяем поле "Приоритет адреса" ')
+@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
+def test_address_routing_three_lkz(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # Переход к списку адресов
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.addresses_list_button,
+                           do_assert=True, wait="lst")
+
+    # Поиск нужного адреса
+    fltr = Manual(base.driver)
+    fltr.click_button(element_dict=fltr.reset)
+    fltr.dropdown_without_input(fltr.filter_date_create, option_text='За все время')
+    time.sleep(1)
+    fltr.input_in_field(fltr.verified_address, value='Судостроительная, д 12', click_first=True)
+    time.sleep(1)
+
+    # Редактирование приоритета у выбранного адреса
+    lst = AddressesList(base.driver)
+    lst.click_button(lst.first_address_link, wait="form")
+    add = AddressAdd(base.driver)
+    add.click_button(add.settings_tab)
+    add.click_button(add.redact_routing)
+    time.sleep(2)
+    a = random.randint(20, 50)
+    add.backspace_and_input_int(add.address_priority, value=a, num=10)
+    add.click_button(add.save_routing)
+    time.sleep(1)
+
+    # Проверяем что изменения применились
+    add.refresh_page()
+    time.sleep(5)
+    p = str(a)
+    add.verify_text_on_page(text=p)
+
+
+
+
+
+
 
 
 

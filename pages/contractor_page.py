@@ -87,4 +87,9 @@ class Contractor(Base):
         "xpath": "//i[@aria-label='icon: close-circle']",
         "name": "clear_button"
     }
+    insurance_contract_select_lkp = {
+        "xpath": "//li[contains(text(),'-20251217183134»')]",
+        "name": "insurance_contract_select_lkp"
+    }
+
     

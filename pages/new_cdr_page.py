@@ -212,6 +212,11 @@ class AddCdr(Base):
         "name": "select_lkp"
     }
 
+    lke_select_lkp = {
+        "xpath": "(//input[@type='checkbox'])[1]",
+        "name": "lke_select_lkp"
+    }
+
     select_contractors_asr_lkz_lkp = {
         "xpath": "(//div[@class='ant-select-selection__placeholder'])[4]",
         "name": "select_contractors_asr_lkz_lke"
@@ -235,6 +240,10 @@ class AddCdr(Base):
     publish_ok_button = {
         "xpath": "(//button[@class='ant-btn ant-btn-primary'])[4]",
         "name": "publish_ok_button"
+    }
+    publish_ok_button_lke = {
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[@type='button']",
+        "name": "publish_ok_button_lke"
     }
     publish_ok_button_ltl = {
         "xpath": "//div[@class='ant-modal-confirm-btns']//button[@type='button']",
@@ -418,7 +427,7 @@ class AddCdr(Base):
         "name": "push_ok"
     }
     processing_application_services = {
-        "xpath": "(//li[contains(@class,'pointer ')])[8]",
+        "xpath": "//span[contains(text(),'Обработка услуг Заявки')]",
         "name": "processing_application_services"
     }
     choose_main_service = {
@@ -434,7 +443,7 @@ class AddCdr(Base):
         "name": "create_and_publish_button"
     }
     select_contractors_lkp = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[8]",
+        "xpath": "//input[@class='ant-input']",
         "name": "select_contractors_lkp"
     }
     publish_button_lke = {
@@ -444,6 +453,10 @@ class AddCdr(Base):
     change_body_type_close = {
         "xpath": "//ul[@class='ant-select-selection__rendered']",
         "name": "change_body_type_close"
+    }
+    click_check_oll_producer = {
+        "xpath": "//div[@class='ant-table-selection']//input[@type='checkbox']",
+        "name": "click_check_oll_producer"
     }
 
     def change_date_time(self) -> NoReturn:
@@ -494,6 +507,7 @@ class AddCdr(Base):
         self.input_in_field(self.address_filter, "Свердловская обл, г Березовский, ул Театральная, д 13")
         time.sleep(3)  # Ожидание завершения фильтрации
         self.click_button(self.address_radio_button)
+        time.sleep(2)
         # Подтверждение выбора второго адреса
         self.click_button(self.confirm_address_button)
 
@@ -554,7 +568,7 @@ class AddCdr(Base):
         self.click_button(self.change_one_time_tariff)
         time.sleep(2)
         # Установка случайной ставки публикации
-        self.dropdown_with_input(self.change_publication_rate, str(random.randint(100000, 800000)))
+        self.input_in_field(self.change_publication_rate, str(random.randint(100000, 800000)))
         time.sleep(2)
         # Выбор подрядчиков
         self.input_in_field(self.select_contractors, "Auto LKP")
@@ -575,7 +589,7 @@ class AddCdr(Base):
         self.click_button(self.change_one_time_tariff)
         time.sleep(2)
         # Установка случайной ставки публикации
-        self.dropdown_with_input(self.change_publication_rate, str(random.randint(100000, 800000)))
+        self.input_in_field(self.change_publication_rate, str(random.randint(100000, 800000)))
         time.sleep(2)
         # Выбор подрядчиков через выпадающий список
         self.input_in_field(self.select_contractors, "Auto LKE")
@@ -617,7 +631,7 @@ class AddCdr(Base):
         self.click_button(self.change_one_time_tariff)
         time.sleep(2)
         # Установка случайной ставки публикации
-        self.dropdown_with_input(self.change_publication_rate_dop, str(random.randint(100000, 800000)))
+        self.input_in_field(self.change_publication_rate_dop, str(random.randint(100000, 800000)))
         time.sleep(2)
         # Выбор подрядчиков через выпадающий список
         self.input_in_field(self.select_contractors, "Auto LKP")
@@ -677,7 +691,7 @@ class AddCdr(Base):
         self.click_button(self.change_one_time_tariff)
         time.sleep(2)
         # Установка случайной ставки публикации
-        self.dropdown_with_input(self.change_publication_rate, str(random.randint(100000, 800000)))
+        self.input_in_field(self.change_publication_rate, str(random.randint(100000, 800000)))
         # Выбор подрядчиков через выпадающий список
         self.input_in_field(self.select_contractors, "Auto LKP")
 
@@ -752,7 +766,7 @@ class AddCdr(Base):
         # Выбираем "Страхование" из выпадающего списка
         self.dropdown_without_input(self.add_insurance, "Страхование")
         # Генерируем случайную сумму страхования и вводим её в поле
-        self.input_in_field(self.change_value_insurance, str(random.randint(10000, 100000)))
+        self.backspace_and_input(self.change_value_insurance,10000)
         # Выбираем категорию страхования "Алкогольные напитки"
         self.dropdown_without_input(self.change_category_insurance, "Алкогольные напитки")
 
@@ -816,7 +830,7 @@ class AddCdr(Base):
         self.click_on_the_cross(self.choose_main_service)
         self.click_button(self.hand_over_contractor)
         time.sleep(2)
-        self.change_date_time()
+        # self.change_date_time()
         self.scroll_to_element(self.create_and_publish_button)
         time.sleep(2)
         self.click_button(self.create_and_publish_button)
@@ -824,14 +838,20 @@ class AddCdr(Base):
         self.click_button(self.change_one_time_tariff)
         time.sleep(2)
         # Установка случайной ставки публикации
-        self.dropdown_with_input(self.change_publication_rate, str(random.randint(100000, 800000)))
+        self.input_in_field(self.change_publication_rate, str(random.randint(100000, 800000)))
         # Выбор подрядчиков через выпадающий список
-        self.dropdown_without_input(self.select_contractors_lkp, "Auto LKP")
+        self.input_in_field(self.select_contractors_lkp, "Auto LKP")
+        # self.click_button(self.select_contractors_lkp)
         ActionChains(self.driver).send_keys(Keys.TAB).perform()
+        ActionChains(self.driver).send_keys(Keys.TAB).perform()
+        active_element = self.driver.switch_to.active_element
+        active_element.click()
+        # ActionChains(self.driver).send_keys(Keys.TAB).click().perform()
+        # self.click_button(self.lke_select_lkp)
         # Подтверждение публикации заказа
         self.click_button(self.publish_button_lke)
         time.sleep(1)
-        self.click_button(self.publish_ok_button)
+        self.click_button(self.publish_ok_button_lke)
 
     # def clear_cache(self, request) -> NoReturn:
     #    """

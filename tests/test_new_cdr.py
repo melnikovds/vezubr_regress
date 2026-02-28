@@ -74,7 +74,7 @@ def test_lkp_confirm_delivery(base_fixture, domain, request):
     time.sleep(2)
 
     with allure.step("Открытие раздела Заявки на доставку Груза"):
-        sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.new_cdr_sidebar)
+        sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.cdr_active_list_button)
         add = AddCdr(base.driver)
         time.sleep(2)
 
@@ -107,7 +107,7 @@ def test_lkp_confirm_delivery(base_fixture, domain, request):
 
 
 @pytest.mark.test_lkz_lke_lkp
-@pytest.mark.order(1)
+@pytest.mark.order(3)
 @allure.story("smoke")
 @allure.feature('Создание заявки на доставку груза')
 @allure.description('ЛКЗ, Тестирование: Создание ФТЛ заявки - город, грузоперевозка, новое ГМ, публикация на ЛКЭ')
@@ -162,7 +162,7 @@ def test_add_new_ftl_lkz_lke(base_fixture, domain, request):
 
 
 @pytest.mark.test_lkz_lke_lkp
-@pytest.mark.order(2)
+@pytest.mark.order(4)
 @allure.story("smoke")
 @allure.feature('Подтверждение и перепубликация рейса от ЛКЭ к ЛКП')
 @allure.description('ЛКЗ, Тестирование: Принятие ФТЛ заявки за ЛКЭ и перепубликация на ЛКП')
@@ -172,7 +172,7 @@ def test_republishing_new_ftl_lke_lkp(base_fixture, domain, request):
     time.sleep(2)
 
     with allure.step("Открытие формы создания новой заявки"):
-        sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.new_cdr_sidebar)
+        sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.cdr_active_list_button)
         add = AddCdr(base.driver)
         time.sleep(2)
 
@@ -193,7 +193,7 @@ def test_republishing_new_ftl_lke_lkp(base_fixture, domain, request):
 
 
 @pytest.mark.test_lkz_lke_lkp
-@pytest.mark.order(3)
+@pytest.mark.order(5)
 @allure.story("smoke")
 @allure.feature('Подтверждение и завершение рейса от ЛКЗ к ЛКЭ, ЛКЭ к ЛКП')
 @allure.description('ЛКЗ, Тестирование: Принятие ФТЛ заявки за ЛКП и завершение')
@@ -203,7 +203,7 @@ def test_confirm_new_ftl_lke_lkp(base_fixture, domain, request):
     time.sleep(2)
 
     with allure.step("Открытие раздела Заявки на доставку Груза"):
-        sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.new_cdr_sidebar)
+        sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.cdr_active_list_button)
         add = AddCdr(base.driver)
         time.sleep(2)
 
@@ -231,7 +231,7 @@ def test_confirm_new_ftl_lke_lkp(base_fixture, domain, request):
     with allure.step("Завершаем рейс через ЛК"):
         add.complete_cdr()
 
-
+@pytest.mark.order(6)
 @allure.story("smoke")
 @allure.feature('Создание заявки на доставку груза')
 @allure.description('ЛКЗ, Тестирование: Создание ЛТЛ заявки - новое ГМ, адреса, публикация')
@@ -262,7 +262,7 @@ def test_add_new_ltl_lkz(base_fixture, domain):
     with allure.step("Публикация заявки"):
         add.save_and_publish_ltl()
 
-
+@pytest.mark.order(7)
 @allure.story("smoke")
 @allure.feature('Создание заявки на доставку груза')
 @allure.description('ЛКЗ, Тестирование: Создание ФТЛ заявки - город, грузоперевозка, новое ГМ, публикация, все допы.')
@@ -315,7 +315,7 @@ def test_add_new_ftl_lkz_dop(base_fixture, domain):
         add.save_and_publish_dop()
         time.sleep(3)
 
-
+@pytest.mark.order(8)
 @allure.story("smoke")
 @allure.feature('Создание заявки на доставку груза')
 @allure.description(

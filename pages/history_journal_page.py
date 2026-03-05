@@ -22,5 +22,9 @@ class Journal(Base):
         "xpath": "//div[@title='Пользовательский']",
         "name": "time_event"
     }
+    tab_history_old_request = {
+        "xpath": "//a[@id='order-history']",
+        "name": "tab_history_old_request",
+    }
 
 

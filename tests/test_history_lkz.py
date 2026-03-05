@@ -11,6 +11,7 @@ from pages.filters_gm_lkz_lke_page import GmFilters
 from pages.address_list_page import AddressesList
 from pages.filter_directory_page import Manual
 from pages.request_old_ftl_add_page import FTLAdd
+from pages.filters_old_ftl_page import OldFTL
 
 
 @allure.story("Extended test")
@@ -133,7 +134,7 @@ def test_journal_order_lkz(base_fixture, domain):
     ftl.click_button(ftl.producer_select_text)
     ftl.click_button(ftl.publish_button)
     ftl.click_button(ftl.continue_button, do_assert=True)
-    ftl.click_button(ftl.confirm_add_button, wait="lst")
+
 
     # Находим элемент с сообщением
     wait = WebDriverWait(base.driver, 10)
@@ -153,6 +154,43 @@ def test_journal_order_lkz(base_fixture, domain):
         print(f"Номер заявки: {application_number}")
     else:
         raise ValueError(f"Не удалось найти номер заявки в тексте: {text}")
+
+
+    ftl.click_button(ftl.confirm_add_button, wait="lst")
+    time.sleep(1)
+
+    # Переход в раздел Активные FTL-заявки
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
+                        do_assert=True, wait='lst')
+
+    add = OldFTL(base.driver)
+    # сброс фильтров
+    add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.click_button(add.start_date)
+    time.sleep(1)
+    add.click_button(add.all_time)
+    time.sleep(1)
+
+    # выбираем созданную заявку
+    add.input_in_field(add.request_number, value=application_number, click_first=True)
+    time.sleep(3)
+    ftl.click_button(ftl.click_on_request)
+    time.sleep(2)
+    jrn = Journal(base.driver)
+    jrn.click_button(jrn.tab_history_old_request)
+    time.sleep(1)
+    jrn.dropdown_without_input(jrn.time_event, option_text='За все время')
+    time.sleep(7)
+    jrn.verify_text_on_page(text='Время публикации')
+    jrn.verify_text_on_page(text='Отложена Заказчиком')
+
+
+
+
+
+
+
 
 
 

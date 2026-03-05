@@ -44,7 +44,7 @@ def test_own_driver_add_lke(base_fixture, domain):
     time.sleep(2)
     # Клик по кнопке прикрепить ТС
     add_driver.click_button(add_driver.attach_button)
-    time.sleep(2)
+    time.sleep(5)
     # Прикрепить первый ТС в списке
     add_driver.click_button(add_driver.select_button)
     # Прикрепить второй ТС в списке
@@ -54,7 +54,7 @@ def test_own_driver_add_lke(base_fixture, domain):
     time.sleep(2)
     # Клик по кнопке прикрепить ТС
     add_driver.click_button(add_driver.attach_button)
-    time.sleep(2)
+    time.sleep(5)
     # Открепить первый ТС в списке
     add_driver.click_button(add_driver.unselect_button)
     # Клик по кнопке подтвердить прикрепление ТС
@@ -116,7 +116,7 @@ def test_inner_driver_add_lke(base_fixture, domain):
     time.sleep(2)
     # Клик по кнопке прикрепить ТС
     add_driver.click_button(add_driver.attach_button)
-    time.sleep(2)
+    time.sleep(5)
     # Прикрепить первый ТС в списке
     add_driver.click_button(add_driver.select_button)
     # Прикрепить второй ТС в списке
@@ -126,7 +126,7 @@ def test_inner_driver_add_lke(base_fixture, domain):
     time.sleep(2)
     # Клик по кнопке прикрепить ТС
     add_driver.click_button(add_driver.attach_button)
-    time.sleep(2)
+    time.sleep(5)
     # Открепить первый ТС в списке
     add_driver.click_button(add_driver.unselect_button)
     # Клик по кнопке подтвердить прикрепление ТС

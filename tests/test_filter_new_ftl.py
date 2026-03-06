@@ -276,6 +276,146 @@ def test_filters_new_ftl_lkz(base_fixture, domain):
     time.sleep(2)
 
 
+@allure.story("Extended path test")
+@allure.feature('Фильтры списка Заявок')
+@allure.description('ЛКЭ, Тестирование фильтров в разделе "Заявки на доставки груза" ')
+@pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
+def test_filters_new_ftl_lke(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+    sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.cdr_active_list_button,
+                           do_assert=True, wait="lst")
+
+    add = NewFtlFilters(base.driver)
+    add.click_button(add.clear)
+    add.dropdown_without_input(add.execution_start_sate, option_text='За все время')
+
+    # Проверка фильтра 'Тип доставки'
+    add.dropdown_without_input(add.delivery_type, option_text='FTL')
+    add.input_in_field(add.request_number, value='178')
+    time.sleep(2)
+    add.verify_text_on_page(text='10.09.2025-7819', should_exist=True)
+    add.verify_text_on_page(text='10.09.2025-3796', should_exist=False)
+    add.click_button(add.clear)
+    add.dropdown_without_input(add.execution_start_sate, option_text='За все время')
+    time.sleep(2)
+    add.dropdown_without_input(add.delivery_type, option_text='LTL')
+    add.backspace_and_input(add.request_number, value='132', num=10)
+    time.sleep(2)
+    add.verify_text_on_page(text='24-VZ-132', should_exist=True)
+    add.verify_text_on_page(text='24-VZ-135', should_exist=False)
+    add.click_button(add.clear)
+    add.dropdown_without_input(add.execution_start_sate, option_text='За все время')
+    time.sleep(2)
+
+    # Проверка фильтра 'Номер заявки'
+    add.input_in_field(add.request_number, value='127')
+    time.sleep(2)
+    add.verify_text_on_page(text='2025-8481', should_exist=True)
+    add.verify_text_on_page(text='25-VZ-124', should_exist=False)
+    time.sleep(2)
+    add.backspace_and_input(add.request_number, value='25-VZ-81', num=10)
+    time.sleep(2)
+    add.verify_text_on_page(text='FTL-12.03.2025-5349', should_exist=True)
+    add.verify_text_on_page(text='VZ-80', should_exist=False)
+    add.click_button(add.clear)
+    add.dropdown_without_input(add.execution_start_sate, option_text='За все время')
+    time.sleep(2)
+
+    # Проверка фильтра 'Тип заявки'
+    add.dropdown_without_input(add.request_type, option_text='Входящая заявка')
+    add.input_in_field(add.request_number, value='25-VZ-137')
+    time.sleep(2)
+    add.verify_text_on_page(text='2025-7267', should_exist=True)
+    add.verify_text_on_page(text='2025-3288', should_exist=False)
+    add.click_button(add.clear)
+    add.dropdown_without_input(add.execution_start_sate, option_text='За все время')
+    time.sleep(2)
+    add.dropdown_without_input(add.request_type, option_text='Исходящая заявка')
+    add.backspace_and_input(add.request_number, value='26-VZ-14', num=10)
+    time.sleep(2)
+    add.verify_text_on_page(text='2026-4742', should_exist=True)
+    add.verify_text_on_page(text='2026-7081', should_exist=False)
+    add.click_button(add.clear)
+    add.dropdown_without_input(add.execution_start_sate, option_text='За все время')
+    time.sleep(2)
+    add.dropdown_without_input(add.request_type, option_text='Входящая заявка')
+    add.input_in_field(add.request_number, value='VZ-15')
+    time.sleep(2)
+    add.verify_text_on_page(text='25-VZ-156', should_exist=True)
+    add.verify_text_on_page(text='26-VZ-15', should_exist=False)
+    add.click_button(add.clear)
+    add.dropdown_without_input(add.execution_start_sate, option_text='За все время')
+    time.sleep(2)
+    add.dropdown_without_input(add.request_type, option_text='Исходящая заявка')
+    add.backspace_and_input(add.request_number, value='VZ-15', num=10)
+    time.sleep(2)
+    add.verify_text_on_page(text='26-VZ-15', should_exist=True)
+    add.verify_text_on_page(text='25-VZ-156', should_exist=False)
+    add.click_button(add.clear)
+    add.dropdown_without_input(add.execution_start_sate, option_text='За все время')
+    time.sleep(2)
+
+
+@allure.story("Extended path test")
+@allure.feature('Фильтры списка Заявок')
+@allure.description('ЛКП, Тестирование фильтров в разделе "Заявки на доставки груза" ')
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
+def test_filters_new_ftl_lkp(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+    sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.cdr_active_list_button,
+                           do_assert=True, wait="lst")
+
+    add = NewFtlFilters(base.driver)
+    add.click_button(add.clear)
+    add.dropdown_without_input(add.execution_start_sate, option_text='За все время')
+
+    # Проверка фильтра 'Тип доставки'
+    add.dropdown_without_input(add.delivery_type, option_text='FTL')
+    add.input_in_field(add.request_number, value='59')
+    time.sleep(2)
+    add.verify_text_on_page(text='2026-4410', should_exist=True)
+    add.verify_text_on_page(text='2026-8857', should_exist=False)
+    add.click_button(add.clear)
+    add.dropdown_without_input(add.execution_start_sate, option_text='За все время')
+    time.sleep(2)
+    add.dropdown_without_input(add.delivery_type, option_text='LTL')
+    add.backspace_and_input(add.request_number, value='173', num=10)
+    time.sleep(2)
+    add.verify_text_on_page(text='25-VZ-173', should_exist=True)
+    add.verify_text_on_page(text='25-VZ-170', should_exist=False)
+    add.click_button(add.clear)
+    add.dropdown_without_input(add.execution_start_sate, option_text='За все время')
+    time.sleep(2)
+
+    # Проверка фильтра 'Номер заявки'
+    add.input_in_field(add.request_number, value='195')
+    time.sleep(2)
+    add.verify_text_on_page(text='25-VZ-195', should_exist=True)
+    add.verify_text_on_page(text='25-VZ-194', should_exist=False)
+    time.sleep(2)
+    add.backspace_and_input(add.request_number, value='25-VZ-166', num=10)
+    time.sleep(2)
+    add.verify_text_on_page(text='2025-9672', should_exist=True)
+    add.verify_text_on_page(text='2025-8022', should_exist=False)
+    add.click_button(add.clear)
+    add.dropdown_without_input(add.execution_start_sate, option_text='За все время')
+    time.sleep(2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

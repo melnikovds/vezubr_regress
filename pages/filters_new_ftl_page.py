@@ -129,4 +129,9 @@ class NewFtlFilters(Base):
         "name": "first_point_address_filter"
     }
 
+    request_type = {
+        "xpath": "//div[@id='requestDirection']//div[@class='ant-select-selection__placeholder'][contains(text(),'Все')]",
+        "name": "request_type"
+    }
+
 

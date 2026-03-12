@@ -38,7 +38,7 @@ def test_profile_edit_lkz(base_fixture, domain):
     profile.verify_text_on_page(text="С НДС", should_exist=True)
 
     profile.dropdown_without_input(profile.vat_type_select, "7%")
-    profile.dropdown_without_input(profile.vat_type_select, "20%")
+    profile.dropdown_without_input(profile.vat_type_select, "22%")
     profile.dropdown_without_input(profile.direct_request_select, "Только неплательщикам НДС")
     profile.dropdown_without_input(profile.direct_request_select, "Всем")
     profile.dropdown_without_input(profile.values_in_system_select, option_text="Без НДС", index=2)
@@ -47,7 +47,7 @@ def test_profile_edit_lkz(base_fixture, domain):
 
     profile.reload_page()
     time.sleep(5)
-    profile.verify_text_on_page(text="20%", should_exist=True)
+    profile.verify_text_on_page(text="22%", should_exist=True)
     profile.verify_text_on_page(text="Всем", should_exist=True)
     profile.verify_text_on_page(text="Без НДС", should_exist=True)
 
@@ -95,7 +95,7 @@ def test_profile_edit_lke(base_fixture, domain):
     profile.backspace_and_input(profile.phone_input, base.random_value_float_str(9000000000, 9999999999))
     # Перебор всех вариантов налогообложения
     profile.dropdown_without_input(profile.vat_type_select, "Без НДС")
-    profile.dropdown_without_input(profile.vat_type_select, "20%")
+    profile.dropdown_without_input(profile.vat_type_select, "22%")
     profile.dropdown_without_input(profile.direct_request_select, "Только плательщикам НДС")
     profile.dropdown_without_input(profile.direct_request_select, "Только неплательщикам НДС")
     profile.dropdown_without_input(profile.direct_request_select, "Всем")
@@ -160,7 +160,7 @@ def test_profile_edit_lkp(base_fixture, domain):
     profile.verify_text_on_page(text="С НДС", should_exist=True)
 
     profile.dropdown_without_input(profile.vat_type_select, "7%")
-    profile.dropdown_without_input(profile.vat_type_select, "20%")
+    profile.dropdown_without_input(profile.vat_type_select, "22%")
     profile.dropdown_without_input(profile.direct_request_select, "Только неплательщикам НДС")
     profile.dropdown_without_input(profile.direct_request_select, "Всем")
     profile.dropdown_without_input(profile.values_in_system_select, option_text="Без НДС", index=2)
@@ -169,7 +169,7 @@ def test_profile_edit_lkp(base_fixture, domain):
 
     profile.reload_page()
     time.sleep(5)
-    profile.verify_text_on_page(text="20%", should_exist=True)
+    profile.verify_text_on_page(text="22%", should_exist=True)
     profile.verify_text_on_page(text="Всем", should_exist=True)
     profile.verify_text_on_page(text="Без НДС", should_exist=True)
 

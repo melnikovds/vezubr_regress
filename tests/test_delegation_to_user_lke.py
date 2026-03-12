@@ -154,7 +154,7 @@ def test_go_to_account_client_lke(base_fixture, domain):
                            do_assert=True, wait="lst")
     
     client_list = ClientsList(base.driver)
-    time.sleep(2)
+    time.sleep(3)
     # Переход в ЛК клиента
     client_list.move_and_click(move_to=client_list.action_button, click_to=client_list.go_to_account_button)
     time.sleep(2)
@@ -181,10 +181,13 @@ def test_go_to_account_producer_lke(base_fixture, domain):
     # Переход к списку перевозчиков
     sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.producers_list_button,
                            do_assert=True, wait="lst")
-    
+    time.sleep(3)
+    cl = ContractorList(base.driver)
     producer_list = ProducersList(base.driver)
-    time.sleep(2)
+
     # Переход в ЛК перевозчика
+    cl.input_in_field(cl.contractor_name, value='LKP')
+    time.sleep(3)
     producer_list.move_and_click(move_to=producer_list.action_button_lkp, click_to=producer_list.go_to_account_button)
     time.sleep(2)
 

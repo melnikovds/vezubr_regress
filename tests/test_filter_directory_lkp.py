@@ -433,7 +433,7 @@ def test_vehicle_directory_lkp(base_fixture, domain):
 
     # проверка фильтра "отчество водителя"
     add.input_in_field(add.patronymic_driver_two, value='24200338', click_first=True)
-    time.sleep(1)
+    time.sleep(3)
     add.verify_text_on_page(text='ТС-20240526053124', should_exist=True)
     add.verify_text_on_page(text='ТС20240110120731', should_exist=False)
     time.sleep(1)

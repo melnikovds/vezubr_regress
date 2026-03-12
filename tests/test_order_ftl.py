@@ -140,8 +140,8 @@ def test_ftl_request_add_lke(base_fixture, domain):
     ftl.click_button(ftl.select_first_radio)
     ftl.click_button(ftl.confirm_address_button)
 
-    time.sleep(1)
-    ftl.click_and_select_with_arrows(ftl.custom_fields, arrow_presses=1)
+    # time.sleep(1)
+    # ftl.click_and_select_with_arrows(ftl.custom_fields, arrow_presses=1)
 
     # Ожидание завершения расчета стоимости
     base.get_element(ftl.calculate_finish)
@@ -229,7 +229,7 @@ def test_ftl_order_lkz(base_fixture, domain):
     time.sleep(1)
     ftl.scroll_to_element(ftl.order_insurance)
     time.sleep(1)
-    ftl.click_and_select_with_arrows(ftl.custom_fields, arrow_presses=1)
+    # ftl.click_and_select_with_arrows(ftl.custom_fields, arrow_presses=1)
     ftl.click_button(ftl.order_insurance)
     # ftl.dropdown_with_input(ftl.cargo_category, option_text='Оборудование и запчасти')
     ftl.click_and_select_with_arrows(ftl.cargo_category, arrow_presses=49)
@@ -266,7 +266,7 @@ def test_ftl_order_lkz(base_fixture, domain):
     sidebar.click_button(sidebar.sidebar_button)
 
     # Переход в раздел Активные FTL-заявки
-    base.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ftl_active_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)

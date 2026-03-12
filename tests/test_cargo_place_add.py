@@ -58,7 +58,7 @@ def test_cargo_place_from_lkz_add_lke(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку грузомест
-    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button_lke,
+    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button,
                            do_assert=True, wait="lst")
     time.sleep(1.5)
     cp_list = CargoPlaceList(base.driver)
@@ -84,7 +84,7 @@ def test_cargo_place_own_add_lke(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку грузомест
-    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button_lke,
+    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button,
                            do_assert=True, wait="lst")
     time.sleep(1.5)
     cp_list = CargoPlaceList(base.driver)
@@ -93,7 +93,7 @@ def test_cargo_place_own_add_lke(base_fixture, domain):
     
     add_cp = CargoPlaceAdd(base.driver)
     # Выбор владельца грузоместа "Собственное Задание Экспедитора"
-    add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Собственное Задание Экспедитора")
+    add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Собственный ГМ")
     # Выбор вложенного грузоместа
     add_cp.click_button(add_cp.child_cp_select, wait="lst")
     # Очистка даты и выбор грузоместа

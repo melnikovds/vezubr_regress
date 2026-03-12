@@ -2,9 +2,7 @@ import random
 import time
 from datetime import datetime
 from typing import NoReturn
-
 from selenium.webdriver import ActionChains, Keys
-
 from base.base_class import Base
 from utilities.flight_generator import fake
 
@@ -463,14 +461,27 @@ class AddCdr(Base):
         """
         Изменение даты и времени начала подачи.
         """
-        # Генерация нового времени с заданным сдвигом (70 минут)
-        new_time = self.naw_time_change(70)
+        # Генерация нового времени с заданным сдвигом (150 минут)
+        new_time = self.naw_time_change(150)
         # Клик по кнопке выбора даты и времени начала подачи
         self.click_button(self.start_at_from_button)
         # Выбор сегодняшней даты из календаря
         self.click_button(self.today_button)
         # Повторный клик по кнопке выбора даты и времени для активации поля ввода
         self.click_button(self.start_at_from_button)
+        # Ввод новой временной метки в поле ввода, предварительно очистив старое значение
+        self.backspace_and_input(self.start_at_from_input, num=5, value=new_time)
+        # Подтверждение выбора даты и времени нажатием кнопки "OK"
+        self.click_button(self.calendar_ok_button)
+
+    def change_date_second_time(self) -> NoReturn:
+        """
+        Изменение даты и времени на сутки вперёд.
+        """
+        # Генерация нового времени с заданным сдвигом
+        new_time = self.naw_time_change(1440, 'datetime')
+        # Клик по кнопке выбора даты и времени начала подачи
+        self.click_button(self.start_at_till_button)
         # Ввод новой временной метки в поле ввода, предварительно очистив старое значение
         self.backspace_and_input(self.start_at_from_input, num=5, value=new_time)
         # Подтверждение выбора даты и времени нажатием кнопки "OK"
@@ -640,23 +651,6 @@ class AddCdr(Base):
         # Подтверждение публикации заказа
         self.click_button(self.publish_button)
         self.click_button(self.publish_ok_button)
-
-    def change_date_second_time(self) -> NoReturn:
-        """
-        Изменение даты и времени второй раз с большим сдвигом (150 минут).
-        """
-        # Генерация нового времени с заданным сдвигом (150 минут)
-        new_time = self.naw_time_change(150)
-        # Клик по кнопке выбора даты и времени начала подачи
-        self.click_button(self.start_at_till_button)
-        # Выбор сегодняшней даты из календаря
-        self.click_button(self.today_till_button)
-        # Повторный клик по кнопке выбора даты и времени для активации поля ввода
-        self.click_button(self.start_at_till_button)
-        # Ввод новой временной метки в поле ввода, предварительно очистив старое значение
-        self.backspace_and_input(self.start_at_from_input, num=5, value=new_time)
-        # Подтверждение выбора даты и времени нажатием кнопки "OK"
-        self.click_button(self.calendar_ok_button)
 
     def new_cargo_place_ltl(self) -> NoReturn:
         """

@@ -211,4 +211,4 @@ def test_cargo_place_transfer_lke(base_fixture, domain):
     # ltl.click_button(ltl.save_button)
     # # Публикация заявки позже
     # ltl.click_button(ltl.publish_later_button, do_assert=True)
-    # Конец теста
+    # # Конец теста

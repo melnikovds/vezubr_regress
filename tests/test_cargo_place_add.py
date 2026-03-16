@@ -94,12 +94,12 @@ def test_cargo_place_own_add_lke(base_fixture, domain):
     add_cp = CargoPlaceAdd(base.driver)
     # Выбор владельца грузоместа "Собственное Задание Экспедитора"
     add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Собственный ГМ")
-    # Выбор вложенного грузоместа
-    add_cp.click_button(add_cp.child_cp_select, wait="lst")
+    # # Выбор вложенного грузоместа
+    # add_cp.click_button(add_cp.child_cp_select, wait="lst")
     # Очистка даты и выбор грузоместа
-    cp_list.move_and_click(move_to=cp_list.date_hover, click_to=cp_list.date_clear_button, wait="lst")
-    cp_list.click_button(cp_list.cp_list_checkbox, index=2)
-    cp_list.click_button(cp_list.confirm_button)
+    # cp_list.move_and_click(move_to=cp_list.date_hover, click_to=cp_list.date_clear_button, wait="lst")
+    # cp_list.click_button(cp_list.cp_list_checkbox, index=2)
+    # cp_list.click_button(cp_list.confirm_button)
     # Добавление полного грузоместа
     cp_stamp = add_cp.add_full_cargo_place_lke()
     

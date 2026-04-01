@@ -1,3 +1,5 @@
+import time
+
 import allure
 import pytest
 from pages.insurer_page import Insurer
@@ -52,7 +54,7 @@ def test_sorting_requests_lkp(base_fixture, domain):
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)
 def test_sorting_orders_lkz(base_fixture, domain):
     base, sidebar = base_fixture
-
+    time.sleep(2)
     sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
                            do_assert=True, wait="lst")
 
@@ -89,7 +91,7 @@ def test_sorting_orders_lkz(base_fixture, domain):
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)
 def test_sorting_orders_lke(base_fixture, domain):
     base, sidebar = base_fixture
-
+    time.sleep(2)
     sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
                            do_assert=True, wait="lst")
 
@@ -138,10 +140,9 @@ def test_sorting_orders_lke(base_fixture, domain):
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)
 def test_sorting_orders_lkp(base_fixture, domain):
     base, sidebar = base_fixture
-
+    time.sleep(2)
     sidebar.move_and_click(move_to=sidebar.orders_old_hover_lkp, click_to=sidebar.ftl_list_button,
                            do_assert=True, wait="lst")
-    # base.click_button(base.reset_button, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
     sidebar.move_and_click(move_to=sidebar.orders_old_hover_lkp, click_to=sidebar.ftl_active_list_button,
@@ -246,7 +247,7 @@ def test_sorting_registries_lkz(base_fixture, domain):
 
 @allure.story("Extended test")
 @allure.feature('Сортировки')
-@allure.description('ЛКЭ. Тест сортировок списков реестров NEW по всем столбцам')
+@allure.description('ЛКЭ. Тест сортировок документов и списков реестров NEW по всем столбцам')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)
 def test_sorting_registries_lke(base_fixture, domain):
     base, sidebar = base_fixture
@@ -276,6 +277,51 @@ def test_sorting_registries_lkp(base_fixture, domain):
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
     sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.registries_client_list_button,
+                           do_assert=True, wait="lst")
+    base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
+
+
+@allure.story("Extended test")
+@allure.feature('Сортировки')
+@allure.description('ЛКЗ. Тест сортировок списков документов и застрахованных рейсов по всем столбцам')
+@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)
+def test_sorting_documents_lkz(base_fixture, domain):
+    base, sidebar = base_fixture
+
+    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.transport_doc_new_list_button,
+                           do_assert=True, wait="lst")
+
+    base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
+
+    # sidebar.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
+    #                       do_assert=True, wait="lst")
+    # insurers_list = InsurersList(base.driver)
+    # insurers_list.click_button(insurers_list.insurer_energy_inn)
+    # insurer = Insurer(base.driver)
+    # insurer.click_button(insurer.insured_orders_list, wait="lst")
+    # insurer.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
+
+
+@allure.story("Extended test")
+@allure.feature('Сортировки')
+@allure.description('ЛКЭ. Тест сортировок списков документов и застрахованных рейсов по всем столбцам')
+@pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)
+def test_sorting_documents_lke(base_fixture, domain):
+    base, sidebar = base_fixture
+
+    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.transport_doc_new_list_button,
+                           do_assert=True, wait="lst")
+    base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
+
+
+@allure.story("Extended test")
+@allure.feature('Сортировки')
+@allure.description('ЛКП. Тест сортировок списков документов и застрахованных рейсов по всем столбцам')
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)
+def test_sorting_documents_lkp(base_fixture, domain):
+    base, sidebar = base_fixture
+
+    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.transport_doc_new_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 

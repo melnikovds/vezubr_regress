@@ -35,9 +35,33 @@ class Login(Base):
         "com": "https://enter.vezubr.com/contour-join?contourCode=DgzHgntfhz",
         "ru": "https://enter.vezubr.ru/contour-join?contourCode=rPswPCnWwL"
     }
+    registration_urls_lkz_to_lkp = {
+        "com": "https://enter.vezubr.com/contour-join?contourCode=7ZqGz8CXcc",
+        "ru": "https://enter.vezubr.ru/contour-join?contourCode=hrVt6h4Gqn"
+    }
+    reset_password_link = {
+        "xpath": "(//a[contains(text(),'Восстановление пароля')])[1]",
+        "name": "reset_password_link"
+    }
+
+    reset_email_input = {
+        "xpath": "(//input[@type='text'])[1]",
+        "name": "reset_email_input"
+    }
+
+    reset_submit_button = {
+        "xpath": "(//button[@class='ant-btn ant-btn-primary'])[1]",
+        "name": "reset_submit_button"
+    }
+
+    reset_close_popup_button = {
+        "xpath": "(//button[@type='button'])[4]",
+        "name": "reset_close_popup_button"
+    }
 
     # Methods
     """Authorization"""
+
     def authorization(self, role: str) -> None:
         """
         Выполняет авторизацию пользователя на основе предоставленной роли.
@@ -64,6 +88,7 @@ class Login(Base):
         self.click_button(self.login_button)
 
     """ Open login page"""
+
     def registration_start(self) -> NoReturn:
         """
         Открывает страницу регистрации.
@@ -75,6 +100,7 @@ class Login(Base):
         self.driver.maximize_window()
 
     """ Get registration link"""
+
     def get_registration_url(self, domain: str) -> str:
         """
         Получает URL регистрации на основе заданного домена.
@@ -97,6 +123,7 @@ class Login(Base):
         return self.registration_urls[domain]
 
     """ Open login page via link"""
+
     def registration_via_link(self, domain: str) -> None:
         """
         Открывает страницу регистрации через ссылку, определенную для заданного домена.
@@ -109,6 +136,25 @@ class Login(Base):
 
         """
         registration_url = self.get_registration_url(domain)
+        self.driver.get(registration_url)
+        self.get_current_url()
+        self.driver.maximize_window()
+
+    """ Get registration link from LKZ to LKP"""
+
+    def get_registration_url_lkz_to_lkp(self, domain: str) -> str:
+        """
+        Получает URL регистрации от ЛКЗ к ЛКП на основе заданного домена.
+        """
+        return self.registration_urls_lkz_to_lkp[domain]
+
+    """ Open login page via link from LKZ to LKP"""
+
+    def registration_via_link_lkz_to_lkp(self, domain: str) -> None:
+        """
+        Открывает страницу регистрации через ссылку от ЛКЗ к ЛКП.
+        """
+        registration_url = self.get_registration_url_lkz_to_lkp(domain)
         self.driver.get(registration_url)
         self.get_current_url()
         self.driver.maximize_window()

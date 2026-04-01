@@ -1,5 +1,6 @@
 import allure
 import pytest
+import time
 from pages.producers_list_page import ProducersList
 from pages.transport_add_page import TransportAdd
 from pages.transports_list_page import TransportsList
@@ -94,7 +95,7 @@ def test_semitrailer_inner_edit_lke(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку транспортных средств
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.transports_list_button,
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.trailers_list_button,
                            do_assert=True, wait="lst")
     
     transports_list = TransportsList(base.driver)
@@ -160,7 +161,7 @@ def test_semitrailer_edit_lke(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку транспортных средств
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.transports_list_button,
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.trailers_list_button,
                            do_assert=True, wait="lst")
     
     transports_list = TransportsList(base.driver)
@@ -185,7 +186,7 @@ def test_semitrailer_edit_lke(base_fixture, domain):
     add_ts.click_button(add_ts.confirm_button, wait="form")
     # Редактирование транспортного средства
     add_ts.click_button(add_ts.edit_button)
-    add_ts.dropdown_without_input(add_ts.owner_types_select, "Аренда")
+    add_ts.dropdown_without_input(add_ts.owner_types_select, "Совместная собственность супругов")
     add_ts.dropdown_without_input(add_ts.vehicle_categories_select, "Автовоз")
     add_ts.backspace_and_input(add_ts.capacity_input, "40")
     add_ts.backspace_and_input(add_ts.height_from_ground_input, "5")
@@ -214,7 +215,7 @@ def test_tractor_inner_edit_lke(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку транспортных средств
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.transports_list_button,
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.tractors_list_button,
                            do_assert=True, wait="lst")
     
     transports_list = TransportsList(base.driver)
@@ -235,17 +236,32 @@ def test_tractor_inner_edit_lke(base_fixture, domain):
     # Заполнение данных о транспортном средстве
     add_ts.input_in_field(add_ts.plate_number_input, f"ВТЯГ-{base.get_timestamp()}")
     add_ts.input_in_field(add_ts.mark_model_input, "Тягач")
-    add_ts.dropdown_without_input(add_ts.owner_types_select, "Аренда")
     add_ts.dropdown_without_input(add_ts.year_select, "2019")
+    add_ts.dropdown_without_input(add_ts.owner_types_select, "Аренда")
+    add_ts.input_in_field(add_ts.owner_document_name, value='название документа')
+    add_ts.input_in_field(add_ts.owner_document_number, value='№-10233')
+    add_ts.input_in_field(add_ts.owner_document_inn, value='2465296844')
+    add_ts.click_button(add_ts.owner_document_date)
+    time.sleep(1)
+    add_ts.click_button(add_ts.owner_document_date_today)
+    add_ts.input_in_field(add_ts.owner_document_organization, value='организация ДСК')
+
     add_ts.dropdown_without_input(add_ts.first_pass_type_select, "МКАД", index=1)
-    add_ts.click_button(add_ts.tractor_first_pass_date_button)
-    add_ts.input_in_field(add_ts.calendar_input, "10102045")
+    add_ts.click_button(add_ts.calendar_select_one)
+    add_ts.input_in_field(add_ts.input_date_button_one, "11102045", press_enter=True)
+    # add_ts.click_button(add_ts.tractor_first_pass_date_button)
+    # add_ts.input_in_field(add_ts.calendar_input, "10102045")
     add_ts.dropdown_without_input(add_ts.second_pass_type_select, "СК", index=2)
-    add_ts.click_button(add_ts.tractor_second_pass_date_button)
-    add_ts.input_in_field(add_ts.calendar_input, "10102045")
+    add_ts.click_button(add_ts.calendar_select_two)
+    add_ts.input_in_field(add_ts.input_date_button_two, "11112045", press_enter=True)
+    # add_ts.click_button(add_ts.tractor_second_pass_date_button)
+    # add_ts.input_in_field(add_ts.calendar_input, "10102045")
     add_ts.dropdown_without_input(add_ts.third_pass_type_select, "ТТК", index=3)
-    add_ts.click_button(add_ts.tractor_third_pass_date_button)
-    add_ts.input_in_field(add_ts.calendar_input, "10102045")
+    add_ts.click_button(add_ts.calendar_select_three)
+    add_ts.input_in_field(add_ts.input_date_button_three, "11122045", press_enter=True)
+    # add_ts.click_button(add_ts.tractor_third_pass_date_button)
+    # add_ts.input_in_field(add_ts.calendar_input, "10102045")
+
     add_ts.click_button(add_ts.gps_monitoring_toggl)
     # Создание транспортного средства
     add_ts.click_button(add_ts.create_tractor_button, do_assert=True)
@@ -254,9 +270,18 @@ def test_tractor_inner_edit_lke(base_fixture, domain):
     add_ts.click_button(add_ts.edit_button)
     add_ts.dropdown_without_input(add_ts.year_select, "2021")
     add_ts.dropdown_without_input(add_ts.owner_types_select, "Лизинг")
-    add_ts.move_and_click(move_to=add_ts.third_pass_type_select, click_to=add_ts.close_circle_button, click_index=9)
-    add_ts.move_and_click(move_to=add_ts.second_pass_type_select, click_to=add_ts.close_circle_button, click_index=7)
-    add_ts.move_and_click(move_to=add_ts.first_pass_type_select, click_to=add_ts.close_circle_button, click_index=5)
+    # add_ts.move_and_click(move_to=add_ts.third_pass_type_select, click_to=add_ts.close_circle_button, click_index=9)
+    # add_ts.move_and_click(move_to=add_ts.second_pass_type_select, click_to=add_ts.close_circle_button, click_index=7)
+    # add_ts.move_and_click(move_to=add_ts.first_pass_type_select, click_to=add_ts.close_circle_button, click_index=5)
+    add_ts.move_to_element(add_ts.third_pass_type_select)
+    time.sleep(1)
+    add_ts.click_on_the_cross(add_ts.cross_pass_type_two)
+
+    add_ts.move_to_element(add_ts.second_pass_type_select)
+    time.sleep(1)
+    add_ts.click_on_the_cross(add_ts.cross_pass_type_one)
+
+    time.sleep(1)
     add_ts.click_button(add_ts.gps_monitoring_toggl)
     # Сохранение внесенных изменений транспортного средства
     add_ts.click_button(add_ts.edit_confirm_tractor_button, do_assert=True)

@@ -127,7 +127,7 @@ def test_tractor1_add_lke(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку транспортных средств
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.transports_list_button,
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.tractors_list_button,
                            do_assert=True, wait="lst")
     
     transports_list = TransportsList(base.driver)
@@ -175,7 +175,7 @@ def test_tractor2_add_lke(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку транспортных средств
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.transports_list_button,
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.tractors_list_button,
                            do_assert=True, wait="lst")
     
     transports_list = TransportsList(base.driver)
@@ -289,7 +289,7 @@ def test_trailer_inner_add_lke(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку транспортных средств
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.transports_list_button,
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.trailers_list_button,
                            do_assert=True, wait="lst")
     
     transports_list = TransportsList(base.driver)
@@ -349,7 +349,7 @@ def test_tractor1_inner_add_lke(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку транспортных средств
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.transports_list_button,
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.tractors_list_button,
                            do_assert=True, wait="lst")
     
     transports_list = TransportsList(base.driver)
@@ -405,7 +405,7 @@ def test_tractor2_inner_add_lke(base_fixture, domain):
     base, sidebar = base_fixture
     
     # Переход к списку транспортных средств
-    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.transports_list_button,
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.tractors_list_button,
                            do_assert=True, wait="lst")
     
     transports_list = TransportsList(base.driver)

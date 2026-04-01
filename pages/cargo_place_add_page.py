@@ -329,8 +329,6 @@ class CargoPlaceAdd(Base):
     }
 
 
-
-
     lke_cp_title_edit = {
         "xpath": "(//input[@type='text'])[5]",
         "name": "lke_cp_title_edit"
@@ -394,8 +392,6 @@ class CargoPlaceAdd(Base):
         # Выбор статуса грузоместа
         self.dropdown_without_input(self.lkz_cp_status_select, "Новое")
 
-
-
         # Ввод адресов отправления и доставки
         self.click_button(self.departure_address_select)
         time.sleep(3)
@@ -430,7 +426,7 @@ class CargoPlaceAdd(Base):
         self.click_button(self.confirm_add_button, wait="lst")
         
         return cp_stamp
-    
+
     def add_base_cargo_place_lke(self) -> str:
         """
         Автоматизирует добавление грузоместа в систему, заполняя основные поля и выбирая опции из выпадающих списков.
@@ -458,11 +454,31 @@ class CargoPlaceAdd(Base):
         self.input_in_field(self.lke_bar_code_input, cp_stamp)  # Штрихкод
         # Выбор статуса грузоместа "Новое"
         self.dropdown_without_input(self.lke_cp_status_select, "Новое")
-        # Ввод адресов отправления и доставки
-        self.dropdown_with_input(self.departure_address_select,
-                                             "Свердловская обл, г Верхняя Пышма, Успенский пр-кт, д 103а")
-        self.dropdown_with_input(self.delivery_address_select,
-                                             "Свердловская обл, г Березовский, ул Театральная, д 13")
+
+        # # Ввод адресов отправления и доставки
+        # self.dropdown_with_input(self.departure_address_select,
+        #                                      "г Петрозаводск, р-н Ключевая")
+        # self.dropdown_with_input(self.delivery_address_select,
+        #                                      "г Гатчина, ул Карла Маркса")
+        self.click_button(self.departure_address_select)
+        time.sleep(3)
+        self.input_in_field(self.factual_address,"г Петрозаводск, р-н Ключевая")
+        time.sleep(1)
+        self.click_button(self.radio_button_first_address, wait_type="located")
+        time.sleep(1)
+        self.scroll_to_element(self.save_selected_address)
+        self.click_button(self.save_selected_address)
+        time.sleep(1)
+        self.click_button(self.delivery_address_select)
+        time.sleep(3)
+        self.input_in_field(self.factual_address,"г Гатчина, ул Карла Маркса")
+        time.sleep(1)
+        self.click_button(self.radio_button_first_address, wait_type="located")
+        time.sleep(1)
+        self.scroll_to_element(self.save_selected_address)
+        self.click_button(self.save_selected_address)
+        time.sleep(1)
+
         # Клик по кнопке создания грузоместа
         self.click_button(self.create_cargo_place_button, do_assert=True)
         # Клик по кнопке подтверждения добавления
@@ -533,7 +549,7 @@ class CargoPlaceAdd(Base):
         # self.click_button(self.confirm_add_button, wait="lst")
         self.click_button(self.confirm_cargo_place_create_button, do_assert=True)
         return cp_stamp
-    
+
     def add_full_cargo_place_lke(self) -> str:
         """
         Автоматизирует добавление грузоместа в систему, заполняя поля и выбирая опции из выпадающих списков.
@@ -571,10 +587,29 @@ class CargoPlaceAdd(Base):
         self.input_in_field(self.lke_external_id_input, cp_stamp)  # Внешний ID
         self.input_in_field(self.lke_comment_input, cp_stamp)  # Комментарий
         # Ввод адресов отправления и доставки
-        self.dropdown_with_input(self.departure_address_select,
-                                             "Свердловская обл, г Верхняя Пышма, Успенский пр-кт, д 103а")
-        self.dropdown_with_input(self.delivery_address_select,
-                                             "Свердловская обл, г Березовский, ул Театральная, д 13")
+        self.click_button(self.departure_address_select)
+        time.sleep(3)
+        self.input_in_field(self.factual_address,"ул Маршала Захарова, д 17")
+        time.sleep(1)
+        self.click_button(self.radio_button_first_address, wait_type="located")
+        time.sleep(1)
+        self.scroll_to_element(self.save_selected_address)
+        self.click_button(self.save_selected_address)
+        time.sleep(1)
+        self.click_button(self.delivery_address_select)
+        time.sleep(3)
+        self.input_in_field(self.factual_address,"Победы-Софийская пл")
+        time.sleep(1)
+        self.click_button(self.radio_button_first_address, wait_type="located")
+        time.sleep(1)
+        self.scroll_to_element(self.save_selected_address)
+        self.click_button(self.save_selected_address)
+        time.sleep(1)
+        # self.dropdown_with_input(self.departure_address_select,
+        #                                      "Свердловская обл, г Верхняя Пышма, Успенский пр-кт, д 103а")
+        # self.dropdown_with_input(self.delivery_address_select,
+        #                                      "Свердловская обл, г Березовский, ул Театральная, д 13")
+
         # Клик по кнопке создания грузоместа
         self.click_button(self.create_cargo_place_button, do_assert=True)
         # Клик по кнопке подтверждения добавления

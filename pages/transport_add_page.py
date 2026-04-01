@@ -333,3 +333,62 @@ class TransportAdd(Base):
         ]
         for button in buttons_to_click:
             self.click_button(button)
+
+    """Документы подтверждающие собственность"""
+    owner_document_name = {
+        "xpath": "//input[@name='title']",
+        "name": "owner_document_name"
+    }
+    owner_document_number = {
+        "xpath": "//input[@name='documentNr']",
+        "name": "owner_document_number"
+    }
+    owner_document_date = {
+        "xpath": "//input[@placeholder='дд.мм.гггг']",
+        "name": "owner_document_date"
+    }
+    owner_document_inn = {
+        "xpath": "//input[@name='ownerInn']",
+        "name": "owner_document_inn"
+    }
+    owner_document_organization = {
+        "xpath": "//input[@name='ownerTitle']",
+        "name": "owner_document_organization"
+    }
+    owner_document_date_today = {
+        "xpath": "//a[contains(text(),'Сегодня')]",
+        "name": "owner_document_date_today"
+    }
+    calendar_select_one = {
+        "xpath": "//div[@class='transport-form__tabs']//div[1]//div[1]//div[2]//label[1]//div[1]//div[1]//span[1]//div[1]//input[1]",
+        "name": "calendar_select_one"
+    }
+    calendar_select_two = {
+        "xpath": "//div[@class='vz-form-group']//div//div[2]//div[1]//div[2]//label[1]//div[1]//div[1]//span[1]//div[1]//input[1]",
+        "name": "calendar_select_two"
+    }
+    calendar_select_three = {
+        "xpath": "//div[@class='transport-form__wrapper']//div[3]//div[1]//div[2]//label[1]//div[1]//div[1]//span[1]//div[1]//input[1]",
+        "name": "calendar_select_three"
+    }
+    input_date_button_one = {
+        "xpath": "//input[contains(@class,'ant-calendar-input')]",
+        "name": "input_date_button_one"
+    }
+    input_date_button_two = {
+        "xpath": "//input[contains(@class,'ant-calendar-input')]",
+        "name": "input_date_button_two"
+    }
+    input_date_button_three = {
+        "xpath": "//input[contains(@class,'ant-calendar-input')]",
+        "name": "input_date_button_three"
+    }
+    cross_pass_type_one = {
+        "xpath": "//div[@class='vz-form-group']//div//div[2]//div[1]//div[1]//label[1]//div[1]//div[1]//div[1]//div[1]//span[1]//i[1]//*[name()='svg']//*[name()='path' and contains(@d,'M512 64C26')]",
+        "name": "cross_pass_type_one"
+    }
+    cross_pass_type_two = {
+        "xpath": "//div[@class='vz-form-group']//div[3]//div[1]//div[1]//label[1]//div[1]//div[1]//div[1]//div[1]//span[1]//i[1]//*[name()='svg']//*[name()='path' and contains(@d,'M512 64C26')]",
+        "name": "cross_pass_type_two"
+    }
+

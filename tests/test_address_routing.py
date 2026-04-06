@@ -156,6 +156,7 @@ def test_address_routing_two_lkz(base_fixture, domain):
 
     # Проверяем отсутствие созданного графика работы
     add.click_button(add.schedule_tab)
+    time.sleep(1)
     add.verify_text_on_page(text='11:35 - 12:45', should_exist=False)
     add.verify_text_on_page(text='06:28 - 07:55', should_exist=False)
     add.verify_text_on_page(text='20:37 - 21:52', should_exist=False)

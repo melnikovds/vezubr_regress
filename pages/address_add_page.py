@@ -127,16 +127,28 @@ class AddressAdd(Base):
     }
     confirm_button = {
         "xpath": "//button[.//span[text()='OK']]",
-        "name": "create_button"
+        "name": "confirm_button"
     }
     delete_button = {
         "xpath": "//button[contains(., 'Удалить')]",
         "name": "delete_button",
-        "reference_xpath": "//span[@class='ant-modal-confirm-title' and text()='Адрес удален']",
+        "reference_xpath": "//span[@class='ant-modal-confirm-title' and text()='Подтвердите действие']",
+        "reference": "Подтвердите действие"
+    }
+    delete_ok_button = {
+        "xpath": "//button[@class='ant-btn ant-btn-primary']",
+        "name": "delete_ok_button",
+        "reference_xpath": "//span[@class='ant-modal-confirm-title']",
         "reference": "Адрес удален"
     }
+
+
+    # edit_button = {
+    #     "xpath": "//button[contains(., 'Редакировать')]",
+    #     "name": "edit_button"
+    # }
     edit_button = {
-        "xpath": "//button[contains(., 'Редакировать')]",
+        "xpath": "//div[@class='address-detail__actions']//button[1]",
         "name": "edit_button"
     }
     general_tab = {

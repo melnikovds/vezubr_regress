@@ -56,8 +56,14 @@ def test_transport_add_lke(base_fixture, domain):
     time.sleep(1)
     add_ts.click_button(add_ts.action_menu_button)
     add_ts.click_button(add_ts.suspend_button, wait="form")
+    add_ts.refresh_page()
+    time.sleep(3)
+    add_ts.verify_text_on_page(text='временно приостановлена', should_exist=True)
     add_ts.click_button(add_ts.action_menu_button)
     add_ts.click_button(add_ts.resume_button, wait="form")
+    add_ts.refresh_page()
+    time.sleep(3)
+    add_ts.verify_text_on_page(text='временно приостановлена', should_exist=False)
     add_ts.click_button(add_ts.action_menu_button)
     add_ts.click_button(add_ts.exploitation_finish_button)
     add_ts.click_button(add_ts.yes_button, do_assert=True)
@@ -112,8 +118,14 @@ def test_trailer_add_lke(base_fixture, domain):
     time.sleep(1)
     add_ts.click_button(add_ts.action_menu_button)
     add_ts.click_button(add_ts.suspend_button, wait="form")
+    add_ts.refresh_page()
+    time.sleep(3)
+    add_ts.verify_text_on_page(text='временно приостановлена', should_exist=True)
     add_ts.click_button(add_ts.action_menu_button)
     add_ts.click_button(add_ts.resume_button, wait="form")
+    add_ts.refresh_page()
+    time.sleep(3)
+    add_ts.verify_text_on_page(text='временно приостановлена', should_exist=False)
     # Конец теста
 
 
@@ -160,8 +172,14 @@ def test_tractor1_add_lke(base_fixture, domain):
     time.sleep(1)
     add_ts.click_button(add_ts.action_menu_button)
     add_ts.click_button(add_ts.suspend_button, wait="form")
+    add_ts.refresh_page()
+    time.sleep(3)
+    add_ts.verify_text_on_page(text='временно приостановлена', should_exist=True)
     add_ts.click_button(add_ts.action_menu_button)
     add_ts.click_button(add_ts.resume_button, wait="form")
+    add_ts.refresh_page()
+    time.sleep(3)
+    add_ts.verify_text_on_page(text='временно приостановлена', should_exist=False)
     # Конец теста
 
 
@@ -269,8 +287,14 @@ def test_transport_inner_add_lke(base_fixture, domain):
     time.sleep(1)
     add_ts.click_button(add_ts.action_menu_button)
     add_ts.click_button(add_ts.suspend_button, wait="form")
+    add_ts.refresh_page()
+    time.sleep(3)
+    add_ts.verify_text_on_page(text='временно приостановлена', should_exist=True)
     add_ts.click_button(add_ts.action_menu_button)
     add_ts.click_button(add_ts.resume_button, wait="form")
+    add_ts.refresh_page()
+    time.sleep(3)
+    add_ts.verify_text_on_page(text='временно приостановлена', should_exist=False)
     add_ts.click_button(add_ts.action_menu_button)
     add_ts.click_button(add_ts.exploitation_finish_button)
     add_ts.click_button(add_ts.yes_button, do_assert=True)
@@ -333,8 +357,14 @@ def test_trailer_inner_add_lke(base_fixture, domain):
     time.sleep(1)
     add_ts.click_button(add_ts.action_menu_button)
     add_ts.click_button(add_ts.suspend_button, wait="form")
+    add_ts.refresh_page()
+    time.sleep(3)
+    add_ts.verify_text_on_page(text='временно приостановлена', should_exist=True)
     add_ts.click_button(add_ts.action_menu_button)
     add_ts.click_button(add_ts.resume_button, wait="form")
+    add_ts.refresh_page()
+    time.sleep(3)
+    add_ts.verify_text_on_page(text='временно приостановлена', should_exist=False)
     # Конец теста
 
 
@@ -390,8 +420,14 @@ def test_tractor1_inner_add_lke(base_fixture, domain):
     time.sleep(1)
     add_ts.click_button(add_ts.action_menu_button)
     add_ts.click_button(add_ts.suspend_button, wait="form")
+    add_ts.refresh_page()
+    time.sleep(3)
+    add_ts.verify_text_on_page(text='временно приостановлена', should_exist=True)
     add_ts.click_button(add_ts.action_menu_button)
     add_ts.click_button(add_ts.resume_button, wait="form")
+    add_ts.refresh_page()
+    time.sleep(3)
+    add_ts.verify_text_on_page(text='временно приостановлена', should_exist=False)
     # Конец теста
 
 

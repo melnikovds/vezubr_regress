@@ -1,3 +1,5 @@
+import random
+import string
 from typing import NoReturn
 from base.base_class import Base
 
@@ -391,4 +393,40 @@ class TransportAdd(Base):
         "xpath": "//div[@class='vz-form-group']//div[3]//div[1]//div[1]//label[1]//div[1]//div[1]//div[1]//div[1]//span[1]//i[1]//*[name()='svg']//*[name()='path' and contains(@d,'M512 64C26')]",
         "name": "cross_pass_type_two"
     }
+
+
+    vin_number = {
+        "xpath": "//input[@placeholder='VIN']",
+        "name": "vin_number"
+    }
+
+    def generate_vin(self):
+        """Генерирует VIN номер автомобиля"""
+
+        vin_chars = "ABCDEFGHJKLMNPRSTUVWXYZ0123456789"
+
+        translit = {
+            **{str(i): i for i in range(10)},
+            **dict(zip("ABCDEFGHJKLMNPRSTUVWXYZ",
+                       [1,2,3,4,5,6,7,8,1,2,3,4,5,7,9,2,3,4,5,6,7,8,9]))
+        }
+
+        weights = [8, 7, 6, 5, 4, 3, 2, 10, 0,
+                   9, 8, 7, 6, 5, 4, 3, 2]
+
+        # генерируем VIN с заглушкой
+        vin = [random.choice(vin_chars) for _ in range(17)]
+        vin[8] = '0'  # временно
+
+        # считаем check digit
+        total = 0
+        for i, char in enumerate(vin):
+            total += translit[char] * weights[i]
+
+        remainder = total % 11
+        vin[8] = 'X' if remainder == 10 else str(remainder)
+
+        return ''.join(vin)
+
+
 

@@ -78,7 +78,8 @@ def test_address_add_lkz(base_fixture, domain):
 
     # Удаление созданного адреса
     add_address.click_button(add_address.delete_button, do_assert=True)
-    add_address.click_button(add_address.confirm_button, wait="lst")
+    add_address.click_button(add_address.delete_ok_button, wait="lst", do_assert=True)
+    # add_address.click_button(add_address.confirm_button, wait="lst")
     # Конец теста
 
 
@@ -151,5 +152,6 @@ def test_address_add_lke(base_fixture, domain):
 
     # Удаление созданного адреса
     add_address.click_button(add_address.delete_button, do_assert=True)
-    add_address.click_button(add_address.confirm_button, wait="lst")
+    add_address.click_button(add_address.delete_ok_button, wait="lst", do_assert=True)
+    # add_address.click_button(add_address.confirm_button, wait="lst")
     # Конец теста

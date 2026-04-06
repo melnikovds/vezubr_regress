@@ -1,5 +1,5 @@
 import time
-
+import random
 from base.base_class import Base
 
 
@@ -205,10 +205,60 @@ class DriverAdd(Base):
         "name": "never_delegate_toggl"
     }
 
-
     contractor_name = {
         "xpath": "//div[@class='table-filters-main-zone']//div[2]//div[1]//div[2]//div[1]//span[1]//span[1]//input[1]",
         "name": "contractor_name"
+    }
+
+    tab_personal_data = {
+        "xpath": "//a[contains(text(),'Личные данные')]",
+        "name": "tab_personal_data"
+    }
+    tab_passport = {
+        "xpath": "//a[contains(text(),'Паспорт')]",
+        "name": "tab_passport"
+    }
+    tab_license = {
+        "xpath": "//a[contains(text(),'ВУ')]",
+        "name": "tab_license"
+    }
+    tab_history = {
+        "xpath": "",
+        "name": "tab_history"
+    }
+
+    """Driver EPD"""
+    signatory_epd_toggl = {
+        "xpath": "//button[@id='canSignDocument']",
+        "name": "signatory_epd_toggl"
+    }
+    inn = {
+        "xpath": "//input[@id='inn']",
+        "name": "inn"
+    }
+    snils = {
+        "xpath": "//input[@id='snils']",
+        "name": "snils"
+    }
+    driver_position = {
+        "xpath": "//input[@id='position']",
+        "name": "driver_position"
+    }
+    confirmation_method = {
+        "xpath": "//div[@id='confirmationType']//div[@class='ant-select-selection__rendered']",
+        "name": "confirmation_method"
+    }
+    attorney_date = {
+        "xpath": "//span[@id='attorneyDate']//input[@placeholder='дд.мм.гггг']",
+        "name": "attorney_date"
+    }
+    attorney_date_today = {
+        "xpath": "//a[contains(text(),'Сегодня')]",
+        "name": "attorney_date_today"
+    }
+    attorney_number = {
+        "xpath": "//input[@id='attorneyNumber']",
+        "name": "attorney_number"
     }
 
     # Methods
@@ -291,3 +341,5 @@ class DriverAdd(Base):
         self.click_button(self.confirm_button, wait="lst")
         
         return surname
+
+

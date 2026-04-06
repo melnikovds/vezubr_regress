@@ -1349,6 +1349,33 @@ class Base:
         else:
             raise ValueError("Тип должен быть 'individual' или 'entity'")
 
+    @staticmethod
+    def generate_snils(only_digits=False):
+
+        while True:
+            number = [random.randint(0, 9) for _ in range(9)]
+            if any(number):
+                break
+
+        total = sum(num * (9 - idx) for idx, num in enumerate(number))
+
+        if total < 100:
+            check = total
+        elif total in (100, 101):
+            check = 0
+        else:
+            check = total % 101
+            if check == 100:
+                check = 0
+
+        snils_number = ''.join(map(str, number))
+        check_str = f"{check:02d}"
+
+        if only_digits:
+            return f"{snils_number}{check_str}"
+
+        return f"{snils_number[:3]}-{snils_number[3:6]}-{snils_number[6:9]} {check_str}"
+
     def click_multiple_buttons(self, button_element: Dict[str, str], num_clicks: int = 1,
                                wait: Optional[str] = None, start_index: int = 1) -> None:
         """

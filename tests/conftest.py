@@ -3,9 +3,9 @@ import allure
 import pytest
 import requests
 from utilities.generator_old_ftl import GeneratorFTL
-from pages.login import accounts
+from pages.login import accounts, admin_credentials
 from tests.base_test import base_test_with_login, base_test_without_login, base_test_with_login_via_link
-
+from tests.conftest_api import *
 
 def pytest_addoption(parser):
     parser.addoption("--domain", choices=['dev', 'com', 'ru'], action="store", default="com",
@@ -82,8 +82,6 @@ def base_fixture(request, domain):
     else:
         yield base, sidebar
 
-    # 🔽 ВСЁ, что ниже — финализатор (выполняется после теста и всех хуков)
-
     # Закрываем драйвер ТОЛЬКО здесь — после скриншота
     if hasattr(base, 'driver') and base.driver is not None:
         try:
@@ -131,7 +129,7 @@ def create_entities(api_base_url, api_login):
         if result:
             entity_results.append(result)
         else:
-            entity_results.append({})  # Если ошибка, добавляем пустой словарь
+            entity_results.append({})
         time.sleep(5)
 
     lkz_a_one = entity_results[0].get("requestNr")
@@ -160,3 +158,28 @@ def create_entities(api_base_url, api_login):
     lkz_e_four = entity_results[4].get("clientNumber")
 
     return locals()
+
+
+@pytest.fixture
+def admin_fixture(domain):
+    """Фикстура специально для админки (открывает страницу логина админки)"""
+    from base.base_class import Base
+
+    base = Base.get_driver()
+
+    # Открываем страницу логина админки
+    admin_login_url = f"https://admin.vezubr.{domain}/login"
+    base.driver.get(admin_login_url)
+
+    yield base
+
+    # Закрываем драйвер после теста
+    if hasattr(base, 'driver') and base.driver is not None:
+        try:
+            base.driver.quit()
+        except:
+            pass
+        finally:
+            base.driver = None
+
+

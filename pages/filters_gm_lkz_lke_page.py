@@ -182,7 +182,6 @@ class GmFilters(Base):
         "name": "status_modified"
     }
 
-
     task_status = {
         "xpath": "//div[@id='status']//div[@class='ant-select-selection__rendered']//div[1]",
         "name": "task_status"
@@ -208,12 +207,10 @@ class GmFilters(Base):
         "name": "task_cross"
     }
 
-
     first_task_click = {
         "xpath": "//a[@class='link-back'][normalize-space()='1']",
         "name": "first_task_click"
     }
-
 
     def to_whom_aplication(self) -> NoReturn:
         self.dropdown_without_input(self.to_aplication, "Маршрутизация Везубр")

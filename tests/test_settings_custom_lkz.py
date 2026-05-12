@@ -25,8 +25,8 @@ def test_one_custom_settings_lkz(base_fixture, domain):
     settings.click_button(settings.custom_fields_tab)
 
     # клик по кнопке добавления поля
-    settings.click_button(settings.add_field_button)
     add_param = CustomFieldsParam(base.driver)
+    add_param.click_button(add_param.add_field_button)
 
     # добавляем кастомное поле
     add_param.input_in_field(add_param.add_ru, value="амбрелла")
@@ -125,8 +125,8 @@ def test_two_custom_settings_lkz(base_fixture, domain):
     settings.click_button(settings.custom_fields_tab)
 
     # клик по кнопке добавления поля
-    settings.click_button(settings.add_field_button)
     add_param = CustomFieldsParam(base.driver)
+    add_param.click_button(add_param.add_field_button)
 
     # ввод данных кастомного поля
     # add_param.backspace_and_input(add_param.add_ru, value="З24-05485")

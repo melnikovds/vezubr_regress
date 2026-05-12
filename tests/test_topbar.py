@@ -1,16 +1,272 @@
 import allure
 import pytest
 import time
+from pages.settings_page import Settings
+from pages.settings_page import PersonalSettingsParams
+from pages.topbar import TopBar
 
 
-# ЭТИ ТЕСТЫ НАДО ПЕРЕДЕЛАТЬ НА ТОПБАР
+@allure.story("Extended test")
+@allure.feature('Верхнее меню')
+@allure.description('ЛКЗ. Тест верхнего меню: переход по всем вкладкам, '
+                    'ожидание прогрузки, проверка вкладки по названию')
+@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
+def test_topbar_lkz(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
 
-@allure.story("Smoke test")
+    # Переход в раздел 'Настройки'
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.settings_button,
+                           do_assert=True)
+
+    time.sleep(2)
+    settings = Settings(base.driver)
+    # переход в таб 'Настройки компании'
+    settings.click_button(settings.custom_fields_tab)
+    settings.click_button(settings.personal_settings_tab)
+
+    # добавление разделов верхнего меню №1
+    add_param = PersonalSettingsParams(base.driver)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Мониторинг FTL Заявок')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Заявки')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Задания')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+
+    # переход по вкладкам верхнего меню №1
+    tb = TopBar(base.driver)
+    tb.click_button(tb.delivery_monitor_button)
+    time.sleep(1)
+    tb.click_button(tb.new_order_hover)
+    time.sleep(1)
+    tb.click_button(tb.new_delivery_request_button, do_assert=True)
+    time.sleep(1)
+    tb.click_button(tb.requests_hover)
+    time.sleep(1)
+    tb.click_button(tb.cdr_active_list_button, do_assert=True)
+    time.sleep(1)
+    tb.refresh_page()
+    time.sleep(3)
+    tb.click_button(tb.assignments_hover)
+    time.sleep(1)
+    tb.click_button(tb.tasks_list_button, do_assert=True)
+    time.sleep(1)
+
+    add_param.refresh_page()
+    time.sleep(3)
+
+    # Переход в раздел 'Настройки'
+    sidebar.click_button(sidebar.sidebar_button)
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.settings_button,
+                           do_assert=True)
+    time.sleep(2)
+
+    # переход в таб 'Настройки компании'
+    settings.click_button(settings.custom_fields_tab)
+    settings.click_button(settings.personal_settings_tab)
+
+    # удаление разделов верхнего меню №1
+    add_param = PersonalSettingsParams(base.driver)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Мониторинг FTL Заявок')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Заявки')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Задания')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+
+
+@allure.story("Extended test")
+@allure.feature('Верхнее меню')
+@allure.description('ЛКЭ. Тест верхнего меню: переход по всем вкладкам, '
+                    'ожидание прогрузки, проверка вкладки по названию')
+@pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
+def test_topbar_lke(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # Переход в раздел 'Настройки'
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.settings_button,
+                           do_assert=True)
+
+    time.sleep(2)
+    settings = Settings(base.driver)
+    # переход в таб 'Настройки компании'
+    settings.click_button(settings.custom_fields_tab)
+    settings.click_button(settings.personal_settings_tab)
+
+    # добавление разделов верхнего меню №1
+    add_param = PersonalSettingsParams(base.driver)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Контрагенты')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Документооборот')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Справочники')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+
+    # переход по вкладкам верхнего меню №1
+    tb = TopBar(base.driver)
+    tb.click_button(tb.contractor_hover)
+    time.sleep(1)
+    tb.click_button(tb.clients_list_button, do_assert=True)
+    time.sleep(1)
+    tb.click_button(tb.documents_hover)
+    time.sleep(1)
+    tb.click_button(tb.registries_client_list_button, do_assert=True)
+    time.sleep(1)
+    tb.click_button(tb.directories_hover)
+    time.sleep(1)
+    tb.click_button(tb.addresses_list_button, do_assert=True)
+    time.sleep(1)
+
+    add_param.refresh_page()
+    time.sleep(3)
+
+    # Переход в раздел 'Настройки'
+    sidebar.click_button(sidebar.sidebar_button)
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.settings_button,
+                           do_assert=True)
+    time.sleep(2)
+
+    # переход в таб 'Настройки компании'
+    settings.click_button(settings.custom_fields_tab)
+    settings.click_button(settings.personal_settings_tab)
+
+    # удаление разделов верхнего меню №1
+    add_param = PersonalSettingsParams(base.driver)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Контрагенты')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Документооборот')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Справочники')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+
+
+@allure.story("Extended test")
+@allure.feature('Верхнее меню')
+@allure.description('ЛКП. Тест верхнего меню: переход по всем вкладкам, '
+                    'ожидание прогрузки, проверка вкладки по названию')
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
+def test_topbar_lkp(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # Переход в раздел 'Настройки'
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.settings_button,
+                           do_assert=True)
+
+    time.sleep(2)
+    settings = Settings(base.driver)
+    # переход в таб 'Настройки компании'
+    settings.click_button(settings.custom_fields_tab)
+    settings.click_button(settings.personal_settings_tab)
+
+    # добавление разделов верхнего меню №1
+    add_param = PersonalSettingsParams(base.driver)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Рейсы OLD версия')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Профиль')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Настройки')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+
+    # переход по вкладкам верхнего меню №1
+    tb = TopBar(base.driver)
+    tb.click_button(tb.orders_old_hover)
+    time.sleep(1)
+    tb.click_button(tb.ftl_active_list_button, do_assert=True)
+    time.sleep(1)
+    tb.click_button(tb.profile_button, do_assert=True)
+    time.sleep(1)
+    tb.click_button(tb.settings_button, do_assert=True)
+    time.sleep(1)
+
+    add_param.refresh_page()
+    time.sleep(3)
+
+    # Переход в раздел 'Настройки'
+    sidebar.click_button(sidebar.sidebar_button)
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.settings_button,
+                           do_assert=True)
+    time.sleep(2)
+
+    # переход в таб 'Настройки компании'
+    settings.click_button(settings.custom_fields_tab)
+    settings.click_button(settings.personal_settings_tab)
+
+    # удаление разделов верхнего меню №1
+    add_param = PersonalSettingsParams(base.driver)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Рейсы OLD версия')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Профиль')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+    add_param.dropdown_without_input(add_param.customizing_top_menu, option_text='Настройки')
+    time.sleep(1)
+    add_param.refresh_page()
+    time.sleep(3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@allure.story("Extended test")
 @allure.feature('Боковое меню')
 @allure.description('ЛКЗ. Тест бокового меню: переход по всем вкладкам, '
                     'ожидание прогрузки, проверка вкладки по названию')
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
-def test_sidebar_lkz(base_fixture, domain):
+def test_sidebar_old_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
 
@@ -94,12 +350,12 @@ def test_sidebar_lkz(base_fixture, domain):
     # # Конец теста
 
 
-@allure.story("Smoke test")
+@allure.story("Extended test")
 @allure.feature('Боковое меню')
 @allure.description('ЛКЭ. Тест бокового меню: переход по всем вкладкам, ожидание прогрузки, '
                     'проверка вкладки по названию')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
-def test_sidebar_lke(base_fixture, domain):
+def test_sidebar_old_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
 
@@ -194,12 +450,12 @@ def test_sidebar_lke(base_fixture, domain):
     # # Конец теста
 
 
-@allure.story("Smoke test")
+@allure.story("Extended test")
 @allure.feature('Боковое меню')
 @allure.description('ЛКП. Тест бокового меню: '
                     'переход по всем вкладкам, ожидание прогрузки, проверка вкладки по названию')
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
-def test_sidebar_lkp(base_fixture, domain):
+def test_sidebar_old_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
 

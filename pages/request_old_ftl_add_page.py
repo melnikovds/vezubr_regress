@@ -75,6 +75,17 @@ class FTLAdd(Base):
         "xpath": "(//span[@class='ant-radio'])[2]",
         "name": "select_first_radio"
     }
+
+    third_address_select = {
+        "xpath": "//a[@id='order-address-1']//span[@class='vz-address-modern-favorite__icon']",
+        "name": "third_address_select"
+    }
+    fourth_address_select = {
+        "xpath": "//a[@id='order-address-2']//span[@class='vz-address-modern-favorite__icon']",
+        "name": "fourth_address_select"
+    }
+
+
     address_filter = {
         "xpath": "//input[@placeholder='Введите Адрес']",
         "name": "address_filter"

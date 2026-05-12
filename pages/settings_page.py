@@ -7,21 +7,49 @@ class Settings(Base):
         self.driver = driver
 
     # Locators
-    notifications_field_tab = {
-        "xpath": "//a[@href='/settings/notification']",
-        "name": "notifications_field",
-        "reference_xpath": "Настройки уведомлений"
+    personal_settings_tab = {
+        "xpath": "//a[@class='vz-tabs-modern__item matched']",
+        "name": "personal_settings_tab",
+        "reference_xpath": ""
+    }
+    company_settings_tab = {
+        "xpath": "//a[contains(text(),'Настройки компании')]",
+        "name": "company_settings_tab",
+        "reference_xpath": ""
+    }
+    contour_settings_tab = {
+        "xpath": "//a[contains(text(),'Настройки контура')]",
+        "name": "contour_settings_tab",
+        "reference_xpath": ""
     }
     custom_fields_tab = {
         "xpath": "//a[text()='Пользовательские поля']",
         "name": "custom_field",
         "reference_xpath": "(//a[@class='vz-tabs-modern__item'])[3]"
     }
-    add_field_button = {
-        "xpath": "//button[@class='mid element-button theme-primary']",
-        "name": "add_field_button",
-        "reference_xpath": "// button[contains(., 'Добавить поле')]",
-        "reference": "Добавить поле"
+    notifications_field_tab = {
+        "xpath": "//a[@href='/settings/notification']",
+        "name": "notifications_field",
+        "reference_xpath": "Настройки уведомлений"
+    }
+
+
+class PersonalSettingsParams(Base):
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.driver = driver
+
+    monitor = {
+        "xpath": "//span[contains(text(),'Выводить в мониторе')]",
+        "name": "monitor"
+    }
+    customizing_top_menu = {
+        "xpath": "//div[@class='topNavControl__select ant-select ant-select-enabled']//div[@role='combobox']",
+        "name": "customizing_top_menu"
+    }
+    customizing_start_page = {
+        "xpath": "//span[contains(text(),'Настройка стартовой страницы')]",
+        "name": "customizing_start_page"
     }
 
 
@@ -31,6 +59,12 @@ class CustomFieldsParam(Base):
         self.driver = driver
 
     # Locators
+    add_field_button = {
+        "xpath": "//button[@class='mid element-button theme-primary']",
+        "name": "add_field_button",
+        "reference_xpath": "// button[contains(., 'Добавить поле')]",
+        "reference": "Добавить поле"
+    }
     add_ru = {
         "xpath": "//input[@class='ant-input']",
         "name": "add_ru",
@@ -70,10 +104,6 @@ class EditFieldsParam(Base):
         super().__init__(driver)
 
     # Locators
-    # e_p_one = {
-    #     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/table[1]/tbody[1]/tr[2]/td[1]/div[1]/div[1]/img[1]",
-    #     "name": "e_p_one"
-    # }
     e_p_one = {
         "xpath": "//tbody/tr[1]/td[1]/div[1]/div[1]/img[1]",
         "name": "e_p_one"
@@ -82,18 +112,10 @@ class EditFieldsParam(Base):
         "xpath": "//tbody/tr[1]/td[1]/div[1]/div[1]/img[1]",
         "name": "e_p_two"
     }
-    # e_p_two = {
-    #     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/table[1]/tbody[1]/tr[2]/td[1]/div[1]/div[1]/img[1]",
-    #     "name": "e_p_two"
-    # }
     del_custom = {
         "xpath": "//tbody/tr[1]/td[1]/div[1]/div[2]/img[1]",
         "name": "del_custom"
     }
-    # del_custom = {
-    #     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[3]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/table[1]/tbody[1]/tr[2]/td[1]/div[1]/div[2]/img[1]",
-    #     "name": "del_custom"
-    # }
     acc_del = {
         "xpath": "//button[@class='ant-btn']/following-sibling::button[1]",
         "name": "acc_del"

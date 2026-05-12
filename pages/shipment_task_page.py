@@ -1,5 +1,6 @@
 from base.base_class import Base
 import time
+import allure
 
 
 class ShipmentTaskAdd(Base):
@@ -60,7 +61,6 @@ class ShipmentTaskAdd(Base):
         "name": "successfully_created"
     }
 
-
     task_edit_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
         "name": "task_edit_button"
@@ -74,8 +74,86 @@ class ShipmentTaskAdd(Base):
         "name": "whom_task_edit_button"
     }
 
+    # Блок удаления заданий
 
+    task_delete_button = {
+        "xpath": "//button[@class='ant-btn ant-btn-danger']",
+        "name": "task_delete_button"
+    }
+    task_delete_button_confirm = {
+        "xpath": "//div[@class='ant-modal-root']//button[2]",
+        "name": "task_delete_button_confirm"
+    }
+    task_delete_window_confirm = {
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[@type='button']",
+        "name": "task_delete_window_confirm"
+    }
 
+    # Блок передачи задания от ЛКЗ к ЛКЭ
 
+    task_sdr_input = {
+        "xpath": "//input[@placeholder='Номер заказа']",
+        "name": "task_sdr_input"
+    }
+    first_request_click = {
+        "xpath": "//a[@class='link-back'][normalize-space()='1']",
+        "name": "first_request_click"
+    }
+    required_search_by_date_lke = {
+        "xpath": "//div[@id='orders-maindate-select']//div[@role='combobox']",
+        "name": "required_search_by_date"
+    }
+    confirm_request_button = {
+        "xpath": "//button[@id='order-take']",
+        "name": "confirm_request_button"
+    }
+    order_number = {
+        "xpath": "//input[@placeholder='Номер заявки']",
+        "name": "order_number"
+    }
+    required_search_by_date = {
+        "xpath": "//div[@id='tasks-maindate-select']//div[@role='combobox']",
+        "name": "required_search_by_date"
+    }
+    first_task_click = {
+        "xpath": "//a[@class='link-back'][normalize-space()='1']",
+        "name": "first_task_click"
+    }
 
+    # МЕТОДЫ
 
+    # ========== Методы для работы с заявками ==========
+
+    @allure.step("Поиск заявки по номеру в статусе 'Сегодня и завтра'")
+    def find_request_by_number(self, request_number: str) -> None:
+        """Поиск заявки по номеру в списке активных заявок"""
+        self.dropdown_without_input(self.required_search_by_date_lke, "Сегодня и завтра")
+        time.sleep(1)
+        self.input_in_field(self.order_number, request_number, wait='lst')
+        time.sleep(2)
+        self.click_button(self.first_request_click)
+        time.sleep(2)
+
+    @allure.step("Подтверждение заявки (принятие)")
+    def accept_request(self) -> None:
+        """Подтверждение/принятие заявки экспедитором"""
+        self.click_button(self.confirm_request_button)
+        time.sleep(2)
+        # Если есть диалог подтверждения
+        # self.click_button(self.confirm_dialog_button)
+        # time.sleep(2)
+
+    @allure.step("Поиск задания по номеру в списке заданий")
+    def find_task_by_number(self, task_number: str) -> None:
+        """Поиск и открытие задания по номеру"""
+        self.dropdown_without_input(self.required_search_by_date, "Сегодня и завтра")
+        time.sleep(1)
+        self.input_in_field(self.order_number, task_number, wait='lst')
+        time.sleep(2)
+        self.click_button(self.first_task_click)
+        time.sleep(2)
+
+    @allure.step("Проверка что открыто задание с номером {task_number}")
+    def verify_task_opened(self, task_number: str) -> None:
+        """Проверка что открыто правильное задание"""
+        self.verify_text_on_page(task_number, should_exist=True)

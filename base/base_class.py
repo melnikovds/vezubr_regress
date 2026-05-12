@@ -383,7 +383,7 @@ class Base:
         return random.randint(of, to)
 
     def get_screenshot(self, test_name: str = None) -> None:
-        
+
         """
         Сохраняет скриншот текущего состояния браузера в папку screens внутри проекта.
         Если тест запускается с Allure, прикрепляет скриншот к отчету Allure.
@@ -1396,6 +1396,37 @@ class Base:
                     print(f" Ошибка при клике на колонку {idx}, попытка {click + 1}: {str(e)}")
                     continue
 
+    def click_sortings_in_admin(self, num_clicks: int = 2) -> None:
+        """
+        Метод для админки: кликает по всем сортировкам
+        """
+        # XPath для сортировок в админке
+        sort_xpath = "//thead//th//a[normalize-space(text()) != '']"
+
+        # Получаем тексты всех сортировок
+        sort_elements = self.driver.find_elements(By.XPATH, sort_xpath)
+        sort_texts = [el.text for el in sort_elements if el.text.strip()]
+
+        print(f"Найдено сортировок: {len(sort_texts)}")
+
+        for sort_text in sort_texts:
+            for click_num in range(num_clicks):
+                try:
+                    # Заново находим элемент (свежий)
+                    element = self.driver.find_element(By.XPATH, f"{sort_xpath}[normalize-space(text())='{sort_text}']")
+
+                    # Скролл и клик
+                    self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
+                    time.sleep(0.3)
+                    self.driver.execute_script("arguments[0].click();", element)
+                    print(f"✓ {sort_text} - клик {click_num + 1}/{num_clicks}")
+
+                    time.sleep(0.5)
+
+                except Exception as e:
+                    print(f"✗ Ошибка: {sort_text} - {str(e)[:80]}")
+                    continue
+
     def dropdown_with_input_force_enter(self, element_dict: Dict[str, str], option_text: str,
                                         dd_index: int = 1, wait_seconds: int = 5) -> None:
         """
@@ -1598,7 +1629,7 @@ class Base:
                             WebDriverWait(self.driver, 5).until(
                                 EC.visibility_of_element_located(
                                     (By.XPATH, loading_spinner['xpath']) if 'xpath' in loading_spinner else (
-                                    By.CSS_SELECTOR, loading_spinner['css'])
+                                        By.CSS_SELECTOR, loading_spinner['css'])
                                 )
                             )
                         except TimeoutException:
@@ -1609,7 +1640,7 @@ class Base:
                             WebDriverWait(self.driver, 15).until(
                                 EC.invisibility_of_element_located(
                                     (By.XPATH, loading_spinner['xpath']) if 'xpath' in loading_spinner else (
-                                    By.CSS_SELECTOR, loading_spinner['css'])
+                                        By.CSS_SELECTOR, loading_spinner['css'])
                                 )
                             )
                         except TimeoutException:

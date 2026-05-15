@@ -20,12 +20,18 @@ def test_tariff_delete_lke(base_fixture, domain):
                            do_assert=True, wait="lst")
 
     tariff_list = TariffsList(base.driver)
+    tariff_list.input_in_field(tariff_list.tariff_name_filter, "ПЧ", wait="lst")
+    time.sleep(5)
+
     # Выбор первого тарифа в списке
     tariff_list.click_button(tariff_list.first_tariff_link, wait="form")
 
     tariff = FTLTariffAdd(base.driver)
     # Клик по кнопке удаления тарифа
     tariff.click_button(tariff.delete_tariff_button, do_assert=True)
+
+    time.sleep(2)
+    tariff.click_button(tariff.confirm_delete_button, do_assert=True, wait_type='visible')
     # Подтверждение удаления тарифа
     tariff.click_button(tariff.confirm_button, wait="lst")
     # Конец теста

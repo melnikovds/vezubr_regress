@@ -126,10 +126,22 @@ class FTLTariffAdd(Base):
         "xpath": "//button[@class='ant-btn ant-btn-primary ant-btn-sm']",
         "name": "add_min_price_button"
     }
+    # delete_tariff_button = {
+    #     "xpath": "//button[contains(., 'Удалить')]",
+    #     "name": "delete_tariff_button",
+    #     "reference_xpath": "//div[@class='ant-modal-confirm-content' and text()='Тариф успешно удален']",
+    #     "reference": "Тариф успешно удален"
+    # }
     delete_tariff_button = {
-        "xpath": "//button[contains(., 'Удалить')]",
+        "xpath": "//button[contains(text(),'Удалить')]",
         "name": "delete_tariff_button",
-        "reference_xpath": "//div[@class='ant-modal-confirm-content' and text()='Тариф успешно удален']",
+        "reference_xpath": "//span[@class='ant-modal-confirm-title']",
+        "reference": "Подтвердите действие"
+    }
+    confirm_delete_button = {
+        "xpath": "//button[@class='ant-btn ant-btn-primary']",
+        "name": "confirm_delete_button",
+        "reference_xpath": "//div[@class='ant-modal-confirm-content']",
         "reference": "Тариф успешно удален"
     }
     clone_tariff_button = {

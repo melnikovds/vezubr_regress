@@ -126,7 +126,7 @@ class SideBar(Base):
         "xpath": "//li[@id='registriesRequestListIncoming']",
         "name": "registries_list_button",
         "reference_xpath": base_reference_xpath,
-        "reference": "Реестры"
+        "reference": "Реестры от перевозчика"
     }
     transport_doc_new_list_button = {
         "xpath": "//li[@id='transportDocumentsRequests']",
@@ -150,15 +150,13 @@ class SideBar(Base):
         "xpath": "//li[@id='registriesRequestListOutgoing']",
         "name": "registries_client_list_button",
         "reference_xpath": base_reference_xpath,
-        # "reference": "Реестры для заказчика",
-        "reference": "Реестры"                                                                                           #нужно исправить потом
+        "reference": "Реестры для заказчика"
     }
     registries_producer_list_button = {
         "xpath": "//li[@id='registriesRequestListIncoming']",
         "name": "registries_producer_list_button",
         "reference_xpath": base_reference_xpath,
-        # "reference": "Реестры от подрядчика"
-        "reference": "Реестры"                                                                                           #нужно исправить потом
+        "reference": "Реестры от перевозчика"
     }
 
     """Directories"""

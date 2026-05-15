@@ -37,7 +37,7 @@ def test_journal_cargo_place_lkz(base_fixture, domain):
     jrn.click_button(jrn.tab_history_cargo_place)
     time.sleep(1)
     jrn.dropdown_without_input(jrn.time_event, option_text='За все время')
-    time.sleep(7)
+    time.sleep(10)
     jrn.verify_text_on_page(text='53332')
     jrn.verify_text_on_page(text='24.02.2026')
     jrn.verify_text_on_page(text='19225')

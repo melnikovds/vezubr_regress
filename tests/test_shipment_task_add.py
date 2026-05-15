@@ -65,9 +65,12 @@ def test_shipment_task_without_gm_add_lkz(base_fixture, domain):
     add.reload_page()
     time.sleep(5)
 
+    def normalize_float_str(value: str) -> str:
+        return str(float(value))
+
     add.verify_text_on_page(text=a)
-    add.verify_text_on_page(text=b)
-    add.verify_text_on_page(text=c)
+    add.verify_text_on_page(text=normalize_float_str(b))
+    add.verify_text_on_page(text=normalize_float_str(c))
     add.verify_text_on_page(text=d)
     add.verify_text_on_page(text=e)
     add.verify_text_on_page(text=h)

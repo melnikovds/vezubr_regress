@@ -132,12 +132,25 @@ class FTLTariffAdd(Base):
     #     "reference_xpath": "//div[@class='ant-modal-confirm-content' and text()='Тариф успешно удален']",
     #     "reference": "Тариф успешно удален"
     # }
-    delete_tariff_button = {
-        "xpath": "//button[contains(text(),'Удалить')]",
-        "name": "delete_tariff_button",
+    delete_tariff_button_lkz = {
+        "xpath": "//button[@class='ant-btn semi-wide margin-left-16 ant-btn-primary']",
+        "name": "delete_tariff_button_lkz",
         "reference_xpath": "//span[@class='ant-modal-confirm-title']",
         "reference": "Подтвердите действие"
     }
+    delete_tariff_button_lke = {
+        "xpath": "//button[contains(text(),'Удалить')]",
+        "name": "delete_tariff_button_lke",
+        "reference_xpath": "//span[@class='ant-modal-confirm-title']",
+        "reference": "Подтвердите действие"
+    }
+    delete_tariff_button_lkp = {
+        "xpath": "//button[contains(text(),'Удалить')]",
+        "name": "delete_tariff_button_lkp",
+        "reference_xpath": "//span[@class='ant-modal-confirm-title']",
+        "reference": "Подтвердите действие"
+    }
+
     confirm_delete_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
         "name": "confirm_delete_button",

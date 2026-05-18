@@ -28,11 +28,12 @@ def test_tariff_delete_lke(base_fixture, domain):
 
     tariff = FTLTariffAdd(base.driver)
     # Клик по кнопке удаления тарифа
-    tariff.click_button(tariff.delete_tariff_button, do_assert=True)
+    tariff.click_button(tariff.delete_tariff_button_lke, do_assert=True)
 
+    # Подтверждение удаления тарифа
     time.sleep(2)
     tariff.click_button(tariff.confirm_delete_button, do_assert=True, wait_type='visible')
-    # Подтверждение удаления тарифа
+    time.sleep(1)
     tariff.click_button(tariff.confirm_button, wait="lst")
     # Конец теста
 

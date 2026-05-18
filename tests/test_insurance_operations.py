@@ -150,6 +150,6 @@ def test_insurance_contract_attach_lkp(base_fixture, domain):
     time.sleep(7)
     contractor.click_button(contractor.insurance_expandable_list)
     time.sleep(2)
-    contractor.verify_text_on_page(text='183134', should_exist=False)
+    contractor.verify_text_on_page(text='7230755', should_exist=False)
     # Конец теста
     

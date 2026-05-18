@@ -151,10 +151,6 @@ class CargoPlaceAdd(Base):
     }
 
     """Delivery address drop-down list"""
-    # delivery_address_select = {
-    #     "xpath": "//span[@class='vz-form-item__label ' and contains(text(),'Адрес доставки')]",
-    #     "name": "delivery_address_select"
-    # }
     delivery_address_select = {
         "xpath": "//*[@id='main']/div/div[3]/div[2]/div/div[2]/div[2]/div[2]/div[1]/div/div/button",
         "name": "delivery_address_select"
@@ -182,13 +178,6 @@ class CargoPlaceAdd(Base):
         "name": "save_selected_address"
     }
 
-
-    # confirm_cargo_place_create_button = {
-    #     "xpath": "//button[contains(.,'OK')]",
-    #     "name": "confirm_cargo_place_create_button",
-    #     "reference_xpath": "//div[@class='ant-modal-confirm-content' and text()='Грузоместо успешно создано']",
-    #     "reference": "Грузоместо успешно создано"
-    # }
     confirm_cargo_place_create_button = {
         "xpath": "//button[contains(.,'OK')]",
         "name": "confirm_cargo_place_create_button",
@@ -390,7 +379,7 @@ class CargoPlaceAdd(Base):
         # Ввод уникального штрихкода
         self.input_in_field(self.lkz_bar_code_input, cp_stamp)  # Штрихкод
         # Выбор статуса грузоместа
-        self.dropdown_without_input(self.lkz_cp_status_select, "Новое")
+        # self.dropdown_without_input(self.lkz_cp_status_select, "Новое")
 
         # Ввод адресов отправления и доставки
         self.click_button(self.departure_address_select)
@@ -453,7 +442,7 @@ class CargoPlaceAdd(Base):
         # Ввод уникального штрихкода
         self.input_in_field(self.lke_bar_code_input, cp_stamp)  # Штрихкод
         # Выбор статуса грузоместа "Новое"
-        self.dropdown_without_input(self.lke_cp_status_select, "Новое")
+        # self.dropdown_without_input(self.lke_cp_status_select, "Новое")
 
         # # Ввод адресов отправления и доставки
         # self.dropdown_with_input(self.departure_address_select,
@@ -511,7 +500,7 @@ class CargoPlaceAdd(Base):
         self.input_in_field(self.cp_value_input, self.random_value_float_str(0.1, 35.0, precision=1))
         self.input_in_field(self.cp_cost_input, self.random_value_float_str(100, 1000000))
         # Выбор статуса грузоместа
-        self.dropdown_without_input(self.lkz_cp_status_select, "Новое")
+        # self.dropdown_without_input(self.lkz_cp_status_select, "Новое")
         # Генерация уникального идентификатора для грузоместа
         cp_stamp = f"ГМ-{self.get_timestamp()}"
         # Ввод уникальных данных для грузоместа
@@ -574,7 +563,7 @@ class CargoPlaceAdd(Base):
         self.backspace_and_input(self.cp_value_input, self.random_value_float_str(0.1, 35.0, precision=1))
         self.backspace_and_input(self.cp_cost_input, self.random_value_float_str(100, 1000000))
         # Выбор статуса грузоместа "Новое"
-        self.dropdown_without_input(self.lke_cp_status_select, "Новое")
+        # self.dropdown_without_input(self.lke_cp_status_select, "Новое")
         # Генерация уникального идентификатора для грузоместа
         cp_stamp = f"ГМ-{self.get_timestamp()}"
         # Ввод уникальных данных для грузоместа

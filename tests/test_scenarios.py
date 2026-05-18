@@ -2,10 +2,12 @@ import time
 import allure
 import pytest
 import re
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from pages.request_old_ftl_add_page import FTLAdd
 from pages.login_page import Login
 from pages.filters_old_ftl_page import OldFTL
-from selenium.webdriver.common.by import By
 
 
 @allure.story("Smoke test")
@@ -82,20 +84,54 @@ def test_scenario_one_lkz(base_fixture, domain):
     ftl.click_button(ftl.producer_select_text)
     ftl.click_button(ftl.publish_button)
     ftl.click_button(ftl.continue_button, do_assert=True)
+
+    wait = WebDriverWait(base.driver, 10)
+
+    element = wait.until(
+        EC.visibility_of_element_located(
+            (By.XPATH, "//div[contains(@class,'ant-modal-confirm-content')]")
+        )
+    )
+
+    # ждём появления номера
+    wait.until(lambda driver: "№" in element.text or "#" in element.text)
+
+    text = element.text.strip()
+    print(f"TEXT FROM MODAL: {repr(text)}")
+
+    match = re.search(r'[№#N°]\s*([A-Za-z0-9\-]+)', text)
+
+    if match:
+        application_number = match.group(1)
+        print(f"Номер заявки: {application_number}")
+    else:
+        raise ValueError(f"Не удалось найти номер заявки в тексте: {text}")
+
+
     ftl.click_button(ftl.confirm_add_button, wait="lst")
+
+
+
+
 
     # # Находим элемент с сообщением
     # element = base.driver.find_element(By.XPATH, "//div[@class='ant-modal-confirm-content']")
     # text = element.text.strip()
     #
     # # Извлекаем всё после "№" — только допустимые символы
-    # match = re.search(r'№([A-Za-z0-9\-]+)', text)
+    # # match = re.search(r'№([A-Za-z0-9\-]+)', text)
+    # match = re.search(r'№\s*([\w/-]+)', text)
     #
     # if match:
     #     application_number = match.group(1)  # например: '25-VZ-494'
     #     print(f"Номер заявки: {application_number}")
     # else:
     #     raise ValueError(f"Не удалось найти номер заявки в тексте: {text}")
+    #
+    # print(match)
+
+    ftl.click_button(ftl.continue_button, do_assert=True)
+    ftl.click_button(ftl.confirm_add_button, wait="lst")
 
 
 

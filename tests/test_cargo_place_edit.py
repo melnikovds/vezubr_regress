@@ -117,7 +117,7 @@ def test_cargo_place_edit_own_lke(base_fixture, domain):
     time.sleep(2)
 
     # Выбор владельца грузоместа "Собственное Задание Экспедитора"
-    add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Собственный ГМ")
+    add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "Собственное ГМ")
     # # Выбор вложенного грузоместа
     # add_cp.click_button(add_cp.child_cp_select, wait="lst")
     #

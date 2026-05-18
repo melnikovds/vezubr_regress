@@ -878,3 +878,31 @@ class AddCdr(Base):
         self.click_button(self.address_radio_button)
         # Подтверждение выбора второго адреса
         self.click_button(self.confirm_address_button)
+
+    def additional_service_add_prr_with_time(self) -> NoReturn:
+        """
+        Добавление услуги ПРР с корректным временем (после начала рейса).
+        """
+        self.dropdown_without_input(self.additional_service_button, "ПРР")
+        self.scroll_to_element(self.save_and_publish_button)
+
+        # Устанавливаем время ПРР с большим сдвигом, чтобы точно было после рейса
+        new_time = self.naw_time_change(200)  # 200 минут = 3 часа 20 минут
+
+        # Клик по кнопке выбора даты и времени ПРР
+        self.click_button(self.additional_service_time)
+        # Выбор сегодняшней даты из календаря
+        self.click_button(self.today_button)
+        # Повторный клик по кнопке выбора даты и времени для активации поля ввода
+        self.click_button(self.additional_service_time)
+        # Ввод новой временной метки в поле ввода, предварительно очистив старое значение
+        self.backspace_and_input(self.start_at_from_input, num=5, value=new_time)
+        # Подтверждение выбора даты и времени нажатием кнопки "OK"
+        self.click_button(self.calendar_ok_button)
+
+        # Выбор адреса и специализации
+        self.click_and_select_with_arrows(self.first_address_select_prr, 1)
+        ActionChains(self.driver).send_keys(Keys.TAB).perform()
+        self.dropdown_without_input(self.change_specialization_prr, "Грузчик")
+        self.input_in_field(self.change_quantity_specialization_prr, "1")
+        time.sleep(2)

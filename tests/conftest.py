@@ -7,6 +7,7 @@ from pages.login import accounts, admin_credentials
 from tests.base_test import base_test_with_login, base_test_without_login, base_test_with_login_via_link
 from tests.conftest_api import *
 
+
 def pytest_addoption(parser):
     parser.addoption("--domain", choices=['dev', 'com', 'ru'], action="store", default="com",
                      help="Set the domain for tests")
@@ -181,5 +182,3 @@ def admin_fixture(domain):
             pass
         finally:
             base.driver = None
-
-

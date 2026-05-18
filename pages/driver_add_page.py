@@ -260,6 +260,10 @@ class DriverAdd(Base):
         "xpath": "//input[@id='attorneyNumber']",
         "name": "attorney_number"
     }
+    information_system_info = {
+        "xpath": "//input[@id='informationSystemInfo']",
+        "name": "information_system_info"
+    }
 
     # Methods
     def add_base_driver(self) -> str:
@@ -285,6 +289,8 @@ class DriverAdd(Base):
         self.backspace_and_input(self.license_date_input_open, num=2, value="45")
         
         # Ввод контактной информации
+        self.scroll_to_element(self.app_phone_input)
+        self.click_outside()
         self.input_in_field(self.app_phone_input, self.random_value_float_str(9650000000, 9659999999), click_first=True)
         self.input_in_field(self.contact_phone_input, self.random_value_float_str(9650000000, 9659999999),
                             click_first=True)
@@ -327,6 +333,8 @@ class DriverAdd(Base):
         self.input_in_field(self.license_id_input, self.random_value_float_str(1000000000, 9999999999))
         self.click_button(self.license_date_input_close)
         self.backspace_and_input(self.license_date_input_open, num=2, value="45")
+        self.click_outside()
+        time.sleep(1)
         
         # Ввод контактной информации
         self.input_in_field(self.app_phone_input, self.random_value_float_str(9650000000, 9659999999), click_first=True)

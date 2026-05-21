@@ -339,13 +339,21 @@ class FTLAdd(Base):
         "xpath": "//input[@class='ant-calendar-picker-input ant-input']",
         "name": "point_loading_start"
     }
+    input_loading_start = {
+        "xpath": "//input[contains(@class,'ant-calendar-input')]",
+        "name": "input_loading_start"
+    }
     # point_loading_start = {
-    #     "xpath": "//span[@id='order-worktime-first']//input[1]",
+    #     "xpath": "//input[contains(@class,'ant-calendar-input')]",
     #     "name": "point_loading_start"
     # }
     point_loading_finish = {
         "xpath": "(//input[@class='ant-calendar-picker-input ant-input'])[2]",
         "name": "point_loading_finish"
+    }
+    input_loading_finish = {
+        "xpath": "//input[contains(@class,'ant-calendar-input')]",
+        "name": "input_loading_finish"
     }
     point_unloading_start = {
         "xpath": "//span[@class='  ant-calendar-picker']//input",

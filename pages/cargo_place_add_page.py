@@ -224,10 +224,6 @@ class CargoPlaceAdd(Base):
         "xpath": "(//input[@role='spinbutton'])[2]",
         "name": "quantity_edit"
     }
-    # weight_edit = {
-    #     "xpath": "(//input[@role='spinbutton'])[3]",
-    #     "name": "weight_edit"
-    # }
     weight_edit = {
         "xpath": "(//input[@role='spinbutton'])[5]",
         "name": "weight_edit"
@@ -240,10 +236,6 @@ class CargoPlaceAdd(Base):
         "xpath": "(//input[@role='spinbutton'])[3]",
         "name": "value_edit"
     }
-    # value_edit = {
-    #     "xpath": "(//input[@role='spinbutton'])[4]",
-    #     "name": "value_edit"
-    # }
     # cost_edit = {
     #     "xpath": "(//input[@role='spinbutton'])[5]",
     #     "name": "cost_edit"
@@ -284,10 +276,6 @@ class CargoPlaceAdd(Base):
         "xpath": "//div[15]//label[1]//div[1]//div[1]//span[1]//input[1]",
         "name": "lkz_bar_code_edit"
     }
-    # lkz_seal_number_edit = {
-    #     "xpath": "(//input[@type='text'])[7]",
-    #     "name": "lkz_seal_number_edit"
-    # }
     lkz_seal_number_edit = {
         "xpath": "//div[16]//label[1]//div[1]//div[1]//span[1]//input[1]",
         "name": "lkz_seal_number_edit"

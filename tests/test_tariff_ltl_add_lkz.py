@@ -1,3 +1,4 @@
+import time
 import allure
 import pytest
 from pages.tariff_ltl_add_page import LTLTariffAdd
@@ -29,25 +30,41 @@ def test_ltl_tariff_add_lkz(base_fixture, domain):
     # Выбор подтипа тарифа "Короб"
     add_tariff.dropdown_without_input(add_tariff.ltl_type_select, "Короб")
     # Ввод минимального веса
-    add_tariff.backspace_and_input(add_tariff.min_weight_input, base.random_value_float_str(10, 100))
+    add_tariff.backspace_and_input(add_tariff.min_weight_input, base.random_value_float_str(10, 100), num=3)
+    time.sleep(1)
     # Ввод объёмного веса
-    add_tariff.backspace_and_input(add_tariff.volumetric_weight_input, base.random_value_float_str(10, 100))
+    add_tariff.backspace_and_input(add_tariff.volumetric_weight_input, base.random_value_float_str(10, 100), num=3)
+    time.sleep(1)
     # Ввод стоимости прямого сбора
-    add_tariff.backspace_and_input(add_tariff.direct_price_input, base.random_value_float_str(100, 500))
+    add_tariff.backspace_and_input(add_tariff.direct_price_input, base.random_value_float_str(100, 500), num=3)
+    time.sleep(1)
     # Ввод стоимости обратного сбора
-    add_tariff.backspace_and_input(add_tariff.reverse_price_input, base.random_value_float_str(100, 500))
+    add_tariff.backspace_and_input(add_tariff.reverse_price_input, base.random_value_float_str(100, 500), num=3)
+    time.sleep(1)
     # Выбор региона отправки
-    add_tariff.dropdown_with_input(add_tariff.dispatch_region_select, "Свердловская область")
+    # add_tariff.dropdown_with_input(add_tariff.dispatch_region_select, "Свердловская область")
+    add_tariff.click_and_select_with_arrows(add_tariff.dispatch_region_select, arrow_presses=27)
+    time.sleep(1)
+    add_tariff.click_outside()
+    time.sleep(1)
     # Выбор региона доставки
-    add_tariff.dropdown_with_input(add_tariff.delivery_region_select, "Алтайский край")
+    # add_tariff.dropdown_with_input(add_tariff.delivery_region_select, "Алтайский край")
+    add_tariff.click_and_select_with_arrows(add_tariff.delivery_region_select, arrow_presses=3)
+    time.sleep(1)
+    add_tariff.click_outside()
+    time.sleep(1)
     # Ввод минимальной стоимости
-    add_tariff.input_in_field(add_tariff.min_price_input, base.random_value_float_str(1000, 3000))
+    add_tariff.backspace_and_input(add_tariff.min_price_input, base.random_value_float_str(1000, 3000, 2), num=3)
+    time.sleep(1)
     # Ввод стоимости за килограмм
-    add_tariff.input_in_field(add_tariff.kg_price_input, base.random_value_float_str(50, 200))
+    add_tariff.backspace_and_input(add_tariff.kg_price_input, base.random_value_float_str(50, 200, 2), num=3)
+    time.sleep(1)
     # Ввод температурного коэффициента
     add_tariff.input_in_field(add_tariff.temp_coeff_input, base.random_value_float_str(1.0, 5.0))
+    time.sleep(1)
     # Ввод срока доставки
     add_tariff.input_in_field(add_tariff.delivery_time_input, base.random_value_float_str(5, 50))
+    time.sleep(1)
     # Подтверждение и сохранение тарифа
     add_tariff.click_button(add_tariff.add_tariff_button, do_assert=True)
     add_tariff.click_button(add_tariff.confirm_add_button, wait="lst")

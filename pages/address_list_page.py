@@ -41,6 +41,18 @@ class AddressesList(Base):
         "xpath": "//input[@value='18466']",
         "name": "first_radio_button_18466"
     }
+    first_radio_button_19194 = {
+        "xpath": "//input[@value='19194']",
+        "name": "first_radio_button_19194"
+    }
+    first_radio_button_16831 = {
+        "xpath": "//input[@value='16831']",
+        "name": "first_radio_button_16831"
+    }
+    first_radio_button_16934 = {
+        "xpath": "//input[@value='16934']",
+        "name": "first_radio_button_16934"
+    }
     save_selected_address = {
         "xpath": "//div[@class='ant-modal-root']//button[2]",
         "name": "save_selected_address"

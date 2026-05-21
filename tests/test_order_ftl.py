@@ -266,7 +266,7 @@ def test_ftl_order_lkz(base_fixture, domain):
     sidebar.click_button(sidebar.sidebar_button)
 
     # Переход в раздел Активные FTL-заявки
-    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover_lkp, click_to=sidebar.ftl_active_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -300,9 +300,13 @@ def test_ftl_order_lkz(base_fixture, domain):
     time_one, time_two, time_three, time_four = FTLAdd.get_time_intervals()
 
     # Простановка времени работы на 1 точке
-    ftl.input_in_field(ftl.point_loading_start, value=time_one)
+    ftl.click_button(ftl.point_loading_start)
     time.sleep(1)
-    ftl.input_in_field(ftl.point_loading_finish, value=time_two)
+    ftl.input_in_field(ftl.input_loading_start, value=time_one)
+    time.sleep(1)
+    ftl.click_button(ftl.point_loading_finish)
+    time.sleep(1)
+    ftl.input_in_field(ftl.input_loading_finish, value=time_two)
     time.sleep(1)
 
     ftl.click_button(ftl.save_changes)

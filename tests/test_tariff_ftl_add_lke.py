@@ -73,14 +73,20 @@ def test_ftl_cc_tariff_add_lke(base_fixture, domain):
     # Ввод города отправления
     add_tariff.input_in_field(add_tariff.departures_city_input, value='г Екатеринбург')
     time.sleep(1)
+    add_tariff.click_button(add_tariff.select_city_three, wait_type='located')
+    time.sleep(1)
     # ActionChains(base.driver).send_keys(Keys.ENTER).perform()
-    base.driver.switch_to.active_element.send_keys(Keys.ENTER)
+    # base.driver.switch_to.active_element.send_keys(Keys.ENTER)
 
     # add_tariff.dropdown_with_input(add_tariff.departures_city_input, wait_presence=True,
     #                                option_text="г Екатеринбург")
     # Ввод города прибытия
-    add_tariff.dropdown_with_input(add_tariff.arrival_city_input, wait_presence=True,
-                                   option_text="г Уфа")
+    add_tariff.input_in_field(add_tariff.arrival_city_input, value="Уфа")
+    time.sleep(1)
+    add_tariff.click_button(add_tariff.select_city_two)
+    time.sleep(1)
+    # add_tariff.dropdown_with_input(add_tariff.arrival_city_input, wait_presence=True,
+    #                                option_text="г Уфа")
     # Выбор типа ТС "1.5т / 9м3 / 4пал."
     add_tariff.dropdown_without_input(add_tariff.vehicle_type_select, "1.5т / 9м3 / 4пал.")
     # Установка флага "Закрытый кузов"

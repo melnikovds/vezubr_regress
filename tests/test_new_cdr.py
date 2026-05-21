@@ -361,7 +361,7 @@ def test_add_new_ftl_lkz_asr(base_fixture, domain):
         add.scroll_to_element(add.save_and_publish_button)
 
     with allure.step("Добавление услуги ПРР"):
-        add.additional_service_add_prr()
+        add.additional_service_add_prr_with_time()
 
     with allure.step("Добавление страховки"):
         add.additional_service_add_insurance()

@@ -114,6 +114,7 @@ def test_own_driver2_add_lke(base_fixture, domain):
     add_driver.input_in_field(add_driver.license_id_input, license_id)
     add_driver.click_button(add_driver.license_date_input_close)
     add_driver.backspace_and_input(add_driver.license_date_input_open, num=2, value="45")
+    add_driver.click_outside()
     time.sleep(2)
 
     # Ввод контактной информации

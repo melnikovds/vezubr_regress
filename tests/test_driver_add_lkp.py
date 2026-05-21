@@ -15,15 +15,15 @@ from pages.filter_directory_page import Manual
 def test_driver1_add_lkp(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
-    
+
     # Переход к списку водителей
     sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.drivers_list_button,
                            do_assert=True, wait="lst")
-    
+
     driver_list = DriverList(base.driver)
     # Клик по кнопке добавления водителя
     driver_list.click_button(driver_list.add_driver_button, wait="form")
-    
+
     add_driver = DriverAdd(base.driver)
     # Добавление нового водителя и получение его фамилии
     surname = add_driver.add_base_driver()
@@ -40,7 +40,7 @@ def test_driver1_add_lkp(base_fixture, domain):
     driver_list.backspace_and_input(driver_list.surname_filter, value=surname, click_first=True)
     time.sleep(3)
     driver_list.click_button(driver_list.first_driver_link, wait="form")
-    
+
     # Включить тогл готов работать как грузчик
     add_driver.click_button(add_driver.work_as_loader_toggl, wait="form")
     # Включить тогл никогда не делегировать
@@ -116,12 +116,13 @@ def test_driver2_add_lkp(base_fixture, domain):
     add_driver.click_button(add_driver.license_date_input_close)
     add_driver.backspace_and_input(add_driver.license_date_input_open, num=2, value="45")
     time.sleep(2)
+    add_driver.click_outside()
 
     # Ввод контактной информации
     app_phone = base.random_value_float_str(9650000000, 9659999999)
     add_driver.input_in_field(add_driver.app_phone_input, app_phone, click_first=True)
     contact_phone = base.random_value_float_str(9650000000, 9659999999)
-    add_driver.input_in_field(add_driver.contact_phone_input, contact_phone,click_first=True)
+    add_driver.input_in_field(add_driver.contact_phone_input, contact_phone, click_first=True)
     add_driver.input_in_field(add_driver.reg_address_input, "Спб, ул. Орджоникидзе, д.31, кв. 103")
     add_driver.input_in_field(add_driver.fact_address_input, "Спб, ул. Турку, д. 3, кв. 78")
     time.sleep(2)
@@ -252,12 +253,13 @@ def test_driver3_add_lkp(base_fixture, domain):
     add_driver.click_button(add_driver.license_date_input_close)
     add_driver.backspace_and_input(add_driver.license_date_input_open, num=2, value="45")
     time.sleep(2)
+    add_driver.click_outside()
 
     # Ввод контактной информации
     app_phone = base.random_value_float_str(9650000000, 9659999999)
     add_driver.input_in_field(add_driver.app_phone_input, app_phone, click_first=True)
     contact_phone = base.random_value_float_str(9650000000, 9659999999)
-    add_driver.input_in_field(add_driver.contact_phone_input, contact_phone,click_first=True)
+    add_driver.input_in_field(add_driver.contact_phone_input, contact_phone, click_first=True)
     add_driver.input_in_field(add_driver.reg_address_input, "Спб, пр. Славы, д.44, кв. 36")
     add_driver.input_in_field(add_driver.fact_address_input, "Спб, ул. Бухарестская, д. 67, кв. 4")
     time.sleep(2)
@@ -274,7 +276,8 @@ def test_driver3_add_lkp(base_fixture, domain):
     time.sleep(1)
     add_driver.click_button(add_driver.attorney_date_today)
     add_driver.input_in_field(add_driver.attorney_number, value=str(add_driver.random_value_int(144, 404)))
-
+    add_driver.input_in_field(add_driver.information_system_info,
+                              value=str(add_driver.random_value_int(100000, 999999)))
     # Подтверждение создания водителя
     add_driver.click_button(add_driver.create_driver_button, do_assert=True)
     add_driver.click_button(add_driver.confirm_button, wait="lst")

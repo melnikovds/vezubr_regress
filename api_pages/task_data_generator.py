@@ -115,7 +115,7 @@ class TaskGenerator:
 
         if cargo_place_ids:
             data["cargoPlaces"] = [
-                {"id": cid, "externalId": None}
+                {"id": int(cid), "externalId": None}
                 for cid in cargo_place_ids
             ]
 

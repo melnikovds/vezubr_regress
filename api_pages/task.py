@@ -88,7 +88,7 @@ class TaskAPI:
     def update_task(self, task_id: int, update_data: Dict) -> Dict:
         """Обновление задания"""
         response = self.client.post(f"/v1/api/shipment/tasks/{task_id}/update", json=update_data)
-        return response.get('task', response)
+        return response
 
     @allure.step("Удаление задания")
     def delete_task(self, task_id: int) -> Dict:

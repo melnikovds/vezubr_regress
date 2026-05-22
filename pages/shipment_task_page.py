@@ -67,6 +67,21 @@ class ShipmentTaskAdd(Base):
         "name": "successfully_created"
     }
 
+
+    tab_characteristics = {
+        "xpath": "//div[contains(text(),'Характеристики')]",
+        "name": "tab_characteristics"
+    }
+    tab_gm = {
+        "xpath": "//div[contains(text(),'Грузоместа')]",
+        "name": "tab_gm"
+    }
+    tab_history = {
+        "xpath": "//div[contains(text(),'История')]",
+        "name": "tab_history"
+    }
+
+
     task_edit_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
         "name": "task_edit_button"

@@ -115,10 +115,6 @@ class OldFTL(Base):
         "xpath": "//*[@id='active']/div",
         "name": "template_status"
     }
-    # template_status = {
-    #     "xpath": "//div[contains(@class,'ant-select-selection ')]",
-    #     "name": "template_status"
-    # }
     order_type = {
         "xpath": "(//div[@data-__field='[object Object]'])[2]",
         "name": "order_type"
@@ -161,7 +157,6 @@ class OldFTL(Base):
         "name": "cross_four"
     }
 
-
     # start_at_from_button = {
     #
     #
@@ -179,6 +174,36 @@ class OldFTL(Base):
     #     self.backspace_and_input(self.start_at_from_input, num=5, value=new_time)
     #     # Клик по кнопке подтверждения выбора даты и времени
     #     self.click_button(self.calendar_ok_button)
+
+    add_filter = {
+        "xpath": "//p[@class='no-margin']",
+        "name": "add_filter"
+    }
+    checkbox_client_request_number = {
+        "xpath": "//div[10]//label[1]//span[2]",
+        "name": "checkbox_client_request_number"
+    }
+    apply_filters = {
+        "xpath": "//button[contains(text(),'Применить')]",
+        "name": "apply_filters"
+    }
+    client_request_number = {
+        "xpath": "//input[@id='orders-clientrequestnr']",
+        "name": "client_request_number"
+    }
+
+    """Формирование реестров"""
+    client_order_number = {
+        "xpath": "//div[@class='table-filters-main-zone']//div[2]//div[1]//div[2]//div[1]//span[1]//span[1]//input[1]",
+        "name": "client_order_number"
+    }
+
+    """Список реестров"""
+    registry_number = {
+        "xpath": "//input[@placeholder='№ реестра']",
+        "name": "registry_number"
+    }
+
 
 
 def create_entity():

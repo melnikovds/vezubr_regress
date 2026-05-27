@@ -302,11 +302,11 @@ def test_ftl_order_lkz(base_fixture, domain):
     # Простановка времени работы на 1 точке
     ftl.click_button(ftl.point_loading_start)
     time.sleep(1)
-    ftl.input_in_field(ftl.input_loading_start, value=time_one)
+    ftl.input_in_field(ftl.input_start, value=time_one)
     time.sleep(1)
     ftl.click_button(ftl.point_loading_finish)
     time.sleep(1)
-    ftl.input_in_field(ftl.input_loading_finish, value=time_two)
+    ftl.input_in_field(ftl.input_finish, value=time_two)
     time.sleep(1)
 
     ftl.click_button(ftl.save_changes)
@@ -317,15 +317,19 @@ def test_ftl_order_lkz(base_fixture, domain):
     time.sleep(3)
 
     # Простановка времени работы на 2 точке
-    ftl.input_in_field(ftl.point_unloading_start, value=time_three)
+    ftl.click_button(ftl.point_unloading_start)
     time.sleep(1)
-    ftl.input_in_field(ftl.point_unloading_finish, value=time_four)
+    ftl.input_in_field(ftl.input_start, value=time_three)
+    time.sleep(1)
+    ftl.click_button(ftl.point_unloading_finish)
+    time.sleep(1)
+    ftl.input_in_field(ftl.input_finish, value=time_four)
     time.sleep(1)
 
     ftl.click_button(ftl.complete_order, wait='list')
     time.sleep(1)
     ftl.click_button(ftl.approve_and_complete_order, wait='form')
-    time.sleep(1)
+
 
 
 

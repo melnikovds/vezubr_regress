@@ -760,7 +760,7 @@ class AddCdr(Base):
         # Выбираем "Страхование" из выпадающего списка
         self.dropdown_without_input(self.add_insurance, "Страхование")
         # Генерируем случайную сумму страхования и вводим её в поле
-        self.backspace_and_input(self.change_value_insurance,10000)
+        self.backspace_and_input(self.change_value_insurance,'10000')
         # Выбираем категорию страхования "Алкогольные напитки"
         self.dropdown_without_input(self.change_category_insurance, "Алкогольные напитки")
 

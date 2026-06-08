@@ -142,11 +142,12 @@ def test_tariff_ftl_cc_copy_lkz(base_fixture, domain):
     tariff.backspace_and_input(tariff.tariff_name_input, f"ГГ-{base.get_timestamp()}")
     # Изменение параметров тарифа
     tariff.click_button(tariff.price_input)
-    tariff.backspace_and_input(tariff.fixed_params_input, base.random_value_float_str(5000, 10000))
+    tariff.backspace_and_input(tariff.fixed_params_input, base.random_value_float_str(5000, 10000), num=5)
     tariff.click_button(tariff.address_cost_input)
-    tariff.backspace_and_input(tariff.fixed_params_input, base.random_value_float_str(1000, 3000))
+    tariff.backspace_and_input(tariff.fixed_params_input, base.random_value_float_str(1000, 3000), num=5)
     tariff.click_button(tariff.free_downtime_input)
-    tariff.backspace_and_input(tariff.fixed_params_input, base.random_value_float_str(10, 60))
+    tariff.backspace_and_input(tariff.fixed_params_input, base.random_value_float_str(10, 60), num=5)
+    time.sleep(1)
     # Сохранение изменений тарифа
     tariff.click_button(tariff.add_fm_tariff_button)
     tariff.click_button(tariff.confirm_button)

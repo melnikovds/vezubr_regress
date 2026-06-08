@@ -108,7 +108,7 @@ class FTLAdd(Base):
         "name": "publication_button"
     }
     tariff_button = {
-        "xpath": "//input[@value='tariff']",
+        "xpath": "//button[@data-tariffpublishing='true']",
         "name": "tariff_button"
     }
     rate_button = {

@@ -277,12 +277,14 @@ def test_shipment_task_with_gm_edit3_lkz(base_fixture, domain):
     cargo_place_id_two = current_url.split('/')[-1]
     print(f"cargo_place_id_two {cargo_place_id_two}")
 
+    b = str(base.random_value_int(2000, 3000))
+
     with allure.step("Добавление 2 ГМ через API"):
         lkz_updater = UpdateEntities(role='lkz')
 
         updated_task = lkz_updater.update_task(
             task_id=task_id,
-            task_number=a,
+            task_number=b,
             cargo_place_ids=[cargo_place_id_one, cargo_place_id_two],
             title="updated title"
         )
@@ -295,7 +297,7 @@ def test_shipment_task_with_gm_edit3_lkz(base_fixture, domain):
     lst = GmFilters(base.driver)
     lst.dropdown_without_input(lst.required_search_by_date, "За все время")
     time.sleep(2)
-    lst.input_in_field(lst.order_number, value=a, wait='lst')
+    lst.input_in_field(lst.order_number, value=b, wait='lst')
     time.sleep(3)
     lst.click_button(lst.first_task_click)
     time.sleep(2)

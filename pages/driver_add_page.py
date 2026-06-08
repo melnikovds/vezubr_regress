@@ -332,8 +332,8 @@ class DriverAdd(Base):
         self.input_in_field(self.passport_code_input, self.random_value_float_str(100000, 999999), click_first=True)
         self.input_in_field(self.license_id_input, self.random_value_float_str(1000000000, 9999999999))
         self.click_button(self.license_date_input_close)
-        self.backspace_and_input(self.license_date_input_open, num=2, value="45")
-        self.click_outside()
+        self.backspace_and_input(self.license_date_input_open, num=2, value="45", press_enter=True)
+        # self.click_outside()
         time.sleep(1)
         
         # Ввод контактной информации

@@ -1,9 +1,7 @@
 import uuid
 from datetime import datetime, timedelta
-
 import allure
 from typing import List, Dict, Optional
-
 from api_pages.client import APIClient
 from api_pages.drivers import DriverAPI
 from api_pages.task import TaskAPI

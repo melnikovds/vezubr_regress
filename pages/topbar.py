@@ -43,6 +43,10 @@ class TopBar(Base):
         "xpath": "//header[contains(@class,'flexbox top-nav')]//a[4]",
         "name": "assignments_hover"
     }
+    assignments_hover_lkz = {
+        "xpath": "//body/div[@id='main']/div[contains(@class,'dashboard')]/header[contains(@class,'flexbox top-nav')]/div[contains(@class,'flexbox size-1 top-nav__center justify-right')]/div[contains(@class,'top-nav__center-wrapper')]/div[contains(@class,'nav-group')]/a[4]",
+        "name": "assignments_hover_lkz"
+    }
     tasks_list_button = {
         "xpath": "//span[contains(@class,'text-big close-menu')][contains(text(),'Задания')]",
         "name": "tasks_list_button",

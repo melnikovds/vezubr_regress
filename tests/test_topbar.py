@@ -54,7 +54,7 @@ def test_topbar_lkz(base_fixture, domain):
     time.sleep(1)
     tb.refresh_page()
     time.sleep(3)
-    tb.click_button(tb.assignments_hover)
+    tb.click_button(tb.assignments_hover_lkz)
     time.sleep(1)
     tb.click_button(tb.tasks_list_button, do_assert=True)
     time.sleep(1)

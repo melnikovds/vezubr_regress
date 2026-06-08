@@ -132,7 +132,7 @@ class SideBar(Base):
         "xpath": "//li[@id='transportDocumentsRequests']",
         "name": "transport_doc_new_list_button",
         "reference_xpath": base_reference_xpath,
-        "reference": "Перевозочные документы (NEW - Заявки)"
+        "reference": "Перевозочные документы"
     }
     reg_client_create_list_button = {
         "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Сформировать')]",

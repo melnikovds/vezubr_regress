@@ -115,14 +115,21 @@ def test_journal_order_lkz(base_fixture, domain):
     # Выбор первого адреса из списка
     ftl.click_button(ftl.first_address_select)
     ftl.input_in_field(ftl.address_filter, "Гатчина, ул Карла Маркса, д 37", wait="lst")
-    ftl.click_button(ftl.select_first_radio)
-    ftl.click_button(ftl.confirm_address_button)
     time.sleep(3)
+    ftl.click_button(ftl.select_first_radio)
+    time.sleep(1)
+    ftl.click_button(ftl.confirm_address_button)
+    time.sleep(1)
     # Выбор второго адреса из списка
     ftl.click_button(ftl.second_address_select)
     ftl.input_in_field(ftl.address_filter, "ул Орджоникидзе, д 31 к 2", wait="lst")
+    time.sleep(3)
     ftl.click_button(ftl.select_first_radio)
+    time.sleep(1)
     ftl.click_button(ftl.confirm_address_button)
+    time.sleep(1)
+
+    ftl.scroll_to_element(ftl.tariff_button)
 
     # Ожидание завершения расчета стоимости
     base.get_element(ftl.calculate_finish)

@@ -348,8 +348,12 @@ class AddCdr(Base):
         "xpath": "//div[@class='ant-col ant-col-12 vz-form-col']//input[@role='spinbutton']",
         "name": "change_value_insurance"
     }
+    # change_category_insurance = {
+    #     "xpath": "(//div[@class='ant-select-selection__rendered'])[10]",
+    #     "name": "change_category_insurance"
+    # }
     change_category_insurance = {
-        "xpath": "(//div[@class='ant-select-selection__rendered'])[10]",
+        "xpath": "//label[@class='vz-form-item vz-form-item--required']//div[@class='ant-select ant-select-enabled']//div[@class='ant-select-selection__rendered']",
         "name": "change_category_insurance"
     }
     input_id_cdr = {

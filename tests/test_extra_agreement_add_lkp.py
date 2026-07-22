@@ -21,8 +21,8 @@ def test_extra_agreements_client_add_lkp(base_fixture, domain):
                            do_assert=True, wait="lst")
     
     client_list = ClientsList(base.driver)
-    # Клик по клиенту с ИНН "client_lkz_inn"
-    client_list.click_button(client_list.client_lkz_inn, wait="lst")
+    # Клик по ИНН контрагента
+    client_list.click_button(client_list.contractor_inn, wait="lst")
     
     contractor = Contractor(base.driver)
     # Переход на вкладку договоров
@@ -53,4 +53,8 @@ def test_extra_agreements_client_add_lkp(base_fixture, domain):
     agreement.refresh_page()
     time.sleep(4)
     agreement.verify_text_on_page(extra_agr_number, should_exist=False)
+    time.sleep(1)
+    add_extra.dropdown_without_input(add_extra.filter_du, option_text='Удаленные')
+    time.sleep(2)
+    agreement.verify_text_on_page(extra_agr_number, should_exist=True)
     # Конец теста

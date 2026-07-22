@@ -10,6 +10,10 @@ class ClientsList(Base):
         self.driver = driver
 
     # Locators
+    contractor_inn = {
+        "xpath": "//a[@class='link-back' and contains(text(), '7810579798')]",
+        "name": "contractor_inn"
+    }
     client_lkz_inn = {
         "xpath": "//a[@class='link-back' and contains(text(), '3123625054')]",
         "name": "client_lkz_inn"

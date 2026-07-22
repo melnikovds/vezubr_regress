@@ -44,6 +44,12 @@ class SideBar(Base):
         "reference_xpath": "//div[@class='order-form__title']",
         "reference": "Создание Шаблона Заявки"
     }
+    new_additional_request_button = {
+        "xpath": "//ul[@id='newOrder$Menu']//li[@id='newAdditionalRequest']",
+        "name": "new_additional_request_button",
+        "reference_xpath": "//div[@class='order-form__title']",
+        "reference": "Создание Заявки на Дополнительную услугу"
+    }
 
     """Requests"""
     requests_hover = {
@@ -55,6 +61,12 @@ class SideBar(Base):
         "name": "cdr_active_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Заявки на доставку Груза"
+    }
+    asr_active_list_button = {
+        "xpath": "//ul[@id='requests$Menu']//li[@id='additonalServicesList']",
+        "name": "asr_active_list_button",
+        "reference_xpath": base_reference_xpath,
+        "reference": "Заявки на доп. услуги"
     }
     delivery_regular_list_button = {
         "xpath": "//li[@id='requestsFtlRegular']",
@@ -116,23 +128,23 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Страховщики"
     }
+    go_gp_list_button = {
+        "xpath": "//li[@id='shipperConsignee']",
+        "name": "go_gp_list_button",
+        "reference_xpath": base_reference_xpath,
+        "reference": "ГО/ГП из адресов"
+    }
 
-    """Documents"""
-    documents_hover = {
-        "xpath": "//span[@class='route-name no-events' and text()='Документооборот']",
-        "name": "documents_hover"
+    """Registries"""
+    registries_hover = {
+        "xpath": "//span[@class='route-name no-events' and text()='Реестры']",
+        "name": "registries_hover"
     }
     registries_list_button = {
         "xpath": "//li[@id='registriesRequestListIncoming']",
         "name": "registries_list_button",
         "reference_xpath": base_reference_xpath,
         "reference": "Реестры от перевозчика"
-    }
-    transport_doc_new_list_button = {
-        "xpath": "//li[@id='transportDocumentsRequests']",
-        "name": "transport_doc_new_list_button",
-        "reference_xpath": base_reference_xpath,
-        "reference": "Перевозочные документы"
     }
     reg_client_create_list_button = {
         "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Сформировать')]",
@@ -158,6 +170,46 @@ class SideBar(Base):
         "reference_xpath": base_reference_xpath,
         "reference": "Реестры от перевозчика"
     }
+
+    """Documents"""
+    # documents_hover = {
+    #     "xpath": "//span[@class='route-name no-events' and text()='Документооборот']",
+    #     "name": "documents_hover"
+    # }
+    documents_hover = {
+        "xpath": "//span[@class='route-name no-events' and text()='Документы ЭПД']",
+        "name": "documents_hover"
+    }
+    ezz_list_button = {
+        "xpath": "//li[@id='electronicApplication']",
+        "name": "ezz_list_button",
+        "reference_xpath": base_reference_xpath,
+        "reference": "ЭЗЗ"
+    }
+    etrn_list_button = {
+        "xpath": "//li[@id='etrnDocuments']",
+        "name": "etrn_list_button",
+        "reference_xpath": base_reference_xpath,
+        "reference": "ЭТрН"
+    }
+    for_signing_list_button = {
+        "xpath": "//li[@id='signatureDocuments']",
+        "name": "for_signing_list_button",
+        "reference_xpath": base_reference_xpath,
+        "reference": "Титулы"
+    }
+    paper_documents_list_button = {
+        "xpath": "//li[@id='transportDocumentsRequests']",
+        "name": "paper_documents_list_button",
+        "reference_xpath": base_reference_xpath,
+        "reference": "Бумажные документы"
+    }
+    # transport_doc_new_list_button = {
+    #     "xpath": "//li[@id='transportDocumentsRequests']",
+    #     "name": "transport_doc_new_list_button",
+    #     "reference_xpath": base_reference_xpath,
+    #     "reference": "Перевозочные документы"
+    # }
 
     """Directories"""
     directories_hover = {
@@ -208,14 +260,18 @@ class SideBar(Base):
     }
 
     """Orders (OLD)"""
+    # orders_old_hover = {
+    #     "xpath": "(//div[@class='flexbox size-1 align-right justify-right'])[7]",
+    #     "name": "orders_old_hover"
+    # }
     orders_old_hover = {
-        "xpath": "(//div[@class='flexbox size-1 align-right justify-right'])[7]",
+        "xpath": "//span[@class='route-name no-events' and text()='Рейсы OLD версия']",
         "name": "orders_old_hover"
     }
-    orders_old_hover_lkp = {
-        "xpath": "//div[@class='flexbox sidebar sidebar--open']//li[7]",
-        "name": "orders_old_hover"
-    }
+    # orders_old_hover_lkp = {
+    #     "xpath": "//div[@class='flexbox sidebar sidebar--open']//li[7]",
+    #     "name": "orders_old_hover"
+    # }
     monitor_button = {
         "xpath": "//li[@id='monitor']",
         "name": "monitor_button",

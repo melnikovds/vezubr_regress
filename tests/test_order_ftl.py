@@ -188,7 +188,7 @@ def test_ftl_order_lkz(base_fixture, domain):
     # # Выбор категории заявки - Груз
     ftl.click_button(ftl.request_category_select)
     ftl.click_button(ftl.select_freight)
-    # Выбор типа ТС - 1.5т
+    # Выбор типа ТС
     ftl.click_button(ftl.vehicle_type_select)
     ftl.dropdown_with_input(ftl.vehicle_type_select, "1.5т / 9м3 / 4пал.")
     # Выбор типа кузова - Закрытый
@@ -246,7 +246,7 @@ def test_ftl_order_lkz(base_fixture, domain):
     time.sleep(3)
     ftl.click_button(ftl.radio_button_rate, wait_type='clickable')
     ftl.input_in_field(ftl.rate_for_publication, value='5999')
-    ftl.click_button(ftl.selection_of_contractors)
+    ftl.click_button(ftl.selection_of_contractors_lkz)
     ftl.click_button(ftl.contractor_checkbox)
     time.sleep(3)
     ftl.click_button(ftl.radio_button_rate, wait_type='visible')
@@ -266,7 +266,7 @@ def test_ftl_order_lkz(base_fixture, domain):
     sidebar.click_button(sidebar.sidebar_button)
 
     # Переход в раздел Активные FTL-заявки
-    base.move_and_click(move_to=sidebar.orders_old_hover_lkp, click_to=sidebar.ftl_active_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -290,12 +290,176 @@ def test_ftl_order_lkz(base_fixture, domain):
     time.sleep(5)
 
     ftl.reload_page()
+    time.sleep(5)
 
     # Начало исполнения рейса
     ftl.click_button(ftl.burger_menu)
     ftl.click_button(ftl.start_execution)
     time.sleep(3)
     # ftl.click_button(ftl.tab_execution)
+
+    time_one, time_two, time_three, time_four = FTLAdd.get_time_intervals()
+
+    # Простановка времени работы на 1 точке
+    ftl.click_button(ftl.point_loading_start)
+    time.sleep(1)
+    ftl.input_in_field(ftl.input_start, value=time_one)
+    time.sleep(1)
+    ftl.click_button(ftl.point_loading_finish)
+    time.sleep(1)
+    ftl.input_in_field(ftl.input_finish, value=time_two)
+    time.sleep(1)
+
+    ftl.click_button(ftl.save_changes)
+    time.sleep(1)
+    ftl.click_button(ftl.approve_changes, wait='form')
+    time.sleep(1)
+    ftl.click_button(ftl.ok_time)
+    time.sleep(3)
+
+    # Простановка времени работы на 2 точке
+    ftl.click_button(ftl.point_unloading_start)
+    time.sleep(1)
+    ftl.input_in_field(ftl.input_start, value=time_three)
+    time.sleep(1)
+    ftl.click_button(ftl.point_unloading_finish)
+    time.sleep(1)
+    ftl.input_in_field(ftl.input_finish, value=time_four)
+    time.sleep(1)
+
+    ftl.click_button(ftl.complete_order, wait='list')
+    time.sleep(1)
+    ftl.click_button(ftl.approve_and_complete_order, wait='form')
+
+
+@allure.story("Smoke test")
+@allure.feature('Создание и Исполнение FTL заявок')
+@allure.description('ЛКЭ. Тест FTL Рейс: тип - Межгород, подача - Сейчас, ТС - Груз 3т, '
+                    'кузов - Закрытый, адреса - Конкретные, публикация - Ставка')
+@pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
+def test_ftl_order_lke(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # Переход в раздел Новая FTL заявка
+    sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.new_ftl_inter_button,
+                           do_assert=True)
+
+    ftl = FTLAdd(base.driver)
+    # Сброс ранее введенных и сохраненных данных
+    ftl.click_button(ftl.cancel_button)
+
+    # Создание новой FTL заявки
+    sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.new_ftl_inter_button,
+                           do_assert=True)
+
+    # Выбор владельца заявки
+    ftl.dropdown_without_input(ftl.request_owner_select, "Собственный Заказ")
+    # Установка даты подачи заявки на сегодня
+    ftl.click_button(ftl.start_date_field)
+    ftl.click_button(ftl.today_button)
+    # Установка времени подачи заявки через час от текущего времени
+    ftl.click_button(ftl.start_time_field)
+    new_time = ftl.naw_time_change(60)
+    ftl.input_in_field(ftl.start_time_input, new_time)
+    time.sleep(2)
+    # # Выбор категории заявки - Груз
+    ftl.click_button(ftl.request_category_select)
+    ftl.click_button(ftl.select_freight)
+    # Выбор типа ТС
+    ftl.click_button(ftl.vehicle_type_select)
+    ftl.click_and_select_with_arrows(ftl.vehicle_type_select, arrow_presses=5)
+    time.sleep(1)
+    # Выбор типа кузова - Закрытый
+    ftl.click_button(ftl.vehicle_body_select)
+    ftl.click_button(ftl.body_type_closed_checkbox)
+    ftl.click_outside()
+    time.sleep(1)
+    # Выбор первого адреса из списка
+    ftl.click_button(ftl.first_address_select, wait="lst")
+    ftl.input_in_field(ftl.address_filter, "г Обнинск, ул Курчатова")
+    time.sleep(5)
+    ftl.click_button(ftl.select_first_radio)
+    ftl.click_button(ftl.confirm_address_button)
+    time.sleep(1)
+    # Выбор второго адреса из списка
+    ftl.click_button(ftl.second_address_select, wait="lst")
+    ftl.input_in_field(ftl.address_filter, "г Саранск, ул Мичурина, д 21")
+    time.sleep(5)
+    ftl.click_button(ftl.select_first_radio)
+    ftl.click_button(ftl.confirm_address_button)
+
+    # Добавление дополнительных данных
+    ftl.click_button(ftl.additional_requirements)
+    ide_code = FTLAdd.generate_ide_code()  # вызов метода
+    ftl.input_in_field(ftl.order_identifier, value=ide_code)
+    time.sleep(1)
+    ftl.scroll_to_element(ftl.order_insurance)
+    time.sleep(1)
+    ftl.click_button(ftl.responsible_employee)
+    ftl.click_and_select_with_arrows(ftl.select_employee, arrow_presses=4)
+    time.sleep(1)
+
+    # Публикация рейса
+    ftl.scroll_to_element(ftl.publish_order)
+    time.sleep(1)
+    ftl.click_button(ftl.publish_order)
+    time.sleep(3)
+    ftl.click_button(ftl.radio_button_rate, wait_type='clickable')
+    ftl.input_in_field(ftl.rate_for_publication, value='6999')
+    ftl.click_button(ftl.selection_of_contractors_lke)
+    ftl.click_button(ftl.contractor_checkbox)
+    time.sleep(3)
+    ftl.click_button(ftl.radio_button_rate, wait_type='visible')
+    ftl.click_button(ftl.publish, wait='form')
+    ftl.click_button(ftl.continue_button, do_assert=True)
+
+    time.sleep(3)
+
+    # Выход из ЛКЭ
+    ftl.click_button(ftl.ok)
+    time.sleep(1)
+    sidebar.click_button(sidebar.exit_button)
+    time.sleep(3)
+
+    # Вход за ЛКП
+    login = Login(base.driver, domain)
+    login.authorization("lkp")
+    time.sleep(10)
+
+    sidebar.click_button(sidebar.sidebar_button)
+
+    # Переход в раздел Активные FTL-заявки
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
+                        do_assert=True, wait='lst')
+
+    add = OldFTL(base.driver)
+    # Сброс фильтров
+    add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.input_in_field(add.request_identifier, value=ide_code, click_first=True)
+    time.sleep(2)
+    # Принятие заявки
+    ftl.click_button(ftl.click_on_request)
+    time.sleep(2)
+    ftl.click_button(ftl.accept_obligations)
+    time.sleep(2)
+    ftl.click_button(ftl.order_accept)
+    time.sleep(2)
+    # Назначение водителя
+    ftl.input_in_field(ftl.search_driver, value='Рыжанков')
+    time.sleep(1)
+    ftl.click_button(ftl.attach_driver, wait='form')
+    ftl.click_button(ftl.order_accepted)
+    time.sleep(5)
+
+    ftl.reload_page()
+    time.sleep(5)
+
+    # Начало исполнения рейса
+    ftl.click_button(ftl.burger_menu)
+    ftl.click_button(ftl.start_execution)
+    time.sleep(3)
 
     time_one, time_two, time_three, time_four = FTLAdd.get_time_intervals()
 

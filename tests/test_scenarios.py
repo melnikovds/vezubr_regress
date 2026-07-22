@@ -200,8 +200,11 @@ def test_scenario_one_lkz(base_fixture, domain):
     ftl.click_outside()
     time.sleep(1)
     ftl.click_button(ftl.publish_button)
+    time.sleep(1)
     ftl.click_button(ftl.continue_share_button, do_assert=True)
+    time.sleep(1)
     ftl.click_button(ftl.share_ok)
+    time.sleep(1)
 
     # Выход из ЛКЭ
     sidebar.click_button(sidebar.exit_button)
@@ -215,7 +218,7 @@ def test_scenario_one_lkz(base_fixture, domain):
     sidebar.click_button(sidebar.sidebar_button)
 
     # Переход в раздел Активные FTL-заявки
-    base.move_and_click(move_to=sidebar.orders_old_hover_lkp, click_to=sidebar.ftl_active_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
                         do_assert=True, wait='lst')
 
     # Сброс фильтров

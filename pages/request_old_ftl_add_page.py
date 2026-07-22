@@ -370,9 +370,17 @@ class FTLAdd(Base):
         "xpath": "//input[@id='order-clientrate']",
         "name": "rate_for_publication"
     }
-    selection_of_contractors = {
-        "xpath": "//span[text()='Подрядчики (для публикации доступно: 3 из 3)']",
-        "name": "selection_of_contractors"
+    # selection_of_contractors = {
+    #     "xpath": "//span[text()='Подрядчики (для публикации доступно: 3 из 3)']",
+    #     "name": "selection_of_contractors"
+    # }
+    selection_of_contractors_lkz = {
+        "xpath": "//span[text()='Подрядчики (для публикации доступно: 4 из 4)']",
+        "name": "selection_of_contractors_lkz"
+    }
+    selection_of_contractors_lke = {
+        "xpath": "//span[text()='Подрядчики (для публикации доступно: 3 из 21)']",
+        "name": "selection_of_contractors_lke"
     }
     contractor_checkbox = {
         "xpath": "(//span[@class='ant-select-tree-checkbox']//span)[2]",

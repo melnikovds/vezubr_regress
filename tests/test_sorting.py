@@ -1,5 +1,4 @@
 import time
-
 import allure
 import pytest
 from pages.insurer_page import Insurer
@@ -141,27 +140,27 @@ def test_sorting_orders_lke(base_fixture, domain):
 def test_sorting_orders_lkp(base_fixture, domain):
     base, sidebar = base_fixture
     time.sleep(2)
-    sidebar.move_and_click(move_to=sidebar.orders_old_hover_lkp, click_to=sidebar.ftl_list_button,
+    sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
-    sidebar.move_and_click(move_to=sidebar.orders_old_hover_lkp, click_to=sidebar.ftl_active_list_button,
+    sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
-    sidebar.move_and_click(move_to=sidebar.orders_old_hover_lkp, click_to=sidebar.ftl_archive_list_button,
+    sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_archive_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
-    sidebar.move_and_click(move_to=sidebar.orders_old_hover_lkp, click_to=sidebar.reg_client_create_old_list_button_lkp,
+    sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.reg_client_create_old_list_button_lkp,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
-    sidebar.move_and_click(move_to=sidebar.orders_old_hover_lkp, click_to=sidebar.transport_doc_old_list_button,
+    sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.transport_doc_old_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
-    sidebar.move_and_click(move_to=sidebar.orders_old_hover_lkp, click_to=sidebar.reg_client_old_list_button_lkp,
+    sidebar.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.reg_client_old_list_button_lkp,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
@@ -239,7 +238,7 @@ def test_sorting_contractor_lkp(base_fixture, domain):
 def test_sorting_registries_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
-    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.registries_list_button,
+    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.registries_list_button,
                            do_assert=True, wait="lst")
 
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
@@ -252,15 +251,15 @@ def test_sorting_registries_lkz(base_fixture, domain):
 def test_sorting_registries_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
-    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.transport_doc_new_list_button,
+    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.paper_documents_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
-    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.registries_client_list_button,
+    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.registries_client_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
-    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.registries_producer_list_button,
+    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.registries_producer_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
@@ -272,11 +271,11 @@ def test_sorting_registries_lke(base_fixture, domain):
 def test_sorting_registries_lkp(base_fixture, domain):
     base, sidebar = base_fixture
 
-    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.transport_doc_new_list_button,
+    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.paper_documents_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
-    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.registries_client_list_button,
+    sidebar.move_and_click(move_to=sidebar.registries_hover, click_to=sidebar.registries_client_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
@@ -288,7 +287,7 @@ def test_sorting_registries_lkp(base_fixture, domain):
 def test_sorting_documents_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
-    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.transport_doc_new_list_button,
+    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.paper_documents_list_button,
                            do_assert=True, wait="lst")
 
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
@@ -309,7 +308,7 @@ def test_sorting_documents_lkz(base_fixture, domain):
 def test_sorting_documents_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
-    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.transport_doc_new_list_button,
+    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.paper_documents_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 
@@ -321,7 +320,7 @@ def test_sorting_documents_lke(base_fixture, domain):
 def test_sorting_documents_lkp(base_fixture, domain):
     base, sidebar = base_fixture
 
-    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.transport_doc_new_list_button,
+    sidebar.move_and_click(move_to=sidebar.documents_hover, click_to=sidebar.paper_documents_list_button,
                            do_assert=True, wait="lst")
     base.click_multiple_buttons(base.sorting_button, num_clicks=3, wait="lst")
 

@@ -14,7 +14,7 @@ def test_filter_old_ftl_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Активные FTL-заявки
-    base.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ftl_active_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -98,7 +98,7 @@ def test_filter_old_ftl_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Активные FTL-заявки
-    base.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ftl_active_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -242,7 +242,7 @@ def test_filter_order_ftl_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.ftl_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -349,7 +349,7 @@ def test_filter_order_ftl_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.ftl_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -430,7 +430,7 @@ def test_filter_order_ftl_lkp(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.order_hover_lkp, click_to=sidebar.ftl_list_button_lkp,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -511,7 +511,7 @@ def test_filter_delayed_order_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.deferred_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.deferred_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -555,7 +555,7 @@ def test_filter_delayed_order_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.deferred_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.deferred_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)

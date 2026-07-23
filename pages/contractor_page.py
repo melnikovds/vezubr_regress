@@ -35,6 +35,18 @@ class Contractor(Base):
         "xpath": "//div[@class='cell-text-overflow-content']",
         "name": "agreements_link"
     }
+    agreement_link_two = {
+        "xpath": "//div[@class='cell-text-overflow-content']//a[contains(text(),'87-23-34')]",
+        "name": "agreement_link_two"
+    }
+    agreement_link_three = {
+        "xpath": "//div[@class='cell-text-overflow-content']//a[contains(text(),'№-20260513201440')]",
+        "name": "agreement_link_three"
+    }
+    agreement_link_four = {
+        "xpath": "//div[@class='cell-text-overflow-content']//a[contains(text(),'91-233-237')]",
+        "name": "agreement_link_four"
+    }
     save_button = {
         "xpath": "//button[@class='ant-btn semi-wide margin-left-16 ant-btn-primary']",
         "name": "save_button",

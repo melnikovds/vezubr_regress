@@ -14,6 +14,14 @@ class ClientsList(Base):
         "xpath": "//a[@class='link-back' and contains(text(), '7810579798')]",
         "name": "contractor_inn"
     }
+    producer_inn = {
+        "xpath": "//a[normalize-space()='5009112893']",
+        "name": "producer_inn"
+    }
+    client_inn = {
+        "xpath": "//a[normalize-space()='7718944576']",
+        "name": "client_inn"
+    }
     client_lkz_inn = {
         "xpath": "//a[@class='link-back' and contains(text(), '3123625054')]",
         "name": "client_lkz_inn"

@@ -8,8 +8,12 @@ class ShipmentTaskAdd(Base):
         super().__init__(driver)
         self.driver = driver
 
+    # task_create_button = {
+    #     "xpath": "//p[@class='no-margin']",
+    #     "name": "task_create_button"
+    # }
     task_create_button = {
-        "xpath": "//p[@class='no-margin']",
+        "xpath": "//p[contains(text(),'Создать Задание')]",
         "name": "task_create_button"
     }
     task_number = {

@@ -8,11 +8,11 @@ from pages.profile_page import *
 from pages.user_add_page import *
 
 
-@allure.story("Extended")
+@allure.story("Critical")
 @allure.feature('Фильтры')
 @allure.description('ЛКЗ, Тестирование: фильтры в разделе "Задания"')
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
-def test_filter_assignment_lkz(base_fixture, domain, request):
+def test_filter_assignment1_lkz(base_fixture, domain, request):
     base, sidebar = base_fixture
 
     with allure.step("Переходим на вкладку 'Задания'"):
@@ -21,6 +21,19 @@ def test_filter_assignment_lkz(base_fixture, domain, request):
 
     with allure.step("Устанавливаем дату создания 'За все время'"):
         add.dropdown_without_input(add.required_search_by_date, "За все время")
+
+    with allure.step("Добавляем все фильтры"):
+        add.click_button(add.additional_filters)
+        time.sleep(1)
+        add.click_button(add.default_filters)
+        time.sleep(1)
+        add.click_button(add.add_filters_1)
+        add.click_button(add.add_filters_2)
+        add.click_button(add.add_filters_3)
+        add.click_button(add.add_filters_4)
+        add.click_button(add.add_filters_5)
+        add.click_button(add.apply_filters)
+        time.sleep(1)
 
     with allure.step("Проверка фильтра 'Номер заказа'"):
         add.input_in_field(add.order_number, "очень", wait='lst')
@@ -85,6 +98,37 @@ def test_filter_assignment_lkz(base_fixture, domain, request):
         # time.sleep(1)
         add.click_on_the_cross(add.task_cross)
         time.sleep(1)
+
+
+@allure.story("Critical")
+@allure.feature('Фильтры')
+@allure.description('ЛКЗ, Тестирование: фильтры в разделе "Задания"')
+@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
+def test_filter_assignment2_lkz(base_fixture, domain, request):
+    base, sidebar = base_fixture
+
+    with allure.step("Переходим на вкладку 'Задания'"):
+        sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.tasks_list_button)
+        add = GmFilters(base.driver)
+
+    with allure.step("Устанавливаем дату создания 'За все время'"):
+        add.dropdown_without_input(add.required_search_by_date, "За все время")
+
+    with allure.step("Проверка фильтра 'Идентификатор адреса отправления'"):
+        add.input_in_field(add.dep_external_id, "ВЛК")
+        time.sleep(2)
+        add.verify_text_on_page(text="2439", should_exist=True)
+        add.verify_text_on_page(text="2946", should_exist=False)
+        add.verify_text_on_page(text="Очень важное", should_exist=False)
+        add.backspace_and_input(add.dep_external_id, "")
+
+    with allure.step("Проверка фильтра 'Идентификатор адреса доставки'"):
+        add.input_in_field(add.arr_external_id, "МРМ")
+        time.sleep(2)
+        add.verify_text_on_page(text="86412987", should_exist=True)
+        add.verify_text_on_page(text="Очень важное", should_exist=False)
+        add.verify_text_on_page(text="567567", should_exist=False)
+        add.backspace_and_input(add.arr_external_id, "")
 
 
 @allure.story("Extended")

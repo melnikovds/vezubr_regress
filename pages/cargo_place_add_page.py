@@ -184,15 +184,27 @@ class CargoPlaceAdd(Base):
         "reference_xpath": "//span[contains(.,'Грузоместо успешно создано')]",
         "reference": "Грузоместо успешно создано"
     }
+    uncreate_cargo_place_button = {
+        "xpath": "//button[@class='ant-btn ant-btn-primary']",
+        "name": "uncreate_cargo_place_button",
+        # "reference_xpath": "//div[@class='ant-modal-confirm-content' and text()='Грузоместо успешно создано']",
+        "reference_xpath": "//div[contains(text(),'Клиент не найден')]",
+        # "reference": "Создать",
+        "reference": "Клиент не найден"
+    }
     create_cargo_place_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
         "name": "create_cargo_place_button",
-        # "reference_xpath": "//div[@class='ant-modal-confirm-content' and text()='Грузоместо успешно создано']",
-        "reference": "Создать"
+        "reference_xpath": "//span[@class='ant-modal-confirm-title']",
+        "reference": "Грузоместо успешно создано"
     }
     confirm_add_button = {
         "xpath": "(//button[@class='ant-btn ant-btn-primary'])[2]",
         "name": "confirm_add_button"
+    }
+    client_not_found_ok = {
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[@type='button']",
+        "name": "client_not_found_ok"
     }
 
 
@@ -588,7 +600,65 @@ class CargoPlaceAdd(Base):
         #                                      "Свердловская обл, г Березовский, ул Театральная, д 13")
 
         # Клик по кнопке создания грузоместа
+        self.click_button(self.uncreate_cargo_place_button, do_assert=True)
+        return cp_stamp
+
+    def add_full_cargo_place_inner_lke(self) -> str:
+        """
+        Автоматизирует добавление грузоместа в систему, заполняя поля и выбирая опции из выпадающих списков.
+        Процесс включает выбор типа места груза, ввод количества, веса, объема и стоимости груза, выбор статуса,
+        генерацию уникальных данных для грузоместа, указание адресов отправления и доставки, а затем подтверждение
+        создания грузоместа.
+
+        Parameters
+        ----------
+        Нет входных параметров. Все необходимые данные генерируются или выбираются внутри метода.
+
+        Returns
+        -------
+        str
+            Уникальный идентификатор (штамп) созданного грузоместа. Побочные эффекты: изменения на веб-странице.
+        """
+        # Выбор типа грузоместа "Короб"
+        self.dropdown_without_input(self.lke_cp_type_select, "Мешок")
+        # Ввод рандомизированных данных для количества, веса, объема и стоимости груза
+        self.backspace_and_input(self.cp_quantity_input, self.random_value_float_str(1, 10))
+        self.backspace_and_input(self.cp_weight_input, self.random_value_float_str(10, 20000))
+        self.backspace_and_input(self.cp_value_input, self.random_value_float_str(0.1, 35.0, precision=1))
+        self.backspace_and_input(self.cp_cost_input, self.random_value_float_str(100, 1000000))
+        # Генерация уникального идентификатора для грузоместа
+        cp_stamp = f"ГМ-ТЕХТРЕЙД-{self.get_timestamp()}"
+        # Ввод уникальных данных для грузоместа
+        self.input_in_field(self.lke_cp_title_input, cp_stamp)  # Название
+        self.input_in_field(self.lke_invoice_number_input, cp_stamp)  # Номер накладной
+        self.input_in_field(self.lke_bar_code_input, cp_stamp)  # Штрихкод
+        self.input_in_field(self.lke_seal_number_input, cp_stamp)  # Номер пломбы
+        self.input_in_field(self.temp_from_input, self.random_value_float_str(-5, 0))  # Температура от
+        self.input_in_field(self.temp_until_input, self.random_value_float_str(0, 5))  # Температура до
+        self.input_in_field(self.lke_external_id_input, cp_stamp)  # Внешний ID
+        self.input_in_field(self.lke_comment_input, cp_stamp)  # Комментарий
+        # Ввод адресов отправления и доставки
+        self.click_button(self.departure_address_select)
+        time.sleep(3)
+        self.input_in_field(self.factual_address,"ул Леона Поземского, д 115Д")
+        time.sleep(1)
+        self.click_button(self.radio_button_first_address, wait_type="located")
+        time.sleep(1)
+        self.scroll_to_element(self.save_selected_address)
+        self.click_button(self.save_selected_address)
+        time.sleep(1)
+        self.click_button(self.delivery_address_select)
+        time.sleep(3)
+        self.input_in_field(self.factual_address,"г Псков, ул Ленина")
+        time.sleep(1)
+        self.click_button(self.radio_button_first_address, wait_type="located")
+        time.sleep(1)
+        self.scroll_to_element(self.save_selected_address)
+        self.click_button(self.save_selected_address)
+        time.sleep(1)
+
+        # Клик по кнопке создания грузоместа
         self.click_button(self.create_cargo_place_button, do_assert=True)
-        # Клик по кнопке подтверждения добавления
+        # # Клик по кнопке подтверждения добавления
         self.click_button(self.confirm_add_button, wait="lst")
         return cp_stamp

@@ -36,6 +36,51 @@ class GmFilters(Base):
         "xpath": "(//i[contains(@class,'anticon anticon-down')])[3]",
         "name": "to_aplication_2"
     }
+
+    additional_filters = {
+        "xpath": "//p[contains(text(),'Доп фильтры')]",
+        "name": "additional_filters"
+    }
+    default_filters = {
+        "xpath": "//button[contains(text(),'По умолчанию')]",
+        "name": "default_filters"
+    }
+    add_filters_1 = {
+        "xpath": "//div[@role='document']//div[1]//div[1]//label[1]//span[2]",
+        "name": "add_filters_1"
+    }
+    add_filters_2 = {
+        "xpath": "//body//div[@id='main']//div[contains(@role,'dialog')]//div[contains(@role,'dialog')]//div[2]//label[1]//span[2]",
+        "name": "add_filters_2"
+    }
+    add_filters_3 = {
+        "xpath": "//div[contains(@class,'modal-body')]//div[3]//label[1]//span[2]",
+        "name": "add_filters_3"
+    }
+    add_filters_4 = {
+        "xpath": "//div[1]//div[4]//label[1]//span[2]",
+        "name": "add_filters_4"
+    }
+    add_filters_5 = {
+        "xpath": "//div[5]//label[1]//span[2]",
+        "name": "add_filters_5"
+    }
+    apply_filters = {
+        "xpath": "//button[contains(text(),'Применить')]",
+        "name": "apply_filters"
+    }
+
+
+    dep_external_id = {
+        "xpath": "//input[@placeholder='Идентификатор адреса отправления']",
+        "name": "dep_external_id"
+    }
+    arr_external_id = {
+        "xpath": "//input[@placeholder='Идентификатор адреса доставки']",
+        "name": "arr_external_id"
+    }
+
+
     # region_dispatch = {
     #     "xpath": "(//div[@class='ant-select-selection__rendered'])[4]",
     #     "name": "region_dispatch"

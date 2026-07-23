@@ -24,7 +24,15 @@ class Journal(Base):
     }
     tab_history_old_request = {
         "xpath": "//a[@id='order-history']",
-        "name": "tab_history_old_request",
+        "name": "tab_history_old_request"
+    }
+    tab_history_contractor = {
+        "xpath": "//a[contains(text(),'История')]",
+        "name": "tab_history_contractor"
+    }
+    tab_history_agreement = {
+        "xpath": "//a[contains(text(),'История')]",
+        "name": "tab_history_agreement"
     }
 
 

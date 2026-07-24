@@ -34,5 +34,9 @@ class Journal(Base):
         "xpath": "//a[contains(text(),'История')]",
         "name": "tab_history_agreement"
     }
+    tab_history_ftl_request = {
+        "xpath": "//a[contains(text(),'История')]",
+        "name": "tab_history_ftl_request"
+    }
 
 

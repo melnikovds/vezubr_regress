@@ -15,6 +15,8 @@ from pages.filters_old_ftl_page import OldFTL
 from pages.contractor_page import Contractor
 from pages.contractor_list_page import ContractorList
 from pages.clients_list_page import ClientsList
+from pages.filters_new_ftl_page import NewFtlFilters
+from pages.cdr_ftl_page import AddCdr
 
 
 @allure.story("Extended test")
@@ -255,6 +257,50 @@ def test_journal_agreement_lkz(base_fixture, domain):
     jrn.verify_text_on_page(text='2045')
     jrn.verify_text_on_page(text='согласованный директором')
     jrn.verify_text_on_page(text='13201440')
+
+
+@allure.story("Critical test")
+@allure.feature('Журналирование')
+@allure.description('ЛКЗ. Проверка журналирования FTL Заявки')
+@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
+def test_journal_cdr_lkz(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    add = NewFtlFilters(base.driver)
+    cdr = AddCdr(base.driver)
+    jrn = Journal(base.driver)
+
+    # Выбор нужной Заявки
+    sidebar.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.cdr_active_list_button,
+                           do_assert=True, wait="lst")
+
+    add.click_button(add.clear)
+    add.dropdown_without_input(add.execution_start_sate, option_text='За все время')
+    time.sleep(1)
+    add.input_in_field(add.request_number, value='26-VZ-187')
+    time.sleep(3)
+    cdr.click_button(cdr.click_first_element)
+    time.sleep(1)
+    jrn.click_button(jrn.tab_history_ftl_request)
+    time.sleep(1)
+    jrn.dropdown_without_input(jrn.time_event, option_text='За все время')
+    time.sleep(10)
+    jrn.verify_text_on_page(text='4666')
+    jrn.verify_text_on_page(text='WH400000')
+    jrn.verify_text_on_page(text='Поиск исполнителя')
+    jrn.verify_text_on_page(text='Статус Заявки')
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -22,13 +22,37 @@ class FTLTariffAdd(Base):
         "xpath": "(//div[@class='ant-select-selection__rendered'])[4]",
         "name": "fixed_type_select"
     }
+    # departures_city_input = {
+    #     "xpath": "(//input[@class='ant-input ant-select-search__field'])[1]",
+    #     "name": "departures_city_input"
+    # }
     departures_city_input = {
-        "xpath": "(//input[@class='ant-input ant-select-search__field'])[1]",
+        "xpath": "//input[@class='ant-input ant-select-search__field']",
         "name": "departures_city_input"
     }
+    # arrival_city_input = {
+    #     "xpath": "(//input[@class='ant-input ant-select-search__field'])[2]",
+    #     "name": "arrival_city_input"
+    # }
     arrival_city_input = {
-        "xpath": "(//input[@class='ant-input ant-select-search__field'])[2]",
+        "xpath": "//div[@class='tariffs page-tariffs-add page-tariffs-add path-tariffs-add container']//div[2]//label[1]//div[1]//div[1]//div[1]//div[1]//div[1]//ul[1]//li[1]//div[1]//input[1]",
         "name": "arrival_city_input"
+    }
+    select_city_one = {
+        "xpath": "//li[contains(text(),'г Мурманск')]",
+        "name": "select_city_one"
+    }
+    select_city_two = {
+        "xpath": "//li[@class='ant-select-dropdown-menu-item ant-select-dropdown-menu-item-active']",
+        "name": "select_city_two"
+    }
+    select_city_three = {
+        "xpath": "//li[contains(text(),'г Екатеринбург')]",
+        "name": "select_city_three"
+    }
+    select_city_four = {
+        "xpath": "//li[contains(text(),'г Воронеж')]",
+        "name": "select_city_three"
     }
     tariff_name_input = {
         "xpath": "//input[@placeholder='Название тарифа']",

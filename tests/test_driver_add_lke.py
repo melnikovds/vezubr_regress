@@ -5,6 +5,7 @@ from pages.driver_add_page import DriverAdd
 from pages.driver_list_page import DriverList
 from pages.filter_directory_page import Manual
 
+
 @allure.story("Smoke test")
 @allure.feature('Создание и операции с водителями')
 @allure.description('ЛКЭ. Тест создания водителя Экс: ФИО - ФИО-timestamp, паспорт/права - РФ, '
@@ -113,8 +114,10 @@ def test_own_driver2_add_lke(base_fixture, domain):
     license_id = add_driver.random_value_float_str(1000000000, 9999999999)
     add_driver.input_in_field(add_driver.license_id_input, license_id)
     add_driver.click_button(add_driver.license_date_input_close)
-    add_driver.backspace_and_input(add_driver.license_date_input_open, num=2, value="45")
-    add_driver.click_outside()
+    time.sleep(2)
+    add_driver.backspace_and_input(add_driver.license_date_input_open, num=2, value="45", press_enter=True)
+    time.sleep(2)
+    add_driver.scroll_to_element(add_driver.app_phone_input)
     time.sleep(2)
 
     # Ввод контактной информации

@@ -19,9 +19,13 @@ class ProducersList(Base):
         "name": "producer_lkp_inn"
     }
     producer_logo_inn = {
-        "xpath": "//a[@class='link-back' and contains(text(), '5009112893')]",
+        "xpath": "//a[normalize-space()='3112584871']",
         "name": "producer_logo_inn"
     }
+    # producer_logo_inn = {
+    #     "xpath": "//a[@class='link-back' and contains(text(), '5009112893')]",
+    #     "name": "producer_logo_inn"
+    # }
     producer_vaz_inn = {
         "xpath": "//a[@class='link-back' and contains(text(), '6320002223')]",
         "name": "producer_vaz_inn"

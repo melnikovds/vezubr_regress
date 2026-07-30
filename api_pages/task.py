@@ -1,5 +1,5 @@
 import allure
-from typing import Dict, Optional
+from typing import List, Dict, Optional
 from api_pages.client import APIClient
 from .task_data_generator import TaskGenerator
 
@@ -87,12 +87,12 @@ class TaskAPI:
     @allure.step("Обновление задания")
     def update_task(self, task_id: int, update_data: Dict) -> Dict:
         """Обновление задания"""
-        response = self.client.put(f"/v1/api/shipment/tasks/{task_id}/update", json=update_data)
-        return response.get('task', response)
+        response = self.client.post(f"/v1/api/shipment/tasks/{task_id}/update", json=update_data)
+        return response
 
     @allure.step("Удаление задания")
     def delete_task(self, task_id: int) -> Dict:
-        """Удаление задания (если API поддерживает)"""
+        """Удаление задания"""
         response = self.client.delete(f"/v1/api/shipment/tasks/{task_id}/delete")
         return response
 

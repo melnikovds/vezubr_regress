@@ -8,7 +8,7 @@ from typing import Any, ClassVar, Dict, Type, NoReturn, Optional
 
 import allure
 from selenium import webdriver
-from selenium.common import TimeoutException
+from selenium.common import TimeoutException, NoSuchElementException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
@@ -665,6 +665,32 @@ class Base:
                     )
                     print(f"[ERROR] Не удалось кликнуть на элемент '{element_name}'.")
                     raise e
+
+    def click_or_skip_button(self, element_dict: Dict[str, str], index: int = 1, do_assert: bool = False,
+                             wait: Optional[str] = None, wait_type: str = 'clickable') -> None:
+        """
+        Кликает по кнопке, если она найдена.
+        Если элемент не найден — пропускает действие без падения теста.
+        """
+
+        element_name = f"{element_dict['name']} index {index}" if index > 1 else element_dict['name']
+        message = f"Try to click on {element_name} (or skip)"
+
+        with allure.step(title=message):
+            try:
+                # используем основной метод
+                self.click_button(
+                    element_dict=element_dict,
+                    index=index,
+                    do_assert=do_assert,
+                    wait=wait,
+                    wait_type=wait_type
+                )
+            except (TimeoutException, NoSuchElementException) as e:
+                skip_message = f"Element '{element_name}' not found. Skipping click. Reason: {e}"
+                print(skip_message)
+                with allure.step(skip_message):
+                    pass
 
     def click_button_recaptchav3(self, element_dict: Dict[str, str], index: int = 1, do_assert: bool = False,
                                  wait: Optional[str] = None, wait_type: str = 'clickable', safe: bool = False) -> None:

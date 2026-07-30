@@ -8,8 +8,12 @@ class ShipmentTaskAdd(Base):
         super().__init__(driver)
         self.driver = driver
 
+    # task_create_button = {
+    #     "xpath": "//p[@class='no-margin']",
+    #     "name": "task_create_button"
+    # }
     task_create_button = {
-        "xpath": "//p[@class='no-margin']",
+        "xpath": "//p[contains(text(),'Создать Задание')]",
         "name": "task_create_button"
     }
     task_number = {
@@ -44,6 +48,11 @@ class ShipmentTaskAdd(Base):
         "xpath": "//body/div[@id='main']/div[@class='dashboard']/div[@class='dashboard-content margin-top-60']/div[@class='shipment-tasks page-shipment-tasks-create page-shipment-tasks-create path-shipment-tasks-create container']/div[@class='vzubr-white-box vzubr-white-box-wide']/div/div/div/div[@class='vz-form-group']/div[3]/div[1]/div[4]/label[1]/div[1]/div[1]/div[1]/div[1]",
         "name": "whom_task"
     }
+    switch_complete_gm = {
+        "xpath": "//div[@class='vz-form-field-switch vz-form-field-switch__size-default']",
+        "name": "switch_complete_gm"
+    }
+
     departure_address = {
         "xpath": "//body/div[@id='main']/div[@class='dashboard']/div[@class='dashboard-content margin-top-60']/div[@class='shipment-tasks page-shipment-tasks-create page-shipment-tasks-create path-shipment-tasks-create container']/div[@class='vzubr-white-box vzubr-white-box-wide']/div/div/div/div[@class='vz-form-group']/div[@class='vz-form-row']/div[@class='ant-row-flex vz-form-row__native']/div[1]/button[1]",
         "name": "departure_address"
@@ -52,6 +61,7 @@ class ShipmentTaskAdd(Base):
         "xpath": "//div[@class='vz-form-row']//div[2]//button[1]",
         "name": "delivery_address"
     }
+
     creation_complete = {
         "xpath": "//button[@class='ant-btn margin-left-10 ant-btn-primary']",
         "name": "creation_complete"
@@ -60,6 +70,21 @@ class ShipmentTaskAdd(Base):
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
         "name": "successfully_created"
     }
+
+
+    tab_characteristics = {
+        "xpath": "//div[contains(text(),'Характеристики')]",
+        "name": "tab_characteristics"
+    }
+    tab_gm = {
+        "xpath": "//div[contains(text(),'Грузоместа')]",
+        "name": "tab_gm"
+    }
+    tab_history = {
+        "xpath": "//div[contains(text(),'История')]",
+        "name": "tab_history"
+    }
+
 
     task_edit_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary']",
@@ -119,8 +144,6 @@ class ShipmentTaskAdd(Base):
         "xpath": "//a[@class='link-back'][normalize-space()='1']",
         "name": "first_task_click"
     }
-
-    # МЕТОДЫ
 
     # ========== Методы для работы с заявками ==========
 

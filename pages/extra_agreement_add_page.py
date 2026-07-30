@@ -56,6 +56,10 @@ class ExtraAgreementAdd(Base):
         "xpath": "//input[@type='radio' and @class='ant-radio-input']",
         "name": "radio_button"
     }
+    filter_du = {
+        "xpath": "//div[@class='ant-select-selection__rendered']",
+        "name": "filter_du"
+    }
 
     # Methods
     def add_base_extra_agreements(self):

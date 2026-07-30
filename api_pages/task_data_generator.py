@@ -1,5 +1,5 @@
 import random
-from typing import Dict, Optional
+from typing import List, Dict, Optional
 from datetime import datetime, timedelta
 
 
@@ -100,3 +100,24 @@ class TaskGenerator:
         task_data["requiredDeliveredAtTill"] = (now + timedelta(days=days_offset_till + 2)).isoformat() + "Z"
 
         return task_data
+
+    def build_update_task_data(self, cargo_place_ids: Optional[List[int]] = None, **overrides) -> Dict:
+        data = {
+            "number": "2405",
+            "title": "authority000",
+            "shipBy": "fm_logistic",
+            "arrivalPoint": {"id": 16934},
+            "departurePoint": {"id": 18466},
+            "types": ["free"],
+            "isCargoPlacesEnabled": True,
+            "cargoPlaces": []
+        }
+
+        if cargo_place_ids:
+            data["cargoPlaces"] = [
+                {"id": int(cid), "externalId": None}
+                for cid in cargo_place_ids
+            ]
+
+        data.update(overrides)
+        return data

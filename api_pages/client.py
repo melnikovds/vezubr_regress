@@ -65,4 +65,7 @@ class APIClient:
     def post(self, endpoint: str, data: Optional[Dict] = None, json: Optional[Dict] = None):
         return self._request('POST', endpoint, json=json or data)
 
+    def delete(self, endpoint: str, params: Optional[Dict] = None):
+        return self._request('DELETE', endpoint, params=params)
+
 

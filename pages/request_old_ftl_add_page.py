@@ -1,6 +1,7 @@
 from base.base_class import Base
 import random
 from datetime import datetime, timedelta
+from typing import Tuple
 
 
 class FTLAdd(Base):
@@ -102,14 +103,41 @@ class FTLAdd(Base):
         "xpath": "//span[@class='cost cost-min']",
         "name": "calculate_finish"
     }
-    tariff_button = {
+    publication_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary' and span[contains(text(), 'По тарифу')]]",
+        "name": "publication_button"
+    }
+    tariff_button = {
+        "xpath": "//button[@data-tariffpublishing='true']",
         "name": "tariff_button"
+    }
+    rate_button = {
+        "xpath": "//input[@value='rate']",
+        "name": "rate_button"
+    }
+    rate_amount = {
+        "xpath": "//input[@id='order-clientrate']",
+        "name": "rate_amount"
     }
     bargain_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary' and span[contains(text(), 'В торги')]]",
         "name": "bargain_button"
     }
+    perevozchik_cross = {
+        "xpath": "//li[@title='ООО 'Перевозчик'']//i[@aria-label='icon: close']",
+        "name": "perevozchik_cross"
+    }
+    lkp_cross = {
+        "xpath": "//li[@title='Auto LKP']//i[@aria-label='icon: close']//*[name()='svg']",
+        "name": "lkp_cross"
+    }
+    lke_select_checkbox = {
+        "xpath": "//span[contains(text(),'Auto LKE')]",
+        "name": "lke_select_checkbox"
+    }
+
+
+
     """Producer drop-down list"""
     producer_select = {
         "xpath": "//span[@class='vz-form-item__label ' and contains(text(), 'Подрядчики')]",
@@ -153,6 +181,27 @@ class FTLAdd(Base):
         "name": "producer_check_box"
     }
 
+
+    """Перепубликация"""
+    republication_button = {
+        "xpath": "//button[@id='order-republish']",
+        "name": "republication_button"
+    }
+    lkp_select_checkbox = {
+        "xpath": "//span[contains(text(),'Auto LKP')]",
+        "name": "lkp_select_checkbox"
+    }
+    continue_share_button = {
+        "xpath": "//button[@class='ant-btn ant-btn-primary' and span[contains(text(), 'Продолжить')]]",
+        "name": "continue_share_button",
+        "reference_xpath": "//div[@class='ant-modal-confirm-content']",
+        "reference": "Рейс был расшарен для всех указанных подрядчиков"
+    }
+    share_ok = {
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[@type='button']",
+        "name": "share_ok",
+    }
+
     # Methods
     @staticmethod
     def generate_ide_code() -> str:
@@ -163,25 +212,70 @@ class FTLAdd(Base):
 
         return ide_code
 
+    # @staticmethod
+    # def get_time_intervals():
+    #     # Получаем текущее время
+    #     now = datetime.now()
+    #
+    #     # Вычисляем временные промежутки
+    #     time_one = now - timedelta(hours=4)  # Четыре часа назад
+    #     time_two = now - timedelta(hours=3)  # Три часа назад
+    #     time_three = now - timedelta(hours=2)  # Два часа назад
+    #     time_four = now - timedelta(hours=1)  # Один час назад
+    #
+    #     # Форматируем время в нужном формате (дд.мм.гггг чч:мм)
+    #     time_one_formatted = time_one.strftime('%d.%m.%Y %H:%M')
+    #     time_two_formatted = time_two.strftime('%d.%m.%Y %H:%M')
+    #     time_three_formatted = time_three.strftime('%d.%m.%Y %H:%M')
+    #     time_four_formatted = time_four.strftime('%d.%m.%Y %H:%M')
+    #
+    #     return time_one_formatted, time_two_formatted, time_three_formatted, time_four_formatted
+
     @staticmethod
-    def get_time_intervals():
-        # Получаем текущее время
+    def get_time_intervals() -> Tuple[str, str, str, str]:
         now = datetime.now()
 
-        # Вычисляем временные промежутки
-        time_one = now - timedelta(hours=4)  # Четыре часа назад
-        time_two = now - timedelta(hours=3)  # Три часа назад
-        time_three = now - timedelta(hours=2)  # Два часа назад
-        time_four = now - timedelta(hours=1)  # Один час назад
+        time_one = now - timedelta(hours=4)
+        time_two = now - timedelta(hours=3)
+        time_three = now - timedelta(hours=2)
+        time_four = now - timedelta(hours=1)
 
-        # Форматируем время в нужном формате (дд.мм.гггг чч:мм)
-        time_one_formatted = time_one.strftime('%d.%m.%Y %H:%M')
-        time_two_formatted = time_two.strftime('%d.%m.%Y %H:%M')
-        time_three_formatted = time_three.strftime('%d.%m.%Y %H:%M')
-        time_four_formatted = time_four.strftime('%d.%m.%Y %H:%M')
+        # Формат: "ддммгггг ччмм"
+        fmt = '%d%m%Y %H%M'
 
-        return time_one_formatted, time_two_formatted, time_three_formatted, time_four_formatted
+        return (
+            time_one.strftime(fmt),
+            time_two.strftime(fmt),
+            time_three.strftime(fmt),
+            time_four.strftime(fmt),
+        )
 
+    @staticmethod
+    def get_time_intervals_many() -> Tuple[str, str, str, str, str, str, str, str]:
+        now = datetime.now()
+
+        time_1 = now - timedelta(hours=8)
+        time_2 = now - timedelta(hours=7)
+        time_3 = now - timedelta(hours=6)
+        time_4 = now - timedelta(hours=5)
+        time_5 = now - timedelta(hours=4)
+        time_6 = now - timedelta(hours=3)
+        time_7 = now - timedelta(hours=2)
+        time_8 = now - timedelta(hours=1)
+
+        # Формат: "ддммгггг ччмм"
+        fmt = '%d%m%Y %H%M'
+
+        return (
+            time_1.strftime(fmt),
+            time_2.strftime(fmt),
+            time_3.strftime(fmt),
+            time_4.strftime(fmt),
+            time_5.strftime(fmt),
+            time_6.strftime(fmt),
+            time_7.strftime(fmt),
+            time_8.strftime(fmt),
+        )
 
     # Locators
     attach_cargoplaces = {
@@ -276,9 +370,17 @@ class FTLAdd(Base):
         "xpath": "//input[@id='order-clientrate']",
         "name": "rate_for_publication"
     }
-    selection_of_contractors = {
-        "xpath": "//span[text()='Подрядчики (для публикации доступно: 3 из 3)']",
-        "name": "selection_of_contractors"
+    # selection_of_contractors = {
+    #     "xpath": "//span[text()='Подрядчики (для публикации доступно: 3 из 3)']",
+    #     "name": "selection_of_contractors"
+    # }
+    selection_of_contractors_lkz = {
+        "xpath": "//span[text()='Подрядчики (для публикации доступно: 4 из 4)']",
+        "name": "selection_of_contractors_lkz"
+    }
+    selection_of_contractors_lke = {
+        "xpath": "//span[text()='Подрядчики (для публикации доступно: 3 из 21)']",
+        "name": "selection_of_contractors_lke"
     }
     contractor_checkbox = {
         "xpath": "(//span[@class='ant-select-tree-checkbox']//span)[2]",
@@ -335,14 +437,18 @@ class FTLAdd(Base):
         "name": "tab_execution",
         "reference": "Расчет заказчика"
     }
+    input_start = {
+        "xpath": "//input[contains(@class,'ant-calendar-input')]",
+        "name": "input_loading_start"
+    }
+    input_finish = {
+        "xpath": "//input[contains(@class,'ant-calendar-input')]",
+        "name": "input_loading_finish"
+    }
     point_loading_start = {
         "xpath": "//input[@class='ant-calendar-picker-input ant-input']",
         "name": "point_loading_start"
     }
-    # point_loading_start = {
-    #     "xpath": "//span[@id='order-worktime-first']//input[1]",
-    #     "name": "point_loading_start"
-    # }
     point_loading_finish = {
         "xpath": "(//input[@class='ant-calendar-picker-input ant-input'])[2]",
         "name": "point_loading_finish"
@@ -364,7 +470,7 @@ class FTLAdd(Base):
         "name": "approve_changes"
     }
     ok_time = {
-        "xpath": "//div[@class='ant-modal-confirm-btns']//button[1]",
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[@type='button']",
         "name": "ok_time"
     }
     complete_order = {
@@ -375,6 +481,124 @@ class FTLAdd(Base):
         "xpath": "//button[@class='ant-btn']/following-sibling::button[1]",
         "name": "approve_and_complete_order"
     }
+
+
+    point_1_start = {
+        "xpath": "//input[@class='ant-calendar-picker-input ant-input']",
+        "name": "point_1_start"
+    }
+    point_1_finish = {
+        "xpath": "(//input[@class='ant-calendar-picker-input ant-input'])[2]",
+        "name": "point_1_finish"
+    }
+    point_2_start = {
+        "xpath": "//div[contains(@class,'white-box-modern order-view-tab-calculation-client order-view__tab')]//div[2]//div[3]//div[1]//span[1]//div[1]//input[1]",
+        "name": "point_2_start"
+    }
+    point_2_finish = {
+        "xpath": "//div[contains(@class,'white-box-modern order-view-tab-calculation-client order-view__tab')]//div[2]//div[3]//div[2]//span[1]//div[1]//input[1]",
+        "name": "point_2_finish"
+    }
+    point_3_start = {
+        "xpath": "//div[contains(@class,'order-work-time')]//div[3]//div[3]//div[1]//span[1]//div[1]//input[1]",
+        "name": "point_3_start"
+    }
+    point_3_finish = {
+        "xpath": "//div[contains(@class,'order-work-time')]//div[3]//div[3]//div[2]//span[1]//div[1]//input[1]",
+        "name": "point_3_finish"
+    }
+    point_4_start = {
+        "xpath": "//div[4]//div[3]//div[1]//span[1]//div[1]//input[1]",
+        "name": "point_4_start"
+    }
+    point_4_finish = {
+        "xpath": "//span[@id='order-worktime-last']//input[contains(@placeholder,'дд.мм.гггг чч:мм')]",
+        "name": "point_4_finish"
+    }
+    input_point = {
+        "xpath": "//input[contains(@class,'ant-calendar-input')]",
+        "name": "input_point"
+    }
+
+    """Стадия расчёта"""
+    tab_documents = {
+        "xpath": "//a[@id='order-documents-order']",
+        "name": "tab_documents"
+    }
+    send_calculation_and_documents = {
+        "xpath": "//button[@type='submit']",
+        "name": "send_calculation_and_documents",
+        "reference_xpath": "//div[@class='ant-modal-confirm-content']",
+        "reference": "Расчёт успешно отправлен"
+    }
+    sent_ok = {
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[@type='button']",
+        "name": "sent_ok"
+    }
+    send_documents = {
+        "xpath": "//button[@type='submit']",
+        "name": "send_documents",
+        "reference_xpath": "//div[@class='ant-modal-confirm-content']",
+        "reference": "Документы отправлены"
+    }
+
+    tab_calculation_producer = {
+        "xpath": "//a[@id='order-documents-producer']",
+        "name": "tab_calculation_producer"
+    }
+    exp_accept_calculation = {
+        "xpath": "//span[contains(text(),'Принять')]",
+        "name": "exp_accept_calculation"
+    }
+    exp_documents_allright = {
+        "xpath": "//span[contains(text(),'Документы в порядке')]",
+        "name": "exp_documents_allright"
+    }
+    exp_approve_calculation = {
+        "xpath": "//button[@class='ant-btn ant-btn-primary']",
+        "name": "exp_approve_calculation",
+        "reference_xpath": "//div[@class='ant-modal-confirm-content']",
+        "reference": "Расчет утвержден"
+    }
+    approved_ok = {
+        "xpath": "//div[@class='ant-modal-confirm-btns']//button[@type='button']",
+        "name": "approved_ok"
+    }
+
+    tab_calculation_client = {
+        "xpath": "//a[@id='order-documents-client']",
+        "name": "tab_calculation_client"
+    }
+    exp_send_calculation_and_documents = {
+        "xpath": "//button[@class='ant-btn ant-btn-primary']",
+        "name": "exp_send_calculation_and_documents",
+        "reference_xpath": "//div[@class='ant-modal-confirm-content']",
+        "reference": "Расчёт успешно отправлен"
+    }
+
+    tab_calculation_producer_lkz = {
+        "xpath": "//a[@id='order-calculation']",
+        "name": "tab_calculation_producer_lkz"
+    }
+    documents_approve = {
+        "xpath": "//span[contains(text(),'Документы в порядке')]",
+        "name": "documents_approve"
+    }
+    documents_approve_approve = {
+        "xpath": "//button[@type='submit']",
+        "name": "documents_approve_approve",
+        "reference_xpath": "//div[@class='ant-modal-confirm-content']",
+        "reference": "Документы утверждены"
+    }
+
+
+
+
+
+
+
+
+
 
 
 

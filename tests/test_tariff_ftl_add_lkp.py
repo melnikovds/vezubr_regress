@@ -1,5 +1,6 @@
 import allure
 import pytest
+import time
 from pages.tariff_ftl_add_page import FTLTariffAdd
 from pages.tariffs_list_page import TariffsList
 
@@ -43,7 +44,7 @@ def test_ftl_h_tariff_add_lkp(base_fixture, domain):
 
 @allure.story("Critical path test")
 @allure.feature('Создание тарифов')
-@allure.description('ЛКП. Тест создания FTL тарифа: тип - Фиксированный, маршрут - Екб-Уфа, название - ГГ-timestamp, '
+@allure.description('ЛКП. Тест создания FTL тарифа: тип - Фиксированный, маршрут - Воронеж-Спб, название - ГГ-timestamp, '
                     'ТС - 1.5т/9м3/4п, кузов - Закрытый, минималка/доп.адрес/ожидание - Рандом')
 @pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
 def test_ftl_cc_tariff_add_lkp(base_fixture, domain):
@@ -68,11 +69,15 @@ def test_ftl_cc_tariff_add_lkp(base_fixture, domain):
     # Выбор типа маршрута "Нас. пункт - Нас. пункт"
     add_tariff.dropdown_without_input(add_tariff.fixed_type_select, "Нас. пункт - Нас. пункт")
     # Ввод города отправления
-    add_tariff.dropdown_with_input(add_tariff.departures_city_input, wait_presence=True,
-                                   option_text="г Екатеринбург")
+    add_tariff.input_in_field(add_tariff.departures_city_input, value='г Воронеж')
+    time.sleep(1)
+    add_tariff.click_button(add_tariff.select_city_four, wait_type='located')
+    time.sleep(1)
     # Ввод города прибытия
-    add_tariff.dropdown_with_input(add_tariff.arrival_city_input, wait_presence=True,
-                                   option_text="г Уфа")
+    add_tariff.input_in_field(add_tariff.arrival_city_input, value="Санкт-Петербург")
+    time.sleep(1)
+    add_tariff.click_button(add_tariff.select_city_two)
+    time.sleep(1)
     # Выбор типа ТС "1.5т / 9м3 / 4пал."
     add_tariff.dropdown_without_input(add_tariff.vehicle_type_select, "1.5т / 9м3 / 4пал.")
     # Установка флага "Закрытый кузов"

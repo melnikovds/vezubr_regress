@@ -11,7 +11,6 @@ class SideBar(Base):
     base_reference_xpath = "//h2[@class='big-title title-bold']"
     instructions_reference = "/html/body/div[1]/div/div/div[2]/div/div[1]/nav/div[1]/div[1]/a/div/div[2]/span"
 
-
     """Sidebar"""
     sidebar_button = {
         "xpath": ("//button[@class='border narrow light-bold notBlocked top-nav__sidebar "
@@ -209,7 +208,7 @@ class SideBar(Base):
 
     """Orders (OLD)"""
     orders_old_hover = {
-        "xpath": "(//div[@class='flexbox size-1 align-right justify-right'])[7]",
+        "xpath": "(//div[@class='flexbox size-1 align-right justify-right'])[6]",
         "name": "orders_old_hover"
     }
     orders_old_hover_lkp = {
@@ -331,7 +330,6 @@ class SideBar(Base):
         "reference": "Реестры от подрядчика"
     }
 
-
     """Profile"""
     profile_button = {
         "xpath": "//li[contains(@class, 'ant-menu-item') and contains(., 'Профиль')]",
@@ -389,11 +387,6 @@ class SideBar(Base):
         "xpath": "//a[contains(@class, 'sidebar__list-item') and contains(., 'Выход')]",
         "name": "exit_button"
     }
-
-
-
-
-
 
     # """Sidebar"""
     # sidebar_button = {

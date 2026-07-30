@@ -336,36 +336,3 @@ def test_sidebar_new_lkp(base_fixture, domain):
     sidebar.click_button(sidebar.exit_button)
 
     # Конец теста
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

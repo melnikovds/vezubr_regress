@@ -5,6 +5,13 @@ from api_pages.task import TaskAPI
 from api_pages.create_entities import CreateEntities
 from typing import Dict
 import os
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import os
+import platform
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 # ============= КОНФИГУРАЦИЯ =============
 # ID точек отправления/назначения (можно через переменные окружения)
@@ -16,6 +23,12 @@ API_POINTS_CONFIG = {
     'lke': {
         'departure_point_id': int(os.getenv('LKE_DEPARTURE_POINT_ID', 28754)),
         'arrival_point_id': int(os.getenv('LKE_ARRIVAL_POINT_ID', 28756))
+    }
+}
+API_TEST_POINTS = {
+    'lkz': {
+        'departure_point_id': 29051,
+        'arrival_point_id': 28865
     }
 }
 
@@ -160,3 +173,29 @@ def created_task(request, create_entities):
         use_dates=params.get('use_dates', False)
     )
     yield task
+
+
+@pytest.fixture
+def base_fixture_download(request, domain):
+    """
+    Фикстура для тестов выгрузки с настройками автоматического скачивания.
+    Использует base_test_with_login_download для логина.
+    """
+    from tests.base_test import base_test_with_login_download
+
+    if not hasattr(request, 'param'):
+        pytest.fail("base_fixture_download требует параметр (например, 'lkz', 'lke', 'lkp')")
+
+    role = request.param
+    base, sidebar = base_test_with_login_download(domain, role)
+
+    yield base, sidebar
+
+    # Закрываем драйвер
+    if hasattr(base, 'driver') and base.driver is not None:
+        try:
+            base.driver.quit()
+        except Exception as e:
+            print(f"[WARNING] Ошибка при закрытии драйвера: {e}")
+        finally:
+            base.driver = None

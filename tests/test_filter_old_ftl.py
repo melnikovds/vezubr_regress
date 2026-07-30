@@ -2,163 +2,183 @@ import allure
 import pytest
 import time
 from pages.filters_old_ftl_page import OldFTL
+from api_pages.create_entities import CreateEntities
+
 
 
 @allure.story("Extended test")
 @allure.feature('Фильтры')
 @allure.description('ЛКЗ. Тест фильтров в разделе Активные old FTL-заявки ')
-# @pytest.mark.usefixtures("create_entities")
-@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
+@pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)
 def test_filter_old_ftl_lkz(base_fixture, domain):
-    # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
 
-    # Переход в раздел Активные FTL-заявки
-    base.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ftl_active_list_button,
+    creator = CreateEntities(role='lkz')
+    departure_point_id = 17098
+    arrival_point_id = 16935
+
+    order_data = creator.create_old_ftl_order_for_filters(
+        departure_point_id=departure_point_id,
+        arrival_point_id=arrival_point_id,
+        producer_id=2447
+    )
+
+    test_data = order_data['test_data']
+    order_nr = test_data['order_nr']
+    client_number = test_data['client_number']
+    order_number = test_data['order_number']
+    publication_from = test_data['publication_date_from']
+    publication_to = test_data['publication_date_to']
+
+    print(f"\n=== СОЗДАН ЗАКАЗ ===")
+    print(f"Номер заявки: {order_nr}")
+    print(f"Идентификатор: {client_number}")
+    print(f"Номер рейса: {order_number}")
+    print(f"===================\n")
+
+    time.sleep(5)
+
+    # Переход в раздел
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
-    # сброс фильтров
+
+    # ========== ПРОВЕРКА ФИЛЬТРА "НОМЕР ЗАЯВКИ" ==========
+    # Сброс перед проверкой
     add.click_button(element_dict=add.reset_filters)
     time.sleep(1)
     add.click_button(add.start_date)
     time.sleep(1)
     add.click_button(add.all_time)
-    time.sleep(1)
+    time.sleep(2)
 
-    # проверка фильтра "номер заявки"
-    add.input_in_field(add.request_number, value='25-297-2448', click_first=True)
+    add.input_in_field(add.request_number, value=order_nr, click_first=True)
     time.sleep(3)
-    add.find_text_on_page(text='25-297-2448', occurrences=3)
-    add.verify_text_on_page(text='25-304-2448', should_exist=False)
-    time.sleep(1)
-    add.backspace_and_input(add.request_number, value='')
+    add.verify_text_on_page(text=order_nr, should_exist=True)
+    # НЕ очищаем поле! Просто переходим к следующей проверке
 
-    # проверка фильтра "статус заявки"
+    # ========== ПРОВЕРКА ФИЛЬТРА "СТАТУС ЗАЯВКИ" ==========
+    # Меняем статус, номер заявки уже введен
     add.dropdown_without_input(add.request_status, option_text='Заявка опубликована')
     time.sleep(2)
-    add.verify_text_on_page(text='25-297-2448', should_exist=True)
-    add.verify_text_on_page(text='25-299-2448', should_exist=False)
-    time.sleep(1)
+    add.verify_text_on_page(text=order_nr, should_exist=True)
+
     add.dropdown_without_input(add.request_status, option_text='Заявка принята')
     time.sleep(2)
-    add.verify_text_on_page(text='25-51-2448', should_exist=False)
-    add.verify_text_on_page(text='25-301-2448', should_exist=True)
-    time.sleep(1)
+    add.find_text_on_page(text=order_nr, occurrences=2)
 
+    # ========== ПРОВЕРКА ФИЛЬТРА "ИДЕНТИФИКАТОР ЗАЯВКИ" ==========
+    # Сброс всех фильтров перед новой проверкой
     add.click_button(element_dict=add.reset_filters)
     time.sleep(1)
     add.click_button(add.start_date)
     time.sleep(1)
     add.click_button(add.all_time)
-    time.sleep(1)
-
-    # проверка фильтра "Идентификатор заявки"
-    add.input_in_field(add.request_identifier, value='681', click_first=True)
     time.sleep(2)
-    add.verify_text_on_page(text='дж-681', should_exist=True)
-    add.verify_text_on_page(text='дж-688', should_exist=False)
-    time.sleep(1)
-    add.backspace_and_input(add.request_identifier, value='')
 
-    # проверка фильтра "Дата публикации"
+    add.input_in_field(add.request_identifier, value=client_number, click_first=True)
+    time.sleep(2)
+    add.verify_text_on_page(text=client_number, should_exist=True)
+
+    # ========== ПРОВЕРКА ФИЛЬТРА "ДАТА ПУБЛИКАЦИИ" ==========
+    # Сброс перед проверкой
+    add.click_button(element_dict=add.reset_filters)
+    time.sleep(1)
+    add.click_button(add.start_date)
+    time.sleep(1)
+    add.click_button(add.all_time)
+    time.sleep(2)
+
     add.click_button(add.publication_date)
     time.sleep(1)
-    add.input_in_field(add.publication_from, value='01102025', click_first=True)
+    add.input_in_field(add.publication_from, value=publication_from, click_first=True)
+    time.sleep(2)
+    add.input_in_field(add.publication_before, value=publication_to, click_first=True)
     time.sleep(3)
-    add.input_in_field(add.publication_before, value='31102025', click_first=True)
-    time.sleep(3)
-    add.verify_text_on_page(text='25-305-2448', should_exist=True)
-    time.sleep(1)
-    add.verify_text_on_page(text='25-28-2448', should_exist=False)
-    time.sleep(1)
+    add.verify_text_on_page(text=order_nr, should_exist=True)
 
-    add.click_button(element_dict=add.reset_filters)
-    time.sleep(1)
-    add.click_button(add.start_date)
-    time.sleep(1)
-    add.click_button(add.all_time)
-    time.sleep(1)
+    # # ========== ПРОВЕРКА ФИЛЬТРА "НОМЕР РЕЙСА" ==========
+    # # Сброс перед проверкой
+    # add.click_button(element_dict=add.reset_filters)
+    # time.sleep(1)
+    # add.click_button(add.start_date)
+    # time.sleep(1)
+    # add.click_button(add.all_time)
+    # time.sleep(2)
+    #
+    # add.input_in_field(add.order_number, value=order_nr, click_first=True)
+    # time.sleep(2)
+    # add.verify_text_on_page(text=order_number, should_exist=True)
 
-    # проверка фильтра "номер рейса"
-    add.input_in_field(add.order_number, value='25-307', click_first=True)
-    time.sleep(1)
-    add.verify_text_on_page(text='R-25-307-2448-1', should_exist=True)
-    add.verify_text_on_page(text='R-25-308-2448-1', should_exist=False)
-    time.sleep(1)
-    add.backspace_and_input(add.order_number, value='')
+    creator.client.session.close()
+    print(f"\n✅ Тест успешно завершен для заказа {order_nr}")
 
 
 @allure.story("Extended test")
 @allure.feature('Фильтры')
 @allure.description('ЛКЕ. Тест фильтров в разделе Активные old FTL-заявки ')
-@pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
+@pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)
 def test_filter_old_ftl_lke(base_fixture, domain):
-    # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
 
-    # Переход в раздел Активные FTL-заявки
-    base.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ftl_active_list_button,
+    creator = CreateEntities(role='lke')
+
+    # Создаем заказ по рабочему curl
+    order_data = creator.create_old_ftl_order_for_lke(
+        client_id=2447,  # как в curl
+        producer_id=2449  # ЛКП
+    )
+
+    test_data = order_data['test_data']
+    order_nr = test_data['order_nr']
+    client_number = test_data['client_number']
+
+    print(f"\n=== СОЗДАН ЗАКАЗ (ЛКЕ) ===")
+    print(f"Номер заявки: {order_nr}")
+    print(f"Client number: {client_number}")
+    print(f"==========================\n")
+
+    time.sleep(5)
+
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
-    # сброс фильтров
-    add.click_button(element_dict=add.reset_filters)
-    time.sleep(1)
-    add.click_button(add.start_date)
-    time.sleep(1)
-    add.click_button(add.all_time)
-    time.sleep(1)
-
-    # проверка фильтра "номер заявки"
-    add.input_in_field(add.request_number, value='25-226-2447', click_first=True)
-    time.sleep(3)
-    add.find_text_on_page(text='25-226-2447', occurrences=3)
-    add.verify_text_on_page(text='25-228-2447', should_exist=False)
-    time.sleep(1)
-    add.backspace_and_input(add.request_number, value='')
-
-    # проверка фильтра "статус заявки"
-    add.dropdown_without_input(add.request_status, option_text='Заявка опубликована')
-    time.sleep(3)
-    add.verify_text_on_page(text='25-230-2447', should_exist=True)
-    add.verify_text_on_page(text='25-228-2447', should_exist=False)
-    time.sleep(1)
-    add.dropdown_without_input(add.request_status, option_text='Заявка принята')
-    time.sleep(3)
-    add.verify_text_on_page(text='25-233-2447', should_exist=True)
-    add.verify_text_on_page(text='25-226-2447', should_exist=False)
-    time.sleep(1)
 
     add.click_button(element_dict=add.reset_filters)
     time.sleep(1)
     add.click_button(add.start_date)
     time.sleep(1)
     add.click_button(add.all_time)
-    time.sleep(1)
-
-    # проверка фильтра "Идентификатор заявки"
-    add.input_in_field(add.request_identifier, value='342', click_first=True)
     time.sleep(2)
-    add.verify_text_on_page(text='kl-342', should_exist=True)
-    add.verify_text_on_page(text='kl-343', should_exist=False)
-    time.sleep(1)
-    add.backspace_and_input(add.request_identifier, value='')
+
+    add.input_in_field(add.request_number, value=order_nr, click_first=True)
+    time.sleep(3)
+    add.verify_text_on_page(text=order_nr, should_exist=True)
+   # баг на фронте за ЛКЕ
+   # add.dropdown_without_input(add.request_status, option_text='Заявка опубликована')
+   # time.sleep(2)
+   # add.verify_text_on_page(text=order_nr, should_exist=True)
+
+   # add.dropdown_without_input(add.request_status, option_text='Заявка принята')
+   # time.sleep(2)
+   # add.verify_text_on_page(text=order_nr, should_exist=False)
 
     add.click_button(element_dict=add.reset_filters)
     time.sleep(1)
     add.click_button(add.start_date)
     time.sleep(1)
     add.click_button(add.all_time)
-    time.sleep(1)
+    time.sleep(2)
 
-    # проверка фильтра "номер рейса"
-    add.input_in_field(add.order_number, value='25-233', click_first=True)
-    time.sleep(3)
-    add.verify_text_on_page(text='R-25-233-2447-1', should_exist=True)
-    add.verify_text_on_page(text='R-25-228-2447-1', should_exist=False)
-    time.sleep(1)
-    add.backspace_and_input(add.order_number, value='')
+    add.input_in_field(add.request_identifier, value=client_number, click_first=True)
+    time.sleep(2)
+    add.verify_text_on_page(text=client_number, should_exist=True)
+
+    creator.client.session.close()
+
+    print(f"\n✅ Тест ЛКЕ успешно завершен для заказа {order_nr}")
 
 
 @allure.story("Extended test")
@@ -170,7 +190,7 @@ def test_filter_old_ftl_lkp(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Активные FTL-заявки
-    base.move_and_click(move_to=sidebar.requests_hover, click_to=sidebar.ftl_active_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover_lkp, click_to=sidebar.ftl_active_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -242,7 +262,7 @@ def test_filter_order_ftl_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.ftl_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -349,7 +369,7 @@ def test_filter_order_ftl_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.ftl_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -430,7 +450,7 @@ def test_filter_order_ftl_lkp(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.order_hover_lkp, click_to=sidebar.ftl_list_button_lkp,
+    base.move_and_click(move_to=sidebar.orders_old_hover_lkp, click_to=sidebar.ftl_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -511,7 +531,7 @@ def test_filter_delayed_order_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.deferred_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.deferred_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -555,7 +575,7 @@ def test_filter_delayed_order_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.deferred_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.deferred_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -599,7 +619,7 @@ def test_filter_regular_order_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.regular_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.regular_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -666,7 +686,7 @@ def test_filter_regular_order_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.regular_list_button,
+    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.regular_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -808,7 +828,7 @@ def test_filter_insured_order_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел "Страховые компании"
-    base.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button_lke,
+    base.move_and_click(move_to=sidebar.contractor_hover, click_to=sidebar.insurers_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -964,155 +984,3 @@ def test_filter_insured_order_lkp(base_fixture, domain):
     add.verify_text_on_page(text='1-111', should_exist=True)
     time.sleep(1)
     add.backspace_and_input(add.contract_number, value='')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

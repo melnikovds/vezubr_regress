@@ -120,6 +120,85 @@ class Base:
 
         return cls(driver)
 
+    @classmethod
+    def get_driver_with_download(cls: Type['Base']) -> 'Base':
+        """
+        Создает драйвер с настройками автоматического скачивания.
+        Полная копия get_driver() + настройки prefs для скачивания.
+        Используется ТОЛЬКО для тестов с прямой выгрузкой файлов.
+        """
+        options = Options()
+
+        # Общие настройки
+        options.add_argument('--window-size=1920,1080')
+        options.add_argument('--force-device-scale-factor=0.8')
+
+        if platform.system() != 'Windows':
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-gpu')
+            options.add_argument('--remote-debugging-port=9222')
+            options.add_argument('--disable-software-rasterizer')
+            options.add_argument('--disable-setuid-sandbox')
+
+        # ============ НАСТРОЙКА АВТОМАТИЧЕСКОГО СКАЧИВАНИЯ ============
+        download_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'downloads')
+        os.makedirs(download_path, exist_ok=True)
+
+        prefs = {
+            "download.default_directory": download_path,
+            "download.prompt_for_download": False,
+            "download.directory_upgrade": True,
+            "safebrowsing.enabled": True,
+            "safebrowsing.disable_download_protection": True,
+        }
+        options.add_experimental_option("prefs", prefs)
+        # ==============================================================
+
+        # Проверяем, нужно ли использовать Selenoid
+        use_selenoid = os.getenv("USE_SELENOID", "false").lower() == "true"
+
+        if use_selenoid:
+            print("🚀 Запуск в режиме Selenoid (с настройками скачивания)...")
+            options.add_argument('--headless=new')
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-gpu')
+
+            browser_version = os.getenv("BROWSER_VERSION", "128.0")
+
+            enable_vnc = os.getenv("ENABLE_VNC", "false").lower() == "true"
+            selenoid_options = {
+                "enableVNC": enable_vnc,
+                "enableVideo": False,
+                "name": "vezubr-autotest-download"
+            }
+            options.set_capability("browserName", "chrome")
+            options.set_capability("browserVersion", browser_version)
+            options.set_capability("selenoid:options", selenoid_options)
+
+            selenoid_url = os.getenv('SELENOID_URL', 'http://localhost:4444/wd/hub')
+            driver = webdriver.Remote(
+                command_executor=selenoid_url,
+                options=options
+            )
+
+        else:
+            print("📌 Запуск локального Chrome (с настройками скачивания)...")
+            if 'JENKINS_HOME' in os.environ:
+                options.add_argument('--headless=new')
+                print("✅ Режим headless включен (Jenkins detected)")
+            elif os.getenv("HEADLESS", "false").lower() == "true":
+                options.add_argument('--headless=new')
+                print("✅ Режим headless включен (по запросу)")
+
+            driver = webdriver.Chrome(options=options)
+
+        with allure.step(title="Start test with download settings"):
+            print("Start test with download settings")
+
+        return cls(driver)
+
     def test_finish(self) -> None:
         """
         Завершает тест и закрывает браузер.
@@ -1701,3 +1780,117 @@ class Base:
                 except Exception as e:
                     print(f"  ❌ Failed to click element #{i}: {e}")
                     raise
+
+    # ==================== МЕТОДЫ ДЛЯ РАБОТЫ С ВЫГРУЗКАМИ ====================
+
+    def get_download_link_from_notification(
+            self,
+            notification_text: str = "Выгрузка в файл готова",
+            timeout: int = 15
+    ) -> str:
+        """
+        Получает ссылку на скачивание из уведомления.
+
+        Parameters
+        ----------
+        notification_text : str
+            Текст уведомления для поиска
+        timeout : int
+            Максимальное время ожидания в секундах
+
+        Returns
+        -------
+        str
+            Полный URL для скачивания
+        """
+        from helpers.download_helper import DownloadHelper
+        helper = DownloadHelper(self.driver, self)
+        return helper.get_download_link_from_notification(notification_text, timeout)
+
+    def download_file_via_api(
+            self,
+            url: str,
+            expected_filename_pattern: Optional[str] = None,
+            timeout: int = 30,
+            min_size_bytes: int = 100
+    ) -> tuple:
+        """
+        Скачивает файл через API с использованием кук из браузера.
+
+        Parameters
+        ----------
+        url : str
+            URL для скачивания
+        expected_filename_pattern : str, optional
+            Ожидаемый паттерн в имени файла
+        timeout : int
+            Таймаут на скачивание
+        min_size_bytes : int
+            Минимальный размер файла
+
+        Returns
+        -------
+        tuple
+            (status_code, filename, content)
+        """
+        from helpers.download_helper import DownloadHelper
+        helper = DownloadHelper(self.driver, self)
+        return helper.download_file_via_api(url, expected_filename_pattern, timeout, min_size_bytes)
+
+    def request_export_and_get_link(
+            self,
+            export_button: Dict[str, str],
+            notification_text: str = "Выгрузка в файл готова",
+            wait_for_spinner: bool = True,
+            timeout: int = 15
+    ) -> str:
+        """
+        Кликает по кнопке выгрузки и возвращает ссылку из уведомления.
+
+        Parameters
+        ----------
+        export_button : dict
+            Локатор кнопки выгрузки
+        notification_text : str
+            Текст уведомления
+        wait_for_spinner : bool
+            Ждать ли исчезновения спиннер
+        timeout : int
+            Таймаут ожидания уведомления
+
+        Returns
+        -------
+        str
+            Ссылка на скачивание
+        """
+        with allure.step(f"Запрос выгрузки и получение ссылки"):
+            # Кликаем по кнопке
+            self.click_button(export_button, wait='form' if wait_for_spinner else None)
+
+            # Получаем ссылку из уведомления
+            return self.get_download_link_from_notification(notification_text, timeout)
+
+    def request_export_and_download(
+            self,
+            export_button: Dict[str, str],
+            notification_text: str = "Выгрузка в файл готова",
+            expected_filename_pattern: Optional[str] = None,
+            wait_for_spinner: bool = True,
+            timeout: int = 15
+    ) -> tuple:
+        """
+        Кликает по кнопке выгрузки, получает ссылку и скачивает файл.
+
+        Returns
+        -------
+        tuple
+            (status_code, filename, content)
+        """
+        with allure.step(f"Запрос выгрузки и скачивание файла"):
+            link = self.request_export_and_get_link(
+                export_button,
+                notification_text,
+                wait_for_spinner,
+                timeout
+            )
+            return self.download_file_via_api(link, expected_filename_pattern)

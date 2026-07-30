@@ -1,6 +1,8 @@
 import allure
 import pytest
 import time
+
+from api_pages.create_entities import CreateEntities
 from pages.filters_old_ftl_page import OldFTL
 
 
@@ -13,7 +15,32 @@ def test_filter_old_ftl_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
 
-    # Переход в раздел Активные FTL-заявки
+    creator = CreateEntities(role='lkz')
+    departure_point_id = 17098
+    arrival_point_id = 16935
+
+    order_data = creator.create_old_ftl_order_for_filters(
+        departure_point_id=departure_point_id,
+        arrival_point_id=arrival_point_id,
+        producer_id=2447
+    )
+
+    test_data = order_data['test_data']
+    order_nr = test_data['order_nr']
+    client_number = test_data['client_number']
+    order_number = test_data['order_number']
+    publication_from = test_data['publication_date_from']
+    publication_to = test_data['publication_date_to']
+
+    print(f"\n=== СОЗДАН ЗАКАЗ ===")
+    print(f"Номер заявки: {order_nr}")
+    print(f"Идентификатор: {client_number}")
+    print(f"Номер рейса: {order_number}")
+    print(f"===================\n")
+
+    time.sleep(5)
+
+    # Переход в раздел
     base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
                         do_assert=True, wait='lst')
 
@@ -97,7 +124,25 @@ def test_filter_old_ftl_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
 
-    # Переход в раздел Активные FTL-заявки
+    creator = CreateEntities(role='lke')
+
+    # Создаем заказ по рабочему curl
+    order_data = creator.create_old_ftl_order_for_lke(
+        client_id=2447,  # как в curl
+        producer_id=2449  # ЛКП
+    )
+
+    test_data = order_data['test_data']
+    order_nr = test_data['order_nr']
+    client_number = test_data['client_number']
+
+    print(f"\n=== СОЗДАН ЗАКАЗ (ЛКЕ) ===")
+    print(f"Номер заявки: {order_nr}")
+    print(f"Client number: {client_number}")
+    print(f"==========================\n")
+
+    time.sleep(5)
+
     base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_active_list_button,
                         do_assert=True, wait='lst')
 
@@ -242,7 +287,7 @@ def test_filter_order_ftl_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_list_button,
+    base.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.ftl_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -349,7 +394,7 @@ def test_filter_order_ftl_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.ftl_list_button,
+    base.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.ftl_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -511,7 +556,7 @@ def test_filter_delayed_order_lkz(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.deferred_list_button,
+    base.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.deferred_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)
@@ -555,7 +600,7 @@ def test_filter_delayed_order_lke(base_fixture, domain):
     base, sidebar = base_fixture
 
     # Переход в раздел Все FTL-рейсы
-    base.move_and_click(move_to=sidebar.orders_old_hover, click_to=sidebar.deferred_list_button,
+    base.move_and_click(move_to=sidebar.order_hover, click_to=sidebar.deferred_list_button,
                         do_assert=True, wait='lst')
 
     add = OldFTL(base.driver)

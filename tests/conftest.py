@@ -112,55 +112,6 @@ def pytest_runtest_makereport(item, call):
                 print(f"[WARNING] Не удалось сделать скриншот для {test_name}: {e}")
 
 
-@pytest.fixture(scope="session")
-def create_entities(api_base_url, api_login):
-    generator = GeneratorFTL(api_base_url, api_login)
-
-    entity_creators = [
-        generator.create_entity_type_a_lkz,
-        generator.create_entity_type_b_lkz,
-        generator.create_entity_type_c_lkz,
-        generator.create_entity_type_d_lkz,
-        generator.create_entity_type_e_lkz
-    ]
-
-    entity_results = []
-    for creator in entity_creators:
-        result = creator()
-        if result:
-            entity_results.append(result)
-        else:
-            entity_results.append({})
-        time.sleep(5)
-
-    lkz_a_one = entity_results[0].get("requestNr")
-    lkz_a_two = entity_results[0].get("date_create")
-    lkz_a_three = entity_results[0].get("toStartAtDate")
-    lkz_a_four = entity_results[0].get("clientNumber")
-
-    lkz_b_one = entity_results[1].get("requestNr")
-    lkz_b_two = entity_results[1].get("date_create")
-    lkz_b_three = entity_results[1].get("toStartAtDate")
-    lkz_b_four = entity_results[1].get("clientNumber")
-
-    lkz_c_one = entity_results[2].get("requestNr")
-    lkz_c_two = entity_results[2].get("date_create")
-    lkz_c_three = entity_results[2].get("toStartAtDate")
-    lkz_c_four = entity_results[2].get("clientNumber")
-
-    lkz_d_one = entity_results[3].get("requestNr")
-    lkz_d_two = entity_results[3].get("date_create")
-    lkz_d_three = entity_results[3].get("toStartAtDate")
-    lkz_d_four = entity_results[3].get("clientNumber")
-
-    lkz_e_one = entity_results[4].get("requestNr")
-    lkz_e_two = entity_results[4].get("date_create")
-    lkz_e_three = entity_results[4].get("toStartAtDate")
-    lkz_e_four = entity_results[4].get("clientNumber")
-
-    return locals()
-
-
 @pytest.fixture
 def admin_fixture(domain):
     """Фикстура специально для админки (открывает страницу логина админки)"""
@@ -182,3 +133,6 @@ def admin_fixture(domain):
             pass
         finally:
             base.driver = None
+
+
+

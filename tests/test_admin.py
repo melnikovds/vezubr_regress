@@ -383,3 +383,65 @@ class TestAdminPanel:
         allure.attach("Поиск населенного пункта успешно выполнен",
                       "Результат",
                       allure.attachment_type.TEXT)
+
+    @allure.title("Создание нового типа ТС")
+    @allure.description("Проверка создания типа ТС и его отображения в списке")
+    def test_create_vehicle_type(self, admin_fixture, domain):
+        """Тест: Создание типа ТС"""
+        base = admin_fixture
+        admin_page = AdminPage(base.driver, domain)
+
+        # Вход в админку
+        admin_page.login()
+
+        # Создаем тип ТС и получаем его имя
+        vehicle_type_name = admin_page.create_new_vehicle_type()
+
+        allure.attach(f"Имя типа ТС: {vehicle_type_name}",
+                      "Информация",
+                      allure.attachment_type.TEXT)
+
+        # Проверяем, что мы на странице списка типов ТС
+        current_url = base.driver.current_url
+        assert "vehicle-type" in current_url or "vehicle-type/index" in current_url, \
+            f"Не удалось создать тип ТС. Текущий URL: {current_url}"
+
+        # Проверяем, что тип ТС отображается в списке
+        assert admin_page.verify_vehicle_type_exists(vehicle_type_name), \
+            f"Созданный тип ТС '{vehicle_type_name}' не найден в списке"
+
+        allure.attach(f"✅ Тип ТС '{vehicle_type_name}' успешно создан и отображается в списке",
+                      "Результат",
+                      allure.attachment_type.TEXT)
+
+    @allure.title("Редактирование типа ТС")
+    @allure.description("Проверка редактирования существующего типа ТС")
+    def test_edit_vehicle_type(self, admin_fixture, domain):
+        """Тест: Редактирование типа ТС"""
+        base = admin_fixture
+        admin_page = AdminPage(base.driver, domain)
+
+        # Вход в админку
+        admin_page.login()
+
+        # Переход в раздел Типы ТС
+        admin_page.click_button(admin_page.vehicle_types)
+        time.sleep(2)
+
+        # Редактируем тип ТС
+        new_vehicle_type_name = admin_page.edit_vehicle_type(
+            search_name="15т / 20м3"
+        )
+
+        # Проверяем, что мы на странице списка типов ТС
+        current_url = base.driver.current_url
+        assert "vehicle-type" in current_url or "vehicle-type/index" in current_url, \
+            f"Не удалось сохранить изменения. Текущий URL: {current_url}"
+
+        # Проверяем, что обновленный тип ТС отображается в списке
+        assert admin_page.verify_vehicle_type_exists(new_vehicle_type_name), \
+            f"Обновленный тип ТС '{new_vehicle_type_name}' не найден в списке"
+
+        allure.attach(f"✅ Тип ТС успешно отредактирован. Новое имя: '{new_vehicle_type_name}'",
+                      "Результат",
+                      allure.attachment_type.TEXT)

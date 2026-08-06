@@ -21,7 +21,7 @@ def test_add_new_ftl_lkz_lkp(base_fixture, domain, request):
         add = AddCdr(base.driver)
         time.sleep(2)
 
-    with allure.step("Выбор типа заявки: Доставку конкретным Типом ТС (FTL)"):
+    with allure.step("Выбор типа заявки: FTL"):
         add.dropdown_without_input(add.change_ftl, "Доставку конкретным Типом ТС (FTL)")
 
     with allure.step("Проставление даты и времени"):

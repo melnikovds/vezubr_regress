@@ -115,12 +115,20 @@ class CargoPlaceList(Base):
         "xpath": "//div[@class='order-select-address__text' and text()='Добавить адрес']",
         "name": "add_address_button"
     }
-    close_button = {
-        "xpath": "//button[@aria-label='Close']",
-        "name": "close_button"
-    }
+    # auto_attachment_button = {
+    #     "xpath": "//button[@type='button' and @class='ant-btn ant-btn-primary' and "
+    #              "span[text()='Автоприкрепление Заданий (ГМ)']]",
+    #     "name": "auto_attachment_button"
+    # }
     auto_attachment_button = {
-        "xpath": "//button[@type='button' and @class='ant-btn ant-btn-primary' and "
-                 "span[text()='Автоприкрепление Заданий (ГМ)']]",
+        "xpath": "//div[@class='filter-item undefined']//button[@type='button']",
         "name": "auto_attachment_button"
+    }
+    # close_button = {
+    #     "xpath": "//button[@aria-label='Close']",
+    #     "name": "close_button"
+    # }
+    save_gm_button = {
+        "xpath": "//button[@class='ant-btn ant-btn-default']",
+        "name": "save_gm_button"
     }

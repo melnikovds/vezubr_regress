@@ -132,6 +132,7 @@ def test_sidebar_lkz(base_fixture, domain):
 @allure.feature('Боковое меню')
 @allure.description('ЛКЭ. Тест бокового меню: переход по всем вкладкам, ожидание прогрузки, '
                     'проверка вкладки по названию')
+@pytest.mark.smoke
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_sidebar_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру

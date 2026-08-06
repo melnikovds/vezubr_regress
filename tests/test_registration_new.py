@@ -1,7 +1,6 @@
 import time
 import allure
 import pytest
-
 from pages.login import base_password
 from pages.registration_page import Registration, MailTmAPI
 from pages.login_page import Login
@@ -12,6 +11,7 @@ from pages.login_page import Login
 @allure.story("Smoke test")
 @allure.feature('Регистрация личного кабинета')
 @allure.description('Тест регистрации личного кабинета Грузовладельца: регистрация - По ссылке Экспедитора')
+@pytest.mark.smoke
 @pytest.mark.parametrize('base_fixture', ['via_link'], indirect=True)
 def test_registration_new_lkz_with_email1(base_fixture, domain):
     base, login = base_fixture

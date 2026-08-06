@@ -9,6 +9,7 @@ from pages.user_add_page import User
 @allure.description('ЛКЭ. Тест создания пользователя: ФИО - ФИО-timestamp, тип - Пользователь, роль - Админ, '
                     'тлф - Рандом, email - Etimestamp@mail.ru, часовой пояс - Екб, группа - Базовая группа, '
                     'подразделение - База')
+@pytest.mark.smoke
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_user_add_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру

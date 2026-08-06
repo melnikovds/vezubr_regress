@@ -13,16 +13,24 @@ class DeliveryAdd(Base):
         "xpath": "//div[@class='ant-select-selection__rendered']",
         "name": "request_type_select"
     }
+    # request_owner_select = {
+    #     "xpath": "//span[@class='vz-form-item__label ' and contains(text(),'Грузовладелец')]",
+    #     "name": "request_owner_select"
+    # }
     request_owner_select = {
-        "xpath": "//span[@class='vz-form-item__label ' and contains(text(),'Грузовладелец')]",
+        "xpath": "//div[@class='ant-col ant-col-12 vz-form-col']//label[@class='vz-form-item']//div[@class='ant-select ant-select-enabled']//div[@class='ant-select-selection__rendered']",
         "name": "request_owner_select"
     }
     attach_cargo_place_button = {
         "xpath": "//button[@class='ant-btn order-assignments__add  ant-btn-primary ant-btn-lg']",
         "name": "attach_cargo_place_button"
     }
+    # existing_cargo_place_button = {
+    #     "xpath": "//button[.//span[text()='Прикрепить существующие ГМ']]",
+    #     "name": "existing_cargo_place_button"
+    # }
     existing_cargo_place_button = {
-        "xpath": "//button[.//span[text()='Прикрепить существующие ГМ']]",
+        "xpath": "//div[@class='ant-modal-body']//div[2]//div[2]//button[1]",
         "name": "existing_cargo_place_button"
     }
     start_at_from_button = {
@@ -66,24 +74,40 @@ class DeliveryAdd(Base):
         "xpath": "//h4[contains(@class, 'vz-form-group__title') and text()='Маршрут']",
         "name": "text_route"
     }
+    # first_address_select = {
+    #     "xpath": "//*[@id='order-address-0']",
+    #     "name": "first_address_select"
+    # }
     first_address_select = {
-        "xpath": "//*[@id='order-address-0']",
+        "xpath": "//div[@data-rbd-droppable-id='list']//div[1]//div[1]//div[3]//a[1]",
         "name": "first_address_select"
     }
+    # second_address_select = {
+    #     "xpath": "//*[@id='order-address-1']",
+    #     "name": "second_address_select"
+    # }
     second_address_select = {
-        "xpath": "//*[@id='order-address-1']",
+        "xpath": "//div[@class='order-ftl-form']//div[2]//div[1]//div[3]//a[1]",
         "name": "second_address_select"
     }
     address_radio_button = {
         "xpath": "//span[@class='ant-radio']",
         "name": "address_radio_button"
     }
+    # address_filter = {
+    #     "xpath": "//input[@placeholder='Введите Адрес']",
+    #     "name": "address_filter"
+    # }
     address_filter = {
-        "xpath": "//input[@placeholder='Введите Адрес']",
+        "xpath": "//input[@placeholder='Название адреса']",
         "name": "address_filter"
     }
+    # confirm_address_button = {
+    #     "xpath": "//button[@class='ant-btn ant-btn-primary' and span[contains(text(), 'Применить выбранный')]]",
+    #     "name": "confirm_address_button"
+    # }
     confirm_address_button = {
-        "xpath": "//button[@class='ant-btn ant-btn-primary' and span[contains(text(), 'Применить выбранный')]]",
+        "xpath": "//button[@class='ant-btn margin-left-5 ant-btn-primary']",
         "name": "confirm_address_button"
     }
     required_documents_select = {
@@ -94,20 +118,40 @@ class DeliveryAdd(Base):
         "xpath": "//div[contains(@class, 'ant-select-selection__placeholder') and text()='Выберите пользователя']",
         "name": "responsible_user_select"
     }
+
+
+
+    close_button = {
+        "xpath": "//i[@aria-label='icon: close']//*[name()='svg']",
+        "name": "close_button"
+    }
+    # create_button = {
+    #     "xpath": "//button[@class='ant-btn ant-btn-primary']",
+    #     "name": "create_button"
+    # }
     create_button = {
-        "xpath": "//button[@class='ant-btn ant-btn-primary']",
+        "xpath": "//div[@class='ant-modal-root']//button[2]",
         "name": "create_button"
     }
+    # publish_later_button = {
+    #     "xpath": "//button[.//span[text()='Опубликовать позже']]",
+    #     "name": "publish_later_button",
+    #     "reference_xpath": "//h2[@class='big-title title-bold']",
+    #     "reference": "Заявки на доставку Груза"
+    # }
     publish_later_button = {
-        "xpath": "//button[.//span[text()='Опубликовать позже']]",
+        "xpath": "//button[2]",
         "name": "publish_later_button",
-        "reference_xpath": "//h2[@class='big-title title-bold']",
-        "reference": "Заявки на доставку Груза"
+        "reference_xpath": "//div[@class='ant-modal-confirm-content']",
+        "reference": "создана в статусе Формирование заявки",
+        "match_type": "contains"
     }
     publish_naw_button = {
         "xpath": "//button[.//span[text()='Опубликовать заявку']]",
         "name": "publish_naw_button"
     }
+
+
     tariff_button = {
         "xpath": "//button[@class='ant-btn ant-btn-primary' and span[contains(text(), 'По тарифу')]]",
         "name": "tariff_button"
@@ -186,7 +230,7 @@ class DeliveryAdd(Base):
         # Клик по кнопке подтверждения выбора даты и времени
         self.click_button(self.calendar_ok_button)
         time.sleep(1)
-        
+
     """ Base request FTL"""
     def add_base_ftl(self) -> NoReturn:
         """
@@ -220,7 +264,7 @@ class DeliveryAdd(Base):
         # Выбор типа груза (например, FTL)
         self.click_button(self.select_type_cargo)
         # Выбор типа ТС
-        self.dropdown_without_input(self.vehicle_type_select, "до 0.5т")
+        self.dropdown_without_input(self.vehicle_type_select, "2т / 14м3 / 7пал.")
         # Выбор типа кузова
         self.click_button(self.body_type_select)
         # Выбор закрытого типа кузова
@@ -240,6 +284,63 @@ class DeliveryAdd(Base):
         self.click_button(self.second_address_select)
         # Фильтрация адресов и выбор второго адреса
         self.input_in_field(self.address_filter, "Свердловская обл, г Березовский, ул Театральная, д 13")
+        time.sleep(1)
+        self.click_button(self.address_radio_button)
+        # Подтверждение выбора адреса
+        self.click_button(self.confirm_address_button)
+
+    def add_base_ftl_inner(self) -> NoReturn:
+        """
+        Создание базовой FTL заявки. Метод включает выбор даты и времени доставки - текущее время + 30 минут,
+        выбор типа автоперевозки и ТС, прикрепление грузоместа, выбор адресов и завершается созданием FTL заявки.
+
+        Parameters
+        ----------
+        Нет входных параметров.
+
+        Returns
+        -------
+        NoReturn
+            Метод не возвращает значения, но вызывает изменения на веб-странице.
+        """
+        # Получение нового времени с учетом изменений
+        new_time = self.naw_time_change(30)
+        # Клик по кнопке выбора даты и времени начала подачи
+        self.click_button(self.start_at_from_button)
+        # Клик по кнопке выбора сегодняшней даты
+        self.click_button(self.today_button)
+        # Еще раз клик по кнопке выбора даты и времени начала подачи
+        self.click_button(self.start_at_from_button)
+        # Ввод новой временной метки в соответствующее поле
+        self.backspace_and_input(self.start_at_from_input, num=5, value=new_time)
+        # Клик по кнопке подтверждения выбора даты и времени
+        self.click_button(self.calendar_ok_button)
+        time.sleep(1)
+        # Выбор типа автоперевозки
+        self.click_button(self.type_transportation_select)
+        # Выбор типа груза (например, FTL)
+        self.click_button(self.select_type_cargo)
+        # Выбор типа ТС
+        self.dropdown_without_input(self.vehicle_type_select, "2т / 14м3 / 7пал.")
+        # Выбор типа кузова
+        self.click_button(self.body_type_select)
+        # Выбор закрытого типа кузова
+        self.click_button(self.select_closed)
+        # Клик на текст для закрытия списка типов кузова
+        self.click_button(self.text_route)
+        # Выбор первого адреса из списка
+        self.click_button(self.first_address_select)
+        # Фильтрация адресов и выбор первого адреса
+        self.input_in_field(self.address_filter,"ул Леона Поземского, д 115Д")
+        time.sleep(1)
+        self.click_button(self.address_radio_button)
+        # Подтверждение выбора адреса
+        self.click_button(self.confirm_address_button)
+        time.sleep(3)  # Ожидание перед продолжением выполнения
+        # Выбор второго адреса из списка
+        self.click_button(self.second_address_select)
+        # Фильтрация адресов и выбор второго адреса
+        self.input_in_field(self.address_filter, "г Псков, ул Ленина")
         time.sleep(1)
         self.click_button(self.address_radio_button)
         # Подтверждение выбора адреса

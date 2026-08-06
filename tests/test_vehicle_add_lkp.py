@@ -139,6 +139,53 @@ def test_transport2_add_lkp(base_fixture, domain):
     # Конец теста
 
 
+@allure.story("Smoke test")
+@allure.feature('Создание и операции с транспортными средствами')
+@allure.description('ЛКП. Тест создания ТС ПВ: номер - ТС-timestamp, модель - Монорамник, выпуск - 2013г, собственник '
+                    '- Подрядчик, тип - Грузовой, кузов - Тент, грузоподемность/объем/палеты/высота - Рандом, '
+                    'эксплуатация - завершаем')
+@pytest.mark.smoke
+@pytest.mark.parametrize('base_fixture', ['lkp'], indirect=True)  # Параметризация роли
+def test_transport3_add_lkp(base_fixture, domain):
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # Переход к списку транспортных средств
+    sidebar.move_and_click(move_to=sidebar.directories_hover, click_to=sidebar.transports_list_button,
+                           do_assert=True, wait="lst")
+
+    transports_list = TransportsList(base.driver)
+    # Клик по кнопке добавления транспортного средства
+    transports_list.click_button(transports_list.add_transport_button)
+
+    add_ts = TransportAdd(base.driver)
+    # Выбор типа транспортного средства
+    add_ts.dropdown_without_input(add_ts.vehicle_type_select, "Монорамное ТС")
+    # Заполнение данных о транспортном средстве
+    add_ts.input_in_field(add_ts.plate_number_input, f"ТС-{base.get_timestamp()}")
+    add_ts.input_in_field(add_ts.mark_model_input, "Монорамник")
+    add_ts.dropdown_without_input(add_ts.owner_types_select, "Подрядчик является собственником")
+    add_ts.dropdown_without_input(add_ts.year_select, "2013")
+    add_ts.dropdown_without_input(add_ts.vehicle_categories_select, "Грузовая")
+    add_ts.dropdown_without_input(add_ts.vehicle_body_types_select, "Тентованный")
+    add_ts.input_in_field(add_ts.capacity_input, base.random_value_float_str(0.5, 30.0))
+    add_ts.input_in_field(add_ts.volume_input, base.random_value_float_str(0.5, 120.0))
+    add_ts.input_in_field(add_ts.pallets_input, base.random_value_float_str(0, 35))
+    add_ts.input_in_field(add_ts.height_from_ground_input, base.random_value_float_str(1.0, 4.0))
+    vin=add_ts.generate_vin()
+    add_ts.input_in_field(add_ts.vin_number, value=str(vin))
+    # Создание транспортного средства
+    add_ts.click_button(add_ts.create_transport_button, do_assert=True)
+    add_ts.click_button(add_ts.confirm_button, wait="form")
+    # Операции с транспортным средством
+    time.sleep(1)
+    add_ts.click_button(add_ts.action_menu_button)
+    add_ts.click_button(add_ts.exploitation_finish_button)
+    add_ts.click_button(add_ts.yes_button, do_assert=True)
+    add_ts.click_button(add_ts.ok_button)
+    # Конец теста
+
+
 @allure.story("Critical path test")
 @allure.feature('Создание и операции с транспортными средствами')
 @allure.description('ЛКП. Тест создания ПП ПВ: номер - ПП-timestamp, модель - Полуприцеп, выпуск - 2012г, собственник '

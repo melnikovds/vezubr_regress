@@ -11,6 +11,7 @@ from selenium.webdriver.common.keys import Keys
 @allure.feature('Создание тарифов')
 @allure.description('ЛКЭ. Тест создания FTL тарифа: тип - Почасовой, округление - Час, название - ПЧ-timestamp, '
                     'ТС - 0.5т, кузов - Закрытый, минималка - Рандом')
+@pytest.mark.smoke
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_ftl_hh_tariff_add_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру

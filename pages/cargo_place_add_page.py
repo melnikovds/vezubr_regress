@@ -655,7 +655,7 @@ class CargoPlaceAdd(Base):
         time.sleep(1)
         self.scroll_to_element(self.save_selected_address)
         self.click_button(self.save_selected_address)
-        time.sleep(1)
+        time.sleep(10)
 
         # Клик по кнопке создания грузоместа
         self.click_button(self.create_cargo_place_button, do_assert=True)

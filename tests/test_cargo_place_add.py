@@ -9,7 +9,8 @@ from pages.cargo_place_list_page import CargoPlaceList
 @allure.feature('Создание и удаление грузомест')
 @allure.description('ЛКЗ. Тест создания ГМ: тип - Короб, кол-во/вес/объем/цена/температура - Рандом, статус - Новое, '
                     'название/накладная/штрихкод/пломба/внешний id - ГМ-timestamp, адреса - Первые из списка, '
-                    'гм - Удаляем')
+                    'ГМ - Удаляем')
+@pytest.mark.smoke
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
 def test_cargo_place_add_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -77,7 +78,7 @@ def test_cargo_place_from_lkz_add_lke(base_fixture, domain):
 @allure.feature('Создание и удаление грузомест')
 @allure.description('ЛКЭ. Тест создания ГМ Экс с влож ГМ ГВ:  тип - Короб, кол-во/вес/объем/цена/температура - Рандом, '
                     'статус - Новое, название/накладная/штрихкод/пломба/внешний id - ГМ-timestamp, '
-                    'адреса - Первые из списка, гм - Удаляем')
+                    'адреса - Первые из списка, ГМ - Удаляем')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_cargo_place_own_add_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру
@@ -125,7 +126,7 @@ def test_cargo_place_own_add_lke(base_fixture, domain):
 @allure.feature('Создание и удаление грузомест')
 @allure.description('ЛКЭ. Тест создания ГМ внутреннего ГВ:  тип - Мешок, кол-во/вес/объем/цена/температура - Рандом, '
                     'статус - Новое, название/накладная/штрихкод/пломба/внешний id - ГМ-timestamp, '
-                    'адреса - Первые из списка, гм - Удаляем')
+                    'адреса - Первые из списка, ГМ - Удаляем')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
 def test_cargo_place_inner_add_lke(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру

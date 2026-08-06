@@ -8,6 +8,7 @@ from pages.address_list_page import AddressesList
 @allure.story("Smoke test")
 @allure.feature('Создание и удаления адресов')
 @allure.description('ЛКЗ. Тест создания адреса: статус - Активный, заполняем поля - Все, в конце - Удаляем')
+@pytest.mark.smoke
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)  # Параметризация роли
 def test_address_add_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру

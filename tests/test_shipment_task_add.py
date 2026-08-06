@@ -79,6 +79,7 @@ def test_shipment_task_without_gm_add_lkz(base_fixture, domain):
 @allure.story("Smoke test")
 @allure.feature('Создание и удаление заданий')
 @allure.description('ЛКЗ. Тест содания Задания с включённой комплектацией грузоместами')
+@pytest.mark.smoke
 @pytest.mark.parametrize('base_fixture', ['lkz'], indirect=True)
 def test_shipment_task_with_gm_add_lkz(base_fixture, domain):
     # Инициализация базовых объектов через фикстуру

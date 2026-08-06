@@ -182,6 +182,24 @@ class FTLAdd(Base):
     }
 
 
+    sure_marginality = {
+        "xpath": "//div[@class='ant-modal-confirm-body-wrapper']//button[2]",
+        "name": "sure_marginality"
+    }
+    automatic_republication = {
+        "xpath": "//div[@class='ant-col ant-col-12 vz-form-col']//div[@class='vz-form-field-switch vz-form-field-switch__size-default']",
+        "name": "automatic_republication"
+    }
+    republication_producers = {
+        "xpath": "//body/div/div[@class='ant-modal-root']/div[@role='dialog']/div[@role='document']/div[@class='ant-modal-content']/div[@class='ant-modal-body']/div[@class='order-tariff-publish-form']/div[@class='vz-form-group']/div[@class='vz-form-row']/div[@class='ant-row-flex vz-form-row__native']/label[1]",
+        "name": "republication_producers"
+    }
+    rate_for_republication = {
+        "xpath": "//div[@class='ant-modal-root']//div[3]//label[1]//div[1]//div[1]//div[1]//div[2]//input[1]",
+        "name": "rate_for_republication"
+    }
+
+
     """Перепубликация"""
     republication_button = {
         "xpath": "//button[@id='order-republish']",

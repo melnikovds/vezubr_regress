@@ -96,7 +96,9 @@ def test_transport_inner_edit_lke(base_fixture, domain):
     # Выбор типа транспортного средства
     add_ts.dropdown_without_input(add_ts.vehicle_type_select, "Монорамное ТС")
     # Выбор владельца транспортного средства
-    add_ts.click_button(add_ts.vehicle_owner_select, wait="lst")
+    # add_ts.click_button(add_ts.vehicle_owner_select, wait="lst")
+    add_ts.click_button(add_ts.vehicle_owner_select)
+    time.sleep(1)
     
     producer_list = ProducersList(base.driver)
     # Выбор первого перевозчика в списке
@@ -226,7 +228,9 @@ def test_semitrailer_inner_edit_lke(base_fixture, domain):
     # Выбор типа транспортного средства
     add_ts.dropdown_without_input(add_ts.vehicle_type_select, "Полуприцеп")
     # Выбор владельца транспортного средства
-    add_ts.click_button(add_ts.vehicle_owner_select, wait="lst")
+    # add_ts.click_button(add_ts.vehicle_owner_select, wait="lst")
+    add_ts.click_button(add_ts.vehicle_owner_select)
+    time.sleep(1)
     
     producer_list = ProducersList(base.driver)
     # Выбор первого перевозчика в списке
@@ -353,7 +357,9 @@ def test_tractor_inner_edit_lke(base_fixture, domain):
     # Выбор типа транспортного средства
     add_ts.dropdown_without_input(add_ts.vehicle_type_select, "Тягач")
     # Выбор владельца транспортного средства
-    add_ts.click_button(add_ts.vehicle_owner_select, wait="lst")
+    # add_ts.click_button(add_ts.vehicle_owner_select, wait="lst")
+    add_ts.click_button(add_ts.vehicle_owner_select)
+    time.sleep(1)
     
     producer_list = ProducersList(base.driver)
     # Выбор первого перевозчика в списке

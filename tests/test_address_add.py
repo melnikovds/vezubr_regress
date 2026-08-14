@@ -36,7 +36,7 @@ def test_address_add_lkz(base_fixture, domain):
     # Ввод фактического адреса и выбор из выпадающего списка
     add_address.dropdown_with_input_force_enter(
         add_address.address_input,
-        f"г Екатеринбург, пр-кт Ленина, д {base.random_value_float_str(1, 150)}",
+        f"г Мурманск, пр-кт Ленина, д {base.random_value_float_str(1, 150)}",
         wait_seconds=4
     )
     # Закрываем все dropdown'ы перед переходом к ИНН
@@ -67,6 +67,7 @@ def test_address_add_lkz(base_fixture, domain):
                                click_first=True)
     add_address.input_in_field(add_address.additional_second_input, base.random_value_float_str(1, 999999),
                                click_first=True)
+    time.sleep(1)
     # Клик по кнопке создания адреса
     add_address.click_button(add_address.create_address_button, do_assert=True)
     # Клик по кнопке подтверждения добавления

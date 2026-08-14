@@ -380,6 +380,18 @@ class FTLAdd(Base):
         "xpath": "(//button[@class='ant-btn ant-btn-primary'])[2]",
         "name": "publish_order"
     }
+
+
+    radio_button_tariff = {
+        "xpath": "//input[@value='tariff']",
+        "name": "radio_button_tariff"
+    }
+    select_first_tariff = {
+        "xpath": "//li[@role='treeitem']//li[1]//span[2]//span[1]",
+        "name": "select_first_tariff"
+    }
+
+
     radio_button_rate = {
         "xpath": "(//div[@class='ant-radio-group ant-radio-group-outline']//div)[2]",
         "name": "radio_button_rate"

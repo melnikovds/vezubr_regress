@@ -101,8 +101,12 @@ class AddCdr(Base):
         "xpath": "(//input[@class='ant-input'])[3]",
         "name": "address_filter"
     }
+    # address_filter_ltl = {
+    #     "xpath": "(//input[@class='ant-input'])[2]",
+    #     "name": "address_filter_ltl"
+    # }
     address_filter_ltl = {
-        "xpath": "(//input[@class='ant-input'])[2]",
+        "xpath": "//input[@placeholder='Название адреса']",
         "name": "address_filter_ltl"
     }
     confirm_address_button = {
@@ -368,12 +372,20 @@ class AddCdr(Base):
         "xpath": "//a[@class='link-back']",
         "name": "click_first_element"
     }
+    # click_confirm_cdr = {
+    #     "xpath": "//button[contains(@class,'ant-btn take-button')]",
+    #     "name": "click_confirm_cdr"
+    # }
     click_confirm_cdr = {
-        "xpath": "//button[contains(@class,'ant-btn take-button')]",
+        "xpath": "//button[@id='order-take']",
         "name": "click_confirm_cdr"
     }
+    # click_options = {
+    #     "xpath": "//img[@class='element-icon icon-small']",
+    #     "name": "click_options"
+    # }
     click_options = {
-        "xpath": "//img[@class='element-icon icon-small']",
+        "xpath": "//img[@alt='dotsBlue']",
         "name": "click_options"
     }
     click_change_transport = {
@@ -447,6 +459,10 @@ class AddCdr(Base):
     select_contractors_lkp = {
         "xpath": "//input[@class='ant-input']",
         "name": "select_contractors_lkp"
+    }
+    select_all_contractors = {
+        "xpath": "//div[@class='ant-table-selection']//input[@type='checkbox']",
+        "name": "select_all_contractors"
     }
     publish_button_lke = {
         "xpath": "(//button[@class='ant-btn ant-btn-primary'])[2]",

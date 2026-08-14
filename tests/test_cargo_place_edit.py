@@ -75,7 +75,6 @@ def test_cargo_place_edit_lkz(base_fixture, domain):
     add_cp.reload_page()
     time.sleep(3)
     add_cp.verify_text_on_page(text=tn_code, should_exist=True)
-
     # Конец теста
 
 
@@ -89,7 +88,7 @@ def test_cargo_place_edit_lkz(base_fixture, domain):
                     '3) редактируем: кол-во/вес/объем/цена/температура - Рандом, '
                     'название/накладная/штрихкод/пломба/внешнийid/коммент - ГМ-timestamp')
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
-def test_cargo_place_edit_own_lke(base_fixture, domain):
+def test_cargo_place_edit_own_lke(base_fixture, domain):                                                                # тест нужно доработать после реализации vz-10509
     # Инициализация базовых объектов через фикстуру
     base, sidebar = base_fixture
     
@@ -127,7 +126,10 @@ def test_cargo_place_edit_own_lke(base_fixture, domain):
     # cp_list.click_button(cp_list.confirm_button)
     
     # Добавление полного базового грузоместа
-    cp_stamp = add_cp.add_full_cargo_place_lke()
+    # cp_stamp = add_cp.add_full_cargo_place_lke()
+    cp_stamp = add_cp.add_full_cargo_place_lke_error()
+    time.sleep(1)
+    add_cp.click_button(add_cp.client_not_found_ok)
     
     # Шаг 3: Редактирование грузоместа
     # Сброс фильтров
@@ -167,6 +169,75 @@ def test_cargo_place_edit_own_lke(base_fixture, domain):
     add_cp.reload_page()
     time.sleep(3)
     add_cp.verify_text_on_page(text=tn_code, should_exist=True)
-
     # Конец теста
+
+
+@allure.story("Critical path test")
+@allure.feature('Создание и редактирование грузомест')
+@allure.description('ЛКЭ. Тест создания и редактирования ГМ внутреннего ГВ: '
+                    '1) создаем ГМ ГВ: тип - Короб, кол-во/вес/объем/цена/температура - Рандом, статус - Новое,'
+                    ' название/накладная/штрихкод/пломба/внешнийid/коммент - ГМ-timestamp, адреса - Первые из списка.'
+                    '2) редактируем: кол-во/вес/объем/цена/температура - Рандом, '
+                    'название/накладная/штрихкод/пломба/внешнийid/коммент - ГМ-timestamp')
+@pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)  # Параметризация роли
+def test_cargo_place_edit_inner_lke(base_fixture, domain):  # тест нужно доработать после реализации vz-10509
+    # Инициализация базовых объектов через фикстуру
+    base, sidebar = base_fixture
+
+    # Переход к списку грузомест
+    sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button,
+                           do_assert=True, wait="lst")
+
+    time.sleep(2)
+    cp_list = CargoPlaceList(base.driver)
+    # Шаг 1: Создание грузоместа ГВ
+    # Клик по кнопке добавления грузоместа
+    # cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    cp_list.click_button(cp_list.add_cargo_place_button)
+
+    add_cp = CargoPlaceAdd(base.driver)
+    # Выбор владельца грузоместа
+    add_cp.dropdown_without_input(add_cp.cargo_place_owner_select, "ООО ТЕХТРЕЙД")
+    # Добавление полного базового грузоместа
+    cp_stamp = add_cp.add_full_cargo_place_inner_lke()
+
+    # Сброс фильтров
+    cp_list.click_button(cp_list.reset_button, wait="lst")
+    # Ввод штрихкода грузоместа в поле фильтрации
+    cp_list.input_in_field(cp_list.barcode_filter, value=cp_stamp, wait="lst")
+    # Клик по ссылке первого грузоместа в списке
+    cp_list.click_button(cp_list.first_cp_link, wait="form")
+
+    # Клик по кнопке редактирования грузоместа
+    add_cp.click_button(add_cp.edit_button)
+    # Ввод рандомизированных данных для количества, веса, объема и стоимости груза
+    add_cp.backspace_and_input(add_cp.quantity_edit, base.random_value_float_str(1, 10), num=10)
+    add_cp.backspace_and_input(add_cp.weight_edit, base.random_value_float_str(10, 20000), num=10)
+    add_cp.backspace_and_input(add_cp.value_edit, base.random_value_float_str(0.1, 35.0, precision=1), num=10)
+    add_cp.backspace_and_input(add_cp.cost_edit, base.random_value_float_str(100, 1000000), num=10)
+    # Генерация уникального идентификатора для грузоместа
+    cp_stamp = f"ГМ-{add_cp.get_timestamp()}"
+    # Ввод уникальных данных для грузоместа
+    # add_cp.backspace_and_input(add_cp.lke_cp_title_edit, cp_stamp)  # Название
+    # add_cp.backspace_and_input(add_cp.lke_invoice_number_edit, cp_stamp)  # Номер накладной
+    # add_cp.backspace_and_input(add_cp.lke_bar_code_edit, cp_stamp)  # Штрихкод
+    # add_cp.backspace_and_input(add_cp.lke_seal_number_edit, cp_stamp)  # Номер пломбы
+    # add_cp.backspace_and_input(add_cp.temp_from_edit, add_cp.random_value_float_str(-5, 0))  # Температура от
+    # add_cp.backspace_and_input(add_cp.temp_until_edit, add_cp.random_value_float_str(0, 5))  # Температура до
+    # add_cp.backspace_and_input(add_cp.lke_external_id_edit, cp_stamp)  # Внешний ID
+    # add_cp.backspace_and_input(add_cp.lke_comment_edit, cp_stamp)  # Комментарий
+
+    tn_code = str(random.randint(1_000_000_000, 9_999_999_999))
+    add_cp.backspace_and_input(add_cp.lkz_nomenclature_code, tn_code)  # Код ТН ВЭД
+    time.sleep(10)
+    # Клик по кнопке сохранения изменений
+    add_cp.click_button(add_cp.save_button, wait="form")
+    time.sleep(10)
+
+    # проверка наличия изменений
+    add_cp.reload_page()
+    time.sleep(3)
+    add_cp.verify_text_on_page(text=tn_code, should_exist=True)
+
+
 

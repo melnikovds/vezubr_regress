@@ -50,6 +50,7 @@ class UpdateEntities:
         # 1. билдим данные
         update_data = self.task.generator.build_update_task_data(
             cargo_place_ids=cargo_place_ids,
+            number=task_number,
             **overrides
         )
 

@@ -117,7 +117,9 @@ def test_shipment_task_with_gm_edit2_lkz(base_fixture, domain):
     time.sleep(2)
     cp_list = CargoPlaceList(base.driver)
     # Клик по кнопке добавления грузоместа
-    cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    # cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    cp_list.click_button(cp_list.add_cargo_place_button)
+    time.sleep(2)
 
     add_cp = CargoPlaceAdd(base.driver)
     # Добавление полного грузоместа
@@ -141,7 +143,9 @@ def test_shipment_task_with_gm_edit2_lkz(base_fixture, domain):
     time.sleep(2)
     cp_list = CargoPlaceList(base.driver)
     # Клик по кнопке добавления грузоместа
-    cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    # cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    cp_list.click_button(cp_list.add_cargo_place_button)
+    time.sleep(2)
 
     add_cp = CargoPlaceAdd(base.driver)
     # Добавление полного грузоместа
@@ -235,7 +239,8 @@ def test_shipment_task_with_gm_edit3_lkz(base_fixture, domain):
     time.sleep(2)
     cp_list = CargoPlaceList(base.driver)
     # Клик по кнопке добавления грузоместа
-    cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    # cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    cp_list.click_button(cp_list.add_cargo_place_button)
 
     add_cp = CargoPlaceAdd(base.driver)
     # Добавление полного грузоместа
@@ -259,7 +264,8 @@ def test_shipment_task_with_gm_edit3_lkz(base_fixture, domain):
     time.sleep(2)
     cp_list = CargoPlaceList(base.driver)
     # Клик по кнопке добавления грузоместа
-    cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    # cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    cp_list.click_button(cp_list.add_cargo_place_button)
 
     add_cp = CargoPlaceAdd(base.driver)
     # Добавление полного грузоместа

@@ -49,6 +49,10 @@ class DeliveryAdd(Base):
         "xpath": "//a[@class='ant-calendar-today-btn ']",
         "name": "today_button"
     }
+    type_flight = {
+        "xpath": "//div[@id='order-ordertype']//div[@class='ant-select-selection__rendered']",
+        "name": "type_flight"
+    }
     type_transportation_select = {
         "xpath": "//span[contains(@class, 'ant-select-selection__placeholder') and "
                  "text()='Выберите тип автоперевозки']",
@@ -121,8 +125,12 @@ class DeliveryAdd(Base):
 
 
 
+    # close_button = {
+    #     "xpath": "//i[@aria-label='icon: close']//*[name()='svg']",
+    #     "name": "close_button"
+    # }
     close_button = {
-        "xpath": "//i[@aria-label='icon: close']//*[name()='svg']",
+        "xpath": "//span[@class='ant-modal-close-x']",
         "name": "close_button"
     }
     # create_button = {
@@ -146,9 +154,13 @@ class DeliveryAdd(Base):
         "reference": "создана в статусе Формирование заявки",
         "match_type": "contains"
     }
-    publish_naw_button = {
-        "xpath": "//button[.//span[text()='Опубликовать заявку']]",
-        "name": "publish_naw_button"
+    # publish_now_button = {
+    #     "xpath": "//button[.//span[text()='Опубликовать заявку']]",
+    #     "name": "publish_now_button"
+    # }
+    publish_now_button = {
+        "xpath": "//button[3]",
+        "name": "publish_now_button"
     }
 
 
@@ -156,12 +168,20 @@ class DeliveryAdd(Base):
         "xpath": "//button[@class='ant-btn ant-btn-primary' and span[contains(text(), 'По тарифу')]]",
         "name": "tariff_button"
     }
+    # rate_radio = {
+    #     "xpath": "//span[text()='Задать ставку (тариф) вручную']",
+    #     "name": "rate_radio"
+    # }
     rate_radio = {
-        "xpath": "//span[text()='Задать ставку (тариф) вручную']",
+        "xpath": "//input[@value='rate']",
         "name": "rate_radio"
     }
+    # rate_input = {
+    #     "xpath": "//input[@role='spinbutton']",
+    #     "name": "rate_input"
+    # }
     rate_input = {
-        "xpath": "//input[@role='spinbutton']",
+        "xpath": "//div[@class='ant-modal-root']//div[@class='ant-row-flex vz-form-row__native']//div[1]//label[1]//div[1]//div[1]//div[1]//div[2]//input[1]",
         "name": "rate_input"
     }
     producer_select = {
@@ -172,8 +192,12 @@ class DeliveryAdd(Base):
         "xpath": "//span[@class='ant-select-tree-node-content-wrapper ant-select-tree-node-content-wrapper-normal']",
         "name": "producer_button"
     }
+    # producer_lke_button = {
+    #     "xpath": "//span[@title='Auto LKE']",
+    #     "name": "producer_lke_button"
+    # }
     producer_lke_button = {
-        "xpath": "//span[@title='Auto LKE']",
+        "xpath": "//td[@class='ant-table-selection-column']//input[@type='checkbox']",
         "name": "producer_lke_button"
     }
     producer_lkp_button = {
@@ -289,6 +313,63 @@ class DeliveryAdd(Base):
         # Подтверждение выбора адреса
         self.click_button(self.confirm_address_button)
 
+    def add_base_ftl_lkz(self) -> NoReturn:
+        """
+        Создание базовой FTL заявки. Метод включает выбор даты и времени доставки - текущее время + 30 минут,
+        выбор типа автоперевозки и ТС, прикрепление грузоместа, выбор адресов и завершается созданием FTL заявки.
+
+        Parameters
+        ----------
+        Нет входных параметров.
+
+        Returns
+        -------
+        NoReturn
+            Метод не возвращает значения, но вызывает изменения на веб-странице.
+        """
+        # Получение нового времени с учетом изменений
+        new_time = self.naw_time_change(30)
+        # Клик по кнопке выбора даты и времени начала подачи
+        self.click_button(self.start_at_from_button)
+        # Клик по кнопке выбора сегодняшней даты
+        self.click_button(self.today_button)
+        # Еще раз клик по кнопке выбора даты и времени начала подачи
+        self.click_button(self.start_at_from_button)
+        # Ввод новой временной метки в соответствующее поле
+        self.backspace_and_input(self.start_at_from_input, num=5, value=new_time)
+        # Клик по кнопке подтверждения выбора даты и времени
+        self.click_button(self.calendar_ok_button)
+        time.sleep(1)  # Ожидание перед продолжением выполнения
+        # Выбор типа автоперевозки
+        self.click_button(self.type_transportation_select)
+        # Выбор типа груза (например, FTL)
+        self.click_button(self.select_type_cargo)
+        # Выбор типа ТС
+        self.dropdown_without_input(self.vehicle_type_select, "2т / 14м3 / 7пал.")
+        # Выбор типа кузова
+        self.click_button(self.body_type_select)
+        # Выбор закрытого типа кузова
+        self.click_button(self.select_closed)
+        # Клик на текст для закрытия списка типов кузова
+        self.click_button(self.text_route)
+        # Выбор первого адреса из списка
+        self.click_button(self.first_address_select)
+        # Фильтрация адресов и выбор первого адреса
+        self.input_in_field(self.address_filter, "г Сыктывкар, ул Юхнина, д 8")
+        time.sleep(1)
+        self.click_button(self.address_radio_button)
+        # Подтверждение выбора адреса
+        self.click_button(self.confirm_address_button)
+        time.sleep(3)  # Ожидание перед продолжением выполнения
+        # Выбор второго адреса из списка
+        self.click_button(self.second_address_select)
+        # Фильтрация адресов и выбор второго адреса
+        self.input_in_field(self.address_filter, "г Мурманск, ул Академика Павлова, д 3")
+        time.sleep(1)
+        self.click_button(self.address_radio_button)
+        # Подтверждение выбора адреса
+        self.click_button(self.confirm_address_button)
+
     def add_base_ftl_inner(self) -> NoReturn:
         """
         Создание базовой FTL заявки. Метод включает выбор даты и времени доставки - текущее время + 30 минут,
@@ -316,6 +397,8 @@ class DeliveryAdd(Base):
         # Клик по кнопке подтверждения выбора даты и времени
         self.click_button(self.calendar_ok_button)
         time.sleep(1)
+        # Выбор типа рейса
+        self.dropdown_without_input(self.type_flight, option_text='Междугородний')
         # Выбор типа автоперевозки
         self.click_button(self.type_transportation_select)
         # Выбор типа груза (например, FTL)
@@ -332,7 +415,7 @@ class DeliveryAdd(Base):
         self.click_button(self.first_address_select)
         # Фильтрация адресов и выбор первого адреса
         self.input_in_field(self.address_filter,"ул Леона Поземского, д 115Д")
-        time.sleep(1)
+        time.sleep(3)
         self.click_button(self.address_radio_button)
         # Подтверждение выбора адреса
         self.click_button(self.confirm_address_button)
@@ -341,7 +424,7 @@ class DeliveryAdd(Base):
         self.click_button(self.second_address_select)
         # Фильтрация адресов и выбор второго адреса
         self.input_in_field(self.address_filter, "г Псков, ул Ленина")
-        time.sleep(1)
+        time.sleep(3)
         self.click_button(self.address_radio_button)
         # Подтверждение выбора адреса
         self.click_button(self.confirm_address_button)

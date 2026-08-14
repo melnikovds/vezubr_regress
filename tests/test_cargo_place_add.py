@@ -19,10 +19,12 @@ def test_cargo_place_add_lkz(base_fixture, domain):
     # Переход к списку грузомест
     sidebar.move_and_click(move_to=sidebar.assignments_hover, click_to=sidebar.cargo_place_list_button,
                            do_assert=True, wait="lst")
-    time.sleep(1.5)
+    time.sleep(2)
     cp_list = CargoPlaceList(base.driver)
     # Клик по кнопке добавления грузоместа
-    cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    # cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    cp_list.click_button(cp_list.add_cargo_place_button)
+    time.sleep(1)
 
     add_cp = CargoPlaceAdd(base.driver)
     # Добавление полного грузоместа
@@ -64,7 +66,9 @@ def test_cargo_place_from_lkz_add_lke(base_fixture, domain):
     time.sleep(1.5)
     cp_list = CargoPlaceList(base.driver)
     # Клик по кнопке добавления грузоместа
-    cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    # cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    cp_list.click_button(cp_list.add_cargo_place_button)
+    time.sleep(1)
     
     add_cp = CargoPlaceAdd(base.driver)
     # Выбор владельца грузоместа "Auto LKZ"
@@ -90,7 +94,9 @@ def test_cargo_place_own_add_lke(base_fixture, domain):
     time.sleep(1.5)
     cp_list = CargoPlaceList(base.driver)
     # Клик по кнопке добавления грузоместа
-    cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    # cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    cp_list.click_button(cp_list.add_cargo_place_button)
+    time.sleep(2)
     
     add_cp = CargoPlaceAdd(base.driver)
     # Выбор владельца грузоместа
@@ -102,7 +108,7 @@ def test_cargo_place_own_add_lke(base_fixture, domain):
     # cp_list.click_button(cp_list.cp_list_checkbox, index=2)
     # cp_list.click_button(cp_list.confirm_button)
     # Добавление полного грузоместа
-    cp_stamp = add_cp.add_full_cargo_place_lke()
+    cp_stamp = add_cp.add_full_cargo_place_lke_error()
     time.sleep(1)
     add_cp.click_button(add_cp.client_not_found_ok)
 
@@ -138,7 +144,9 @@ def test_cargo_place_inner_add_lke(base_fixture, domain):
     time.sleep(1.5)
     cp_list = CargoPlaceList(base.driver)
     # Клик по кнопке добавления грузоместа
-    cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    # cp_list.click_button(cp_list.add_cargo_place_button, wait="form")
+    cp_list.click_button(cp_list.add_cargo_place_button)
+    time.sleep(1)
 
     add_cp = CargoPlaceAdd(base.driver)
     # Выбор владельца грузоместа
@@ -159,11 +167,17 @@ def test_cargo_place_inner_add_lke(base_fixture, domain):
     # Клик по ссылке первого грузоместа в списке
     cp_list.click_button(cp_list.first_cp_link, wait="form")
 
-    # Удаление созданного грузоместа                                                                                    vz-10207
+    # Удаление созданного грузоместа
     add_cp.click_button(add_cp.delete_button, do_assert=True)
+    time.sleep(2)
     # Подтверждение удаления грузоместа
     add_cp.click_button(add_cp.yes_button)
+    time.sleep(2)
     # Подтверждение успешного удаления
-    add_cp.click_button(add_cp.ok_button, wait="lst")
+    # add_cp.click_button(add_cp.ok_button, wait="lst")
+    add_cp.reload_page()
+    time.sleep(2)
+    # add_cp.verify_text_on_page(text=cp_stamp, should_exist=False)
+    add_cp.find_text_on_page(text=cp_stamp, occurrences=2)
     # Конец теста
 

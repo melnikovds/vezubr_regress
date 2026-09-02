@@ -594,6 +594,7 @@ def test_export_tariffs_lkz(base_fixture):
 @allure.story("Выгрузки документов")
 @allure.feature('Экспорт данных LKE')
 @allure.description('Тест выгрузки Заявки на доставку Груза для роли LKE')
+@pytest.mark.smoke
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)
 def test_export_cdr_lke(base_fixture):
     base, sidebar = base_fixture
@@ -654,6 +655,7 @@ def test_export_cdr_lke(base_fixture):
 @allure.story("Выгрузки документов")
 @allure.feature('Экспорт данных LKE')
 @allure.description('Тест выгрузки ГМ для роли LKE')
+@pytest.mark.smoke
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)
 def test_export_gm_lke(base_fixture):
     base, sidebar = base_fixture
@@ -943,6 +945,7 @@ def test_export_active_order_lke(base_fixture):
 @allure.story("Выгрузки документов")
 @allure.feature('Экспорт данных LKE')
 @allure.description('Тест выгрузки Все рейсы OLD для роли LKE')
+@pytest.mark.smoke
 @pytest.mark.parametrize('base_fixture', ['lke'], indirect=True)
 def test_export_all_order_lke(base_fixture):
     base, sidebar = base_fixture
